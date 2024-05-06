@@ -1,39 +1,58 @@
-# Internship assignment
+# DynImagic
 
-assessment task for interns
+## Objective
 
-## Task List
+Create a Mobile application that utilizes AI to separate colors from a group image and generate individual images with the same pattern. Implement a user-friendly UI to display available designs and colors, allowing users to generate specific color images on demand.
 
-- Array of objects which have title and other property; run a function that will title case all strings
+## Requirements
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+1. **Image Processing with AI:**
+   - Develop a function that takes two images as input: one with the pattern/design and another with a group of colors and patterns.
+   - Use AI/image processing techniques to identify and separate different colors from the group image.
+   - Generate separate images for each color, preserving the original pattern.
 
-- Create Unit test for a react component
+2. **User Interface (UI):**
+   - Utilize a GUI library like Tkinter, PyQt, or any of your choice for the user interface.
+   - Display a list of available designs along with the count of unique colors for each design.
+   - When a user clicks on a design, dynamically show the associated colors and patterns.
+   - Provide a button or interactive element to generate individual color images based on the user's selection.
 
-- Chrome extension which read network request and display in good accordion format
+3. **GitHub Repository:**
+   - Set up a GitHub repository for the project.
+   - Structure the repository with appropriate directories (e.g., code, documentation).
+   - Include a README file with instructions on how to run the application, required dependencies, and any additional information for users and developers.
 
-## List of Assignments
+4. **Documentation:**
+   - Document your code thoroughly.
+   - Provide a brief explanation of the AI/image processing techniques used.
+   - Clearly explain the structure of your UI and how it interacts with the image processing functions.
 
-[AuthenticInfo](assigments/markdown/AuthenticInfo.md)  
+## Submission
 
-[DateMatics](assigments/markdown/DateMatics.md)
+1. Push the complete codebase to the GitHub repository.
+2. Include a README.md file with clear instructions on how to set up and run the application.
+3. Provide a short document explaining the AI techniques used for color separation.
 
-[DynImagic](assigments/markdown/DynImagic.md)
+## Evaluation Criteria
 
-[FamilyTree](assigments/markdown/FamilyTree.md)
+1. **Functionality (50%):**
+   - Successful color separation and image generation.
+   - User-friendly UI with design and color selection features.
 
-[HinDictionary](assigments/markdown/HinDictionary.md)
+2. **Code Quality (30%):**
+   - Well-documented code.
+   - Clear and modular structure.
 
-[ImageSearch](assigments/markdown/ImageSearch.md)
+3. **GitHub Repository (10%):**
+   - Proper organization of files and directories.
+   - A README file with comprehensive instructions.
 
-[FolkDance_Showcase](assigments/markdown/FolkDance_Showcase.md)
+4. **Documentation (10%):**
+   - Concise documentation explaining the AI techniques used.
+   - Clear instructions for users and developers.
 
-[MaturityMatrix](assigments/markdown/MaturityMatrix.md)
+## Note
 
-[NumPad](assigments/markdown/NumPad.md)
+Feel free to use any libraries or frameworks you find suitable for image processing and UI development. The goal is to create a functional and well-documented application that meets the specified requirements.
 
-[PNR_PWA](assigments/markdown/PNR_PWA.md)
-
-[SaveDocs](assigments/markdown/SaveDocs.md)
-
-[Voice_Form](assigments/markdown/Voice_Form.md)
+&copy; 2024 RecursiveZero Private Limited, All rights reserved.
