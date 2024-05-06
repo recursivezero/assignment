@@ -14,7 +14,7 @@ assessment task for interns
 
 ## List of Assignments
 
-[AuthenticInfo](assigments/markdown/AuthenticInfo.md)  
+[BrandAddress](assigments/markdown/AuthenticInfo.md)  
 
 [DateMatics](assigments/markdown/DateMatics.md)
 
@@ -26,14 +26,14 @@ assessment task for interns
 
 [ImageSearch](assigments/markdown/ImageSearch.md)
 
-[FolkDance_Showcase](assigments/markdown/FolkDance_Showcase.md)
+[DanceCase](assigments/markdown/DanceCase.md)
 
 [MaturityMatrix](assigments/markdown/MaturityMatrix.md)
 
 [NumPad](assigments/markdown/NumPad.md)
 
-[PNR_PWA](assigments/markdown/PNR_PWA.md)
+[PNR](assigments/markdown/PNR_PWA.md)
 
-[SaveDocs](assigments/markdown/SaveDocs.md)
+[SafeDocs](assigments/markdown/SafeDocs.md)
 
-[Voice_Form](assigments/markdown/Voice_Form.md)
+[VoiceForm](assigments/markdown/VoiceForm.md)

@@ -1,4 +1,4 @@
-**Intern Assignment: Brand Information Portal**
+**Intern Assignment : Brand Information Portal**
 
 **Objective:**
 Create a web-based portal where users can easily access and search for details of various brands, companies, or organizations. The portal should have a beautiful UI, be easy to navigate, and provide fast search functionality.
