@@ -1,39 +1,63 @@
-# Internship assignment
+# VoiceForm : A Voice-Activated Form
 
-assessment task for interns
+## Objective
 
-## Task List
+Build a web page featuring a form with 4-5 input fields, a "Speak" button enabling users to record a 1-minute audio clip. The form should dynamically populate based on the audio content, leaving fields empty if not mentioned. Additionally, provide users the ability to edit the automatically filled information before submitting.
 
-- Array of objects which have title and other property; run a function that will title case all strings
+## Requirements
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+1. ## HTML Structure
 
-- Create Unit test for a react component
+   - Create an HTML form with 4-5 input fields.
+   - Include a "Speak" button for voice recording.
 
-- Chrome extension which read network request and display in good accordion format
+2. ## Voice Recording
 
-## List of Assignments
+   - Implement audio recording functionality using the Web Speech API or any suitable library.
+   - Set a limit of 1 minute for voice recordings.
 
-[AuthenticInfo](assigments/markdown/AuthenticInfo.md)  
+3. ## Dynamic Form Filling
 
-[DateMatics](assigments/markdown/DateMatics.md)
+   - Upon clicking the "Speak" button, transcribe the audio and auto-fill relevant form fields.
+   - Leave fields empty if information is not mentioned in the audio.
 
-[DynImagic](assigments/markdown/DynImagic.md)
+4. ## Edit Functionality
 
-[FamilyTree](assigments/markdown/FamilyTree.md)
+   - Enable users to manually edit the filled information in each form field.
 
-[HinDictionary](assigments/markdown/HinDictionary.md)
+5. ## Submit and View
 
-[ImageSearch](assigments/markdown/ImageSearch.md)
+   - Implement a submission button to store the form data.
+   - After submission, display the details in a view mode.
 
-[FolkDance_Showcase](assigments/markdown/FolkDance_Showcase.md)
+6. ## User Experience
 
-[MaturityMatrix](assigments/markdown/MaturityMatrix.md)
+   - Ensure a user-friendly interface with clear instructions.
+   - Implement error handling for recording or transcription issues.
 
-[NumPad](assigments/markdown/NumPad.md)
+7. ## Optional Enhancements (Bonus)
 
-[PNR_PWA](assigments/markdown/PNR_PWA.md)
+   - Implement additional validation for form fields.
+   - Add a feature to replay the recorded audio.
+   - Provide user feedback during the recording process.
 
-[SaveDocs](assigments/markdown/SaveDocs.md)
+## Submission
 
-[Voice_Form](assigments/markdown/Voice_Form.md)
+1. Push the complete codebase to the your own GitHub repository and share the link.
+2. Include a README.md file with clear instructions on how to set up and run the application.
+3. Provide a short document explaining the structure, AI technologies used, and any challenges faced.
+
+## Evaluation Criteria
+
+- Successful implementation of the voice recording and transcription.
+- Accurate and dynamic form filling based on audio content.
+- Effective editing functionality.
+- Clear and organized code structure.
+- User interface design and experience.
+- Submission and display of form data.
+
+## Note Feel free to use any front-end libraries or frameworks as needed. The goal is to create a functional and user-friendly voice-activated form with the specified features
+
+## Submission date##  : 1 Week. code push in your own github repo
+
+&copy; 2024 RecursiveZero Private Limited, All rights reserved.
