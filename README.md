@@ -1,39 +1,60 @@
-# Internship assignment
+# HinDictionary: A Bilingual Dictionary Web App
 
-assessment task for interns
+## Overview
 
-## Task List
+Develop a bilingual dictionary web application that allows users to add and search for the meaning of Hindi and English words. Users should be able to add multiple meanings, examples, and pronunciation for each entry. The application should operate locally without internet search, and users can commit their progress to a GitHub repository.
 
-- Array of objects which have title and other property; run a function that will title case all strings
+## Tasks
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+### User Interface
 
-- Create Unit test for a react component
+Design a user-friendly interface with input fields for Hindi and English words, along with areas for meanings, examples, and pronunciation.
+Create a section for displaying saved entries and a search bar for quick lookups.
 
-- Chrome extension which read network request and display in good accordion format
+### Add Word Functionality
 
-## List of Assignments
+Implement a feature that allows users to add new words with their meanings in both Hindi and English.
+Include the option to add multiple meanings, example sentences, and pronunciation.
 
-[AuthenticInfo](assigments/markdown/AuthenticInfo.md)  
+### Local Search
 
-[DateMatics](assigments/markdown/DateMatics.md)
+Develop a search function to find words within the locally stored dictionary.
+Display the search results with meanings, examples, and pronunciation if available.
 
-[DynImagic](assigments/markdown/DynImagic.md)
+### Handle Duplicate
 
-[FamilyTree](assigments/markdown/FamilyTree.md)
+Ensure that the application prevents the addition of duplicate words. If a word already exists, prompt the user to update the existing entry.
 
-[HinDictionary](assigments/markdown/HinDictionary.md)
+### GitHub Repository
 
-[ImageSearch](assigments/markdown/ImageSearch.md)
+Create a GitHub repository for the project.
+Commit regularly to showcase coding progress and adherence to coding standards.
 
-[FolkDance_Showcase](assigments/markdown/FolkDance_Showcase.md)
+### Optional Features
 
-[MaturityMatrix](assigments/markdown/MaturityMatrix.md)
+Include the option to edit or delete existing entries.
+Provide a link for internet search in case a word is not found locally.
 
-[NumPad](assigments/markdown/NumPad.md)
+## Submission Guidelines
 
-[PNR_PWA](assigments/markdown/PNR_PWA.md)
+Share the GitHub repository link for evaluation.
+Include a README file with instructions on how to run the application locally.
+Ensure clear comments and documentation in your code.
 
-[SaveDocs](assigments/markdown/SaveDocs.md)
+### Evaluation Criteria
 
-[Voice_Form](assigments/markdown/Voice_Form.md)
+- Functionality of adding, searching, and displaying entries.
+- Prevention of duplicate entries.
+- Inclusion of optional features (editing, deletion, internet search link).
+- Code structure, readability, and adherence to coding standards.
+- Regular commits to the GitHub repository.
+
+### Deadline
+
+Submit your project by 1 week. Regular commits and progress updates are encouraged.
+
+Best of luck with your bilingual dictionary web application!
+
+**Note:** This assignment aims to evaluate your skills in web development, design aesthetics, and attention to detail. Good luck!
+
+&copy; 2024 RecursiveZero Private Limited, All rights reserved.
