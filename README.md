@@ -1,39 +1,58 @@
-# Internship assignment
+# NumPad
 
-assessment task for interns
+## Objective
 
-## Task List
+Create a dynamic and visually appealing webpage for an intern assignment with the following specifications.
 
-- Array of objects which have title and other property; run a function that will title case all strings
+## Requirements
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+1. **Input Handling:**
+   - Allow users to input numbers or alphanumeric characters, no white space allowed.
+   - Set a customizable maximum input length of 16 characters.
+   - Restrict duplicate numbers.
 
-- Create Unit test for a react component
+2. **Timeline Display:**
+   - Showcase entered numbers on a timeline.
+   - Include posting details such as date, time, and the respective user's name.
 
-- Chrome extension which read network request and display in good accordion format
+3. **Aesthetics:**
+   - Choose an appropriate font to enhance the visual appeal.
+   - Implement dark and light themes using CSS root properties for a polished appearance.
 
-## List of Assignments
+4. **Responsiveness:**
+   - Ensure mobile responsiveness for an optimal user experience.
 
-[AuthenticInfo](assigments/markdown/AuthenticInfo.md)  
+## Deliverables
 
-[DateMatics](assigments/markdown/DateMatics.md)
+1. **Webpage Design:**
+   - Develop a visually pleasing interface with a focus on user experience.
 
-[DynImagic](assigments/markdown/DynImagic.md)
+2. **Codebase:**
+   - Provide well-documented HTML, CSS, and JavaScript code.
 
-[FamilyTree](assigments/markdown/FamilyTree.md)
+3. **User Guide:**
+   - Include instructions on how to use the webpage effectively.
 
-[HinDictionary](assigments/markdown/HinDictionary.md)
+## Evaluation Criteria
 
-[ImageSearch](assigments/markdown/ImageSearch.md)
+1. **Functionality:**
+   - Successful implementation of input handling,  and timeline display.
 
-[FolkDance_Showcase](assigments/markdown/FolkDance_Showcase.md)
+2. **Design Aesthetics:**
+   - Effective use of fonts and seamless integration of dark and light themes.
 
-[MaturityMatrix](assigments/markdown/MaturityMatrix.md)
+3. **Responsiveness:**
+   - Webpage should be optimized for both desktop and mobile devices.
 
-[NumPad](assigments/markdown/NumPad.md)
+4. **Code Quality:**
+   - Well-structured and commented code for easy understanding and maintenance.
 
-[PNR_PWA](assigments/markdown/PNR_PWA.md)
+## Submission Guidelines
 
-[SaveDocs](assigments/markdown/SaveDocs.md)
+- Deadline: 1 Week
+- Submit the assignment by pushing your code in github repo.
+- Include any additional notes or considerations.
 
-[Voice_Form](assigments/markdown/Voice_Form.md)
+**Note:** This assignment aims to evaluate your skills in web development, design aesthetics, and attention to detail. Good luck!
+
+&copy; 2024 RecursiveZero Private Limited, All rights reserved.
