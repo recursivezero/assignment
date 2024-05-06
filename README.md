@@ -1,39 +1,54 @@
-# Internship assignment
+# Saparivar ( सपरिवार )
 
-assessment task for interns
+## Objective  
 
-## Task List
+As an intern, your task is to develop a Family Tree application that caters to the cultural nuances of family relationships in India. The application should allow users to create, share, and collaborate on their family trees. Additionally, users should have the option to include details such as date of birth, residence, occupation, and business location for each family member.
 
-- Array of objects which have title and other property; run a function that will title case all strings
+## Key Tasks
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+### Family Member Management
 
-- Create Unit test for a react component
+- Develop functionality for users to add themselves and their family members.
+- Include fields for name, relationship, date of birth, residence, occupation, and business location.
+- Consider there is only 1:1 mapping i.e. single husband and wife, no polygamy feature.
 
-- Chrome extension which read network request and display in good accordion format
+### Relationship Mapping
 
-## List of Assignments
+- Design a system for users to define relationships between family members.
+- Ensure that the application recognizes and accommodates specific Indian familial relationships like Mausi, Mama, and bhua.
+- if user click on a person then all relationship name would change keeping selected person in center.
 
-[AuthenticInfo](assigments/markdown/AuthenticInfo.md)  
+### Data Sharing
 
-[DateMatics](assigments/markdown/DateMatics.md)
+- Implement a feature that allows users to share their family tree with specific relatives via email or username.
 
-[DynImagic](assigments/markdown/DynImagic.md)
+### Collaborative Editing
 
-[FamilyTree](assigments/markdown/FamilyTree.md)
+- Enable collaborative editing, allowing shared family members to contribute by adding their known relatives and detailing relationships.
 
-[HinDictionary](assigments/markdown/HinDictionary.md)
+### Privacy Settings
 
-[ImageSearch](assigments/markdown/ImageSearch.md)
+- Develop privacy settings to give users control over who can view and edit their family tree.
 
-[FolkDance_Showcase](assigments/markdown/FolkDance_Showcase.md)
+### Additional Details
 
-[MaturityMatrix](assigments/markdown/MaturityMatrix.md)
+- Provide an option for users to add more details about each family member, enhancing the depth and richness of the family tree.
 
-[NumPad](assigments/markdown/NumPad.md)
+## Submission Guidelines
 
-[PNR_PWA](assigments/markdown/PNR_PWA.md)
+- Share the GitHub repository link for evaluation.
+- Include a README file with instructions on how to run the application locally.
+- Ensure clear comments and documentation in your code.
 
-[SaveDocs](assigments/markdown/SaveDocs.md)
+## Evaluation Criteria
 
-[Voice_Form](assigments/markdown/Voice_Form.md)
+- Prevention and handling of error and invalid entries.
+- Code structure, readability, and adherence to coding standards.
+- Regular commits to the GitHub repository.
+
+## Notes
+
+- The internship assignment is expected to be completed within a week . Regular check-ins will be scheduled to monitor progress and provide guidance.
+- Successful completion of the assignment may lead to further opportunities for involvement in the project or consideration for a more permanent position within the company.
+
+&copy; 2024 RecursiveZero Private Limited, All rights reserved.
