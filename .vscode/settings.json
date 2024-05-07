@@ -1,0 +1,9 @@
+{
+	"cSpell.words": [
+		"crossorigin",
+		"uidai"
+	],
+	"typescript.format.enable": false,
+	"eslint.format.enable": true,
+	"javascript.validate.enable": false
+}
