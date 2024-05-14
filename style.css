@@ -185,6 +185,38 @@ select {
       width: 100%;
     }
   }
+  .label {
+    font-weight: lighter; /* Make label text lighter */
+  }
+  
+  .value {
+    font-style: italic; /* Make value text italic */
+  }
+  /* Make label text bold */
+  .canvas-label {
+    font-weight: bold;
+  }
+  
+  /* Make value text italic */
+  .canvas-value {
+    font-style: italic;
+  }
+  .reset-btn {
+    background-color: #6c757d; 
+    color: #fff; 
+    border-radius: 4px;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 22px;
+    margin-top: 10px; 
+  }
+  
+  .reset-btn:hover {
+    background-color: #5a6268; 
+  }
+  
   
   
 
