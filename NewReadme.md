@@ -13,9 +13,9 @@ Acknowledgements This project was inspired by the need for a simple offline docu
 Steps to run -> use vs code
 
 -> download the zip file extract it and run it on your vs code
-![Front UI](https://github.com/recursivezero/assigment/assets/139054853/5d192205-06a2-45e0-a555-daa1a9db8657)
-![DrivingLicense Form](https://github.com/recursivezero/assigment/assets/1![AAdhar Canva](https://github.com/recursivezero/assigment/assets/139054853/8a8aa228-6bcf-47c6-9be![License Canva](https://github.com/recursivezero/assigment/assets/139054853/2a98354a-22d7-4167-975b-6113c677c9eb![Pan Canva](https://github.com/recursivezero/assigment/assets/139054853/087ba7d1-123c-4513-ba2d-3d67eb711172)
-)
-6-65f05e949f8d)
-39054853/df0dcb5f-0ccd-4af2-8a4a-4cdb065cb283)![Multiple saved data](https://github.com/recursivezero/assigment/assets/139054853/9f9c60b0-58cd-4d77-b464-319c7d9d9504)
 
+![Multiple saved data](https://github.com/recursivezero/assigment/assets/139054853/3621b17d-bb19-41f3-8047-59387b6dfab6)
+![PanCard Form](https://github.com/recursivezero/assigment/assets/139054853/2c57b93a-5727-4c3a-a301-072fe4ca830f)
+![DrivingLicense Form](https://github.com/recursivezero/assigment/assets/139054853/c9d7d8de-e58f-40e5-b49a-8109ad5514fd)
+![AADHAR FORM](https://github.com/recursivezero/assigment/assets/139054853/2888e630-6c51-483b-a274-e642a21a9997)
+![Front UI](https://github.com/recursivezero/assigment/assets/139054853/3b216b52-907a-4a55-8567-271a0664b6b9)
