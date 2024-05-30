@@ -52,7 +52,7 @@ offline-document-storage/
 Here are some screenshots of the application:
 
 ### Document Entry Page
- ![Main Page](../assets/images/MainPage.png)
+ ![Main Page](<../assets/images/Main Page.png>)
 
 -> Entry Page consist of front ui of the application with the options of forms selection and buttons like save and reset details.
 
@@ -66,7 +66,7 @@ Here are some screenshots of the application:
 -> This section consists of forms image that are used in our website 
 
 ### Data stored Section
-![ Stored data table](../assets/images/StoredData.png)
+![Saved Data](<../assets/images/Saved Data.png>)
 
 -> This section contains the tabel image that stores the data of diffrent users
 
