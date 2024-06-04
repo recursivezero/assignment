@@ -207,17 +207,17 @@ const generateImage =(documentType, documentNumber, holdingPersonName,DOB) => {
 
     
 if (mappedDocumentType === "DrivingLicense") {
-    backgroundImage.src = '../styles/images/gery.jpg';
+    backgroundImage.src = 'assets/images/gery.jpg';
     backgroundColor = '#F4A460';
     canvasWidth = 500;
     canvasHeight = 300;
 } else if (mappedDocumentType === "PAN") {
-    backgroundImage.src = '../styles/images/image.jpg';
+    backgroundImage.src = 'assets/images/image.jpg';
     backgroundColor = 'FFFAFA';
     canvasWidth = 500;
     canvasHeight = 300;
 } else {
-    backgroundImage.src = '../styles/images/tricolour.jpg';
+    backgroundImage.src = 'assets/images/tricolour.jpg';
 }
 
     

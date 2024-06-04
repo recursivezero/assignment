@@ -2,15 +2,25 @@
  An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.
 
 ## Table of Contents
-
+- [Installation]
 - [Introduction]
 - [Features]
 - [Usage]
 - [ProjectStructure]
 - [Screenshot]
-- [Contributing]
 - [Conclusion]
-- [Intstallation]
+
+
+
+## Installation
+
+To set up the project, clone the repository and open the `index.html` file in your browser.
+
+```bash
+git clone "https://github.com/recursivezero/assigment.git"
+cd " offline-document-storage"
+Run directly in your vs code using golive Extensions.
+```
 
 
 
@@ -34,18 +44,20 @@
 5. View, edit, or delete saved document details.
 
 ## Project Structure
-offline-document-storage/
-├── styles/
-│   ├── style.css
-│   └── images/
-│       ├── tricolour.jpg
-│       ├── gery.jpg
-│       └── image.jpg
-├── script/
-│   └── app.js
-├── index.html
-├── README.md
-└── .gitignore
+```sh
+
+D:.
+├───.vscode
+├───assets
+│   └───images
+├───docs
+├───script
+└───styles
+    └───images
+```
+
+
+
 
 ## Screenshots
 
@@ -79,13 +91,7 @@ Here are some screenshots of the application:
 
 -> This section consists of the canva image that are generated from user data after clicking view button 
 
-## For Contributing
 
-st-1 Fork the repository.
-st-2 Create a new branch (git checkout -b feature/YourFeature).
-st-3 Commit your changes (git commit -m 'Add YourFeature').
-st-4 Push to the branch (git push origin feature/YourFeature).
-st-5 Open a Pull Request.
 
 ## Conclusion
 
@@ -94,12 +100,4 @@ The Offline Document Storage application is a convenient solution for managing p
 
 
 
-## Installation
-
-To set up the project, clone the repository and open the `index.html` file in your browser.
-
-```bash
-git clone "https://github.com/recursivezero/assigment.git"
-cd " offline-document-storage"
-Run directly in your vs code using golive Extensions.
 
