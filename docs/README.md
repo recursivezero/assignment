@@ -69,11 +69,11 @@ Here are some screenshots of the application:
 -> Entry Page consist of front ui of the application with the options of forms selection and buttons like save and reset details.
 
 ### Forms Section
-![DrivingLicense](../assets/images/DrivingLicenseForm.png)
+![DrivingLicense](../assets/images/DLForm.png)
 
 ![PanCard](../assets/images/PanForm.png)
 
-![AadharCard](../assets/images/AadharForm.png)
+![AadharCard](../assets/images/AddharForm.png)
 
 -> This section consists of forms image that are used in our website 
 

@@ -76,7 +76,7 @@ const populateAadhaarFields = () => {
     return `
         <div class='formContainer' id='aadhar'>
             <label for="documentNumber_aadhaar">Aadhaar Number:</label>
-            <input type="number" id="documentNumber_aadhaar" name="documentNumber" required>
+            <input type="text" id="documentNumber_aadhaar" name="documentNumber" required>
             <label for="holdingPersonName_aadhaar">Name:</label>
             <input type="text" id="holdingPersonName_aadhaar" name="holdingPersonName" required>
             <select id="gender" name="gender" required>
@@ -94,7 +94,7 @@ const populateDrivingLicenseFields = () => {
     return `
         <div class='formContainer' id='driver'>
             <label for="documentNumber_drivingLicense">Driving License Number:</label>
-            <input type="number" id="documentNumber_drivingLicense" name="documentNumber" required>
+            <input type="text" id="documentNumber_drivingLicense" name="documentNumber" required>
             <label for="holdingPersonName_drivingLicense">Name:</label>
             <input type="text" id="holdingPersonName_drivingLicense" name="holdingPersonName" required>
             <label for="DOB_drivingLicense">Date of issue:</label>
@@ -108,7 +108,7 @@ const populatePanCardFields = () => {
     return `
         <div class='formContainer' id='pan'>
             <label for="documentNumber_panCard">PAN Card Number:</label>
-            <input type="number" id="documentNumber_panCard" name="documentNumber" required>
+            <input type="text" id="documentNumber_panCard" name="documentNumber" required>
             <label for="holdingPersonName_panCard">Name:</label>
             <input type="text" id="holdingPersonName_panCard" name="holdingPersonName" required>
             <label for="DOB_panCard">Date of Birth:</label>
