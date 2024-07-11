@@ -169,6 +169,7 @@ select {
     cursor: pointer;
     transition: background-color 0.3s;
     font-size: 22px;
+    margin-top: 10px; 
 }
 
 .save-btn:hover {
@@ -216,4 +217,11 @@ select {
   .reset-btn:hover {
     background-color: #5a6268; 
   }
+  
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+}
   
