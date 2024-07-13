@@ -78,16 +78,16 @@ Here are some screenshots of the application:
 -> This section consists of forms image that are used in our website 
 
 ### Data stored Section
-![Saved Data](<../assets/images/Saved Data.png>)
+![Saved Data](<../assets/images/SavedDetail.png>)
 
 -> This section contains the tabel image that stores the data of diffrent users
 
 ### Canva Image
-![PanCard](../assets/images/PanCanavImage.png)
+![PanCard](../assets/images/PanCanva.png)
 
-![Driving License](../assets/images/LicenseCanvaImage.png)
+![Driving License](../assets/images/DLCanvaImage.png)
 
-![Aadhar Card](../assets/images/AadharCanvaImage.png)
+![Aadhar Card](../assets/images/AadharCanvaImag.png)
 
 -> This section consists of the canva image that are generated from user data after clicking view button 
 

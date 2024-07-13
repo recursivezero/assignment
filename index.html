@@ -11,44 +11,45 @@
 </head>
 <body>
    
-    <header class="footer">
+    <header class="foote">
         <h1>Offline Document Storage</h1>
     </header>
     <main>
         <section>
-            <h2>Enter Document Details</h2>
+            
             <form id="documentForm">
-                <label for="documentType">Select Document Type:</label>
+                <label for="documentType" class="dev">_Document Selection_ </label>
                 <select class="form" id="documentType" name="documentType" required>
-                    <option value="">Select Document Type</option>
-                    <option value="aadhaar">Aadhaar Card</option>
+                    <option value="doc" class="op">Select Document Type</option>
+                    <option value="aadhaar">Aadhaar</option>
                     <option value="drivingLicense">Driving License</option>
                     <option value="panCard">PAN Card</option>
-                    
-                    
                 </select>
                 <div id="documentFields" style="display: none"></div>
-                
+                <div id="formContainer"></div>
                 <div class="button-container">
-                    <button type="submit" id="saveButton" class="save-btn">Save Details</button>
-                    <button type="button" id="resetButton" class="reset-btn">Reset Form</button>
+                    <button type="submit" class="saveButton" class="save-btn" style="display: none;">Save</button>
+                    <button type="button" class="resetButton" class="reset-btn" style="display: none;">Reset</button>
                 </div>
-        
-
-
-                
             </form>
         </section>
+        
+        
+        
         <section>
            
-            <h2>Saved Document Details</h2>
+            
             <div class="container">
             
                 <div class="item header">
+                    <div>#</div>
                     <div>Document</div>
                     <div>Info</div>
+                    <div>Name</div>
+                    <div>Gender</div>
                     <div>DOB</div>
-                    <div>Action</div>
+                    <div>Actions</div>
+
                 </div>
             </div>
             
