@@ -50,8 +50,10 @@ const createNewEntry = (selectedDocumentType, documentNumber, holdingPersonName,
             <div>${DOB}</div>
             <div>
                 <button class="view-btn" type="button">View</button>
-                <button class="delete-btn" type="button">Delete</button>
-                <button class="edit-btn" type="button">Edit</button>
+               <button class="delete-btn" type="button">Delete</button>
+                  <button class="edit-btn" type="button">Edit</button>
+              
+                
             </div>
         </div>
     `);
@@ -92,22 +94,24 @@ const populateFields = (selectedDocumentType) => {
 const populateAadhaarFields = () => {
     return `
         <div class='formContainer' id='aadhaar'>
-            <label for="documentNumber_aadhaar">Aadhaar Number:</label>
+            <label for="documentNumber_aadhaar">Aadhaar Number</label>
             <input type="text" id="documentNumber_aadhaar" name="documentNumber" required>
-            <label for="holdingPersonName_aadhaar">Name:</label>
+            <label for="holdingPersonName_aadhaar">Name</label>
             <input type="text" id="holdingPersonName_aadhaar" name="holdingPersonName" required>
-            <label for="DOB_aadhaar">Date of Birth:</label>
+            <label for="DOB_aadhaar">Date of Birth</label>
             <input type="date" id="DOB_aadhaar" name="DOB" required>
-            <label for="aadhaarAddress">Address:</label>
+            <label for="aadhaarAddress">Address</label>
             <textarea id="aadhaarAddress" name="aadhaarAddress" required ></textarea>
-            <label for="gender">Gender:</label>
-            <div class="gender-selection" style="display: flex; gap: 10px;">
-                <label style="display: flex; align-items: center;">
-                    <input type="radio" id="gender_male" name="gender" value="male" required checked> Male
-                </label>
-                <label style="display: flex; align-items: center;">
-                    <input type="radio" id="gender_female" name="gender" value="female" required> Female
-                </label>
+         <div class="gender-container">
+                <label for="gender">Gender</label>
+                <div class="gender-selection">
+                    <label class="gender-label">
+                        <input type="radio" id="gender_male" name="gender" value="male" required checked> Male
+                    </label>
+                    <label class="gender-label">
+                        <input type="radio" id="gender_female" name="gender" value="female" required> Female
+                    </label>
+                </div>
             </div>
         </div>
     `;
@@ -116,23 +120,25 @@ const populateAadhaarFields = () => {
 const populateDrivingLicenseFields = () => {
     return `
         <div class='formContainer' id='driver'>
-            <label for="documentNumber_drivingLicense">Driving License Number:</label>
+            <label for="documentNumber_drivingLicense">DL Number</label>
             <input type="text" id="documentNumber_drivingLicense" name="documentNumber" required>
-            <label for="holdingPersonName_drivingLicense">Name:</label>
+            <label for="holdingPersonName_drivingLicense">Name</label>
             <input type="text" id="holdingPersonName_drivingLicense" name="holdingPersonName" required>
-            <label for="DOB_drivingLicense">Date of issue:</label>
+            <label for="DOB_drivingLicense">Date of issue</label>
             <input type="date" id="DOB_drivingLicense" name="DOB" required>
         
-             <label for="DOB_panCard">Date of Birth:</label>
+             <label for="DOB_panCard">Date of Birth</label>
             <input type="date" id="DOB_panCard" name="DOB" required>
-            <label for="gender">Gender:</label>
-            <div class="gender-selection" style="display: flex; gap: 10px;">
-                <label style="display: flex; align-items: center;">
-                    <input type="radio" id="gender_male" name="gender" value="male" required checked> Male
-                </label>
-                <label style="display: flex; align-items: center;">
-                    <input type="radio" id="gender_female" name="gender" value="female" required> Female
-                </label>
+             <div class="gender-container">
+                <label for="gender">Gender</label>
+                <div class="gender-selection">
+                    <label class="gender-label">
+                        <input type="radio" id="gender_male" name="gender" value="male" required checked> Male
+                    </label>
+                    <label class="gender-label">
+                        <input type="radio" id="gender_female" name="gender" value="female" required> Female
+                    </label>
+                </div>
             </div>
         </div>
     `;
@@ -141,20 +147,22 @@ const populateDrivingLicenseFields = () => {
 const populatePanCardFields = () => {
     return `
         <div class='formContainer' id='pan'>
-            <label for="documentNumber_panCard">PAN Card Number:</label>
+            <label for="documentNumber_panCard">PAN Number</label>
             <input type="text" id="documentNumber_panCard" name="documentNumber" required>
-            <label for="holdingPersonName_panCard">Name:</label>
+            <label for="holdingPersonName_panCard">Name</label>
             <input type="text" id="holdingPersonName_panCard" name="holdingPersonName" required>
-            <label for="DOB_panCard">Date of Birth:</label>
+            <label for="DOB_panCard">Date of Birth</label>
             <input type="date" id="DOB_panCard" name="DOB" required>
-            <label for="gender">Gender:</label>
-            <div class="gender-selection" style="display: flex; gap: 10px;">
-                <label style="display: flex; align-items: center;">
-                    <input type="radio" id="gender_male" name="gender" value="male" required checked> Male
-                </label>
-                <label style="display: flex; align-items: center;">
-                    <input type="radio" id="gender_female" name="gender" value="female" required> Female
-                </label>
+             <div class="gender-container">
+                <label for="gender">Gender</label>
+                <div class="gender-selection">
+                    <label class="gender-label">
+                        <input type="radio" id="gender_male" name="gender" value="male" required checked> Male
+                    </label>
+                    <label class="gender-label">
+                        <input type="radio" id="gender_female" name="gender" value="female" required> Female
+                    </label>
+                </div>
             </div>
         </div>
     `;
@@ -223,17 +231,17 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
     const mappedDocumentType = documentMapper.get(documentType.toLowerCase());
 
     if (mappedDocumentType === "DrivingLicense") {
-        backgroundImage.src = '/assets/images/image.jpg';
+        backgroundImage.src = '/assets/images/gery.jpg';
         backgroundColor = '#F4A460';
         canvasWidth = 500;
         canvasHeight = 300;
     } else if (mappedDocumentType === "PAN") {
-        backgroundImage.src = '/assets/images/image.jpg';
+        backgroundImage.src = '/assets/images/gery.jpg';
         backgroundColor = '#FFFAFA';
         canvasWidth = 500;
         canvasHeight = 300;
     } else {
-        backgroundImage.src = '/assets/images/image.jpg';
+        backgroundImage.src = '/assets/images/gery.jpg';
     }
 
     canvas.width = canvasWidth;
@@ -318,12 +326,10 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
             }, 1000); 
         });
     };
-    backgroundImage.src = '/assets/images/image.jpg'; 
+    backgroundImage.src = '/assets/images/gery.jpg'; 
 };
 
 const formatDOB = (DOB) => {
     const parts = DOB.split('-');
     return `${parts[2]}/${parts[1]}/${parts[0]}`;
 };
-
-

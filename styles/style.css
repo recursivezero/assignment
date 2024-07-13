@@ -230,7 +230,8 @@ select {
   cursor: pointer;
   transition: background-color 0.3s;
   font-size: 22px;
-  margin-left: 12.4cm;
+  margin-right: -3.5cm;
+  width: 90000px;
  
 }
 
@@ -274,7 +275,8 @@ select {
   transition: background-color 0.3s;
   font-size: 22px;
   margin-left: auto;
-  margin-right: -3.5cm;
+  margin-left: 12.7cm;
+  width: 90000px;
   
  
 }
@@ -285,7 +287,7 @@ select {
 
 .button-container {
   display: flex;
-  gap: 0.3cm;
+  gap: 1.3cm;
   justify-content: flex-end;
   margin-top: 3px;
  
@@ -512,4 +514,20 @@ white-space: nowrap;
 
 #downloadLink:hover {
 background-color: #2bc3de;
+}
+.gender-container {
+display: flex;
+align-items: center;
+gap: 20px; 
+}
+
+.gender-selection {
+display: flex;
+gap: 10px; 
+}
+
+.gender-label {
+display: flex;
+align-items: center;
+gap: 5px; 
 }
