@@ -6,6 +6,7 @@ const saveButton = document.querySelector(".saveButton");
 const resetButton = document.querySelector(".resetButton");
 
 let entryCount = 0;
+let currentEditItem = null;
 
 const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,9 +21,17 @@ const handleSubmit = (event) => {
     const holdingPersonName = holdingPersonNameInput.value;
     const DOB = DOBInput.value;
     const gender = genderInput.value;
+
     saveButton.classList.remove("active");
 
-    createNewEntry(selectedDocumentType, documentNumber, holdingPersonName, DOB, gender);
+    if (currentEditItem) {
+        // Update the existing entry
+        updateEntry(currentEditItem, selectedDocumentType, documentNumber, holdingPersonName, DOB, gender);
+    } else {
+        // Create a new entry
+        createNewEntry(selectedDocumentType, documentNumber, holdingPersonName, DOB, gender);
+    }
+
     resetForm();
 
     // Hide the form after saving the entry
@@ -36,12 +45,11 @@ documentForm.addEventListener("submit", handleSubmit);
 const createNewEntry = (selectedDocumentType, documentNumber, holdingPersonName, DOB, gender) => {
     entryCount++;
     const tableBody = document.querySelector(".container");
-    // Define the gender symbols
     const maleSymbol = String.fromCharCode(0x2642); // Male symbol
     const femaleSymbol = String.fromCharCode(0x2640); // Female symbol
     const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
     tableBody.insertAdjacentHTML('beforeend', `
-        <div class="item">
+        <div class="item" data-entry-id="${entryCount}">
             <div>${entryCount}</div>
             <div>${selectedDocumentType}</div>
             <div>${documentNumber}</div>
@@ -50,13 +58,25 @@ const createNewEntry = (selectedDocumentType, documentNumber, holdingPersonName,
             <div>${DOB}</div>
             <div>
                 <button class="view-btn" type="button">View</button>
-               <button class="delete-btn" type="button">Delete</button>
-                  <button class="edit-btn" type="button">Edit</button>
-              
-                
+                <button class="delete-btn" type="button">Delete</button>
+                <button class="edit-btn" type="button">Edit</button>
             </div>
         </div>
     `);
+};
+
+const updateEntry = (item, selectedDocumentType, documentNumber, holdingPersonName, DOB, gender) => {
+    const maleSymbol = String.fromCharCode(0x2642); // Male symbol
+    const femaleSymbol = String.fromCharCode(0x2640); // Female symbol
+    const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+    item.querySelector("div:nth-child(2)").textContent = selectedDocumentType;
+    item.querySelector("div:nth-child(3)").textContent = documentNumber;
+    item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
+    item.querySelector("div:nth-child(5)").textContent = genderSymbol;
+    item.querySelector("div:nth-child(6)").textContent = DOB;
+
+    currentEditItem = null;
 };
 
 const resetForm = () => {
@@ -102,7 +122,7 @@ const populateAadhaarFields = () => {
             <input type="date" id="DOB_aadhaar" name="DOB" required>
             <label for="aadhaarAddress">Address</label>
             <textarea id="aadhaarAddress" name="aadhaarAddress" required ></textarea>
-         <div class="gender-container">
+            <div class="gender-container">
                 <label for="gender">Gender</label>
                 <div class="gender-selection">
                     <label class="gender-label">
@@ -116,20 +136,18 @@ const populateAadhaarFields = () => {
         </div>
     `;
 };
-
 const populateDrivingLicenseFields = () => {
     return `
-        <div class='formContainer' id='driver'>
-            <label for="documentNumber_drivingLicense">DL Number</label>
-            <input type="text" id="documentNumber_drivingLicense" name="documentNumber" required>
-            <label for="holdingPersonName_drivingLicense">Name</label>
-            <input type="text" id="holdingPersonName_drivingLicense" name="holdingPersonName" required>
-            <label for="DOB_drivingLicense">Date of issue</label>
-            <input type="date" id="DOB_drivingLicense" name="DOB" required>
-        
-             <label for="DOB_panCard">Date of Birth</label>
-            <input type="date" id="DOB_panCard" name="DOB" required>
-             <div class="gender-container">
+        <div class='formContainer' id='drivinglicense'>
+            <label for="documentNumber_drivinglicense">DL Number</label>
+            <input type="text" id="documentNumber_drivinglicense" name="documentNumber" required>
+            <label for="holdingPersonName_drivinglicense">Name</label>
+            <input type="text" id="holdingPersonName_drivinglicense" name="holdingPersonName" required>
+            <label for="DOI_drivinglicense">Date of Issue</label>
+            <input type="date" id="DOI_drivinglicense" name="DOI" required>
+            <label for="DOB_drivinglicense">Date of Birth</label>
+            <input type="date" id="DOB_drivinglicense" name="DOB" required>
+            <div class="gender-container">
                 <label for="gender">Gender</label>
                 <div class="gender-selection">
                     <label class="gender-label">
@@ -146,14 +164,14 @@ const populateDrivingLicenseFields = () => {
 
 const populatePanCardFields = () => {
     return `
-        <div class='formContainer' id='pan'>
-            <label for="documentNumber_panCard">PAN Number</label>
-            <input type="text" id="documentNumber_panCard" name="documentNumber" required>
-            <label for="holdingPersonName_panCard">Name</label>
-            <input type="text" id="holdingPersonName_panCard" name="holdingPersonName" required>
-            <label for="DOB_panCard">Date of Birth</label>
-            <input type="date" id="DOB_panCard" name="DOB" required>
-             <div class="gender-container">
+        <div class='formContainer' id='pancard'>
+            <label for="documentNumber_pancard">PAN Number</label>
+            <input type="text" id="documentNumber_pancard" name="documentNumber" required>
+            <label for="holdingPersonName_pancard">Name</label>
+            <input type="text" id="holdingPersonName_pancard" name="holdingPersonName" required>
+            <label for="DOB_pancard">Date of Birth</label>
+            <input type="date" id="DOB_pancard" name="DOB" required>
+            <div class="gender-container">
                 <label for="gender">Gender</label>
                 <div class="gender-selection">
                     <label class="gender-label">
@@ -203,9 +221,56 @@ const deleteItem = (event) => {
     const item = event.target.closest(".item");
     item.remove();
 };
-
 const editItem = (event) => {
-    // Edit item code here
+    const item = event.target.closest(".item");
+    const documentType = item.querySelector("div:nth-child(2)").textContent.trim();
+    const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
+    const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
+    const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
+    const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+
+    const maleSymbol = String.fromCharCode(0x2642);
+    const gender = genderSymbol === maleSymbol ? "male" : "female";
+
+    currentEditItem = item;
+
+    documentTypeSelect.value = documentType.toLowerCase();
+    const mappedDocumentType = documentMapper.get(documentType.toLowerCase());
+
+    if (mappedDocumentType) {
+        documentFieldsDiv.innerHTML = populateFields(mappedDocumentType);
+        documentFieldsDiv.style.display = "block";
+        saveButton.style.display = 'inline-block';
+        resetButton.style.display = 'inline-block';
+
+        const documentNumberField = documentForm.querySelector("#documentNumber_" + mappedDocumentType);
+        if (documentNumberField) {
+            documentNumberField.value = documentNumber;
+        }
+
+        const holdingPersonNameField = documentForm.querySelector("#holdingPersonName_" + mappedDocumentType);
+        if (holdingPersonNameField) {
+            holdingPersonNameField.value = holdingPersonName;
+        }
+
+        const DOBField = documentForm.querySelector("#DOB_" + mappedDocumentType);
+        if (DOBField) {
+            DOBField.value = DOB;
+        }
+
+        const genderField = documentForm.querySelector('input[name="gender"][value="' + gender + '"]');
+        if (genderField) {
+            genderField.checked = true;
+        }
+
+        // Additional fields specific to each document type
+        if (mappedDocumentType === 'drivinglicense') {
+            const DOIField = documentForm.querySelector("#DOI_drivinglicense");
+            if (DOIField) {
+                DOIField.value = item.querySelector("div:nth-child(7)").textContent.trim();
+            }
+        }
+    }
 };
 
 const viewItem = (event) => {
@@ -231,17 +296,17 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
     const mappedDocumentType = documentMapper.get(documentType.toLowerCase());
 
     if (mappedDocumentType === "DrivingLicense") {
-        backgroundImage.src = '/assets/images/gery.jpg';
+        backgroundImage.src = '/styles/images/gery.jpg';
         backgroundColor = '#F4A460';
         canvasWidth = 500;
         canvasHeight = 300;
     } else if (mappedDocumentType === "PAN") {
-        backgroundImage.src = '/assets/images/gery.jpg';
+        backgroundImage.src = '/styles/images/gery.jpg';
         backgroundColor = '#FFFAFA';
         canvasWidth = 500;
         canvasHeight = 300;
     } else {
-        backgroundImage.src = '/assets/images/gery.jpg';
+        backgroundImage.src = '/styles/images/gery.jpg';
     }
 
     canvas.width = canvasWidth;
@@ -290,7 +355,6 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
 
         const image = canvas.toDataURL("image/png");
 
-        
         const downloadLink = document.createElement('a');
         downloadLink.href = image;
         downloadLink.download = `${documentType}_document.png`;
@@ -299,7 +363,6 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
         downloadLink.style.marginTop = '10px';
         downloadLink.id = 'downloadLink'; // Add id for styling
 
-        
         const imageContainer = document.createElement('div');
         imageContainer.id = 'generatedImageContainer';
         imageContainer.style.marginBottom = '20px';
@@ -311,7 +374,6 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
         imageContainer.appendChild(imageElement);
         imageContainer.appendChild(downloadLink);
 
-        
         const existingImageContainer = document.getElementById('generatedImageContainer');
         if (existingImageContainer) {
             existingImageContainer.remove();
@@ -326,7 +388,7 @@ const generateImage = (documentType, documentNumber, holdingPersonName, genderSy
             }, 1000); 
         });
     };
-    backgroundImage.src = '/assets/images/gery.jpg'; 
+    backgroundImage.src = '/styles/images/gery.jpg'; 
 };
 
 const formatDOB = (DOB) => {
