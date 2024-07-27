@@ -103,7 +103,7 @@ This page consist of aadhaar form , the tabel which stores the form data
 This page consist of Pan form , the tabel which stores the form data 
 
 ![DlNav](public/assets/images/DlForm.png)
-This page consist of Pan form , the tabel which stores the form data 
+This page consist of dl form , the tabel which stores the form data 
 
 
 
