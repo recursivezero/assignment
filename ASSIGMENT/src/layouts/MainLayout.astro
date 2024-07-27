@@ -1,0 +1,37 @@
+---
+
+import Nav from '../components/Nav.astro';
+
+const title = "Offline Document Storage";
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/style.css">
+    <script type="module" src="/src/scripts/app.js" defer></script>
+</head>
+<body>
+    
+    <header class="foote">
+        <h1>Offline Document Storage</h1>
+    </header>
+
+    
+    <Nav />
+
+    <!-- Main content -->
+    <main>
+        <slot />
+    </main>
+
+    
+    <footer class="footer">
+        <p>&copy; 2024 Offline Document Storage</p>
+    </footer>
+</body>
+
+</html>

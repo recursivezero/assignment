@@ -1,0 +1,234 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/pan.css">
+</head>
+<MainLayout>
+    <nav slot="nav">
+        <Nav />
+    </nav>
+    <section>
+        <label for="documentType" class="dev">Document Pan </label>
+        <form id="panForm">
+            <div id="documentFields">
+                <div class='formContainer' id='pan'>
+                    <label for="documentNumber_pan">Pan Number</label>
+                    <input type="text" id="documentNumber_pan" name="documentNumber" required>
+                    <label for="holdingPersonName_pan">Name</label>
+                    <input type="text" id="holdingPersonName_pan" name="holdingPersonName" required>
+                    <label for="DOB_pan">Date of Birth</label>
+                    <input type="date" id="DOB_pan" name="DOB" required>
+                    <label for="panAddress">Address</label>
+                    <textarea id="panAddress" name="panAddress" required></textarea>
+                    <div class="gender-container">
+                        <label for="gender">Gender</label>
+                        <input type="radio" id="gender_male" name="gender" value="male" required checked>
+                        <label for="gender_male">Male</label>
+                        <input type="radio" id="gender_female" name="gender" value="female" required>
+                        <label for="gender_female">Female</label>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <div class="button-container">
+            <button type="button" class="resetButton">Reset</button>
+            <button type="submit" class="saveButton">Save</button>
+        </div>
+    </section>
+    <div class="container">
+        <div class="item header">
+            <div>#</div>
+            <div>Document</div>
+            <div>Info</div>
+            <div>Name</div>
+            <div>Gender</div>
+            <div>DOB</div>
+            <div>Actions</div>
+        </div>
+    </div>
+    <div id="canvasContainer" style="display: none;">
+        <canvas id="panCanvas"></canvas>
+        <button id="downloadButton" style="display: none;">Download Image</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const panForm = document.getElementById("panForm");
+            const saveButton = document.querySelector(".saveButton");
+            const resetButton = document.querySelector(".resetButton");
+            const container = document.querySelector(".container");
+            const canvasContainer = document.getElementById("canvasContainer");
+            const downloadButton = document.getElementById("downloadButton");
+            const canvas = document.getElementById('panCanvas');
+            const context = canvas ? canvas.getContext('2d') : null;
+            let entryCount = 0;
+            let currentEditItem = null;
+
+            const handleSubmit = (event) => {
+                event.preventDefault();
+                const documentNumber = panForm.querySelector("#documentNumber_pan").value.trim();
+                const holdingPersonName = panForm.querySelector("#holdingPersonName_pan").value.trim();
+                const DOB = panForm.querySelector("#DOB_pan").value.trim();
+                const gender = panForm.querySelector('input[name="gender"]:checked').value;
+                const address = panForm.querySelector("#panAddress").value.trim(); 
+
+                if (documentNumber && holdingPersonName && DOB) {
+                    if (currentEditItem) {
+                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender);
+                    } else {
+                        createNewEntry(documentNumber, holdingPersonName, DOB, gender, address);
+                    }
+                    resetForm();
+                } else {
+                    console.log("Please fill in all required fields.");
+                }
+            };
+
+            const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, address) => {
+                entryCount++;
+                const maleSymbol = String.fromCharCode(0x2642);
+                const femaleSymbol = String.fromCharCode(0x2640);
+                const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+                container.insertAdjacentHTML('beforeend', `
+                    <div class="item" data-entry-id="${entryCount}">
+                        <div>${entryCount}</div>
+                        <div>Pan</div>
+                        <div>${documentNumber}</div>
+                        <div>${holdingPersonName}</div>
+                        <div>${genderSymbol}</div>
+                        <div>${formatDate(DOB)}</div>
+                        <div>
+                            <button class="view-btn" type="button">View</button>
+                            <button class="edit-btn" type="button">Edit</button>
+                            <button class="delete-btn" type="button">Delete</button>
+                        </div>
+                    </div>
+                `);
+            };
+
+            const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender) => {
+                const maleSymbol = String.fromCharCode(0x2642);
+                const femaleSymbol = String.fromCharCode(0x2640);
+                const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+                item.querySelector("div:nth-child(3)").textContent = documentNumber;
+                item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
+                item.querySelector("div:nth-child(5)").textContent = genderSymbol;
+                item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
+
+                currentEditItem = null;
+            };
+
+            const resetForm = () => {
+                panForm.reset();
+                currentEditItem = null;
+            };
+
+            const deleteItem = (event) => {
+                const item = event.target.closest(".item");
+                item.remove();
+            };
+
+            const editItem = (event) => {
+                const item = event.target.closest(".item");
+                const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
+                const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
+                const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
+                const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+
+                const maleSymbol = String.fromCharCode(0x2642);
+                const gender = genderSymbol === maleSymbol ? "male" : "female";
+
+                panForm.querySelector("#documentNumber_pan").value = documentNumber;
+                panForm.querySelector("#holdingPersonName_pan").value = holdingPersonName;
+                panForm.querySelector(`#gender_${gender}`).checked = true;
+
+                const [day, month, year] = DOB.split('/');
+                panForm.querySelector("#DOB_pan").value = `${year}-${month}-${day}`;
+            };
+
+            const viewItem = (event) => {
+                const item = event.target.closest(".item");
+                const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
+                const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
+                const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
+                const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+
+                generateImage(documentNumber, holdingPersonName, genderSymbol, DOB);
+            };
+
+            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB) => {
+                let canvasWidth = 400;
+                let canvasHeight = 300;
+
+                if (canvas && context) {
+                    canvas.width = canvasWidth;
+                    canvas.height = canvasHeight;
+
+                    context.fillStyle = '#ADD8E6';
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+
+                    context.fillStyle = '#333';
+                    context.font = 'bold 22px Arial';
+                    context.textAlign = 'left';
+
+                    let text = `--Pan Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}`;
+
+                    const lines = text.split('\n');
+                    lines.forEach((line, index) => {
+                        context.font = `bold ${line.includes('Name:') ? 16 : 14}px Arial`;
+                        context.fillText(line, 40, 40 + index * 30);
+                    });
+
+                    canvasContainer.style.display = 'block';
+                    downloadButton.style.display = 'block';
+
+                    downloadButton.onclick = () => {
+                        const imageURL = canvas.toDataURL('image/png');
+                        const link = document.createElement('a');
+                        link.href = imageURL;
+                        link.download = `Pan_${new Date().getTime()}.png`; 
+                        link.click();
+
+                        canvasContainer.style.display = 'none';
+                        downloadButton.style.display = 'none';
+                    };
+                } else {
+                    console.error('Canvas or context is not defined');
+                }
+            };
+
+            const formatDate = (date) => {
+                const [year, month, day] = date.split('-');
+                return `${day}/${month}/${year}`;
+            };
+
+            if (resetButton) {
+                resetButton.addEventListener("click", resetForm);
+            } else {
+                console.error('Reset button not found');
+            }
+
+            if (saveButton) {
+                saveButton.addEventListener("click", handleSubmit);
+            } else {
+                console.error('Save button not found');
+            }
+
+            container.addEventListener("click", (event) => {
+                if (event.target.classList.contains('delete-btn')) {
+                    deleteItem(event);
+                } else if (event.target.classList.contains('edit-btn')) {
+                    editItem(event);
+                } else if (event.target.classList.contains('view-btn')) {
+                    viewItem(event);
+                }
+            });
+        });
+    </script>
+</MainLayout>

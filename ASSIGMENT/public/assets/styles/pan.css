@@ -1,0 +1,262 @@
+
+section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 2rem;
+  }
+  
+  section h2 {
+    margin-bottom: 1rem;
+  }
+  
+  form {
+    background-color: #c4dae3;
+    border-radius: 8px;
+    border: 1px solid #000; 
+    padding: 2rem;
+  }
+  
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formContainer label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: red; 
+  }
+  
+  .formContainer input,
+  .formContainer textarea,
+  .formContainer select {
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    padding: 0.4rem; 
+    width: calc(100% - 1rem); 
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    font-size: 20px; 
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    color: black; 
+    letter-spacing: 0.4rem;
+  }
+  
+  .formContainer input::placeholder,
+  .formContainer textarea::placeholder {
+    font-size: 14px; 
+    letter-spacing: 1px;
+  }
+  
+  #panAddress{
+    
+    resize: none; 
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  button {
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #555;
+  }
+  
+  .container {
+    margin-top: 2rem;
+    width: 100%;
+  }
+  
+  .item, .item.header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    padding: 0.5rem;
+    align-items: center;
+  }
+  
+  .item.header {
+    font-weight: bold;
+    background-color: #f8f8f8;
+  }
+  
+  .gender-container {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; 
+  }
+  
+  .gender-container label[for="gender"] {
+    color: red; 
+    margin-right: 20px; 
+  }
+  
+  .gender-container input {
+    margin: 0 5px 0 0;
+  }
+  
+  .gender-container label:not([for="gender"]) {
+    color: black; 
+    margin-right: 20px; 
+  }
+  
+  
+  
+  
+  @media (max-width: 1200px) {
+    section {
+      margin: 1.5rem auto;
+      padding: 1.5rem;
+    }
+  
+    .button-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .item, .item.header {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  @media (max-width: 900px) {
+    section {
+      margin: 1rem auto;
+      padding: 1rem;
+    }
+  
+    .formContainer {
+      padding: 0.5rem;
+    }
+  
+    .button-container {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  
+    .item, .item.header {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .formContainer {
+      padding: 1rem;
+    }
+  
+    .button-container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .item, .item.header {
+      grid-template-columns: 1fr;
+      font-size: 14px;
+    }
+  
+    .formContainer input,
+    .formContainer textarea {
+      font-size: 16px; /* Adjust font size for small screens */
+    }
+  }
+  
+  .saveButton {
+    margin-top: 1rem;
+    background-color: rgba(9, 239, 162, 0.589);
+    color: #333;
+    font-weight: 700;
+  }
+  
+  .resetButton {
+    margin-top: 1rem;
+    color: #333;
+    background-color: rgba(238, 94, 91, 0.925);
+    font-weight: 700;
+  }
+  .delete-btn{
+    color: rgb(254, 6, 6);
+    margin-top: 0.1cm;
+    
+  }
+  .delete-btn:hover{
+    background-color: red;
+    color: #333;
+  }
+  .view-btn{
+    color: lightgreen;
+  }
+  .view-btn:hover{
+    background-color: lightgreen;
+    color: #333;
+  }
+  .edit-btn{
+    color: yellow;
+  }
+  .edit-btn:hover{
+    color: black;
+    background-color: yellow;
+  }
+  
+#canvasContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  position: relative; 
+}
+
+
+#panCanvas {
+  background-color: #ffe6e6; 
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; 
+}
+
+/* Download button styling */
+#downloadButton {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #4CAF50; 
+  color: white;
+  left: 22cm;
+  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative; 
+}
+
+#downloadButton:hover {
+  background-color: #45a049;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  #aadhaarCanvas {
+      width: 90%; 
+  }
+
+  #downloadButton {
+      width: 100%; 
+      text-align: center;
+  }
+}

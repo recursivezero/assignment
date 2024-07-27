@@ -1,0 +1,64 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Nav from '../components/Nav.astro';
+---
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/aadhaar.css">
+</head>
+<MainLayout>
+    <nav slot="nav">
+        <Nav />
+    </nav>
+    <section>
+        <label for="documentType" class="dev">Document Aadhaar </label>
+        <form id="aadhaarForm">
+           
+           
+            <div id="documentFields">
+                <div class='formContainer' id='aadhaar'>
+                    <label for="documentNumber_aadhaar">Aadhaar Number</label>
+                    <input type="text" id="documentNumber_aadhaar" name="documentNumber" required>
+                    <label for="holdingPersonName_aadhaar">Name</label>
+                    <input type="text" id="holdingPersonName_aadhaar" name="holdingPersonName" required>
+                    <label for="DOB_aadhaar">Date of Birth</label>
+                    <input type="date" id="DOB_aadhaar" name="DOB" required>
+                    <label for="aadhaarAddress">Address</label>
+                    <textarea id="aadhaarAddress" name="aadhaarAddress" required></textarea>
+                    <div class="gender-container">
+                        <label for="gender">Gender</label>
+                        <input type="radio" id="gender_male" name="gender" value="male" required checked>
+                        <label for="gender_male">Male</label>
+                        <input type="radio" id="gender_female" name="gender" value="female" required>
+                        <label for="gender_female">Female</label>
+                    </div>
+                </div>
+            </div>
+            
+           
+
+        </form>
+
+        <div class="button-container">
+            <button type="button" class="resetButton">Reset</button>
+            <button type="submit" class="saveButton">Save</button>
+        </div>
+    
+    </section>
+    <div class="container">
+        <div class="item header">
+            <div>#</div>
+            <div>Document</div>
+            <div>Info</div>
+            <div>Name</div>
+            <div>Gender</div>
+            <div>DOB</div>
+            <div>Actions</div>
+        </div>
+    </div>
+    <div id="canvasContainer" style="display: none;">
+        <canvas id="aadhaarCanvas"></canvas>
+        <button id="downloadButton" style="display: none;">Download Image</button>
+    </div>
+    <script src="/src/scripts/app.js" type="module"></script>
+</MainLayout>
