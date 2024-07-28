@@ -78,7 +78,7 @@ import Nav from '../components/Nav.astro';
 
                 if (documentNumber && holdingPersonName && DOB) {
                     if (currentEditItem) {
-                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender);
+                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender, address);
                     } else {
                         createNewEntry(documentNumber, holdingPersonName, DOB, gender, address);
                     }
@@ -95,7 +95,7 @@ import Nav from '../components/Nav.astro';
                 const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
 
                 container.insertAdjacentHTML('beforeend', `
-                    <div class="item" data-entry-id="${entryCount}">
+                    <div class="item" data-entry-id="${entryCount}" data-address="${address}">
                         <div>${entryCount}</div>
                         <div>Pan</div>
                         <div>${documentNumber}</div>
@@ -111,7 +111,7 @@ import Nav from '../components/Nav.astro';
                 `);
             };
 
-            const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender) => {
+            const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender, address) => {
                 const maleSymbol = String.fromCharCode(0x2642);
                 const femaleSymbol = String.fromCharCode(0x2640);
                 const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
@@ -120,6 +120,7 @@ import Nav from '../components/Nav.astro';
                 item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
                 item.querySelector("div:nth-child(5)").textContent = genderSymbol;
                 item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
+                item.setAttribute("data-address", address);
 
                 currentEditItem = null;
             };
@@ -150,6 +151,8 @@ import Nav from '../components/Nav.astro';
 
                 const [day, month, year] = DOB.split('/');
                 panForm.querySelector("#DOB_pan").value = `${year}-${month}-${day}`;
+
+                currentEditItem = item;
             };
 
             const viewItem = (event) => {
@@ -158,11 +161,12 @@ import Nav from '../components/Nav.astro';
                 const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
                 const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
                 const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+                const address = item.getAttribute("data-address").trim();
 
-                generateImage(documentNumber, holdingPersonName, genderSymbol, DOB);
+                generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, address);
             };
 
-            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB) => {
+            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, address) => {
                 let canvasWidth = 400;
                 let canvasHeight = 300;
 
@@ -177,7 +181,7 @@ import Nav from '../components/Nav.astro';
                     context.font = 'bold 22px Arial';
                     context.textAlign = 'left';
 
-                    let text = `--Pan Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}`;
+                    let text = `--Pan Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}\nAddress: ${address}`;
 
                     const lines = text.split('\n');
                     lines.forEach((line, index) => {
@@ -189,43 +193,31 @@ import Nav from '../components/Nav.astro';
                     downloadButton.style.display = 'block';
 
                     downloadButton.onclick = () => {
-                        const imageURL = canvas.toDataURL('image/png');
+                        const dataURL = canvas.toDataURL('image/png');
                         const link = document.createElement('a');
-                        link.href = imageURL;
-                        link.download = `Pan_${new Date().getTime()}.png`; 
+                        link.href = dataURL;
+                        link.download = 'pan_card.png';
                         link.click();
 
                         canvasContainer.style.display = 'none';
                         downloadButton.style.display = 'none';
                     };
-                } else {
-                    console.error('Canvas or context is not defined');
                 }
             };
 
-            const formatDate = (date) => {
-                const [year, month, day] = date.split('-');
+            const formatDate = (dateString) => {
+                const [year, month, day] = dateString.split('-');
                 return `${day}/${month}/${year}`;
             };
 
-            if (resetButton) {
-                resetButton.addEventListener("click", resetForm);
-            } else {
-                console.error('Reset button not found');
-            }
-
-            if (saveButton) {
-                saveButton.addEventListener("click", handleSubmit);
-            } else {
-                console.error('Save button not found');
-            }
-
+            saveButton.addEventListener("click", handleSubmit);
+            resetButton.addEventListener("click", resetForm);
             container.addEventListener("click", (event) => {
-                if (event.target.classList.contains('delete-btn')) {
+                if (event.target.classList.contains("delete-btn")) {
                     deleteItem(event);
-                } else if (event.target.classList.contains('edit-btn')) {
+                } else if (event.target.classList.contains("edit-btn")) {
                     editItem(event);
-                } else if (event.target.classList.contains('view-btn')) {
+                } else if (event.target.classList.contains("view-btn")) {
                     viewItem(event);
                 }
             });

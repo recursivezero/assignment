@@ -24,9 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (documentNumber && holdingPersonName && DOB) {
             if (currentEditItem) {
-                updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender);
+                updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender,address);
             } else {
-                createNewEntry(documentNumber, holdingPersonName, DOB, gender);
+                createNewEntry(documentNumber, holdingPersonName, DOB, gender, address);
             }
             resetForm();
         } else {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return new Date(date).toLocaleDateString('en-GB', options).replace(/\//g, '-');
     };
 
-    const createNewEntry = (documentNumber, holdingPersonName, DOB, gender) => {
+    const createNewEntry = (documentNumber, holdingPersonName, DOB, gender,address) => {
         entryCount++;
         const maleSymbol = String.fromCharCode(0x2642); 
         const femaleSymbol = String.fromCharCode(0x2640);
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const formattedDOB = formatDOB(DOB);
 
         container.insertAdjacentHTML('beforeend', `
-            <div class="item" data-entry-id="${entryCount}">
+            <div class="item" data-entry-id="${entryCount}" data-address="${address}"> <!-- Store address in data attribute -->
                 <div>${entryCount}</div>
                 <div>Aadhaar</div>
                 <div>${documentNumber}</div>
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `);
     };
 
-    const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender) => {
+    const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender,address) => {
         const maleSymbol = String.fromCharCode(0x2642); 
         const femaleSymbol = String.fromCharCode(0x2640); 
         const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
         item.querySelector("div:nth-child(5)").textContent = genderSymbol;
         item.querySelector("div:nth-child(6)").textContent = formattedDOB;
+        item.setAttribute("data-address", address);
 
         currentEditItem = null;
     };

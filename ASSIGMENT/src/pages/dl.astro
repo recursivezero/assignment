@@ -21,8 +21,8 @@ import Nav from '../components/Nav.astro';
                     <input type="text" id="holdingPersonName_dl" name="holdingPersonName" required>
                     <label for="DOB_dl">Date of Birth</label>
                     <input type="date" id="DOB_dl" name="DOB" required>
-                    <label for="dlAddress">Address</label>
-                    <textarea id="dlAddress" name="dlAddress" required></textarea>
+                    <label for="DOE_dl">Date of Expiry</label>
+                    <input type="date" id="DOE_dl" name="DOE" required>
                     <div class="gender-container">
                         <label for="gender">Gender</label>
                         <input type="radio" id="gender_male" name="gender" value="male" required checked>
@@ -79,13 +79,13 @@ import Nav from '../components/Nav.astro';
                 const holdingPersonName = dlForm.querySelector("#holdingPersonName_dl").value.trim();
                 const DOB = dlForm.querySelector("#DOB_dl").value.trim();
                 const gender = dlForm.querySelector('input[name="gender"]:checked').value;
-                const address = dlForm.querySelector("#dlAddress").value.trim();
+                const DOE = dlForm.querySelector("#DOE_dl").value.trim();
 
                 if (documentNumber && holdingPersonName && DOB) {
                     if (currentEditItem) {
-                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender);
+                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender,DOE);
                     } else {
-                        createNewEntry(documentNumber, holdingPersonName, DOB, gender, address);
+                        createNewEntry(documentNumber, holdingPersonName, DOB, gender, DOE);
                     }
                     resetForm();
                 } else {
@@ -93,14 +93,14 @@ import Nav from '../components/Nav.astro';
                 }
             };
 
-            const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, address) => {
+            const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, DOE) => {
                 entryCount++;
                 const maleSymbol = String.fromCharCode(0x2642);
                 const femaleSymbol = String.fromCharCode(0x2640);
                 const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
 
                 container.insertAdjacentHTML('beforeend', `
-                    <div class="item" data-entry-id="${entryCount}">
+                    <div class="item" data-entry-id="${entryCount}" data-DOE="${DOE}">
                         <div>${entryCount}</div>
                         <div>DL</div>
                         <div>${documentNumber}</div>
@@ -116,7 +116,7 @@ import Nav from '../components/Nav.astro';
                 `);
             };
 
-            const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender) => {
+            const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender, DOE) => {
                 const maleSymbol = String.fromCharCode(0x2642);
                 const femaleSymbol = String.fromCharCode(0x2640);
                 const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
@@ -125,6 +125,7 @@ import Nav from '../components/Nav.astro';
                 item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
                 item.querySelector("div:nth-child(5)").textContent = genderSymbol;
                 item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
+                item.setAttribute("data-DOE",DOE);
 
                 currentEditItem = null;
             };
@@ -163,13 +164,14 @@ import Nav from '../components/Nav.astro';
                 const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
                 const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
                 const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+                const DOE = item.getAttribute("data-DOE").trim();
 
-                generateImage(documentNumber, holdingPersonName, genderSymbol, DOB);
+                generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, DOE);
             };
 
-            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB) => {
-                let canvasWidth = 600;
-                let canvasHeight = 400;
+            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB,DOE) => {
+                let canvasWidth = 400;
+                let canvasHeight = 300;
 
                 canvas.width = canvasWidth;
                 canvas.height = canvasHeight;
@@ -181,7 +183,7 @@ import Nav from '../components/Nav.astro';
                 context.font = 'bold 22px Arial';
                 context.textAlign = 'left';
 
-                let text = `--DL Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}`;
+                let text = `--DL Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}\nDOE: ${DOE}`;
 
                 const lines = text.split('\n');
                 lines.forEach((line, index) => {
@@ -196,7 +198,7 @@ import Nav from '../components/Nav.astro';
                     const imageURL = canvas.toDataURL('image/png');
                     const link = document.createElement('a');
                     link.href = imageURL;
-                    link.download = `DL_${new Date().toISOString().slice(0, 10)}.png`;
+                    link.download = `DL_${new Date().getTime()}.png`;
                     link.click();
                     canvasContainer.style.display = 'none';
                     downloadButton.style.display = 'none';
