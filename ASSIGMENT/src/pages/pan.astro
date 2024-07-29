@@ -141,6 +141,7 @@ import Nav from '../components/Nav.astro';
                 const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
                 const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
                 const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+                const address = item.getAttribute("data-address").trim();
 
                 const maleSymbol = String.fromCharCode(0x2642);
                 const gender = genderSymbol === maleSymbol ? "male" : "female";
@@ -148,6 +149,7 @@ import Nav from '../components/Nav.astro';
                 panForm.querySelector("#documentNumber_pan").value = documentNumber;
                 panForm.querySelector("#holdingPersonName_pan").value = holdingPersonName;
                 panForm.querySelector(`#gender_${gender}`).checked = true;
+                panForm.querySelector("#panAddress").value = address;
 
                 const [day, month, year] = DOB.split('/');
                 panForm.querySelector("#DOB_pan").value = `${year}-${month}-${day}`;

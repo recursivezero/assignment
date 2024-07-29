@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
         const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
         const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+        const address = item.getAttribute("data-address").trim();
 
         const maleSymbol = String.fromCharCode(0x2642);
         const gender = genderSymbol === maleSymbol ? "male" : "female";
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         aadhaarForm.querySelector("#DOB_aadhaar").value = dobFormatted;
         
         aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
+        aadhaarForm.querySelector("#aadhaarAddress").value = address;
     };
 
     const convertToDateInputFormat = (dateStr) => {

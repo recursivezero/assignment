@@ -146,6 +146,7 @@ import Nav from '../components/Nav.astro';
                 const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
                 const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
                 const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+                const DOE = item.getAttribute("data-DOE").trim();
 
                 const maleSymbol = String.fromCharCode(0x2642);
                 const gender = genderSymbol === maleSymbol ? "male" : "female";
@@ -154,6 +155,7 @@ import Nav from '../components/Nav.astro';
                 dlForm.querySelector("#holdingPersonName_dl").value = holdingPersonName;
                 dlForm.querySelector("#DOB_dl").value = convertToDateInputFormat(DOB);
                 dlForm.querySelector(`#gender_${gender}`).checked = true;
+                dlForm.querySelector("#DOE_dl").value = DOE;
 
                 currentEditItem = item;
             };
