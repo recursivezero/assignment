@@ -169,41 +169,67 @@ import Nav from '../components/Nav.astro';
                 generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, DOE);
             };
 
-            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB,DOE) => {
-                let canvasWidth = 400;
-                let canvasHeight = 300;
+            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, DOE) => {
+    let canvasWidth = 400;
+    let canvasHeight = 300;
 
-                canvas.width = canvasWidth;
-                canvas.height = canvasHeight;
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
 
-                context.fillStyle = '#ffe6e6';
-                context.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = '#90EE90'; 
+    context.fillRect(0, 0, canvas.width, canvas.height);
 
-                context.fillStyle = '#333';
-                context.font = 'bold 22px Arial';
-                context.textAlign = 'left';
+    context.fillStyle = '#8B0000'; 
+    context.font = 'bold 22px Arial';
+    context.textAlign = 'center';
 
-                let text = `--DL Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}\nDOE: ${DOE}`;
+    
+    context.fillText('--DL Card--', canvasWidth / 2, 50);
 
-                const lines = text.split('\n');
-                lines.forEach((line, index) => {
-                    context.font = `bold ${line.includes('Name:') ? 16 : 14}px Arial`;
-                    context.fillText(line, 40, 40 + index * 30);
-                });
+    
+    context.textAlign = 'left';
 
-                canvasContainer.style.display = 'block';
-                downloadButton.style.display = 'block';
+    
+    const details = [
+        { label: 'Dl-id:', value: documentNumber },
+        { label: 'Name:', value: holdingPersonName },
+        { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+        { label: 'DOB:', value: DOB },
+        { label: 'DOE:', value: DOE },
+    ];
 
-                downloadButton.onclick = () => {
-                    const imageURL = canvas.toDataURL('image/png');
-                    const link = document.createElement('a');
-                    link.href = imageURL;
-                    link.download = `DL_${new Date().getTime()}.png`;
-                    link.click();
-                    canvasContainer.style.display = 'none';
-                    downloadButton.style.display = 'none';
-                };
-            };
+    
+    const startX = 40;
+    let startY = 100;
+    const lineHeight = 30;
+    const labelValueGap = 10; 
+
+    
+    details.forEach((detail, index) => {
+        context.fillStyle = '#333';
+        context.font = 'bold 16px Arial';
+        context.fillText(detail.label, startX, startY + index * lineHeight);
+
+        context.fillStyle = '#333';
+        context.font = 'bold 14px Arial';
+        context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight); 
+    });
+
+    
+    canvasContainer.style.display = 'block';
+    downloadButton.style.display = 'block';
+
+    downloadButton.onclick = () => {
+        const imageURL = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = imageURL;
+        link.download = `DL_${new Date().getTime()}.png`;
+        link.click();
+
+        canvasContainer.style.display = 'none';
+        downloadButton.style.display = 'none';
+    };
+};
 
             const formatDate = (date) => {
                 if (!date) return '';

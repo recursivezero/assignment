@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         generateImage(documentNumber, holdingPersonName, genderSymbolText, DOB,address);
     };
-
     const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, address) => { 
         let canvasWidth = 400;
         let canvasHeight = 300;
@@ -75,25 +74,43 @@ document.addEventListener('DOMContentLoaded', () => {
         context.fillStyle = '#D8BFD8';
         context.fillRect(0, 0, canvas.width, canvas.height);
     
-        context.fillStyle = '#333';
-        context.font = 'bold 45px Arial';
+        context.fillStyle = '#8B0000';
+        context.font = 'bold 22px Arial';
+        context.textAlign = 'center';
+    
+        
+        context.fillText('--Aadhaar Card--', canvasWidth / 2, 50);
+    
+        
         context.textAlign = 'left';
     
-        const genderSymbolText = genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female";
+        
+        const details = [
+            { label: 'U-id:', value: documentNumber },
+            { label: 'Name:', value: holdingPersonName },
+            { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+            { label: 'DOB:', value: DOB },
+            { label: 'Address:', value: address },
+        ];
     
-        let text = `--Aadhaar Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbolText}\nDOB: ${DOB}\nAddress: ${address}`; 
+        
+        const startX = 40;
+        let startY = 100;
+        const lineHeight = 30;
+        const labelValueGap = 10; 
     
-        const lines = text.split('\n');
-        lines.forEach((line, index) => {
-            if (line.includes('Name:')) {
-                context.font = 'bold 16px Arial';
-            } else {
-                context.font = 'bold 14px Arial';
-            }
+        
+        details.forEach((detail, index) => {
+            context.fillStyle = '#333';
+            context.font = 'bold 16px Arial';
+            context.fillText(detail.label, startX, startY + index * lineHeight);
     
-            context.fillText(line, 40, 40 + index * 30);
+            context.fillStyle = '#333';
+            context.font = 'bold 14px Arial';
+            context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight); // Reduced the gap between label and value
         });
     
+        
         canvasContainer.style.display = 'block';
         downloadButton.style.display = 'block';
     
@@ -101,12 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const imageURL = canvas.toDataURL('image/png');
             const link = document.createElement('a');
             link.href = imageURL;
-            link.download = `Aadhaar_${new Date().getTime()}.png`; 
+            link.download = `Aadhaar_${new Date().getTime()}.png`;
             link.click();
     
             canvasContainer.style.display = 'none';
             downloadButton.style.display = 'none';
         };
     };
-    
-});
+})    

@@ -165,45 +165,70 @@ import Nav from '../components/Nav.astro';
 
                 generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, address);
             };
-
             const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, address) => {
-                let canvasWidth = 400;
-                let canvasHeight = 300;
+    let canvasWidth = 400;
+    let canvasHeight = 300;
 
-                if (canvas && context) {
-                    canvas.width = canvasWidth;
-                    canvas.height = canvasHeight;
+    if (canvas && context) {
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
 
-                    context.fillStyle = '#ADD8E6';
-                    context.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = '#87CEEB'; 
+        context.fillRect(0, 0, canvas.width, canvas.height);
 
-                    context.fillStyle = '#333';
-                    context.font = 'bold 22px Arial';
-                    context.textAlign = 'left';
+        context.fillStyle = '#8B0000'; 
+        context.font = 'bold 22px Arial';
+        context.textAlign = 'center';
 
-                    let text = `--Pan Card--\n# ${documentNumber}\nName: ${holdingPersonName}\nGender: ${genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female"}\nDOB: ${DOB}\nAddress: ${address}`;
+        
+        context.fillText('--PAN Card--', canvasWidth / 2, 50);
 
-                    const lines = text.split('\n');
-                    lines.forEach((line, index) => {
-                        context.font = `bold ${line.includes('Name:') ? 16 : 14}px Arial`;
-                        context.fillText(line, 40, 40 + index * 30);
-                    });
+        
+        context.textAlign = 'left';
 
-                    canvasContainer.style.display = 'block';
-                    downloadButton.style.display = 'block';
+        
+        const details = [
+            { label: 'Pn-id:', value: documentNumber },
+            { label: 'Name:', value: holdingPersonName },
+            { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+            { label: 'DOB:', value: DOB },
+            { label: 'Address:', value: address },
+        ];
 
-                    downloadButton.onclick = () => {
-                        const dataURL = canvas.toDataURL('image/png');
-                        const link = document.createElement('a');
-                        link.href = dataURL;
-                        link.download = 'pan_card.png';
-                        link.click();
+        
+        const startX = 40;
+        let startY = 100;
+        const lineHeight = 30;
+        const labelValueGap = 10; 
 
-                        canvasContainer.style.display = 'none';
-                        downloadButton.style.display = 'none';
-                    };
-                }
-            };
+        
+        details.forEach((detail, index) => {
+            context.fillStyle = '#333';
+            context.font = 'bold 16px Arial';
+            context.fillText(detail.label, startX, startY + index * lineHeight);
+
+            context.fillStyle = '#333';
+            context.font = 'bold 14px Arial';
+            context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight); 
+        });
+
+        
+        canvasContainer.style.display = 'block';
+        downloadButton.style.display = 'block';
+
+        downloadButton.onclick = () => {
+            const dataURL = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'pan_card.png';
+            link.click();
+
+            canvasContainer.style.display = 'none';
+            downloadButton.style.display = 'none';
+        };
+    }
+};
+
 
             const formatDate = (dateString) => {
                 const [year, month, day] = dateString.split('-');
