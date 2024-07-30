@@ -3,15 +3,14 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Nav from '../components/Nav.astro';
 ---
 
-<head>
-    <link rel="stylesheet" type="text/css" href="/assets/styles/aadhaar.css">
-</head>
+
 <MainLayout>
     <nav slot="nav">
         <Nav />
     </nav>
+    <label for="documentType" class="dev">Document Aadhaar </label>
     <section>
-        <label for="documentType" class="dev">Document Aadhaar </label>
+        
         <form id="aadhaarForm">
            
            
@@ -25,8 +24,8 @@ import Nav from '../components/Nav.astro';
                     <input type="date" id="DOB_aadhaar" name="DOB" required>
                     <label for="aadhaarAddress">Address</label>
                     <textarea id="aadhaarAddress" name="aadhaarAddress" required></textarea>
-                    <div class="gender-container">
-                        <label for="gender">Gender</label>
+                    <div class="gendercontainer">
+                        <label for="gender" class="gen">Gender</label>
                         <input type="radio" id="gender_male" name="gender" value="male" required checked>
                         <label for="gender_male">Male</label>
                         <input type="radio" id="gender_female" name="gender" value="female" required>

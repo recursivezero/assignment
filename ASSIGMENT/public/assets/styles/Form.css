@@ -1,0 +1,262 @@
+section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+section h2 {
+  margin-bottom: 1rem;
+}
+
+form {
+  background-color: hsl(252, 100%, 85%);
+  border-radius: 8px;
+  border: 1px solid #000; 
+  padding: 2rem;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: red; 
+  text-align: left;
+}
+
+.formContainer input,
+.formContainer textarea,
+.formContainer select {
+  border: 1px solid #000;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 0.4rem; 
+  width: 100%; 
+  box-sizing: border-box;
+  letter-spacing: 0.4rem;
+  font-size: 20px; 
+  color: black; 
+  text-align: left;
+}
+
+.formContainer input::placeholder,
+.formContainer textarea::placeholder {
+  font-size: 14px; 
+  letter-spacing: 1px;
+}
+
+#aadhaarAddress {
+  resize: none;
+}
+#panAddress{
+  resize: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color:black;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+  width: 48%;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+.container {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.item, .item.header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  padding: 0.5rem;
+  align-items: center;
+}
+
+.item.header {
+  font-weight: bold;
+  background-color: #f8f8f8;
+}
+
+
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  section {
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .item, .item.header {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+.gendercontainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.gendercontainer label.gen {
+  margin-right: 10px;
+}
+
+.gendercontainer input {
+  margin-right: 5px;
+}
+
+.gendercontainer label:not(.gen) {
+  margin-right: 1px;
+  color: black;
+}
+
+
+@media (max-width: 900px) {
+  section {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .formContainer {
+    padding: 0.5rem;
+  }
+
+  .buttoncontainer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .item, .item.header {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
+  .buttoncontainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .item, .item.header {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .formContainer input,
+  .formContainer textarea {
+    font-size: 16px; 
+  }
+}
+
+@media (max-width: 600px) {
+  section {
+    margin: 1rem auto;
+    padding: 0.5rem;
+  }
+
+  .buttoncontainer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .item, .item.header {
+    grid-template-columns: 1fr;
+    font-size: 14px;
+  }
+
+  .formContainer input,
+  .formContainer textarea {
+    font-size: 14px; 
+  }
+}
+
+.saveButton {
+  margin-top: 1rem;
+  background-color: rgba(9, 239, 162, 0.589);
+  color: #333;
+  font-weight: 700;
+}
+.saveButton:hover{
+  color: #f8f8f8;
+}
+
+.resetButton {
+  margin-top: 1rem;
+  color: #333;
+  background-color: rgba(255, 198, 249, 0.925);
+  font-weight: 700;
+}
+.resetButton:hover{
+  color: #f8f8f8;
+}
+
+.delete-btn {
+  color: rgb(254, 6, 6);
+  margin-top: 0.1cm;
+}
+
+.delete-btn:hover {
+  background-color: red;
+  color: #333;
+}
+
+.view-btn {
+  color: lightgreen;
+}
+
+.view-btn:hover {
+  background-color: lightgreen;
+  color: #333;
+}
+
+.edit-btn {
+  color: yellow;
+}
+
+.edit-btn:hover {
+  color: black;
+  background-color: yellow;
+}
+
+#aadhaarForm {
+  background-color: antiquewhite;
+}
+
+#dlForm {
+  background-color: rgb(192, 231, 233);
+}
+
+.dev {
+  color: #000;
+  text-align: center;
+  font-size: x-large;
+  font-weight: bold;
+}

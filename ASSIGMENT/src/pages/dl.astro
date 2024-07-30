@@ -3,19 +3,16 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Nav from '../components/Nav.astro';
 ---
 
-<head>
-    <link rel="stylesheet" type="text/css" href="/assets/styles/dl.css">
-</head>
 <MainLayout>
     <nav slot="nav">
         <Nav />
     </nav>
+    <label for="documentType" class="dev">_Document DL_ </label>
     <section>
-        <label for="documentType" class="dev">Document DL </label>
         <form id="dlForm">
             <div id="documentFields">
                 <div class='formContainer' id='dl'>
-                    <label for="documentNumber_dl">DL Number</label>
+                    <label for="documentNumber_dl" class="num">DL Number</label>
                     <input type="text" id="documentNumber_dl" name="documentNumber" required>
                     <label for="holdingPersonName_dl">Name</label>
                     <input type="text" id="holdingPersonName_dl" name="holdingPersonName" required>
@@ -23,8 +20,8 @@ import Nav from '../components/Nav.astro';
                     <input type="date" id="DOB_dl" name="DOB" required>
                     <label for="DOE_dl">Date of Expiry</label>
                     <input type="date" id="DOE_dl" name="DOE" required>
-                    <div class="gender-container">
-                        <label for="gender">Gender</label>
+                    <div class="gendercontainer">
+                        <label for="gender" class="gen">Gender</label>
                         <input type="radio" id="gender_male" name="gender" value="male" required checked>
                         <label for="gender_male">Male</label>
                         <input type="radio" id="gender_female" name="gender" value="female" required>
@@ -33,8 +30,7 @@ import Nav from '../components/Nav.astro';
                 </div>
             </div>
         </form>
-
-        <div class="button-container">
+        <div class="buttoncontainer">
             <button type="button" class="resetButton">Reset</button>
             <button type="submit" class="saveButton">Save</button>
         </div>
@@ -55,24 +51,21 @@ import Nav from '../components/Nav.astro';
         <button id="downloadButton" style="display: none;">Download Image</button>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const dlForm = document.getElementById("dlForm");
-            const saveButton = document.querySelector(".saveButton");
-            const resetButton = document.querySelector(".resetButton");
-            const container = document.querySelector(".container");
-            const canvasContainer = document.getElementById("canvasContainer");
-            const downloadButton = document.getElementById("downloadButton");
-            const canvas = document.getElementById('dlCanvas');
-            const context = canvas ? canvas.getContext('2d') : null;
-            let entryCount = 0;
-            let currentEditItem = null;
+    <script is:inline>
+        const dlForm = document.getElementById("dlForm");
+        const saveButton = document.querySelector(".saveButton");
+        const resetButton = document.querySelector(".resetButton");
+        const container = document.querySelector(".container");
+        const canvasContainer = document.getElementById("canvasContainer");
+        const downloadButton = document.getElementById("downloadButton");
+        const canvas = document.getElementById('dlCanvas');
+        const context = canvas ? canvas.getContext('2d') : null;
+        let entryCount = 0;
+        let currentEditItem = null;
 
-            if (!context) {
-                console.error("Canvas context could not be obtained.");
-                return;
-            }
-
+        if (!context) {
+            console.error("Canvas context could not be obtained.");
+        } else {
             const handleSubmit = (event) => {
                 event.preventDefault();
                 const documentNumber = dlForm.querySelector("#documentNumber_dl").value.trim();
@@ -83,7 +76,7 @@ import Nav from '../components/Nav.astro';
 
                 if (documentNumber && holdingPersonName && DOB) {
                     if (currentEditItem) {
-                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender,DOE);
+                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender, DOE);
                     } else {
                         createNewEntry(documentNumber, holdingPersonName, DOB, gender, DOE);
                     }
@@ -125,7 +118,7 @@ import Nav from '../components/Nav.astro';
                 item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
                 item.querySelector("div:nth-child(5)").textContent = genderSymbol;
                 item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
-                item.setAttribute("data-DOE",DOE);
+                item.setAttribute("data-DOE", DOE);
 
                 currentEditItem = null;
             };
@@ -172,66 +165,60 @@ import Nav from '../components/Nav.astro';
             };
 
             const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, DOE) => {
-    let canvasWidth = 400;
-    let canvasHeight = 300;
+                let canvasWidth = 400;
+                let canvasHeight = 300;
 
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
 
-    context.fillStyle = '#90EE90'; 
-    context.fillRect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = '#90EE90';
+                context.fillRect(0, 0, canvas.width, canvas.height);
 
-    context.fillStyle = '#8B0000'; 
-    context.font = 'bold 22px Arial';
-    context.textAlign = 'center';
+                context.fillStyle = '#8B0000';
+                context.font = 'bold 22px Arial';
+                context.textAlign = 'center';
 
-    
-    context.fillText('--DL Card--', canvasWidth / 2, 50);
+                context.fillText('--DL Card--', canvasWidth / 2, 50);
 
-    
-    context.textAlign = 'left';
+                context.textAlign = 'left';
 
-    
-    const details = [
-        { label: 'Dl-id:', value: documentNumber },
-        { label: 'Name:', value: holdingPersonName },
-        { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-        { label: 'DOB:', value: DOB },
-        { label: 'DOE:', value: DOE },
-    ];
+                const details = [
+                    { label: 'Dl-id:', value: documentNumber },
+                    { label: 'Name:', value: holdingPersonName },
+                    { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+                    { label: 'DOB:', value: DOB },
+                    { label: 'DOE:', value: DOE },
+                ];
 
-    
-    const startX = 40;
-    let startY = 100;
-    const lineHeight = 30;
-    const labelValueGap = 10; 
+                const startX = 40;
+                let startY = 100;
+                const lineHeight = 30;
+                const labelValueGap = 10;
 
-    
-    details.forEach((detail, index) => {
-        context.fillStyle = '#333';
-        context.font = 'bold 16px Arial';
-        context.fillText(detail.label, startX, startY + index * lineHeight);
+                details.forEach((detail, index) => {
+                    context.fillStyle = '#333';
+                    context.font = 'bold 16px Arial';
+                    context.fillText(detail.label, startX, startY + index * lineHeight);
 
-        context.fillStyle = '#333';
-        context.font = 'bold 14px Arial';
-        context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight); 
-    });
+                    context.fillStyle = '#333';
+                    context.font = 'bold 14px Arial';
+                    context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight);
+                });
 
-    
-    canvasContainer.style.display = 'block';
-    downloadButton.style.display = 'block';
+                canvasContainer.style.display = 'block';
+                downloadButton.style.display = 'block';
 
-    downloadButton.onclick = () => {
-        const imageURL = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = imageURL;
-        link.download = `DL_${new Date().getTime()}.png`;
-        link.click();
+                downloadButton.onclick = () => {
+                    const imageURL = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = imageURL;
+                    link.download = `DL_${new Date().getTime()}.png`;
+                    link.click();
 
-        canvasContainer.style.display = 'none';
-        downloadButton.style.display = 'none';
-    };
-};
+                    canvasContainer.style.display = 'none';
+                    downloadButton.style.display = 'none';
+                };
+            };
 
             const formatDate = (date) => {
                 if (!date) return '';
@@ -266,6 +253,6 @@ import Nav from '../components/Nav.astro';
                     viewItem(event);
                 }
             });
-        });
+        }
     </script>
 </MainLayout>
