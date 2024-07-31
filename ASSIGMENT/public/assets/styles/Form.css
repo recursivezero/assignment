@@ -12,7 +12,7 @@ section h2 {
 }
 
 form {
-  background-color: hsl(252, 100%, 85%);
+  background-color: hsl(143, 36%, 79%);
   border-radius: 8px;
   border: 1px solid #000; 
   padding: 2rem;
@@ -53,9 +53,22 @@ form {
 
 #aadhaarAddress {
   resize: none;
+  letter-spacing: 0rem;
 }
 #panAddress{
   resize: none;
+  letter-spacing: 0rem;
+}
+#holdingPersonName_aadhaar{
+  letter-spacing: 0.1rem;
+}
+#holdingPersonName_dl{
+  letter-spacing: 0.1rem;
+
+}
+#holdingPersonName_pan{
+  letter-spacing: 0.1rem;
+
 }
 
 .button-container {
@@ -64,7 +77,7 @@ form {
 }
 
 button {
-  background-color:black;
+  background-color:rgba(0, 0, 0, 0.762);
   border: none;
   border-radius: 4px;
   color: #fff;
@@ -121,18 +134,27 @@ button:hover {
   margin-bottom: 1rem;
 }
 
-.gendercontainer label.gen {
+.gendercontainer .gen {
   margin-right: 10px;
 }
 
-.gendercontainer input {
-  margin-right: 5px;
+.gendercontainer .g {
+  display: flex;
+  align-items: center;
+  gap: 5px; 
+}
+
+.gendercontainer input[type="radio"] {
+  margin: 0; 
+  vertical-align: middle; 
 }
 
 .gendercontainer label:not(.gen) {
-  margin-right: 1px;
+  margin-right: 5px; 
   color: black;
 }
+
+
 
 
 @media (max-width: 900px) {
@@ -219,13 +241,13 @@ button:hover {
 }
 
 .delete-btn {
-  color: rgb(254, 6, 6);
+  color: rgba(249, 196, 215, 1);
   margin-top: 0.1cm;
 }
 
 .delete-btn:hover {
   background-color: red;
-  color: #333;
+  color: #ede5e5;
 }
 
 .view-btn {

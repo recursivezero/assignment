@@ -3,6 +3,7 @@
 import Nav from '../components/Nav.astro';
 
 const title = "Offline Document Storage";
+const {name} =Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -12,19 +13,20 @@ const title = "Offline Document Storage";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
     <link rel="stylesheet" type="text/css" href="/assets/styles/style.css">
-    <link rel="stylesheet" type="text/css" href="/assets/styles/Form.css">
+    <link rel="stylesheet" type="text/css" href="/assets/styles/form.css">
     <script type="module" src="/src/scripts/app.js" defer></script>
 </head>
 <body>
     
     <header class="foote">
         <h1>Offline Document Storage</h1>
+        <h2>{name}</h2>
     </header>
 
     
     <Nav />
 
-    <!-- Main content -->
+    
     <main>
         <slot />
     </main>

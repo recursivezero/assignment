@@ -93,13 +93,14 @@ main {
 #downloadButton {
   margin-top: 10px;
   padding: 10px ;
-  background-color: #4CAF50; 
+  background-color: #ff83d6; 
   color: white;
-  left: 10cm;
+  left: 23cm;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   position: relative; 
+  width: 10%;
 }
 
 #downloadButton:hover {
@@ -115,4 +116,8 @@ main {
       
       text-align: center;
   }
+}
+.tit{
+  color: red;
+  margin-top: 0.5cm;
 }

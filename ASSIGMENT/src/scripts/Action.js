@@ -88,11 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
         
         const details = [
-            { label: 'U-id:', value: documentNumber },
-            { label: 'Name:', value: holdingPersonName },
-            { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-            { label: 'DOB:', value: DOB },
-            { label: 'Address:', value: address },
+            { label: 'Aadhaar Number:', value: documentNumber },
+            { label: 'Aadhaar Name:', value: holdingPersonName },
+            { label: 'Aadhaar Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+            { label: 'Aadhaar DOB:', value: DOB },
+            { label: 'Aadhaar Address:', value: address },
         ];
     
         
@@ -103,13 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
     
         
         details.forEach((detail, index) => {
-            context.fillStyle = '#333';
-            context.font = 'bold 16px Arial';
+            context.fillStyle = '#FF0000';
+            context.font = 'bold 15px Arial';
             context.fillText(detail.label, startX, startY + index * lineHeight);
     
             context.fillStyle = '#333';
             context.font = 'bold 14px Arial';
-            context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight); // Reduced the gap between label and value
+            context.fillText(detail.value, startX + 130 + labelValueGap, startY + index * lineHeight); // Reduced the gap between label and value
         });
     
         

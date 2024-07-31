@@ -7,25 +7,31 @@ import Nav from '../components/Nav.astro';
     <nav slot="nav">
         <Nav />
     </nav>
-    <label for="documentType" class="dev">_Document Pan_ </label>
+    <label for="documentType" class="dev">Document Pan</label>
+    <h3>Please Enter the details in form</h3>
+    <p class="tit">*all feilds are mandatory</p>
     <section>
         <form id="panForm">
             <div id="documentFields">
                 <div class='formContainer' id='pan'>
-                    <label for="documentNumber_pan">Pan Number</label>
+                    <label for="documentNumber_pan">Enter Pan Number</label>
                     <input type="text" id="documentNumber_pan" name="documentNumber" required>
-                    <label for="holdingPersonName_pan">Name</label>
+                    <label for="holdingPersonName_pan">Enter Pan Name</label>
                     <input type="text" id="holdingPersonName_pan" name="holdingPersonName" required>
                     <label for="DOB_pan">Date of Birth</label>
                     <input type="date" id="DOB_pan" name="DOB" required>
-                    <label for="panAddress">Address</label>
+                    <label for="panAddress">Enter Pan Address</label>
                     <textarea id="panAddress" name="panAddress" required></textarea>
                     <div class="gendercontainer">
                         <label for="gender" class="gen">Gender</label>
-                        <input type="radio" id="gender_male" name="gender" value="male" required checked>
-                        <label for="gender_male">Male</label>
-                        <input type="radio" id="gender_female" name="gender" value="female" required>
-                        <label for="gender_female">Female</label>
+                        <div class="g">
+                          <input type="radio" id="gender_male" name="gender" value="male" required checked>
+                          <label for="gender_male">Male</label>
+                          <input type="radio" id="gender_female" name="gender" value="female" required>
+                          <label for="gender_female">Female</label>
+                        </div>
+                      </div>
+                                                              
                     </div>
                 </div>
             </div>
@@ -184,11 +190,11 @@ import Nav from '../components/Nav.astro';
                 context.textAlign = 'left';
 
                 const details = [
-                    { label: 'Pn-id:', value: documentNumber },
-                    { label: 'Name:', value: holdingPersonName },
-                    { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-                    { label: 'DOB:', value: DOB },
-                    { label: 'Address:', value: address },
+                    { label: 'Pan Number:', value: documentNumber },
+                    { label: 'Pan Name:', value: holdingPersonName },
+                    { label: 'Pan Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+                    { label: 'Pan DOB:', value: DOB },
+                    { label: 'Pan Address:', value: address },
                 ];
 
                 const startX = 40;
@@ -197,13 +203,13 @@ import Nav from '../components/Nav.astro';
                 const labelValueGap = 10; 
 
                 details.forEach((detail, index) => {
-                    context.fillStyle = '#333';
+                    context.fillStyle = '#FF0000';
                     context.font = 'bold 16px Arial';
                     context.fillText(detail.label, startX, startY + index * lineHeight);
 
                     context.fillStyle = '#333';
                     context.font = 'bold 14px Arial';
-                    context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight); 
+                    context.fillText(detail.value, startX + 130 + labelValueGap, startY + index * lineHeight); 
                 });
 
                 canvasContainer.style.display = 'block';

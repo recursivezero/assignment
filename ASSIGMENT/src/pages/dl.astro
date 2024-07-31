@@ -7,14 +7,16 @@ import Nav from '../components/Nav.astro';
     <nav slot="nav">
         <Nav />
     </nav>
-    <label for="documentType" class="dev">_Document DL_ </label>
+    <label for="documentType" class="dev">Document DL</label>
+    <h3>Please Enter the details in form</h3>
+    <p class="tit">*all feilds are mandatory</p>
     <section>
         <form id="dlForm">
             <div id="documentFields">
                 <div class='formContainer' id='dl'>
-                    <label for="documentNumber_dl" class="num">DL Number</label>
+                    <label for="documentNumber_dl" class="num">Enter License Number</label>
                     <input type="text" id="documentNumber_dl" name="documentNumber" required>
-                    <label for="holdingPersonName_dl">Name</label>
+                    <label for="holdingPersonName_dl">Enter License Name</label>
                     <input type="text" id="holdingPersonName_dl" name="holdingPersonName" required>
                     <label for="DOB_dl">Date of Birth</label>
                     <input type="date" id="DOB_dl" name="DOB" required>
@@ -22,10 +24,14 @@ import Nav from '../components/Nav.astro';
                     <input type="date" id="DOE_dl" name="DOE" required>
                     <div class="gendercontainer">
                         <label for="gender" class="gen">Gender</label>
-                        <input type="radio" id="gender_male" name="gender" value="male" required checked>
-                        <label for="gender_male">Male</label>
-                        <input type="radio" id="gender_female" name="gender" value="female" required>
-                        <label for="gender_female">Female</label>
+                        <div class="g">
+                          <input type="radio" id="gender_male" name="gender" value="male" required checked>
+                          <label for="gender_male">Male</label>
+                          <input type="radio" id="gender_female" name="gender" value="female" required>
+                          <label for="gender_female">Female</label>
+                        </div>
+                      </div>
+                                                              
                     </div>
                 </div>
             </div>
@@ -178,16 +184,16 @@ import Nav from '../components/Nav.astro';
                 context.font = 'bold 22px Arial';
                 context.textAlign = 'center';
 
-                context.fillText('--DL Card--', canvasWidth / 2, 50);
+                context.fillText('--Driving License --', canvasWidth / 2, 50);
 
                 context.textAlign = 'left';
 
                 const details = [
-                    { label: 'Dl-id:', value: documentNumber },
-                    { label: 'Name:', value: holdingPersonName },
-                    { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-                    { label: 'DOB:', value: DOB },
-                    { label: 'DOE:', value: DOE },
+                    { label: 'License Number:', value: documentNumber },
+                    { label: 'License Name:', value: holdingPersonName },
+                    { label: 'License Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+                    { label: 'License DOB:', value: DOB },
+                    { label: 'License DOE:', value: DOE },
                 ];
 
                 const startX = 40;
@@ -196,13 +202,13 @@ import Nav from '../components/Nav.astro';
                 const labelValueGap = 10;
 
                 details.forEach((detail, index) => {
-                    context.fillStyle = '#333';
+                    context.fillStyle = '#FF0000';
                     context.font = 'bold 16px Arial';
                     context.fillText(detail.label, startX, startY + index * lineHeight);
 
                     context.fillStyle = '#333';
                     context.font = 'bold 14px Arial';
-                    context.fillText(detail.value, startX + 80 + labelValueGap, startY + index * lineHeight);
+                    context.fillText(detail.value, startX + 130 + labelValueGap, startY + index * lineHeight);
                 });
 
                 canvasContainer.style.display = 'block';

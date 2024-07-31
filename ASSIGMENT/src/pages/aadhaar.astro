@@ -9,27 +9,32 @@ import Nav from '../components/Nav.astro';
         <Nav />
     </nav>
     <label for="documentType" class="dev">Document Aadhaar </label>
+    <h3>Please Enter the details in form</h3>
+    <p class="tit">*all feilds are mandatory</p>
     <section>
-        
         <form id="aadhaarForm">
            
            
             <div id="documentFields">
                 <div class='formContainer' id='aadhaar'>
-                    <label for="documentNumber_aadhaar">Aadhaar Number</label>
+                    <label for="documentNumber_aadhaar" class="num">Enter Aadhaar Number</label>
                     <input type="text" id="documentNumber_aadhaar" name="documentNumber" required>
-                    <label for="holdingPersonName_aadhaar">Name</label>
+                    <label for="holdingPersonName_aadhaar" class="nam">Enter Aadhaar Name</label>
                     <input type="text" id="holdingPersonName_aadhaar" name="holdingPersonName" required>
-                    <label for="DOB_aadhaar">Date of Birth</label>
+                    <label for="DOB_aadhaar" class="dob">Date of Birth</label>
                     <input type="date" id="DOB_aadhaar" name="DOB" required>
-                    <label for="aadhaarAddress">Address</label>
+                    <label for="aadhaarAddress" class="add">Enter Aadhaar Address</label>
                     <textarea id="aadhaarAddress" name="aadhaarAddress" required></textarea>
                     <div class="gendercontainer">
                         <label for="gender" class="gen">Gender</label>
-                        <input type="radio" id="gender_male" name="gender" value="male" required checked>
-                        <label for="gender_male">Male</label>
-                        <input type="radio" id="gender_female" name="gender" value="female" required>
-                        <label for="gender_female">Female</label>
+                        <div class="g">
+                          <input type="radio" id="gender_male" name="gender" value="male" required checked>
+                          <label for="gender_male">Male</label>
+                          <input type="radio" id="gender_female" name="gender" value="female" required>
+                          <label for="gender_female">Female</label>
+                        </div>
+                      </div>
+                                                              
                     </div>
                 </div>
             </div>
@@ -59,5 +64,5 @@ import Nav from '../components/Nav.astro';
         <canvas id="aadhaarCanvas"></canvas>
         <button id="downloadButton" style="display: none;">Download Image</button>
     </div>
-    <script src="/src/scripts/app.js" type="module"></script>
+    <script src="/src/scripts/app.js"  is:inline></script>
 </MainLayout>
