@@ -8,28 +8,37 @@ import Nav from '../components/Nav.astro';
         <Nav />
     </nav>
     <label for="documentType" class="dev">Document Pan</label>
-    <h3>Please Enter the details in form</h3>
-    <p class="tit">*all feilds are mandatory</p>
+    <h3>Please enter the details in below form</h3>
+    <p class="tit">*all feilds are required</p>
     <section>
         <form id="panForm">
             <div id="documentFields">
                 <div class='formContainer' id='pan'>
-                    <label for="documentNumber_pan">Enter Pan Number</label>
-                    <input type="text" id="documentNumber_pan" name="documentNumber" required>
-                    <label for="holdingPersonName_pan">Enter Pan Name</label>
-                    <input type="text" id="holdingPersonName_pan" name="holdingPersonName" required>
-                    <label for="DOB_pan">Date of Birth</label>
-                    <input type="date" id="DOB_pan" name="DOB" required>
-                    <label for="panAddress">Enter Pan Address</label>
-                    <textarea id="panAddress" name="panAddress" required></textarea>
-                    <div class="gendercontainer">
-                        <label for="gender" class="gen">Gender</label>
-                        <div class="g">
-                          <input type="radio" id="gender_male" name="gender" value="male" required checked>
-                          <label for="gender_male">Male</label>
-                          <input type="radio" id="gender_female" name="gender" value="female" required>
-                          <label for="gender_female">Female</label>
+                    <div>
+                        <label for="documentNumber_pan" class="num"> Pan Number</label>
+                        <input type="text" id="documentNumber_pan" name="documentNumber" placeholder="as mentioned in pan" required>
                         </div>
+                        <div>
+                        <label for="holdingPersonName_pan" class="nam"> Name on  Pan</label>
+                        <input type="text" id="holdingPersonName_pan" name="holdingPersonName" placeholder="as mentioned in pan" required>
+                        </div>
+                        <div>
+                        <label for="DOB_pan" class="dob">Date of Birth</label>
+                        <input type="date" id="DOB_pan" name="DOB" required>
+                        </div>
+                        <div>
+                        <label for="panAddress" class="add"> Pan Address</label>
+                        <textarea id="panAddress" name="aadhaarAddress" placeholder="as mentioned in pan" required></textarea>
+                        </div>
+                        <div class="gendercontainer">
+                            <label for="gender" class="gen">Gender</label>
+                            <div class="g">
+                              <input type="radio" id="gender_male" name="gender" value="male" required checked>
+                              <label for="gender_male">Male</label>
+                              <input type="radio" id="gender_female" name="gender" value="female" required>
+                              <label for="gender_female">Female</label>
+                            </div>
+                          </div>
                       </div>
                                                               
                     </div>
@@ -190,11 +199,11 @@ import Nav from '../components/Nav.astro';
                 context.textAlign = 'left';
 
                 const details = [
-                    { label: 'Pan Number:', value: documentNumber },
-                    { label: 'Pan Name:', value: holdingPersonName },
-                    { label: 'Pan Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-                    { label: 'Pan DOB:', value: DOB },
-                    { label: 'Pan Address:', value: address },
+                    { label: 'Number:', value: documentNumber },
+                    { label: 'Name:', value: holdingPersonName },
+                    { label: 'Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+                    { label: 'Dateofbirth:', value: DOB },
+                    { label: 'Address:', value: address },
                 ];
 
                 const startX = 40;
@@ -209,7 +218,7 @@ import Nav from '../components/Nav.astro';
 
                     context.fillStyle = '#333';
                     context.font = 'bold 14px Arial';
-                    context.fillText(detail.value, startX + 130 + labelValueGap, startY + index * lineHeight); 
+                    context.fillText(detail.value, startX + 100 + labelValueGap, startY + index * lineHeight); 
                 });
 
                 canvasContainer.style.display = 'block';

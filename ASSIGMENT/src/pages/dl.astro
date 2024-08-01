@@ -7,21 +7,29 @@ import Nav from '../components/Nav.astro';
     <nav slot="nav">
         <Nav />
     </nav>
-    <label for="documentType" class="dev">Document DL</label>
-    <h3>Please Enter the details in form</h3>
-    <p class="tit">*all feilds are mandatory</p>
+    <label for="documentType" class="dev">Document Driving License</label>
+    <h3>Please enter the details in below form</h3>
+    <p class="tit">*all feilds are required</p>
     <section>
         <form id="dlForm">
             <div id="documentFields">
                 <div class='formContainer' id='dl'>
-                    <label for="documentNumber_dl" class="num">Enter License Number</label>
-                    <input type="text" id="documentNumber_dl" name="documentNumber" required>
-                    <label for="holdingPersonName_dl">Enter License Name</label>
-                    <input type="text" id="holdingPersonName_dl" name="holdingPersonName" required>
+                    <div>
+                    <label for="documentNumber_dl" class="num"> License Number</label>
+                    <input type="text" id="documentNumber_dl" name="documentNumber" placeholder="as mentioned in license" required>
+                    </div>
+                    <div>
+                    <label for="holdingPersonName_dl"> Name on license</label>
+                    <input type="text" id="holdingPersonName_dl" name="holdingPersonName" placeholder="as mentioned in license" required>
+                    </div>
+                    <div>
                     <label for="DOB_dl">Date of Birth</label>
                     <input type="date" id="DOB_dl" name="DOB" required>
+                    </div>
+                    <div>
                     <label for="DOE_dl">Date of Expiry</label>
                     <input type="date" id="DOE_dl" name="DOE" required>
+                    </div>
                     <div class="gendercontainer">
                         <label for="gender" class="gen">Gender</label>
                         <div class="g">
@@ -31,9 +39,8 @@ import Nav from '../components/Nav.astro';
                           <label for="gender_female">Female</label>
                         </div>
                       </div>
-                                                              
-                    </div>
-                </div>
+               </div>
+            </div>
             </div>
         </form>
         <div class="buttoncontainer">
@@ -189,11 +196,11 @@ import Nav from '../components/Nav.astro';
                 context.textAlign = 'left';
 
                 const details = [
-                    { label: 'License Number:', value: documentNumber },
-                    { label: 'License Name:', value: holdingPersonName },
-                    { label: 'License Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-                    { label: 'License DOB:', value: DOB },
-                    { label: 'License DOE:', value: DOE },
+                    { label: ' Number:', value: documentNumber },
+                    { label: ' Name:', value: holdingPersonName },
+                    { label: ' Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+                    { label: ' Dateofbirth:', value: DOB },
+                    { label: ' ExpiryDate:', value: DOE },
                 ];
 
                 const startX = 40;
@@ -208,7 +215,7 @@ import Nav from '../components/Nav.astro';
 
                     context.fillStyle = '#333';
                     context.font = 'bold 14px Arial';
-                    context.fillText(detail.value, startX + 130 + labelValueGap, startY + index * lineHeight);
+                    context.fillText(detail.value, startX + 100 + labelValueGap, startY + index * lineHeight);
                 });
 
                 canvasContainer.style.display = 'block';

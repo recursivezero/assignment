@@ -27,7 +27,7 @@ form {
   font-weight: bold;
   margin-bottom: 0.5rem;
   color: red; 
-  text-align: left;
+  
 }
 
 .formContainer input,
@@ -145,7 +145,7 @@ button:hover {
 }
 
 .gendercontainer input[type="radio"] {
-  margin: 0; 
+  margin-top: 9px;
   vertical-align: middle; 
 }
 
@@ -153,6 +153,7 @@ button:hover {
   margin-right: 5px; 
   color: black;
 }
+
 
 
 
@@ -270,10 +271,16 @@ button:hover {
 
 #aadhaarForm {
   background-color: antiquewhite;
+  text-align: left;
+  
 }
 
 #dlForm {
   background-color: rgb(192, 231, 233);
+  text-align: left;
+}
+#panForm{
+  text-align: left;
 }
 
 .dev {
