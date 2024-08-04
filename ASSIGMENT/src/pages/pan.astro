@@ -11,9 +11,9 @@ import Nav from '../components/Nav.astro';
     <h3>Please enter the details in below form</h3>
     <p class="tit">*all feilds are required</p>
     <section>
-        <form id="panForm">
+        <form class="panForm">
             <div id="documentFields">
-                <div class='formContainer' id='pan'>
+                <div class='formContainerpan' id='pan'>
                     <div>
                         <label for="documentNumber_pan" class="num"> Pan Number</label>
                         <input type="text" id="documentNumber_pan" name="documentNumber" placeholder="as mentioned in pan" required>
@@ -68,7 +68,7 @@ import Nav from '../components/Nav.astro';
     </div>
 
     <script is:inline>
-        const panForm = document.getElementById("panForm");
+        const panForm = document.querySelector(".panForm");
         const saveButton = document.querySelector(".saveButton");
         const resetButton = document.querySelector(".resetButton");
         const container = document.querySelector(".container");

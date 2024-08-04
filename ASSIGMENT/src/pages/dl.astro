@@ -11,9 +11,9 @@ import Nav from '../components/Nav.astro';
     <h3>Please enter the details in below form</h3>
     <p class="tit">*all feilds are required</p>
     <section>
-        <form id="dlForm">
+        <form class="dlForm">
             <div id="documentFields">
-                <div class='formContainer' id='dl'>
+                <div class='formContainerdl' id='dl'>
                     <div>
                     <label for="documentNumber_dl" class="num"> License Number</label>
                     <input type="text" id="documentNumber_dl" name="documentNumber" placeholder="as mentioned in license" required>
@@ -65,7 +65,7 @@ import Nav from '../components/Nav.astro';
     </div>
 
     <script is:inline>
-        const dlForm = document.getElementById("dlForm");
+        const dlForm = document.querySelector(".dlForm");
         const saveButton = document.querySelector(".saveButton");
         const resetButton = document.querySelector(".resetButton");
         const container = document.querySelector(".container");

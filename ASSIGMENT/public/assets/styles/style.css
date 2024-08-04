@@ -121,3 +121,31 @@ main {
   color: red;
   margin-top: 0.5cm;
 }
+
+.delete-btn {
+  color: rgba(249, 196, 215, 1);
+  margin-top: 2px;
+}
+
+.delete-btn:hover {
+  background-color: red;
+  color: #ede5e5;
+}
+
+.view-btn {
+  color: lightgreen;
+}
+
+.view-btn:hover {
+  background-color: lightgreen;
+  color: #333;
+}
+
+.edit-btn {
+  color: yellow;
+}
+
+.edit-btn:hover {
+  color: black;
+  background-color: yellow;
+}

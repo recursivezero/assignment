@@ -3,21 +3,20 @@ import MainLayout from '../layouts/MainLayout.astro';
 import Nav from '../components/Nav.astro';
 ---
 
-
 <MainLayout>
     <nav slot="nav">
         <Nav />
     </nav>
     <label for="documentType" class="dev">Document Aadhaar</label>
-    <h3>Please Enter the details in form</h3>
+    <h3>Please enter the details in below form</h3>
     <p class="tit">*all feilds are mandatory</p>
     <section>
         
-        <form id="aadhaarForm">
+        <form class="aadhaarForm">
            
            
             <div id="documentFields">
-                <div class='formContainer' id='aadhaar'>
+                <div class='formContaineraadhaar' id='aadhaar'>
                     <div>
                     <label for="documentNumber_aadhaar" class="num"> Aadhaar Number</label>
                     <input type="text" id="documentNumber_aadhaar" name="documentNumber" placeholder="as per aadhaar" required>
@@ -43,9 +42,6 @@ import Nav from '../components/Nav.astro';
                           <label for="gender_female">Female</label>
                         </div>
                       </div>
-                      
-                                                              
-                    
                 </div>
             </div>
             
@@ -76,7 +72,7 @@ import Nav from '../components/Nav.astro';
     </div>
     
     <script is:inline>
-        const aadhaarForm = document.getElementById("aadhaarForm");
+        const aadhaarForm = document.querySelector(".aadhaarForm");
         const saveButton = document.querySelector(".saveButton");
         const resetButton = document.querySelector(".resetButton");
         const container = document.querySelector(".container");
