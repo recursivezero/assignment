@@ -19,7 +19,7 @@ import Nav from '../components/Nav.astro';
                 <div class='formContaineraadhaar' id='aadhaar'>
                     <div>
                     <label for="documentNumber_aadhaar" class="num"> Aadhaar Number</label>
-                    <input type="text" id="documentNumber_aadhaar" name="documentNumber" placeholder="as per aadhaar" required>
+                    <input type="text" class="s" id="documentNumber_aadhaar" name="documentNumber" placeholder="as per aadhaar" pattern="[0-9]{12}" title="Aadhaar number must be 12 digits" required>
                     </div>
                     <div>
                     <label for="holdingPersonName_aadhaar" class="nam"> Name on Aadhaar</label>
@@ -27,7 +27,7 @@ import Nav from '../components/Nav.astro';
                     </div>
                     <div>
                     <label for="DOB_aadhaar" class="dob">Date of Birth</label>
-                    <input type="date" id="DOB_aadhaar" name="DOB" required>
+                    <input type="date"  id="DOB_aadhaar" name="DOB" required>
                     </div>
                     <div>
                     <label for="aadhaarAddress" class="add"> Aadhaar Address</label>
@@ -277,6 +277,10 @@ import Nav from '../components/Nav.astro';
                 } else if (event.target.classList.contains('view-btn')) {
                     viewItem(event);
                 }
+            });
+            const aadhaarInput = document.getElementById("documentNumber_aadhaar");
+            aadhaarInput.addEventListener("input", () => {
+                aadhaarInput.value = aadhaarInput.value.replace(/\D/g, '');
             });
         }
     </script>

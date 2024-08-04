@@ -50,6 +50,10 @@ body {
     color: red;
     display: block;
     margin-bottom: 0.5rem;
+    margin-top: 10px;
+  }
+  .s{
+    letter-spacing: 0.4rem;
   }
   
   .formContaineraadhaar input,
