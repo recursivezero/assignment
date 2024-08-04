@@ -70,7 +70,6 @@ import Nav from '../components/Nav.astro';
         <canvas id="aadhaarCanvas"></canvas>
         <button id="downloadButton" style="display: none;">Download Image</button>
     </div>
-    
     <script is:inline>
         const aadhaarForm = document.querySelector(".aadhaarForm");
         const saveButton = document.querySelector(".saveButton");
@@ -88,11 +87,13 @@ import Nav from '../components/Nav.astro';
         } else {
             const handleSubmit = (event) => {
                 event.preventDefault();
-                const documentNumber = aadhaarForm.querySelector("#documentNumber_aadhaar").value.trim();
-                const holdingPersonName = aadhaarForm.querySelector("#holdingPersonName_aadhaar").value.trim();
-                const DOB = aadhaarForm.querySelector("#DOB_aadhaar").value.trim();
-                const gender = aadhaarForm.querySelector('input[name="gender"]:checked').value;
-                const aadhaarAddress = aadhaarForm.querySelector("#aadhaarAddress").value.trim();
+                
+                const formData = new FormData(aadhaarForm);
+                const documentNumber = formData.get("documentNumber")?.trim();
+                const holdingPersonName = formData.get("holdingPersonName")?.trim();
+                const DOB = formData.get("DOB")?.trim();
+                const gender = formData.get("gender");
+                const aadhaarAddress = formData.get("aadhaarAddress")?.trim();
     
                 if (documentNumber && holdingPersonName && DOB) {
                     if (currentEditItem) {
@@ -183,67 +184,62 @@ import Nav from '../components/Nav.astro';
     
                 generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, aadhaarAddress);
             };
+    
             const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, address) => { 
-        let canvasWidth = 400;
-        let canvasHeight = 300;
+                let canvasWidth = 400;
+                let canvasHeight = 300;
     
-        canvas.width = canvasWidth;
-        canvas.height = canvasHeight;
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
     
-        context.fillStyle = '#D8BFD8';
-        context.fillRect(0, 0, canvas.width, canvas.height);
+                context.fillStyle = '#D8BFD8';
+                context.fillRect(0, 0, canvas.width, canvas.height);
     
-        context.fillStyle = '#8B0000';
-        context.font = 'bold 22px Arial';
-        context.textAlign = 'center';
+                context.fillStyle = '#8B0000';
+                context.font = 'bold 22px Arial';
+                context.textAlign = 'center';
     
-        
-        context.fillText('--Aadhaar Card--', canvasWidth / 2, 50);
+                context.fillText('--Aadhaar Card--', canvasWidth / 2, 50);
     
-        
-        context.textAlign = 'left';
+                context.textAlign = 'left';
     
-        
-        const details = [
-            { label: ' Number:', value: documentNumber },
-            { label: ' Name:', value: holdingPersonName },
-            { label: ' Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-            { label: ' Dateofbirth:', value: DOB },
-            { label: ' Address:', value: address },
-        ];
+                const details = [
+                    { label: ' Number:', value: documentNumber },
+                    { label: ' Name:', value: holdingPersonName },
+                    { label: ' Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
+                    { label: ' Dateofbirth:', value: DOB },
+                    { label: ' Address:', value: address },
+                ];
     
-        
-        const startX = 40;
-        let startY = 100;
-        const lineHeight = 30;
-        const labelValueGap = 10; 
+                const startX = 40;
+                let startY = 100;
+                const lineHeight = 30;
+                const labelValueGap = 10; 
     
-        
-        details.forEach((detail, index) => {
-            context.fillStyle = '#FF0000';
-            context.font = 'bold 15px Arial';
-            context.fillText(detail.label, startX, startY + index * lineHeight);
+                details.forEach((detail, index) => {
+                    context.fillStyle = '#FF0000';
+                    context.font = 'bold 15px Arial';
+                    context.fillText(detail.label, startX, startY + index * lineHeight);
     
-            context.fillStyle = '#333';
-            context.font = 'bold 14px Arial';
-            context.fillText(detail.value, startX + 100 + labelValueGap, startY + index * lineHeight); 
-        });
+                    context.fillStyle = '#333';
+                    context.font = 'bold 14px Arial';
+                    context.fillText(detail.value, startX + 100 + labelValueGap, startY + index * lineHeight); 
+                });
     
-        
-        canvasContainer.style.display = 'block';
-        downloadButton.style.display = 'block';
+                canvasContainer.style.display = 'block';
+                downloadButton.style.display = 'block';
     
-        downloadButton.onclick = () => {
-            const imageURL = canvas.toDataURL('image/png');
-            const link = document.createElement('a');
-            link.href = imageURL;
-            link.download = `Aadhaar_${new Date().getTime()}.png`;
-            link.click();
+                downloadButton.onclick = () => {
+                    const imageURL = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = imageURL;
+                    link.download = `Aadhaar_${new Date().getTime()}.png`;
+                    link.click();
     
-            canvasContainer.style.display = 'none';
-            downloadButton.style.display = 'none';
-        };
-    };
+                    canvasContainer.style.display = 'none';
+                    downloadButton.style.display = 'none';
+                };
+            };
     
             const formatDate = (date) => {
                 if (!date) return '';
@@ -278,6 +274,7 @@ import Nav from '../components/Nav.astro';
                     viewItem(event);
                 }
             });
+    
             const aadhaarInput = document.getElementById("documentNumber_aadhaar");
             aadhaarInput.addEventListener("input", () => {
                 aadhaarInput.value = aadhaarInput.value.replace(/\D/g, '');
