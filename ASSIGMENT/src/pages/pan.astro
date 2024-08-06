@@ -1,6 +1,8 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
 import Nav from '../components/Nav.astro';
+import Tabel from '../components/Tabel.astro';
+import Button from '../components/Button.astro'
 ---
 
 <MainLayout>
@@ -46,22 +48,9 @@ import Nav from '../components/Nav.astro';
             </div>
         </form>
 
-        <div class="buttoncontainer">
-            <button type="button" class="resetButton">Reset</button>
-            <button type="submit" class="saveButton">Save</button>
-        </div>
+       <Button/>
     </section>
-    <div class="container">
-        <div class="item header">
-            <div>#</div>
-            <div>Document</div>
-            <div>Info</div>
-            <div>Name</div>
-            <div>Gender</div>
-            <div>DOB</div>
-            <div>Actions</div>
-        </div>
-    </div>
+   <Tabel/>
     <div id="canvasContainer" style="display: none;">
         <canvas id="panCanvas"></canvas>
         <button id="downloadButton" style="display: none;">Download Image</button>
