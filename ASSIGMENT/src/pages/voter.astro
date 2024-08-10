@@ -1,11 +1,9 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
-import Tabel from "../components/Tabel.astro";
-import Button from "../components/Button.astro";
 import Gen from "../components/Gen.astro";
-
-
+import Button from "../components/Button.astro";
+import Tabel from "../components/Tabel.astro";
 ---
 
 <MainLayout>
@@ -16,25 +14,36 @@ import Gen from "../components/Gen.astro";
     <p class="subheading">all feilds are required</p>
    </p>
   <section>
-    <form class="form" id ="pan" name="pan">
-      <div class="container__pan">
+    <form class="form" id="voter" name="voter">
+      <div class="container__voter">
         <div class="form__field">
-          <label for="doc-number"> PAN</label>
+          <label for="doc-number">Id Number</label>
           <input
             type="text"
             id="doc-number"
             name="documentNumber"
-            placeholder="DO12 3456 789"
+            placeholder="1234 5678 9012"
+            pattern="[0-9]{12}"
             required
           />
         </div>
         <div class="form__field">
-          <label for="doc-name"> Name on Pan</label>
+          <label for="doc-name">Elector's Name</label>
           <input
             type="text"
             id="doc-name"
             name="holdingPersonName"
-            placeholder="ERIC ROVEN"
+            placeholder="JACK RAYN"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label for="doc-fathername">Father's Name</label>
+          <input
+            type="text"
+            id="doc-fathername"
+            name="fathername"
+            placeholder="JACK RAYN"
             required
           />
         </div>
@@ -42,55 +51,47 @@ import Gen from "../components/Gen.astro";
           <label for="doc-dob">Date of Birth</label>
           <input type="date" id="doc-dob" name="DOB" required />
         </div>
-        <div class="form__field">
-          <label for="doc-fathername"> Father Name </label>
-          <input
-            id="doc-fathername"
-            name="fathername"
-            placeholder="ROVEN RAN"
-            required
-            />
-        </div>
-     <Gen/>
+        
+       <Gen/>
       </div>
     </form>
+  
     <Button/>
   </section>
+ 
  <Tabel/>
-</div>
   <div id="canvasContainer" class="canvas" style="display: none;">
-    <canvas id="panCanvas"></canvas>
+    <canvas id="voterCanvas"></canvas>
     <button id="downloadButton" class="download" style="display: none;">Download Image</button>
   </div>
-  <script is:inline>
-
-    const panForm = document.querySelector(".form");
+</MainLayout>
+<script is:inline>
+    const voterForm = document.querySelector(".form");
     const saveButton = document.querySelector(".saveButton");
     const resetButton = document.querySelector(".resetButton");
     const container = document.querySelector(".container");
     const canvasContainer = document.getElementById("canvasContainer");
     const downloadButton = document.getElementById("downloadButton");
-    const canvas = document.getElementById("panCanvas");
+    const canvas = document.getElementById("voterCanvas");
     const context = canvas.getContext("2d");
   
     let entryCount = 0;
     let currentEditItem = null;
   
-    
     const handleSubmit = (event) => {
       event.preventDefault();
   
-              const documentNumber = panForm.querySelector("#doc-number").value.trim();
-              const holdingPersonName = panForm.querySelector("#doc-name").value.trim();
-              const DOB = panForm.querySelector("#doc-dob").value.trim();
-              const gender = panForm.querySelector('input[name="gender"]:checked').value;
-              const fathername = panForm.querySelector("#doc-fathername").value.trim(); 
+      const documentNumber = voterForm.querySelector("#doc-number").value.trim();
+      const holdingPersonName = voterForm.querySelector("#doc-name").value.trim();
+      const fathername = voterForm.querySelector("#doc-fathername").value.trim();
+      const DOB = voterForm.querySelector("#doc-dob").value.trim();
+      const gender = voterForm.querySelector('input[name="gender"]:checked').value;
   
-      if (documentNumber && holdingPersonName && DOB) {
+      if (documentNumber && holdingPersonName && DOB && fathername) {
         if (currentEditItem) {
-          updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender, fathername);
+          updateEntry(currentEditItem, documentNumber, holdingPersonName, fathername, DOB, gender);
         } else {
-          createNewEntry(documentNumber, holdingPersonName, DOB, gender, fathername);
+          createNewEntry(documentNumber, holdingPersonName, fathername, DOB, gender);
         }
         resetForm();
       } else {
@@ -98,64 +99,53 @@ import Gen from "../components/Gen.astro";
       }
     };
   
-    
-    const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, fathername) => {
+    const createNewEntry = (documentNumber, holdingPersonName, fathername, DOB, gender) => {
       entryCount++;
-              const maleSymbol = String.fromCharCode(0x2642);
-              const femaleSymbol = String.fromCharCode(0x2640);
-              const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-  
-              container.insertAdjacentHTML('beforeend', `
-                  <div class="item" data-entry-id="${entryCount}" data-address="${fathername}">
-                      <div>${entryCount}</div>
-                      <div>Pan</div>
-                      <div>${documentNumber}</div>
-                      <div>${holdingPersonName}</div>
-                      <div>${genderSymbol}</div>
-                      <div>${formatDate(DOB)}</div>
-                      <div>
-                          <button class="view-btn" type="button">View</button>
-                          <button class="edit-btn" type="button">Edit</button>
-                          <button class="delete-btn" type="button">Delete</button>
-                      </div>
-                  </div>
-              `);
-      
-  
-    
-  
-     
-    };
-  
-  
-    // Update an existing entry
-    const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender, fathername) => {
       const maleSymbol = String.fromCharCode(0x2642);
-              const femaleSymbol = String.fromCharCode(0x2640);
-              const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+      const femaleSymbol = String.fromCharCode(0x2640);
+      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
   
-              item.querySelector("div:nth-child(3)").textContent = documentNumber;
-              item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
-              item.querySelector("div:nth-child(5)").textContent = genderSymbol;
-              item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
-              item.setAttribute("data-address", fathername);
-  
-              currentEditItem = null;
+      container.insertAdjacentHTML('beforeend', `
+        <div class="item" data-entry-id="${entryCount}" data-address="${fathername}">
+          <div>${entryCount}</div>
+          <div>Voter ID</div>
+          <div>${documentNumber}</div>
+          <div>${holdingPersonName}</div>
+          <div>${genderSymbol}</div>
+          <div>${formatDate(DOB)}</div>
+          <div>
+            <button class="view-btn" type="button">View</button>
+            <button class="edit-btn" type="button">Edit</button>
+            <button class="delete-btn" type="button">Delete</button>
+          </div>
+        </div>
+      `);
     };
   
-    // Reset the form
-    const resetForm = () => {
-      panForm.reset();
+    const updateEntry = (item, documentNumber, holdingPersonName, fathername, DOB, gender) => {
+      const maleSymbol = String.fromCharCode(0x2642);
+      const femaleSymbol = String.fromCharCode(0x2640);
+      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+  
+      item.querySelector("div:nth-child(3)").textContent = documentNumber;
+      item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
+      item.querySelector("div:nth-child(5)").textContent = genderSymbol;
+      item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
+      item.setAttribute("data-address", fathername);
+  
       currentEditItem = null;
     };
   
-    // Delete an entry
+    const resetForm = () => {
+      voterForm.reset();
+      currentEditItem = null;
+    };
+  
     const deleteItem = (event) => {
       const item = event.target.closest(".item");
       item.remove();
     };
   
-    // Edit an entry
     const editItem = (event) => {
       const item = event.target.closest(".item");
       const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
@@ -165,20 +155,19 @@ import Gen from "../components/Gen.astro";
       const fathername = item.getAttribute("data-address").trim();
   
       const maleSymbol = String.fromCharCode(0x2642);
-              const gender = genderSymbol === maleSymbol ? "male" : "female";
+      const gender = genderSymbol === maleSymbol ? "male" : "female";
   
-              panForm.querySelector("#doc-number").value = documentNumber;
-              panForm.querySelector("#doc-name").value = holdingPersonName;
-              panForm.querySelector(`#gender_${gender}`).checked = true;
-              panForm.querySelector("#doc-fathername").value = fathername;
+      voterForm.querySelector("#doc-number").value = documentNumber;
+      voterForm.querySelector("#doc-name").value = holdingPersonName;
+      voterForm.querySelector(`#gender_${gender}`).checked = true;
+      voterForm.querySelector("#doc-fathername").value = fathername;
   
-              const [day, month, year] = DOB.split('/');
-              panForm.querySelector("#doc-dob").value = `${year}-${month}-${day}`;
+      const [year, month, day] = DOB.split('/');
+      voterForm.querySelector("#doc-dob").value = `${day}-${month}-${year}`;
   
-              currentEditItem = item;
+      currentEditItem = item;
     };
   
-    // View an entry
     const viewItem = (event) => {
       const item = event.target.closest(".item");
       const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
@@ -190,7 +179,6 @@ import Gen from "../components/Gen.astro";
       generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, fathername);
     };
   
-    // Generate an image for download
     const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, fathername) => {
       let canvasWidth = 400;
       let canvasHeight = 300;
@@ -198,18 +186,18 @@ import Gen from "../components/Gen.astro";
       canvas.width = canvasWidth;
       canvas.height = canvasHeight;
   
-      context.fillStyle = "#E6E6FA";
+      context.fillStyle = "#808080";
       context.fillRect(0, 0, canvas.width, canvas.height);
   
       context.fillStyle = "#8B0000";
       context.font = "bold 22px Arial";
       context.textAlign = "center";
-      context.fillText("--PAN Card--", canvasWidth / 2, 50);
+      context.fillText("--Voter ID Card--", canvasWidth / 2, 50);
   
       context.textAlign = "left";
   
       const details = [
-        { label: "PAN Number:", value: documentNumber },
+        { label: "ID Number:", value: documentNumber },
         { label: "Name:", value: holdingPersonName },
         { label: "Gender:", value: genderSymbol === "♂" ? "Male" : "Female" },
         { label: "DOB:", value: DOB },
@@ -238,7 +226,7 @@ import Gen from "../components/Gen.astro";
         const imageURL = canvas.toDataURL("image/png");
         const link = document.createElement("a");
         link.href = imageURL;
-        link.download = `PAN_${new Date().getTime()}.png`;
+        link.download = `VoterID_${new Date().getTime()}.png`;
         link.click();
   
         canvasContainer.style.display = "none";
@@ -246,16 +234,13 @@ import Gen from "../components/Gen.astro";
       };
     };
   
-    // Format date to DD/MM/YYYY
     const formatDate = (date) => {
       if (!date) return "";
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     };
+    
   
-   
-  
-    // Attach event listeners
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
@@ -267,26 +252,19 @@ import Gen from "../components/Gen.astro";
         viewItem(event);
       }
     });
+  
     const navItems = document.querySelectorAll('.nav-item');
-    
-
     const activeTabId = localStorage.getItem('activeTabId');
     if (activeTabId) {
       document.getElementById(activeTabId)?.classList.add('active');
     }
-
+  
     navItems.forEach(item => {
       item.addEventListener('click', () => {
-        
         navItems.forEach(nav => nav.classList.remove('active'));
-        
-        
         item.classList.add('active');
-        
-        
         localStorage.setItem('activeTabId', item.id);
       });
     });
-  
   </script>
-</MainLayout>
+  

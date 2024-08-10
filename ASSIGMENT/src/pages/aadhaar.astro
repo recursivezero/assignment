@@ -1,109 +1,135 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Nav from '../components/Nav.astro';
-import Tabel from '../components/Tabel.astro';
-import Button from '../components/Button.astro';
+import MainLayout from "../layouts/MainLayout.astro";
+import Nav from "../components/Nav.astro";
+import Tabel from "../components/Tabel.astro";
+import Button from "../components/Button.astro";
+import Gen from "../components/Gen.astro";
 ---
 
 <MainLayout>
-    <nav slot="nav">
-        <Nav />
-    </nav>
-    <label for="documentType" class="dev">Document Aadhaar</label>
-    <h3>Please enter the details in below form</h3>
-    <p class="tit">*all feilds are mandatory</p>
-    <section>
-        
-        <form class="aadhaarForm">
-           
-           
-            <div id="documentFields">
-                <div class='formContaineraadhaar' id='aadhaar'>
-                    <div>
-                    <label for="documentNumber_aadhaar" class="num"> Aadhaar Number</label>
-                    <input type="text" class="number" id="documentNumber_aadhaar" name="documentNumber" placeholder="as per aadhaar" pattern="[0-9]{12}" title="Aadhaar number must be 12 digits" required>
-                    </div>
-                    <div>
-                    <label for="holdingPersonName_aadhaar" class="nam"> Name on Aadhaar</label>
-                    <input type="text" id="holdingPersonName_aadhaar" name="holdingPersonName" placeholder="as per aadhaar" required>
-                    </div>
-                    <div>
-                    <label for="DOB_aadhaar" class="dob">Date of Birth</label>
-                    <input type="date"  id="DOB_aadhaar" name="DOB" required>
-                    </div>
-                    <div>
-                    <label for="aadhaarAddress" class="add"> Aadhaar Address</label>
-                    <textarea id="aadhaarAddress" name="aadhaarAddress" placeholder="as per aadhaar" required></textarea>
-                    </div>
-                    <div class="gendercontainer">
-                        <label for="gender" class="gen">Gender</label>
-                        <div class="g">
-                          <input type="radio" id="gender_male" name="gender" value="male" required checked>
-                          <label for="gender_male">Male</label>
-                          <input type="radio" id="gender_female" name="gender" value="female" required>
-                          <label for="gender_female">Female</label>
-                        </div>
-                      </div>
-                </div>
-            </div>
-            
-           
-
-        </form>
-
-     <Button/>
+  <nav slot="nav">
+    <Nav />
+  </nav>
+  <div class="heading"><p>Please enter the details in the below form
+   <p class="subheading">all feilds are required</p>
+  </p>
     
-    </section>
-    <Tabel/>
+  </div>
+ 
+   <section>
+    <form class="form" id="aadhaar" name="aadhaar">
+       <div class="container__form">
+        <div class="form__field">
+          <label for="doc-number">Aadhaar Number</label>
+          <input
+            type="text"
+            id="doc-number"
+            name="documentNumber"
+            placeholder="1234 5678 9012"
+            pattern="[0-9]{12}"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label for="doc-name"> Name on Aadhaar</label>
+          <input
+            type="text"
+            id="doc-name"
+            name="holdingPersonName"
+            placeholder="JACK RAYN"
+            required
+          />
+        </div>
+        <div class="form__field">
+          <label for="doc-dob" >Date of Birth</label>
+          <input type="date" id="doc-dob" name="DOB" required />
+        </div>
+        <div class="form__field">
+          <label for="doc-address"> Aadhaar Address</label>
+          <textarea
+            id="doc-address"
+            name="aadhaarAddress"
+            placeholder="as per aadhaar"
+            required></textarea>
+        </div>
+        <Gen/>
+          
+      </div>
+    </form>
+    <Button />
+   </section>
+   <Tabel />
+   <div id="canvasContainer" class="canvas" style="display: none;">
+    <canvas id="aadhaarCanvas"></canvas>
+    <button id="downloadButton" class="download" style="display: none;">Download Image</button>
+</div>
+</MainLayout>
 
-    <div id="canvasContainer" style="display: none;">
-        <canvas id="aadhaarCanvas"></canvas>
-        <button id="downloadButton" style="display: none;">Download Image</button>
-    </div>
-    <script is:inline>
-        const aadhaarForm = document.querySelector(".aadhaarForm");
-        const saveButton = document.querySelector(".saveButton");
-        const resetButton = document.querySelector(".resetButton");
-        const container = document.querySelector(".container");
-        const canvasContainer = document.getElementById("canvasContainer");
-        const downloadButton = document.getElementById("downloadButton");
-        const canvas = document.getElementById('aadhaarCanvas');
-        const context = canvas ? canvas.getContext('2d') : null;
-        let entryCount = 0;
-        let currentEditItem = null;
-    
-        if (!context) {
-            console.error("Canvas context could not be obtained.");
+<script is:inline>
+  const aadhaarForm = document.getElementById("aadhaar");
+  const saveButton = document.querySelector(".saveButton");
+  const resetButton = document.querySelector(".resetButton");
+  const container = document.querySelector(".container");
+  const canvasContainer = document.getElementById("canvasContainer");
+  const downloadButton = document.getElementById("downloadButton");
+  const canvas = document.getElementById("aadhaarCanvas");
+  const context = canvas ? canvas.getContext("2d") : null;
+  let entryCount = 0;
+  let currentEditItem = null;
+
+  if (!context) {
+    console.error("Canvas context could not be obtained.");
+  } else {
+    const handleSubmit = (event) => {
+      event.preventDefault();
+
+      const formData = new FormData(aadhaarForm);
+      const documentNumber = formData.get("documentNumber")?.trim();
+      const holdingPersonName = formData.get("holdingPersonName")?.trim();
+      const DOB = formData.get("DOB")?.trim();
+      const gender = formData.get("gender");
+      const aadhaarAddress = formData.get("aadhaarAddress")?.trim();
+
+      if (documentNumber && holdingPersonName && DOB) {
+        if (currentEditItem) {
+          updateEntry(
+            currentEditItem,
+            documentNumber,
+            holdingPersonName,
+            DOB,
+            gender,
+            aadhaarAddress
+          );
         } else {
-            const handleSubmit = (event) => {
-                event.preventDefault();
-                
-                const formData = new FormData(aadhaarForm);
-                const documentNumber = formData.get("documentNumber")?.trim();
-                const holdingPersonName = formData.get("holdingPersonName")?.trim();
-                const DOB = formData.get("DOB")?.trim();
-                const gender = formData.get("gender");
-                const aadhaarAddress = formData.get("aadhaarAddress")?.trim();
-    
-                if (documentNumber && holdingPersonName && DOB) {
-                    if (currentEditItem) {
-                        updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender, aadhaarAddress);
-                    } else {
-                        createNewEntry(documentNumber, holdingPersonName, DOB, gender, aadhaarAddress);
-                    }
-                    resetForm();
-                } else {
-                    console.log("Please fill in all required fields.");
-                }
-            };
-    
-            const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, aadhaarAddress) => {
-                entryCount++;
-                const maleSymbol = String.fromCharCode(0x2642);
-                const femaleSymbol = String.fromCharCode(0x2640);
-                const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-    
-                container.insertAdjacentHTML('beforeend', `
+          createNewEntry(
+            documentNumber,
+            holdingPersonName,
+            DOB,
+            gender,
+            aadhaarAddress
+          );
+        }
+        resetForm();
+      } else {
+        console.log("Please fill in all required fields.");
+      }
+    };
+
+    const createNewEntry = (
+      documentNumber,
+      holdingPersonName,
+      DOB,
+      gender,
+      aadhaarAddress
+    ) => {
+      entryCount++;
+      const maleSymbol = String.fromCharCode(0x2642);
+      const femaleSymbol = String.fromCharCode(0x2640);
+      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+      container.insertAdjacentHTML(
+        "beforeend",
+        `
                     <div class="item" data-entry-id="${entryCount}" data-address="${aadhaarAddress}">
                         <div>${entryCount}</div>
                         <div>Aadhaar</div>
@@ -117,159 +143,220 @@ import Button from '../components/Button.astro';
                             <button class="delete-btn" type="button">Delete</button>
                         </div>
                     </div>
-                `);
-            };
+                `
+      );
+    };
+
+    const updateEntry = (
+      item,
+      documentNumber,
+      holdingPersonName,
+      DOB,
+      gender,
+      aadhaarAddress
+    ) => {
+      const maleSymbol = String.fromCharCode(0x2642);
+      const femaleSymbol = String.fromCharCode(0x2640);
+      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+      item.querySelector("div:nth-child(3)").textContent = documentNumber;
+      item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
+      item.querySelector("div:nth-child(5)").textContent = genderSymbol;
+      item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
+      item.setAttribute("data-address", aadhaarAddress);
+
+      currentEditItem = null;
+    };
+
+    const resetForm = () => {
+      aadhaarForm.reset();
+      currentEditItem = null;
+    };
+
+    const deleteItem = (event) => {
+      const item = event.target.closest(".item");
+      item.remove();
+    };
+
+    const editItem = (event) => {
+      const item = event.target.closest(".item");
+      const documentNumber = item
+        .querySelector("div:nth-child(3)")
+        .textContent.trim();
+      const holdingPersonName = item
+        .querySelector("div:nth-child(4)")
+        .textContent.trim();
+      const genderSymbol = item
+        .querySelector("div:nth-child(5)")
+        .textContent.trim();
+      const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+      const aadhaarAddress = item.getAttribute("data-address").trim();
+
+      const maleSymbol = String.fromCharCode(0x2642);
+      const gender = genderSymbol === maleSymbol ? "male" : "female";
+
+      aadhaarForm.querySelector("#doc-number").value =
+        documentNumber;
+      aadhaarForm.querySelector("#doc-name").value =
+        holdingPersonName;
+      aadhaarForm.querySelector("#doc-dob").value =
+        convertToDateInputFormat(DOB);
+      aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
+      aadhaarForm.querySelector("#doc-address").value = aadhaarAddress;
+
+      
+
+      currentEditItem = item;
+    };
+
+    const viewItem = (event) => {
+      const item = event.target.closest(".item");
+      const documentNumber = item
+        .querySelector("div:nth-child(3)")
+        .textContent.trim();
+      const holdingPersonName = item
+        .querySelector("div:nth-child(4)")
+        .textContent.trim();
+      const genderSymbol = item
+        .querySelector("div:nth-child(5)")
+        .textContent.trim();
+      const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
+      const aadhaarAddress = item.getAttribute("data-address").trim();
+
+      generateImage(
+        documentNumber,
+        holdingPersonName,
+        genderSymbol,
+        DOB,
+        aadhaarAddress
+      );
+    };
+
+    const generateImage = (
+      documentNumber,
+      holdingPersonName,
+      genderSymbol,
+      DOB,
+      address
+    ) => {
+      let canvasWidth = 400;
+      let canvasHeight = 300;
+
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+
+      context.fillStyle = "#D8BFD8";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+
+      context.fillStyle = "#8B0000";
+      context.font = "bold 22px Arial";
+      context.textAlign = "center";
+
+      context.fillText("--Aadhaar Card--", canvasWidth / 2, 50);
+
+      context.textAlign = "left";
+
+      const details = [
+        { label: " Number:", value: documentNumber },
+        { label: " Name:", value: holdingPersonName },
+        {
+          label: " Gender:",
+          value:
+            genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female",
+        },
+        { label: " Dateofbirth:", value: DOB },
+        { label: " Address:", value: address },
+      ];
+
+      const startX = 40;
+      let startY = 100;
+      const lineHeight = 30;
+      const labelValueGap = 10;
+
+      details.forEach((detail, index) => {
+        context.fillStyle = "#FF0000";
+        context.font = "bold 15px Arial";
+        context.fillText(detail.label, startX, startY + index * lineHeight);
+
+        context.fillStyle = "#333";
+        context.font = "bold 14px Arial";
+        context.fillText(
+          detail.value,
+          startX + 100 + labelValueGap,
+          startY + index * lineHeight
+        );
+      });
+
+      canvasContainer.style.display = "block";
+      downloadButton.style.display = "block";
+
+      downloadButton.onclick = () => {
+        const imageURL = canvas.toDataURL("image/png");
+        const link = document.createElement("a");
+        link.href = imageURL;
+        link.download = `Aadhaar_${new Date().getTime()}.png`;
+        link.click();
+
+        canvasContainer.style.display = "none";
+        downloadButton.style.display = "none";
+      };
+    };
     
-            const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender, aadhaarAddress) => {
-                const maleSymbol = String.fromCharCode(0x2642);
-                const femaleSymbol = String.fromCharCode(0x2640);
-                const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+    const formatDate = (date) => {
+      if (!date) return "";
+      const [year, month, day] = date.split("-");
+      return `${day}/${month}/${year}`;
+    };
+
+    const convertToDateInputFormat = (date) => {
+      if (!date) return "";
+      const [day, month, year] = date.split("/");
+      return `${year}-${month}-${day}`;
+    };
+
+    if (resetButton) {
+      resetButton.addEventListener("click", resetForm);
+    } else {
+      console.error("Reset button not found");
+    }
+
+    if (saveButton) {
+      saveButton.addEventListener("click", handleSubmit);
+    } else {
+      console.error("Save button not found");
+    }
+
+    container.addEventListener("click", (event) => {
+      if (event.target.classList.contains("delete-btn")) {
+        deleteItem(event);
+      } else if (event.target.classList.contains("edit-btn")) {
+        editItem(event);
+      } else if (event.target.classList.contains("view-btn")) {
+        viewItem(event);
+      }
+    });
+
+    const navItems = document.querySelectorAll('.nav-item');
     
-                item.querySelector("div:nth-child(3)").textContent = documentNumber;
-                item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
-                item.querySelector("div:nth-child(5)").textContent = genderSymbol;
-                item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
-                item.setAttribute("data-address", aadhaarAddress);
-    
-                currentEditItem = null;
-            };
-    
-            const resetForm = () => {
-                aadhaarForm.reset();
-                currentEditItem = null;
-            };
-    
-            const deleteItem = (event) => {
-                const item = event.target.closest(".item");
-                item.remove();
-            };
-    
-            const editItem = (event) => {
-                const item = event.target.closest(".item");
-                const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
-                const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
-                const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
-                const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
-                const aadhaarAddress = item.getAttribute("data-address").trim();
-    
-                const maleSymbol = String.fromCharCode(0x2642);
-                const gender = genderSymbol === maleSymbol ? "male" : "female";
-    
-                aadhaarForm.querySelector("#documentNumber_aadhaar").value = documentNumber;
-                aadhaarForm.querySelector("#holdingPersonName_aadhaar").value = holdingPersonName;
-                aadhaarForm.querySelector("#DOB_aadhaar").value = convertToDateInputFormat(DOB);
-                aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
-                aadhaarForm.querySelector("#aadhaarAddress").value = aadhaarAddress;
-    
-                currentEditItem = item;
-            };
-    
-            const viewItem = (event) => {
-                const item = event.target.closest(".item");
-                const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
-                const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
-                const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
-                const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
-                const aadhaarAddress = item.getAttribute("data-address").trim();
-    
-                generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, aadhaarAddress);
-            };
-    
-            const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, address) => { 
-                let canvasWidth = 400;
-                let canvasHeight = 300;
-    
-                canvas.width = canvasWidth;
-                canvas.height = canvasHeight;
-    
-                context.fillStyle = '#D8BFD8';
-                context.fillRect(0, 0, canvas.width, canvas.height);
-    
-                context.fillStyle = '#8B0000';
-                context.font = 'bold 22px Arial';
-                context.textAlign = 'center';
-    
-                context.fillText('--Aadhaar Card--', canvasWidth / 2, 50);
-    
-                context.textAlign = 'left';
-    
-                const details = [
-                    { label: ' Number:', value: documentNumber },
-                    { label: ' Name:', value: holdingPersonName },
-                    { label: ' Gender:', value: genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female" },
-                    { label: ' Dateofbirth:', value: DOB },
-                    { label: ' Address:', value: address },
-                ];
-    
-                const startX = 40;
-                let startY = 100;
-                const lineHeight = 30;
-                const labelValueGap = 10; 
-    
-                details.forEach((detail, index) => {
-                    context.fillStyle = '#FF0000';
-                    context.font = 'bold 15px Arial';
-                    context.fillText(detail.label, startX, startY + index * lineHeight);
-    
-                    context.fillStyle = '#333';
-                    context.font = 'bold 14px Arial';
-                    context.fillText(detail.value, startX + 100 + labelValueGap, startY + index * lineHeight); 
-                });
-    
-                canvasContainer.style.display = 'block';
-                downloadButton.style.display = 'block';
-    
-                downloadButton.onclick = () => {
-                    const imageURL = canvas.toDataURL('image/png');
-                    const link = document.createElement('a');
-                    link.href = imageURL;
-                    link.download = `Aadhaar_${new Date().getTime()}.png`;
-                    link.click();
-    
-                    canvasContainer.style.display = 'none';
-                    downloadButton.style.display = 'none';
-                };
-            };
-    
-            const formatDate = (date) => {
-                if (!date) return '';
-                const [year, month, day] = date.split('-');
-                return `${day}/${month}/${year}`;
-            };
-    
-            const convertToDateInputFormat = (date) => {
-                if (!date) return '';
-                const [day, month, year] = date.split('/');
-                return `${year}-${month}-${day}`;
-            };
-    
-            if (resetButton) {
-                resetButton.addEventListener("click", resetForm);
-            } else {
-                console.error('Reset button not found');
-            }
-    
-            if (saveButton) {
-                saveButton.addEventListener("click", handleSubmit);
-            } else {
-                console.error('Save button not found');
-            }
-    
-            container.addEventListener("click", (event) => {
-                if (event.target.classList.contains('delete-btn')) {
-                    deleteItem(event);
-                } else if (event.target.classList.contains('edit-btn')) {
-                    editItem(event);
-                } else if (event.target.classList.contains('view-btn')) {
-                    viewItem(event);
-                }
-            });
-    
-            const aadhaarInput = document.getElementById("documentNumber_aadhaar");
-            aadhaarInput.addEventListener("input", () => {
-                aadhaarInput.value = aadhaarInput.value.replace(/\D/g, '');
-            });
-        }
-    </script>
-    
-</MainLayout>
+
+    const activeTabId = localStorage.getItem('activeTabId');
+    if (activeTabId) {
+      document.getElementById(activeTabId)?.classList.add('active');
+    }
+
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        
+        navItems.forEach(nav => nav.classList.remove('active'));
+        
+        
+        item.classList.add('active');
+        
+        
+        localStorage.setItem('activeTabId', item.id);
+      });
+    });
+
+  }
+</script>
