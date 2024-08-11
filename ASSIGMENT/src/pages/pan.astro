@@ -3,8 +3,17 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
 import Tabel from "../components/Tabel.astro";
 import Button from "../components/Button.astro";
-import Gen from "../components/Gen.astro";
+import FormLayout from '../layouts/FormLayout.astro';
 
+const fields = [
+  { id: 'doc-number', label: 'PAN', type: 'text', name: 'documentNumber', placeholder: 'D123 4567 8901 234', required: true },
+  { id: 'doc-name', label: 'Name on PAN', type: 'text', name: 'holdingPersonName', placeholder: 'ZEN RAYN', required: true },
+  { id: 'doc-dob', label: 'Date of Birth', type: 'date', name: 'DOB', required: true },
+  { id: 'doc-fathername', label: 'Father Name', type: 'text', name: 'fathername', placeholder: 'ZEN RAY', required: true }
+];
+const inlineStyle = `
+  background-color: rgb(200, 239, 253);
+`;
 
 ---
 
@@ -16,44 +25,7 @@ import Gen from "../components/Gen.astro";
     <p class="subheading">all feilds are required</p>
    </p>
   <section>
-    <form class="form" id ="pan" name="pan">
-      <div class="container__pan">
-        <div class="form__field">
-          <label for="doc-number"> PAN</label>
-          <input
-            type="text"
-            id="doc-number"
-            name="documentNumber"
-            placeholder="DO12 3456 789"
-            required
-          />
-        </div>
-        <div class="form__field">
-          <label for="doc-name"> Name on Pan</label>
-          <input
-            type="text"
-            id="doc-name"
-            name="holdingPersonName"
-            placeholder="ERIC ROVEN"
-            required
-          />
-        </div>
-        <div class="form__field">
-          <label for="doc-dob">Date of Birth</label>
-          <input type="date" id="doc-dob" name="DOB" required />
-        </div>
-        <div class="form__field">
-          <label for="doc-fathername"> Father Name </label>
-          <input
-            id="doc-fathername"
-            name="fathername"
-            placeholder="ROVEN RAN"
-            required
-            />
-        </div>
-     <Gen/>
-      </div>
-    </form>
+    <FormLayout formId="pan" formName="pan" fields={fields} genderLabel="Gender" style={inlineStyle} />
     <Button/>
   </section>
  <Tabel/>
@@ -63,7 +35,6 @@ import Gen from "../components/Gen.astro";
     <button id="downloadButton" class="download" style="display: none;">Download Image</button>
   </div>
   <script is:inline>
-
     const panForm = document.querySelector(".form");
     const saveButton = document.querySelector(".saveButton");
     const resetButton = document.querySelector(".resetButton");
@@ -76,7 +47,6 @@ import Gen from "../components/Gen.astro";
     let entryCount = 0;
     let currentEditItem = null;
   
-    
     const handleSubmit = (event) => {
       event.preventDefault();
   
@@ -98,7 +68,6 @@ import Gen from "../components/Gen.astro";
       }
     };
   
-    
     const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, fathername) => {
       entryCount++;
               const maleSymbol = String.fromCharCode(0x2642);
@@ -121,14 +90,8 @@ import Gen from "../components/Gen.astro";
                   </div>
               `);
       
-  
-    
-  
-     
     };
   
-  
-    // Update an existing entry
     const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender, fathername) => {
       const maleSymbol = String.fromCharCode(0x2642);
               const femaleSymbol = String.fromCharCode(0x2640);
@@ -143,19 +106,16 @@ import Gen from "../components/Gen.astro";
               currentEditItem = null;
     };
   
-    // Reset the form
     const resetForm = () => {
       panForm.reset();
       currentEditItem = null;
     };
   
-    // Delete an entry
     const deleteItem = (event) => {
       const item = event.target.closest(".item");
       item.remove();
     };
   
-    // Edit an entry
     const editItem = (event) => {
       const item = event.target.closest(".item");
       const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
@@ -178,7 +138,6 @@ import Gen from "../components/Gen.astro";
               currentEditItem = item;
     };
   
-    // View an entry
     const viewItem = (event) => {
       const item = event.target.closest(".item");
       const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
@@ -190,7 +149,6 @@ import Gen from "../components/Gen.astro";
       generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, fathername);
     };
   
-    // Generate an image for download
     const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, fathername) => {
       let canvasWidth = 400;
       let canvasHeight = 300;
@@ -246,16 +204,12 @@ import Gen from "../components/Gen.astro";
       };
     };
   
-    // Format date to DD/MM/YYYY
     const formatDate = (date) => {
       if (!date) return "";
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     };
   
-   
-  
-    // Attach event listeners
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
@@ -267,26 +221,12 @@ import Gen from "../components/Gen.astro";
         viewItem(event);
       }
     });
-    const navItems = document.querySelectorAll('.nav-item');
-    
-
-    const activeTabId = localStorage.getItem('activeTabId');
-    if (activeTabId) {
-      document.getElementById(activeTabId)?.classList.add('active');
-    }
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        
-        navItems.forEach(nav => nav.classList.remove('active'));
-        
-        
-        item.classList.add('active');
-        
-        
-        localStorage.setItem('activeTabId', item.id);
-      });
+    const navLinks = document.querySelectorAll('.nav-item');
+    const currentPath = window.location.pathname;
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
     });
-  
   </script>
 </MainLayout>

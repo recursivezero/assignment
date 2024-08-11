@@ -3,9 +3,18 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
 import Tabel from "../components/Tabel.astro";
 import Button from "../components/Button.astro";
-import Gen from "../components/Gen.astro";
----
+import FormLayout from '../layouts/FormLayout.astro';
 
+const fields = [
+  { id: 'doc-number', label: 'Aadhaar Number', type: 'text', name: 'documentNumber', placeholder: '1234 5678 9012', pattern: '[0-9]{12}', required: true },
+  { id: 'doc-name', label: 'Name on Aadhaar', type: 'text', name: 'holdingPersonName', placeholder: 'JACK RAYN', required: true },
+  { id: 'doc-dob', label: 'Date of Birth', type: 'date', name: 'DOB', required: true },
+  { id: 'doc-address', label: 'Aadhaar Address', type: 'textarea', name: 'aadhaarAddress', placeholder: 'as per aadhaar', required: true }
+];
+const inlineStyle = `
+  background-color: antiquewhite;
+`;
+---
 <MainLayout>
   <nav slot="nav">
     <Nav />
@@ -13,49 +22,9 @@ import Gen from "../components/Gen.astro";
   <div class="heading"><p>Please enter the details in the below form
    <p class="subheading">all feilds are required</p>
   </p>
-    
   </div>
- 
    <section>
-    <form class="form" id="aadhaar" name="aadhaar">
-       <div class="container__form">
-        <div class="form__field">
-          <label for="doc-number">Aadhaar Number</label>
-          <input
-            type="text"
-            id="doc-number"
-            name="documentNumber"
-            placeholder="1234 5678 9012"
-            pattern="[0-9]{12}"
-            required
-          />
-        </div>
-        <div class="form__field">
-          <label for="doc-name"> Name on Aadhaar</label>
-          <input
-            type="text"
-            id="doc-name"
-            name="holdingPersonName"
-            placeholder="JACK RAYN"
-            required
-          />
-        </div>
-        <div class="form__field">
-          <label for="doc-dob" >Date of Birth</label>
-          <input type="date" id="doc-dob" name="DOB" required />
-        </div>
-        <div class="form__field">
-          <label for="doc-address"> Aadhaar Address</label>
-          <textarea
-            id="doc-address"
-            name="aadhaarAddress"
-            placeholder="as per aadhaar"
-            required></textarea>
-        </div>
-        <Gen/>
-          
-      </div>
-    </form>
+     <FormLayout formId="aadhaar" formName="aadhaar" fields={fields} genderLabel="Gender" style={inlineStyle} />
     <Button />
    </section>
    <Tabel />
@@ -204,8 +173,6 @@ import Gen from "../components/Gen.astro";
       aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
       aadhaarForm.querySelector("#doc-address").value = aadhaarAddress;
 
-      
-
       currentEditItem = item;
     };
 
@@ -302,7 +269,6 @@ import Gen from "../components/Gen.astro";
       };
     };
     
-
     const formatDate = (date) => {
       if (!date) return "";
       const [year, month, day] = date.split("-");
@@ -336,27 +302,12 @@ import Gen from "../components/Gen.astro";
         viewItem(event);
       }
     });
-
-    const navItems = document.querySelectorAll('.nav-item');
-    
-
-    const activeTabId = localStorage.getItem('activeTabId');
-    if (activeTabId) {
-      document.getElementById(activeTabId)?.classList.add('active');
-    }
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        
-        navItems.forEach(nav => nav.classList.remove('active'));
-        
-        
-        item.classList.add('active');
-        
-        
-        localStorage.setItem('activeTabId', item.id);
-      });
+const navLinks = document.querySelectorAll('.nav-item');
+    const currentPath = window.location.pathname;
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
     });
-
   }
 </script>

@@ -1,0 +1,26 @@
+---
+import Gen from "../components/Gen.astro";
+const { formId, formName, fields, genderLabel,style } = Astro.props;
+---
+
+<form class="form" id={formId} name={formName} style={style}>
+  <div class="container__form">
+    {fields.map(field => (
+      <div class="form__field">
+        <label for={field.id}>{field.label}</label>
+        <input
+          type={field.type}
+          id={field.id}
+          name={field.name}
+          placeholder={field.placeholder}
+          pattern={field.pattern}
+          required={field.required}
+        />
+      </div>
+    ))}
+
+    {genderLabel && (
+   <Gen/>
+    )}
+  </div>
+</form>

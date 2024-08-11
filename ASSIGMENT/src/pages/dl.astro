@@ -2,8 +2,18 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
 import Tabel from "../components/Tabel.astro";
-import Gen from "../components/Gen.astro";
 import Button from "../components/Button.astro";
+import FormLayout from '../layouts/FormLayout.astro';
+
+const fields = [
+  { id: 'doc-number', label: 'License Number', type: 'text', name: 'documentNumber', placeholder: 'D123 4567 8901 234', required: true },
+  { id: 'doc-name', label: 'Name on License', type: 'text', name: 'holdingPersonName', placeholder: 'ZEN RAYN', required: true },
+  { id: 'doc-dob', label: 'Date of Birth', type: 'date', name: 'DOB', required: true },
+  { id: 'DOE_dl', label: 'Date of Expiry', type: 'date', name: 'DOE', required: true }
+];
+const inlineStyle = `
+   background-color: rgb(215, 250, 216);
+`;
 ---
 
 <MainLayout>
@@ -15,39 +25,7 @@ import Button from "../components/Button.astro";
    </p>
 
   <section>
-    <form class="form" id="license" name="license">
-        <div class="Container__dl">
-          <div class="form__field">
-            <label for="doc-number" > License Number</label>
-            <input
-              type="text"
-              id="doc-number"
-              name="documentNumber"
-              placeholder="D123 4567 8901 234"
-              required
-            />
-          </div>
-          <div class="form__field">
-            <label for="doc-name"> Name on license</label>
-            <input
-              type="text"
-              id="doc-name"
-              name="holdingPersonName"
-              placeholder="ZEN RAYN"
-              required
-            />
-          </div>
-          <div class="form__field">
-            <label for="doc-dob">Date of Birth</label>
-            <input type="date" id="doc-dob" name="DOB" required />
-          </div>
-          <div class="form__field">
-            <label for="DOE_dl">Date of Expiry</label>
-            <input type="date" id="DOE_dl" name="DOE" required />
-          </div>
-          <Gen/>
-      </div>
-    </form>
+    <FormLayout formId="license" formName="license" fields={fields} genderLabel="Gender" style={inlineStyle} />
     <Button/>
   </section>
   <Tabel />
@@ -56,8 +34,6 @@ import Button from "../components/Button.astro";
     <button id="downloadButton" class="download" style="display: none;">Download Image</button>
   </div>
 </MainLayout>
-
-
 
 <script is:inline>
   const dlForm = document.getElementById("license");
@@ -311,25 +287,13 @@ import Button from "../components/Button.astro";
         viewItem(event);
       }
     });
-    const navItems = document.querySelectorAll('.nav-item');
-    
+   const navLinks = document.querySelectorAll('.nav-item');
+    const currentPath = window.location.pathname;
 
-    const activeTabId = localStorage.getItem('activeTabId');
-    if (activeTabId) {
-      document.getElementById(activeTabId)?.classList.add('active');
-    }
-
-    navItems.forEach(item => {
-      item.addEventListener('click', () => {
-        
-        navItems.forEach(nav => nav.classList.remove('active'));
-        
-        
-        item.classList.add('active');
-        
-        
-        localStorage.setItem('activeTabId', item.id);
-      });
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('active');
+        }
     });
   }
 </script>

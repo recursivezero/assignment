@@ -105,6 +105,8 @@ This page consist of Pan form , the tabel which stores the form data
 ![DlNav](public/assets/images/DlForm.png)
 This page consist of dl form , the tabel which stores the form data 
 
+![idNav](public/assets/images/VoterId.png)
+This page consist of dl form , the tabel which stores the form data 
 
 
 
@@ -117,6 +119,9 @@ the tabel data showing is showing in below canva Image with the option of downlo
 the tabel data showing is showing in below canva Image with the option of download them
 
 ![DlData](public/assets/images/DlData.png)
+the tabel data showing is showing in below canva Image with the option of download them
+
+![idData](public/assets/images/IdCard.png)
 the tabel data showing is showing in below canva Image with the option of download them
 
  This section consists of the canva image that are generated from user data after clicking view button 
