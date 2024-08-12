@@ -3,33 +3,33 @@
   --header__bg--2: #333;
   --header__txt: #fff;
   --nav__bg--4: #444;
-  --bg__red__bg--5: rgb(255, 0, 0);
-  --bg__green__bg--6: green;
-  --bg__blue__bg--7: blue;
+  --bg__red__bg--5: #ff0000;
+  --bg__green__bg--6: #008000;
+  --bg__blue__bg--7: #0000ff;
   --canvas__bg--8: #020202;
   --canvas__border--9: #ccc;
-  --canvas__box__shadow--10: rgba(0, 0, 0, 0.1);
+  --canvas__box__shadow--10: #0000001a;
   --downloadButton__bg--11: #ff83d6;
-  --downloadButton__txt--12: white;
+  --downloadButton__txt--12: #ffffff;
   --downloadButton__bg--13: #45a049;
-  --delete__txt--14: rgba(249, 196, 215, 1);
+  --delete__txt--14: #f9c4d7;
   --delete__txt--15: #ede5e5;
-  --view__txt--16: lightgreen;
-  --edit__txt--17: yellow;
-  --edit__txt--18: black;
-  --dev__txt--19: deeppink;
+  --view__txt--16: #90ee90;
+  --edit__txt--17: #ffff00;
+  --edit__txt--18: #000000;
+  --dev__txt--19: #ff1493;
   --title__txt--20: #db0e0e;
   --textarea__border--21: #000;
-  --button__bg--22: rgba(0, 0, 0, 0.762);
+  --button__bg--22: #000000c2;
   --button__bg--23: #555;
-  --saveButton__bg--24: rgba(9, 239, 162, 0.589);
+  --saveButton__bg--24: #09efa296;
   --saveButton__txt--25: #f8f8f8;
-  --resetButton__bg--26: rgba(255, 198, 249, 0.925);
+  --resetButton__bg--26: #ffc6f9ec;
   --section__txt--27: #888;
   --heading__txt--1: #060606;
-  --subheading__txt--2: red;
+  --subheading__txt--2: #ff0000;
   --nav__bg--3: #6fabeb;
-  --nav__txt--4: rgb(20, 19, 19);
+  --nav__txt--4: #141313;
 }
 html {
   box-sizing: content-box;
@@ -108,10 +108,9 @@ main {
   cursor: pointer;
   position: relative;
   width: 10%;
-}
-
-.download:hover {
-  background-color: var(--downloadButton__bg--13);
+  &:hover {
+    background-color: var(--downloadButton__bg--13);
+  }
 }
 
 @media (max-width: 768px) {
@@ -148,31 +147,6 @@ main {
   }
 }
 
-.gendercontainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  color: var(--bg__red__bg--5);
-  font-weight: bold;
-  .gen {
-    margin-right: 6px;
-  }
-  .g {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  input[type="radio"] {
-    margin-top: 3.8px;
-    vertical-align: middle;
-  }
-  label:not(.gen) {
-    margin-right: 5px;
-    color: var(--edit__txt--18);
-    margin-top: 3px;
-  }
-}
-
 .heading {
   color: var(--heading__txt--1);
   margin-block-start: -0.8cm;
@@ -181,43 +155,6 @@ main {
 .subheading {
   color: var(--subheading__txt--2);
   margin-block-start: -0.3cm;
-}
-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1px solid #000;
-  .form__field {
-    margin-bottom: 1.5rem;
-    & label {
-      font-weight: bold;
-      color: var(--bg__red__bg--5);
-      display: block;
-      margin-bottom: 0.5rem;
-      margin-top: 10px;
-      text-align: left;
-      margin-left: 2px;
-    }
-    & input,
-    & textarea {
-      border: 1px solid var(--textarea__border--21);
-      border-radius: 4px;
-      padding: 0.4rem;
-      width: 100%;
-      box-sizing: border-box;
-      font-size: 16px;
-      color: var(--header__bg--2);
-      background-color: var(--header__txt);
-      letter-spacing: 0.2rem;
-    }
-    & textarea {
-      resize: none;
-      min-height: 20px;
-      letter-spacing: 0rem;
-    }
-  }
 }
 
 .buttoncontainer {
@@ -273,6 +210,7 @@ button {
   align-items: center;
   font-weight: bold;
   background-color: var(--saveButton__txt--25);
+  color: #45a049;
 }
 
 @media (max-width: 1200px) {
@@ -346,6 +284,6 @@ section {
   margin-block-start: 0;
 }
 .nav-item.active {
-  background-color: rgb(0, 221, 255);
-  color: rgb(10, 10, 10);
+  background-color: rgb(239, 241, 241);
+  color: rgb(6, 6, 6);
 }

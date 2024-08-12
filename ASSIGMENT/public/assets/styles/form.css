@@ -1,0 +1,61 @@
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #000;
+  .form__field {
+    margin-bottom: 1.5rem;
+    & label {
+      font-weight: bold;
+      color: var(--bg__red__bg--5);
+      display: block;
+      margin-bottom: 0.5rem;
+      margin-top: 10px;
+      text-align: left;
+      margin-left: 2px;
+    }
+    & input,
+    & textarea {
+      border: 1px solid var(--textarea__border--21);
+      border-radius: 4px;
+      padding: 0.4rem;
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 16px;
+      color: var(--header__bg--2);
+      background-color: var(--header__txt);
+      letter-spacing: 0.2rem;
+    }
+    & textarea {
+      resize: none;
+      min-height: 20px;
+      letter-spacing: 0rem;
+    }
+  }
+}
+.gendercontainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: var(--bg__red__bg--5);
+  font-weight: bold;
+  .gen {
+    margin-right: 6px;
+  }
+  .g {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  input[type="radio"] {
+    margin-top: 3.8px;
+    vertical-align: middle;
+  }
+  label:not(.gen) {
+    margin-right: 5px;
+    color: var(--edit__txt--18);
+    margin-top: 3px;
+  }
+}
