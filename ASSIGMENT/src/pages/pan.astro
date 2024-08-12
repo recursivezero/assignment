@@ -34,13 +34,14 @@ const inlineStyle = `
     <canvas id="panCanvas"></canvas>
     <button id="downloadButton" class="download" style="display: none;">Download Image</button>
   </div>
-  <script is:inline>
+  <script is:inline type="module">
+     import { generateImage } from "/scripts/image.js";
+
     const panForm = document.querySelector(".form");
     const saveButton = document.querySelector(".saveButton");
     const resetButton = document.querySelector(".resetButton");
     const container = document.querySelector(".container");
-    const canvasContainer = document.getElementById("canvasContainer");
-    const downloadButton = document.getElementById("downloadButton");
+    
     const canvas = document.getElementById("panCanvas");
     const context = canvas.getContext("2d");
   
@@ -146,64 +147,33 @@ const inlineStyle = `
       const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
       const fathername = item.dataset.address.trim();
   
-      generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, fathername);
+      generatePanImage(documentNumber, holdingPersonName, genderSymbol, DOB, fathername);
     };
   
-    const generateImage = (documentNumber, holdingPersonName, genderSymbol, DOB, fathername) => {
-      let canvasWidth = 400;
-      let canvasHeight = 300;
-  
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-  
-      context.fillStyle = "#E6E6FA";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-  
-      context.fillStyle = "#8B0000";
-      context.font = "bold 22px Arial";
-      context.textAlign = "center";
-      context.fillText("--PAN Card--", canvasWidth / 2, 50);
-  
-      context.textAlign = "left";
-  
+   function generatePanImage(
+        documentNumber,
+        holdingPersonName,
+        genderSymbol,
+        DOB,
+        fathername
+      ) {
       const details = [
         { label: "PAN Number:", value: documentNumber },
         { label: "Name:", value: holdingPersonName },
         { label: "Gender:", value: genderSymbol === "♂" ? "Male" : "Female" },
         { label: "DOB:", value: DOB },
-        { label: "Father's Name:", value: fathername },
-      ];
-  
-      const startX = 40;
-      let startY = 100;
-      const lineHeight = 30;
-      const labelValueGap = 10;
-  
-      details.forEach((detail, index) => {
-        context.fillStyle = "#FF0000";
-        context.font = "bold 15px Arial";
-        context.fillText(detail.label, startX, startY + index * lineHeight);
-  
-        context.fillStyle = "#333";
-        context.font = "bold 14px Arial";
-        context.fillText(detail.value, startX + 100 + labelValueGap, startY + index * lineHeight);
-      });
-  
-      canvasContainer.style.display = "block";
-      downloadButton.style.display = "block";
-  
-      downloadButton.onclick = () => {
-        const imageURL = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = imageURL;
-        link.download = `PAN_${new Date().getTime()}.png`;
-        link.click();
-  
-        canvasContainer.style.display = "none";
-        downloadButton.style.display = "none";
-      };
-    };
-  
+        { label: "FatherName:", value: fathername },
+      ]
+
+        generateImage({
+          title: "--Pan Card--",
+          details: details,
+          canvas: document.getElementById("panCanvas"),
+          canvasContainer: document.getElementById("canvasContainer"),
+          downloadButton: document.getElementById("downloadButton"),
+          backgroundColor: "#87CEEB",
+        });
+      }
     const formatDate = (date) => {
       if (!date) return "";
       const [year, month, day] = date.split("-");

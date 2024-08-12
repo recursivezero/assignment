@@ -210,7 +210,7 @@ button {
   align-items: center;
   font-weight: bold;
   background-color: var(--saveButton__txt--25);
-  color: #45a049;
+  color: #050505;
 }
 
 @media (max-width: 1200px) {

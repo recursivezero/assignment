@@ -35,13 +35,13 @@ const inlineStyle = `
   </div>
 </MainLayout>
 
-<script is:inline>
+<script is:inline type="module">
+  import { generateImage } from "/scripts/image.js";
+
   const dlForm = document.getElementById("license");
   const saveButton = document.querySelector(".saveButton");
   const resetButton = document.querySelector(".resetButton");
   const container = document.querySelector(".container");
-  const canvasContainer = document.getElementById("canvasContainer");
-  const downloadButton = document.getElementById("downloadButton");
   const canvas = document.getElementById("dlCanvas");
   const context = canvas ? canvas.getContext("2d") : null;
   let entryCount = 0;
@@ -181,79 +181,26 @@ const inlineStyle = `
       const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
       const DOE = item.getAttribute("data-DOE").trim();
 
-      generateImage(documentNumber, holdingPersonName, genderSymbol, DOB, DOE);
+      generateDLImage(documentNumber, holdingPersonName, genderSymbol, DOB, DOE);
     };
+ function generateDLImage(documentNumber, holdingPersonName, genderSymbol, DOB, DOE) {
+  const details = [
+    { label: "DL-id:", value: documentNumber },
+    { label: "Name:", value: holdingPersonName },
+    { label: "Gender:", value: genderSymbol === "♂" ? "Male" : "Female" },
+    { label: "DOB:", value: DOB },
+    { label: "DOE:", value: DOE }
+  ];
 
-    const generateImage = (
-      documentNumber,
-      holdingPersonName,
-      genderSymbol,
-      DOB,
-      DOE
-    ) => {
-      let canvasWidth = 400;
-      let canvasHeight = 300;
-
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-
-      context.fillStyle = "#90EE90";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      context.fillStyle = "#8B0000";
-      context.font = "bold 22px Arial";
-      context.textAlign = "center";
-
-      context.fillText("--DL Card--", canvasWidth / 2, 50);
-
-      context.textAlign = "left";
-
-      const details = [
-        { label: "Dl-id:", value: documentNumber },
-        { label: "Name:", value: holdingPersonName },
-        {
-          label: "Gender:",
-          value:
-            genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female",
-        },
-        { label: "DOB:", value: DOB },
-        { label: "DOE:", value: DOE },
-      ];
-
-      const startX = 40;
-      let startY = 100;
-      const lineHeight = 30;
-      const labelValueGap = 10;
-
-      details.forEach((detail, index) => {
-        context.fillStyle = "#333";
-        context.font = "bold 16px Arial";
-        context.fillText(detail.label, startX, startY + index * lineHeight);
-
-        context.fillStyle = "#333";
-        context.font = "bold 14px Arial";
-        context.fillText(
-          detail.value,
-          startX + 80 + labelValueGap,
-          startY + index * lineHeight
-        );
-      });
-
-      canvasContainer.style.display = "block";
-      downloadButton.style.display = "block";
-
-      downloadButton.onclick = () => {
-        const imageURL = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = imageURL;
-        link.download = `DL_${new Date().getTime()}.png`;
-        link.click();
-
-        canvasContainer.style.display = "none";
-        downloadButton.style.display = "none";
-      };
-    };
-
+  generateImage({
+    title: "--DL Card--",
+    details: details,
+    canvas: document.getElementById("dlCanvas"),
+    canvasContainer: document.getElementById("canvasContainer"),
+    downloadButton: document.getElementById("downloadButton"),
+     backgroundColor: "#90EE90"
+  });
+}
     const formatDate = (date) => {
       if (!date) return "";
       const [year, month, day] = date.split("-");

@@ -34,13 +34,13 @@ const inlineStyle = `
 </div>
 </MainLayout>
 
-<script is:inline>
+<script is:inline type="module">
+   import { generateImage } from "/scripts/image.js";
+
   const aadhaarForm = document.getElementById("aadhaar");
   const saveButton = document.querySelector(".saveButton");
   const resetButton = document.querySelector(".resetButton");
   const container = document.querySelector(".container");
-  const canvasContainer = document.getElementById("canvasContainer");
-  const downloadButton = document.getElementById("downloadButton");
   const canvas = document.getElementById("aadhaarCanvas");
   const context = canvas ? canvas.getContext("2d") : null;
   let entryCount = 0;
@@ -190,7 +190,7 @@ const inlineStyle = `
       const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
       const aadhaarAddress = item.getAttribute("data-address").trim();
 
-      generateImage(
+      generateAadhaarImage(
         documentNumber,
         holdingPersonName,
         genderSymbol,
@@ -199,30 +199,7 @@ const inlineStyle = `
       );
     };
 
-    const generateImage = (
-      documentNumber,
-      holdingPersonName,
-      genderSymbol,
-      DOB,
-      address
-    ) => {
-      let canvasWidth = 400;
-      let canvasHeight = 300;
-
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
-
-      context.fillStyle = "#D8BFD8";
-      context.fillRect(0, 0, canvas.width, canvas.height);
-
-      context.fillStyle = "#8B0000";
-      context.font = "bold 22px Arial";
-      context.textAlign = "center";
-
-      context.fillText("--Aadhaar Card--", canvasWidth / 2, 50);
-
-      context.textAlign = "left";
-
+    function generateAadhaarImage(documentNumber, holdingPersonName, genderSymbol, DOB,aadhaarAddress ) {
       const details = [
         { label: " Number:", value: documentNumber },
         { label: " Name:", value: holdingPersonName },
@@ -232,42 +209,18 @@ const inlineStyle = `
             genderSymbol === String.fromCharCode(0x2642) ? "Male" : "Female",
         },
         { label: " Dateofbirth:", value: DOB },
-        { label: " Address:", value: address },
+        { label: " Address:", value: aadhaarAddress },
       ];
 
-      const startX = 40;
-      let startY = 100;
-      const lineHeight = 30;
-      const labelValueGap = 10;
-
-      details.forEach((detail, index) => {
-        context.fillStyle = "#FF0000";
-        context.font = "bold 15px Arial";
-        context.fillText(detail.label, startX, startY + index * lineHeight);
-
-        context.fillStyle = "#333";
-        context.font = "bold 14px Arial";
-        context.fillText(
-          detail.value,
-          startX + 100 + labelValueGap,
-          startY + index * lineHeight
-        );
-      });
-
-      canvasContainer.style.display = "block";
-      downloadButton.style.display = "block";
-
-      downloadButton.onclick = () => {
-        const imageURL = canvas.toDataURL("image/png");
-        const link = document.createElement("a");
-        link.href = imageURL;
-        link.download = `Aadhaar_${new Date().getTime()}.png`;
-        link.click();
-
-        canvasContainer.style.display = "none";
-        downloadButton.style.display = "none";
-      };
-    };
+  generateImage({
+    title: "--Aadhaar Card--",
+    details: details,
+    canvas: document.getElementById("aadhaarCanvas"),
+    canvasContainer: document.getElementById("canvasContainer"),
+    downloadButton: document.getElementById("downloadButton"),
+     backgroundColor: "#D8BFD8"
+  });
+}
     
     const formatDate = (date) => {
       if (!date) return "";
