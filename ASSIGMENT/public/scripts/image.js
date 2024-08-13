@@ -1,15 +1,14 @@
 export function generateImage({
   title,
-  details,
+  data, 
   canvas,
   canvasContainer,
   downloadButton,
   canvasWidth = 400,
   canvasHeight = 300,
-  backgroundColor = "#fff",
+  backgroundColor = "#90EE90",
 }) {
   const context = canvas.getContext("2d");
-
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
 
@@ -28,16 +27,21 @@ export function generateImage({
   const lineHeight = 30;
   const labelValueGap = 10;
 
+  const detailType = Object.keys(data)[0]; 
+  const details = data[detailType];
+
   details.forEach((detail, index) => {
+    
     context.fillStyle = "#ff0000";
     context.font = "bold 16px Arial";
     context.fillText(detail.label, startX, startY + index * lineHeight);
 
+    
     context.fillStyle = "#333";
     context.font = "bold 14px Arial";
     context.fillText(
       detail.value,
-      startX + 120 + labelValueGap,
+      startX + 80 + labelValueGap,
       startY + index * lineHeight
     );
   });
