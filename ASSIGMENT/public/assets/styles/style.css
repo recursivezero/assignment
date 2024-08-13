@@ -178,7 +178,7 @@ button {
   }
 }
 
-.savebutton {
+.save__button {
   background-color: var(--saveButton__bg--24);
   color: var(--header__bg--2);
   font-weight: 700;
@@ -187,7 +187,7 @@ button {
   }
 }
 
-.resetbutton {
+.reset__button {
   background-color: var(--resetButton__bg--26);
   color: var(--header__bg--2);
   font-weight: 700;
