@@ -99,25 +99,25 @@ import { generateImage } from "/scripts/image.js";
        container.insertAdjacentHTML(
          "beforeend",
          `
-         <div class="item" data-entry-id="${entryCount}" 
-                           data-document-number="${documentNumber}" 
-                           data-holding-person-name="${holdingPersonName}" 
-                           data-dob="${formatDate(DOB)}" 
-                           data-gender="${gender}" 
-                           data-aadhaar-address="${aadhaarAddress}">
-             <div>${entryCount}</div>
-             <div>Aadhaar</div>
-             <div>${documentNumber}</div>
-             <div>${holdingPersonName}</div>
-             <div>${genderSymbol}</div>
-             <div>${formatDate(DOB)}</div>
-             <div>
-                 <button class="viewbtn" type="button">View</button>
-                 <button class="editbtn" type="button">Edit</button>
-                 <button class="deletebtn" type="button">Delete</button>
-             </div>
-         </div>
-         `
+           <div class="item" data-entry-id="${entryCount}" 
+                      data-document-number="${documentNumber}" 
+                      data-holding-person-name="${holdingPersonName}" 
+                      data-dob="${formatDate(DOB)}" 
+                      data-gender="${gender}" 
+                      data-aadhaar-address="${aadhaarAddress}">
+                     <div data-label="entryCount">${entryCount}</div>
+                     <div data-label="aadhaarType">Aadhaar</div>
+                     <div data-label="documentNumber">${documentNumber}</div>
+                     <div data-label="holdingPersonName">${holdingPersonName}</div>
+                     <div data-label="genderSymbol">${genderSymbol}</div>
+                     <div data-label="DOB">${formatDate(DOB)}</div>
+        <div>
+            <button class="viewbtn" type="button">View</button>
+            <button class="editbtn" type="button">Edit</button>
+            <button class="deletebtn" type="button">Delete</button>
+        </div>
+    </div>
+    `
        );
      };
 
@@ -139,11 +139,10 @@ import { generateImage } from "/scripts/image.js";
        item.dataset.gender = gender;
        item.dataset.aadhaarAddress = aadhaarAddress;
 
-      const divs = item.querySelectorAll('div');
-      divs[2].textContent = documentNumber;
-      divs[3].textContent = holdingPersonName;
-      divs[4].textContent = genderSymbol;
-      divs[5].textContent = formatDate(DOB);
+        item.querySelector('[data-label="documentNumber"]').textContent = documentNumber;
+        item.querySelector('[data-label="holdingPersonName"]').textContent = holdingPersonName;
+        item.querySelector('[data-label="genderSymbol"]').textContent = genderSymbol;
+        item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
 
        currentEditItem = null;
      };
