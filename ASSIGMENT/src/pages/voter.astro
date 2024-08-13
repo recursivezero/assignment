@@ -43,8 +43,8 @@ const inlineStyle = `
      import { generateImage } from "/scripts/image.js";
 
     const voterForm = document.querySelector(".form");
-    const saveButton = document.querySelector(".saveButton");
-    const resetButton = document.querySelector(".resetButton");
+    const saveButton = document.querySelector(".savebutton");
+    const resetButton = document.querySelector(".resetbutton");
     const container = document.querySelector(".container");
     const canvas = document.getElementById("voterCanvas");
     const context = canvas.getContext("2d");
@@ -117,9 +117,9 @@ const inlineStyle = `
           <div>${genderSymbol}</div>
           <div>${formatDate(DOB)}</div>
           <div>
-            <button class="view-btn" type="button">View</button>
-            <button class="edit-btn" type="button">Edit</button>
-            <button class="delete-btn" type="button">Delete</button>
+            <button class="viewbtn" type="button">View</button>
+            <button class="editbtn" type="button">Edit</button>
+            <button class="deletebtn" type="button">Delete</button>
           </div>
         </div>
       `
@@ -241,11 +241,11 @@ const inlineStyle = `
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
-      if (event.target.classList.contains("delete-btn")) {
+      if (event.target.classList.contains("deletebtn")) {
         deleteItem(event);
-      } else if (event.target.classList.contains("edit-btn")) {
+      } else if (event.target.classList.contains("editbtn")) {
         editItem(event);
-      } else if (event.target.classList.contains("view-btn")) {
+      } else if (event.target.classList.contains("viewbtn")) {
         viewItem(event);
       }
     });
