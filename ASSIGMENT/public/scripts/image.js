@@ -41,7 +41,7 @@ export function generateImage({
     context.font = "bold 14px Arial";
     context.fillText(
       detail.value,
-      startX + 80 + labelValueGap,
+      startX + 110 + labelValueGap,
       startY + index * lineHeight
     );
   });

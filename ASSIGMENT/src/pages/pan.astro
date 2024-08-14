@@ -3,200 +3,280 @@ import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
 import Tabel from "../components/Tabel.astro";
 import Button from "../components/Button.astro";
-import FormLayout from '../layouts/FormLayout.astro';
+import FormLayout from "../layouts/FormLayout.astro";
 
 const fields = [
-  { id: 'doc-number', label: 'PAN', type: 'text', name: 'documentNumber', placeholder: 'D123 4567 8901 234', required: true },
-  { id: 'doc-name', label: 'Name on PAN', type: 'text', name: 'holdingPersonName', placeholder: 'ZEN RAYN', required: true },
-  { id: 'doc-dob', label: 'Date of Birth', type: 'date', name: 'DOB', required: true },
-  { id: 'doc-fathername', label: 'Father Name', type: 'text', name: 'fathername', placeholder: 'ZEN RAY', required: true }
+  {
+    id: "doc-number",
+    label: "PAN",
+    type: "text",
+    name: "documentNumber",
+    placeholder: "D123 4567 8901 234",
+    required: true,
+  },
+  {
+    id: "doc-name",
+    label: "Name on PAN",
+    type: "text",
+    name: "holdingPersonName",
+    placeholder: "ZEN RAYN",
+    required: true,
+  },
+  {
+    id: "doc-dob",
+    label: "Date of Birth",
+    type: "date",
+    name: "DOB",
+    required: true,
+  },
+  {
+    id: "doc-fathername",
+    label: "Father Name",
+    type: "text",
+    name: "fathername",
+    placeholder: "ZEN RAY",
+    required: true,
+  },
 ];
 const inlineStyle = `
   background-color: rgb(200, 239, 253);
 `;
-
 ---
 
 <MainLayout>
   <nav slot="nav">
     <Nav />
   </nav>
-  <div class="heading"><p>Please enter the details in the below form
-    <p class="subheading">all feilds are required</p>
-   </p>
-  <section>
-    <FormLayout formId="pan" formName="pan" fields={fields} genderLabel="Gender" style={inlineStyle} />
-    <Button/>
-  </section>
- <Tabel/>
-</div>
+  <div class="heading">
+    <p>
+      Please enter the details in the below form
+      <p class="subheading">all feilds are required</p>
+    </p>
+    <section>
+      <FormLayout
+        formId="pan"
+        formName="pan"
+        fields={fields}
+        genderLabel="Gender"
+        style={inlineStyle}
+      />
+      <Button />
+    </section>
+    <Tabel />
+  </div>
   <div id="canvasContainer" class="canvas" style="display: none;">
     <canvas id="panCanvas"></canvas>
-    <button id="downloadButton" class="download" style="display: none;">Download Image</button>
+    <button id="downloadButton" class="download" style="display: none;"
+      >Download Image</button
+    >
   </div>
-  <script is:inline type="module">
-     import { generateImage } from "/scripts/image.js";
-
-    const panForm = document.querySelector(".form");
-    const saveButton = document.querySelector(".save__button");
-    const resetButton = document.querySelector(".reset__button");
-    const container = document.querySelector(".container");
-    
-    const canvas = document.getElementById("panCanvas");
-    const context = canvas.getContext("2d");
-  
-    let entryCount = 0;
-    let currentEditItem = null;
-  
-    const handleSubmit = (event) => {
-      event.preventDefault();
-  
-              const documentNumber = panForm.querySelector("#doc-number").value.trim();
-              const holdingPersonName = panForm.querySelector("#doc-name").value.trim();
-              const DOB = panForm.querySelector("#doc-dob").value.trim();
-              const gender = panForm.querySelector('input[name="gender"]:checked').value;
-              const fathername = panForm.querySelector("#doc-fathername").value.trim(); 
-  
-      if (documentNumber && holdingPersonName && DOB) {
-        if (currentEditItem) {
-          updateEntry(currentEditItem, documentNumber, holdingPersonName, DOB, gender, fathername);
-        } else {
-          createNewEntry(documentNumber, holdingPersonName, DOB, gender, fathername);
-        }
-        resetForm();
-      } else {
-        console.log("Please fill in all required fields.");
-      }
-    };
-  
-    const createNewEntry = (documentNumber, holdingPersonName, DOB, gender, fathername) => {
-      entryCount++;
-              const maleSymbol = String.fromCharCode(0x2642);
-              const femaleSymbol = String.fromCharCode(0x2640);
-              const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-  
-              container.insertAdjacentHTML('beforeend', `
-                  <div class="item" data-entry-id="${entryCount}" data-address="${fathername}">
-                      <div>${entryCount}</div>
-                      <div>Pan</div>
-                      <div>${documentNumber}</div>
-                      <div>${holdingPersonName}</div>
-                      <div>${genderSymbol}</div>
-                      <div>${formatDate(DOB)}</div>
-                      <div>
-                          <button class="viewbtn" type="button">View</button>
-                          <button class="editbtn" type="button">Edit</button>
-                          <button class="deletebtn" type="button">Delete</button>
-                      </div>
-                  </div>
-              `);
-      
-    };
-  
-    const updateEntry = (item, documentNumber, holdingPersonName, DOB, gender, fathername) => {
-      const maleSymbol = String.fromCharCode(0x2642);
-              const femaleSymbol = String.fromCharCode(0x2640);
-              const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-  
-              item.querySelector("div:nth-child(3)").textContent = documentNumber;
-              item.querySelector("div:nth-child(4)").textContent = holdingPersonName;
-              item.querySelector("div:nth-child(5)").textContent = genderSymbol;
-              item.querySelector("div:nth-child(6)").textContent = formatDate(DOB);
-              item.setAttribute("data-address", fathername);
-  
-              currentEditItem = null;
-    };
-  
-    const resetForm = () => {
-      panForm.reset();
-      currentEditItem = null;
-    };
-  
-    const deleteItem = (event) => {
-      const item = event.target.closest(".item");
-      item.remove();
-    };
-  
-    const editItem = (event) => {
-      const item = event.target.closest(".item");
-      const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
-      const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
-      const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
-      const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
-      const fathername = item.getAttribute("data-address").trim();
-  
-      const maleSymbol = String.fromCharCode(0x2642);
-              const gender = genderSymbol === maleSymbol ? "male" : "female";
-  
-              panForm.querySelector("#doc-number").value = documentNumber;
-              panForm.querySelector("#doc-name").value = holdingPersonName;
-              panForm.querySelector(`#gender_${gender}`).checked = true;
-              panForm.querySelector("#doc-fathername").value = fathername;
-  
-              const [day, month, year] = DOB.split('/');
-              panForm.querySelector("#doc-dob").value = `${year}-${month}-${day}`;
-  
-              currentEditItem = item;
-    };
-  
-    const viewItem = (event) => {
-      const item = event.target.closest(".item");
-      const documentNumber = item.querySelector("div:nth-child(3)").textContent.trim();
-      const holdingPersonName = item.querySelector("div:nth-child(4)").textContent.trim();
-      const genderSymbol = item.querySelector("div:nth-child(5)").textContent.trim();
-      const DOB = item.querySelector("div:nth-child(6)").textContent.trim();
-      const fathername = item.dataset.address.trim();
-  
-      generatePanImage(documentNumber, holdingPersonName, genderSymbol, DOB, fathername);
-    };
-  
-   function generatePanImage(
-        documentNumber,
-        holdingPersonName,
-        genderSymbol,
-        DOB,
-        fathername
-      ) {
-      const details = [
-        { label: "PAN Number:", value: documentNumber },
-        { label: "Name:", value: holdingPersonName },
-        { label: "Gender:", value: genderSymbol === "♂" ? "Male" : "Female" },
-        { label: "DOB:", value: DOB },
-        { label: "FatherName:", value: fathername },
-      ]
-
-        generateImage({
-          title: "--Pan Card--",
-          details: details,
-          canvas: document.getElementById("panCanvas"),
-          canvasContainer: document.getElementById("canvasContainer"),
-          downloadButton: document.getElementById("downloadButton"),
-          backgroundColor: "#87CEEB",
-        });
-      }
-    const formatDate = (date) => {
-      if (!date) return "";
-      const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
-    };
-  
-    resetButton.addEventListener("click", resetForm);
-    saveButton.addEventListener("click", handleSubmit);
-    container.addEventListener("click", (event) => {
-      if (event.target.classList.contains("deletebtn")) {
-        deleteItem(event);
-      } else if (event.target.classList.contains("editbtn")) {
-        editItem(event);
-      } else if (event.target.classList.contains("viewbtn")) {
-        viewItem(event);
-      }
-    });
-    const navLinks = document.querySelectorAll('.nav-item');
-    const currentPath = window.location.pathname;
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
-    });
-  </script>
 </MainLayout>
+<script is:inline type="module">
+  import { generateImage } from "/scripts/image.js";
+
+  const panForm = document.querySelector(".form");
+  const saveButton = document.querySelector(".save__button");
+  const resetButton = document.querySelector(".reset__button");
+  const container = document.querySelector(".container");
+  const canvas = document.getElementById("panCanvas");
+  const context = canvas.getContext("2d");
+  let entryCount = 0;
+  let currentEditItem = null;
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(panForm);
+    const documentNumber = formData.get("documentNumber")?.trim();
+    const holdingPersonName = formData.get("holdingPersonName")?.trim();
+    const DOB = formData.get("DOB")?.trim();
+    const gender = formData.get("gender");
+    const fathername = formData.get("fathername")?.trim();
+
+    if (documentNumber && holdingPersonName && DOB) {
+      if (currentEditItem) {
+        updateEntry(
+          currentEditItem,
+          documentNumber,
+          holdingPersonName,
+          DOB,
+          gender,
+          fathername
+        );
+      } else {
+        createNewEntry(
+          documentNumber,
+          holdingPersonName,
+          DOB,
+          gender,
+          fathername
+        );
+      }
+      resetForm();
+    } else {
+      console.log("Please fill in all required fields.");
+    }
+  };
+
+  const createNewEntry = (
+    documentNumber,
+    holdingPersonName,
+    DOB,
+    gender,
+    fathername
+  ) => {
+    entryCount++;
+    const maleSymbol = String.fromCharCode(0x2642);
+    const femaleSymbol = String.fromCharCode(0x2640);
+    const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+    container.insertAdjacentHTML(
+      "beforeend",
+      `
+           <div class="item" data-entry-id="${entryCount}" 
+                      data-document-number="${documentNumber}" 
+                      data-holding-person-name="${holdingPersonName}" 
+                      data-dob="${formatDate(DOB)}" 
+                      data-gender="${gender}" 
+                      data-fathername="${fathername}">
+                      <div data-label="entryCount">${entryCount}</div>
+                      <div data-label="panType">PAN</div>
+                      <div data-label="documentNumber">${documentNumber}</div>
+                      <div data-label="holdingPersonName">${holdingPersonName}</div>
+                      <div data-label="genderSymbol">${genderSymbol}</div>
+                      <div data-label="DOB">${formatDate(DOB)}</div>
+          <div>
+            <button class="viewbtn" type="button">View</button>
+            <button class="editbtn" type="button">Edit</button>
+            <button class="deletebtn" type="button">Delete</button>
+        </div>
+    </div>
+    `
+    );
+  };
+  const updateEntry = (
+    item,
+    documentNumber,
+    holdingPersonName,
+    DOB,
+    gender,
+    fathername
+  ) => {
+    const maleSymbol = String.fromCharCode(0x2642);
+    const femaleSymbol = String.fromCharCode(0x2640);
+    const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
+    item.dataset.documentNumber = documentNumber;
+    item.dataset.holdingPersonName = holdingPersonName;
+    item.dataset.dob = formatDate(DOB);
+    item.dataset.gender = gender;
+    item.dataset.fathername = fathername;
+
+    item.querySelector('[data-label="documentNumber"]').textContent =
+      documentNumber;
+    item.querySelector('[data-label="holdingPersonName"]').textContent =
+      holdingPersonName;
+    item.querySelector('[data-label="genderSymbol"]').textContent =
+      genderSymbol;
+    item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
+
+    currentEditItem = null;
+  };
+
+  const resetForm = () => {
+    panForm.reset();
+    currentEditItem = null;
+  };
+
+  const deleteItem = (event) => {
+    const item = event.target.closest(".item");
+    item.remove();
+  };
+
+  const editItem = (event) => {
+    const item = event.target.closest(".item");
+
+    const documentNumber = item.dataset.documentNumber;
+    const holdingPersonName = item.dataset.holdingPersonName;
+    const gender = item.dataset.gender;
+    const DOB = item.dataset.dob;
+    const fathername = item.dataset.fathername;
+
+    panForm.querySelector("#doc-number").value = documentNumber;
+    panForm.querySelector("#doc-name").value = holdingPersonName;
+    panForm.querySelector("#doc-dob").value = convertToDateInputFormat(DOB);
+    panForm.querySelector(`#gender_${gender}`).checked = true;
+    panForm.querySelector("#doc-fathername").value = fathername;
+
+    currentEditItem = item;
+  };
+
+  const viewItem = (event) => {
+    const item = event.target.closest(".item");
+
+    const pan_detail = {
+      number: item.dataset.documentNumber,
+      name: item.dataset.holdingPersonName,
+      gender: item.dataset.gender === "male" ? "♂" : "♀",
+      dob: item.dataset.dob,
+      fathername: item.dataset.fathername,
+    };
+
+    generatePanImage(pan_detail);
+  };
+
+  const buildDetail = ({ type, detail }) => {
+    const details = [
+      { label: "PAN:", value: detail.number },
+      { label: "Name:", value: detail.name },
+      {
+        label: "Gender:",
+        value: detail.gender === "♂" ? "Male" : "Female",
+      },
+      { label: "Date of birth:", value: detail.dob },
+      { label: "father Name:", value: detail.fathername },
+    ];
+    return { [type]: details };
+  };
+
+  const generatePanImage = (pan_detail) => {
+    const data = buildDetail({ type: "pan", detail: pan_detail });
+
+    generateImage({
+      title: "--PAN Card--",
+      data,
+      canvas: document.getElementById("panCanvas"),
+      canvasContainer: document.getElementById("canvasContainer"),
+      downloadButton: document.getElementById("downloadButton"),
+      backgroundColor: "#87CEEB",
+    });
+  };
+  const formatDate = (date) => {
+    if (!date) return "";
+    const [year, month, day] = date.split("-");
+    return `${day}/${month}/${year}`;
+  };
+  const convertToDateInputFormat = (date) => {
+    if (!date) return "";
+    const [day, month, year] = date.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
+  resetButton.addEventListener("click", resetForm);
+  saveButton.addEventListener("click", handleSubmit);
+  container.addEventListener("click", (event) => {
+    if (event.target.classList.contains("deletebtn")) {
+      deleteItem(event);
+    } else if (event.target.classList.contains("editbtn")) {
+      editItem(event);
+    } else if (event.target.classList.contains("viewbtn")) {
+      viewItem(event);
+    }
+  });
+  const navLinks = document.querySelectorAll(".nav-item");
+  const currentPath = window.location.pathname;
+  navLinks.forEach((link) => {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active");
+    }
+  });
+</script>
