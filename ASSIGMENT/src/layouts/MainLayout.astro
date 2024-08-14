@@ -1,33 +1,37 @@
 ---
-import Nav from '../components/Nav.astro';
+import Nav from "../components/Nav.astro";
 const title = "Offline Document Storage";
-const {name} =Astro.props;
+const { name } = Astro.props;
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
-    <link rel="stylesheet" type="text/css" href="/assets/styles/style.css">
-    <link rel="stylesheet" type="text/css" href="/assets/styles/form.css">
-   
-</head>
-<body>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/styles/form.css" />
+  </head>
+  <body>
     <header class="foote">
-        <h1>Offline Document Storage</h1>
-        <h2>{name}</h2>
+      <img
+        src="/public/assets/images/OfflineDocumnet.png"
+        alt="Header Image"
+        class="header-image"
+      />
+
+      <h2>{name}</h2>
     </header>
 
     <Nav />
 
     <main>
-        <slot />
+      <slot />
     </main>
 
     <footer class="footer">
-        <p>&copy; 2024 Offline Document Storage</p>
+      <p>&copy; 2024 Offline Document Storage</p>
     </footer>
-</body>
-
+  </body>
 </html>

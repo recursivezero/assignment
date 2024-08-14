@@ -150,9 +150,9 @@ const inlineStyle = `
                       <div data-label="DOB">${formatDate(DOB)}</div>
           
           <div>
-            <button class="viewbtn" type="button">View</button>
-            <button class="editbtn" type="button">Edit</button>
-            <button class="deletebtn" type="button">Delete</button>
+            <button class="view__btn" type="button">View</button>
+            <button class="edit__btn" type="button">Edit</button>
+            <button class="delete__btn" type="button">Delete</button>
           </div>
         </div>
         `
@@ -283,11 +283,11 @@ const inlineStyle = `
     }
 
     container.addEventListener("click", (event) => {
-      if (event.target.classList.contains("deletebtn")) {
+      if (event.target.classList.contains("delete__btn")) {
         deleteItem(event);
-      } else if (event.target.classList.contains("editbtn")) {
+      } else if (event.target.classList.contains("edit__btn")) {
         editItem(event);
-      } else if (event.target.classList.contains("viewbtn")) {
+      } else if (event.target.classList.contains("view__btn")) {
         viewItem(event);
       }
     });

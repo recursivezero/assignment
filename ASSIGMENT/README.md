@@ -105,7 +105,7 @@ This page consist of Pan form , the tabel which stores the form data
 ![DlNav](public/assets/images/DlForm.png)
 This page consist of dl form , the tabel which stores the form data 
 
-![idNav](public/assets/images/VoterId.png)
+![idNav](public/assets/images/VoterIdform.png)
 This page consist of dl form , the tabel which stores the form data 
 
 

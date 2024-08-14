@@ -1,13 +1,19 @@
 ---
-import MainLayout from '../layouts/MainLayout.astro';
-import Nav from '../components/Nav.astro';
+import MainLayout from "../layouts/MainLayout.astro";
+import Nav from "../components/Nav.astro";
 ---
+
 <MainLayout>
-    <nav slot="nav">
-        <Nav />
-    </nav>
-    <section>
-        <h1>Welcome to the Document Storage Application</h1>
-        <p class="tit">Select a document type from the navigation to get started</p>
-    </section>
+  <nav slot="nav">
+    <Nav />
+  </nav>
+  <div class="background-container">
+    <img src="/assets/images/bgimage.jpg" alt="Image" class="image" />
+    <div class="text-overlay">
+      <h1>Welcome to the Document Storage Application</h1>
+      <p class="title">
+        Select a document type from the navigation to get started
+      </p>
+    </div>
+  </div>
 </MainLayout>
