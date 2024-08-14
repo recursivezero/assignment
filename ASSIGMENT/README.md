@@ -112,16 +112,16 @@ This page consist of dl form , the tabel which stores the form data
 
 ### Data tabel and Canva image
 
-![PanData](public/assets/images/PanData.png)
+![PanData](public/assets/images/PAN.png)
 the tabel data showing is showing in below canva Image with the option of download them
 
-![AadhaarData](public/assets/images/AadhaarData.png)
+![AadhaarData](public/assets/images/Aadhaar.png)
 the tabel data showing is showing in below canva Image with the option of download them
 
-![DlData](public/assets/images/DlData.png)
+![DlData](public/assets/images/License.png)
 the tabel data showing is showing in below canva Image with the option of download them
 
-![idData](public/assets/images/IdCard.png)
+![idData](public/assets/images/Voterid.png)
 the tabel data showing is showing in below canva Image with the option of download them
 
  This section consists of the canva image that are generated from user data after clicking view button 

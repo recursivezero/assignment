@@ -107,13 +107,7 @@ const inlineStyle = `
             DOE
           );
         } else {
-          createNewEntry(
-            documentNumber,
-            holdingPersonName,
-            DOB,
-            gender,
-            DOE
-          );
+          createNewEntry(documentNumber, holdingPersonName, DOB, gender, DOE);
         }
         resetForm();
       } else {
@@ -233,7 +227,7 @@ const inlineStyle = `
 
     const buildDetail = ({ type, detail }) => {
       const details = [
-        { label: "DL-id:", value: detail.number },
+        { label: "Number:", value: detail.number },
         { label: "Name:", value: detail.name },
         {
           label: "Gender:",
@@ -254,7 +248,8 @@ const inlineStyle = `
         canvas: document.getElementById("dlCanvas"),
         canvasContainer: document.getElementById("canvasContainer"),
         downloadButton: document.getElementById("downloadButton"),
-        backgroundColor: "#90EE90",
+        backgroundColor: "#b5fdeb",
+        borderColor: "#808000"
       });
     };
 
