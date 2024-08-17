@@ -298,28 +298,30 @@ section {
   background-color: rgb(239, 241, 241);
   color: rgb(6, 6, 6);
 }
+
 .background-container {
   position: relative;
-  width: 100%;
-  height: 100vh; 
-  overflow: hidden;
+  width: 97.8vw;
+  height: 100vh;
   margin-left: -0.8cm;
   margin-block-start: -0.8cm;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 
 .image {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; 
+  z-index: 1;
 }
 
 .text-overlay {
   position: relative;
-  z-index: 2; 
+  z-index: 2;
   color: white;
   text-align: center;
   display: flex;
@@ -328,7 +330,7 @@ section {
   align-items: center;
   height: 100%;
   padding: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 h1 {

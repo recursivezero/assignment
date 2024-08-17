@@ -7,6 +7,53 @@ import Nav from "../components/Nav.astro";
   <nav slot="nav">
     <Nav />
   </nav>
+  <style is:inline>
+    .background-container {
+      position: relative;
+      width: 97.8vw;
+      height: 100vh;
+      margin-left: -0.8cm;
+      margin-block-start: -0.8cm;
+      background-attachment: fixed;
+      background-size: 100% 100%;
+    }
+
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+    }
+
+    .text-overlay {
+      position: relative;
+      z-index: 2;
+      color: rgb(48, 68, 53);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
+
+    h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+
+    .title {
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #c01552d6;
+    }
+  </style>
+  
   <div class="background-container">
     <img src="/assets/images/bgimage.jpg" alt="Image" class="image" />
     <div class="text-overlay">
@@ -17,3 +64,12 @@ import Nav from "../components/Nav.astro";
     </div>
   </div>
 </MainLayout>
+<script is:inline>
+  const navLinks = document.querySelectorAll(".nav-item");
+  const currentPath = window.location.pathname;
+  navLinks.forEach((link) => {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active");
+    }
+  });
+</script>

@@ -1,0 +1,52 @@
+---
+
+---
+
+<style is:inline>
+  .container__gender {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: #f00;
+    font-weight: bold;
+    .gender{
+      margin-right: 6px;
+    }
+    .g {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    input[type="radio"] {
+      margin-top: 3.8px;
+      vertical-align: middle;
+    }
+    label:not(.gen) {
+      margin-right: 5px;
+      color: var(--edit__txt--18);
+      margin-top: 3px;
+    }
+  }
+</style>
+<div class="container__gender">
+  <label for="gender" class="gender">Gender</label>
+  <div class="g">
+    <input
+      type="radio"
+      id="gender_male"
+      name="gender"
+      value="male"
+      required
+      checked
+    />
+    <label for="gender_male">Male</label>
+    <input
+      type="radio"
+      id="gender_female"
+      name="gender"
+      value="female"
+      required
+    />
+    <label for="gender_female">Female</label>
+  </div>
+</div>

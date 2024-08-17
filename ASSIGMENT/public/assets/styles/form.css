@@ -35,28 +35,5 @@ form {
     }
   }
 }
-.gendercontainer {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  color: var(--bg__red__bg--5);
-  font-weight: bold;
-  .gen {
-    margin-right: 6px;
-  }
-  .g {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  input[type="radio"] {
-    margin-top: 3.8px;
-    vertical-align: middle;
-  }
-  label:not(.gen) {
-    margin-right: 5px;
-    color: var(--edit__txt--18);
-    margin-top: 3px;
-  }
-}
+
 

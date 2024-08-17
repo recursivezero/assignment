@@ -1,0 +1,26 @@
+---
+const { field } = Astro.props;
+---
+
+<div class="form__field">
+  <label for={field.id}>{field.label}</label>
+  {
+    field.type === "textarea" ? (
+      <textarea
+        id={field.id}
+        name={field.name}
+        placeholder={field.placeholder}
+        required={field.required}
+      />
+    ) : (
+      <input
+        type={field.type}
+        id={field.id}
+        name={field.name}
+        placeholder={field.placeholder}
+        pattern={field.pattern}
+        required={field.required}
+      />
+    )
+  }
+</div>

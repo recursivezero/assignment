@@ -27,7 +27,7 @@ export function generateImage({
   context.fillText(title, canvasWidth / 2, 50);
 
   context.textAlign = "left";
-  const startX = 40;
+  const startX = 94;
   let startY = 100;
   const lineHeight = 30;
   const labelValueGap = 10;
