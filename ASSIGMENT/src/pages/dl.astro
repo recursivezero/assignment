@@ -73,7 +73,7 @@ const inlineStyle = `
 </MainLayout>
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
-
+  import { generateEntryHTML } from "/scripts/entryHelpers.js";
   const dlForm = document.getElementById("license");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
@@ -115,6 +115,7 @@ const inlineStyle = `
       }
     };
 
+    // Use generateEntryHTML for DL
     const createNewEntry = (
       documentNumber,
       holdingPersonName,
@@ -123,34 +124,16 @@ const inlineStyle = `
       DOE
     ) => {
       entryCount++;
-      const maleSymbol = String.fromCharCode(0x2642);
-      const femaleSymbol = String.fromCharCode(0x2640);
-      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-
-      container.insertAdjacentHTML(
-        "beforeend",
-        `
-        <div class="item" data-entry-id="${entryCount}" 
-                       data-document-number="${documentNumber}"
-                       data-holding-person-name="${holdingPersonName}"
-                       data-dob="${formatDate(DOB)}"
-                       data-gender="${gender}"
-                       data-doe="${formatDate(DOE)}">
-                       <div data-label="entryCount">${entryCount}</div>
-                       <div data-label="licenseType">License</div>
-                       <div data-label="documentNumber">${documentNumber}</div>
-                       <div data-label="holdingPersonName">${holdingPersonName}</div>
-                       <div data-label="genderSymbol">${genderSymbol}</div>
-                      <div data-label="DOB">${formatDate(DOB)}</div>
-          
-          <div>
-            <button class="view__btn" type="button">View</button>
-            <button class="edit__btn" type="button">Edit</button>
-            <button class="delete__btn" type="button">Delete</button>
-          </div>
-        </div>
-        `
+      const newEntryHTML = generateEntryHTML(
+        entryCount,
+        documentNumber,
+        holdingPersonName,
+        formatDate(DOB),
+        gender,
+        "License",
+        { DOE: formatDate(DOE) }
       );
+      container.insertAdjacentHTML("beforeend", newEntryHTML);
     };
 
     const updateEntry = (
@@ -161,10 +144,6 @@ const inlineStyle = `
       gender,
       DOE
     ) => {
-      const maleSymbol = String.fromCharCode(0x2642);
-      const femaleSymbol = String.fromCharCode(0x2640);
-      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-
       item.dataset.documentNumber = documentNumber;
       item.dataset.holdingPersonName = holdingPersonName;
       item.dataset.dob = formatDate(DOB);
@@ -179,7 +158,6 @@ const inlineStyle = `
         genderSymbol;
       item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
       item.querySelector('[data-label="DOE"]').textContent = formatDate(DOE);
-
       currentEditItem = null;
     };
 
@@ -249,7 +227,7 @@ const inlineStyle = `
         canvasContainer: document.getElementById("canvasContainer"),
         downloadButton: document.getElementById("downloadButton"),
         backgroundColor: "#b5fdeb",
-        borderColor: "#808000"
+        borderColor: "#808000",
       });
     };
 
