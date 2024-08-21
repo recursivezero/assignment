@@ -119,7 +119,7 @@ const inlineStyle = `
     }
   };
 
-  // Use generateEntryHTML for Aadhaar
+  
   const createNewEntry = (
     documentNumber,
     holdingPersonName,
@@ -148,6 +148,10 @@ const inlineStyle = `
     gender,
     fathername
   ) => {
+    const maleSymbol = String.fromCharCode(0x2642);
+    const femaleSymbol = String.fromCharCode(0x2640);
+    const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
+
     item.dataset.documentNumber = documentNumber;
     item.dataset.holdingPersonName = holdingPersonName;
     item.dataset.dob = formatDate(DOB);
@@ -182,6 +186,7 @@ const inlineStyle = `
     const gender = item.dataset.gender;
     const DOB = item.dataset.dob;
     const fathername = item.dataset.fathername;
+    console.log(fathername);
 
     panForm.querySelector("#doc-number").value = documentNumber;
     panForm.querySelector("#doc-name").value = holdingPersonName;

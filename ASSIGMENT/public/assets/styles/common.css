@@ -210,7 +210,7 @@ button {
   width: 100%;
 }
 
-.item,
+.row,
 .item.header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -221,9 +221,9 @@ button {
   background-color: var(--saveButton__txt--25);
   color: #050505;
 }
-.item {
-  color: #db0e0e;
-}
+
+
+
 @media (max-width: 1200px) {
   section {
     margin: 1.5rem auto;

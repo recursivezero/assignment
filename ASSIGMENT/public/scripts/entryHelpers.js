@@ -13,12 +13,14 @@ export function generateEntryHTML(entryCount, documentNumber, holdingPersonName,
             <div data-label="genderSymbol">${genderSymbol}</div>
             <div data-label="DOB">${DOB}</div>
             ${Object.entries(additionalFields).map(([key, value]) => `<div style="display:none;" data-label="${key}">${value}</div>`).join("")}
+
+               <div class="action__group">
+               <button class="view__btn" type="button">View</button>
+               <button class="edit__btn" type="button">Edit</button>
+               <button class="delete__btn" type="button">Delete</button>
+              </div>
         </div>
-        <div class="action__group">
-            <button class="view__btn" type="button">View</button>
-            <button class="edit__btn" type="button">Edit</button>
-            <button class="delete__btn" type="button">Delete</button>
-        </div>
+       
     </div>
   `;
 }
