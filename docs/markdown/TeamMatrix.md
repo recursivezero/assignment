@@ -1,4 +1,4 @@
-# Internship Assignment: Maturity Matrix
+# Internship Assignment: Team Matrix
 
 ## Problem Statement
 
