@@ -1,39 +1,127 @@
-# Internship assignment
+# Offline Document Storage
 
-assessment task for interns
+   An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.
+ 
+## Table of Contents
 
-## Task List
+- [Installation](#installation)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Screenshots](#screenshots)
 
-- Array of objects which have title and other property; run a function that will title case all strings
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+## Installation
 
-- Create Unit test for a react component
+To set up the project, clone the repository
+```bash
+git clone "https://github.com/ghanishth-rajput/Astro.git"
+cd "ASTRO"
 
-- Chrome extension which read network request and display in good accordion format
+npm install
+npm run dev
+```
 
-## List of Assignments
+## Introduction
 
-[BrandAddress](assigments/markdown/AuthenticInfo.md)  
+ The Offline Document Storage is a simple yet efficient tool designed to help users store and manage their important personal documents offline. It provides a user-friendly interface to add, view, edit, and delete document details.
 
-[DateMatics](assigments/markdown/DateMatics.md)
+## Features
 
-[DynImagic](assigments/markdown/DynImagic.md)
+- Add various document types including Aadhaar Card, Driving License, and PAN Card.
+- View stored document details.
+- Edit and update document information.
+- Delete unnecessary or outdated document entries.
+- Offline functionality ensures data security and privacy.
 
-[FamilyTree](assigments/markdown/FamilyTree.md)
+## Usage
 
-[HinDictionary](assigments/markdown/HinDictionary.md)
+1. Open the index.html file in your browser.
+2. Select the document type from the dropdown.
+3. Fill in the document details.
+4. Click on Save Details to save the document information.
+5. View, edit, or delete saved document details.
 
-[ImageSearch](assigments/markdown/ImageSearch.md)
+## Project Structure
 
-[DanceCase](assigments/markdown/DanceCase.md)
+```sh
+D: 
+ASTRO
+├── .astro
+├── .vscode
+├── node_modules
+├── public
+│   ├── assets
+│   │   └── images
+│   └── styles
+│       └── aadhaar.css
+|       └── dl.css
+|       └── pan.css
+|        └── style.css 
+├── src
+|   ├── components
+│   │   └── Nav.astro
+    ├── layouts
+│   │   └── MainLayout.astro
+│   └── pages
+│   │   └── aadhaar.astro
+|   │   └── dl.astro
+|   │    └── index.astro
+|   │     └── pan.astro 
+│   └── script
+│       └── Action.js
+|       └── app.js
+|       
+│   
+|
+│  
+│       
+├── package.json
+├── tsconfig.json
+          
+```
 
-[MaturityMatrix](assigments/markdown/MaturityMatrix.md)
+## Screenshots
 
-[NumPad](assigments/markdown/NumPad.md)
+Here are some screenshots of the application:
 
-[PNR](assigments/markdown/PNR_PWA.md)
+### Document Entry Page
 
-[SafeDocs](assigments/markdown/SafeDocs.md)
+![HomePage](<public/assets/images/HomePage.png>)
+ Entry Page consist of front ui of the application with the options of forms selection in form of Nav links 
 
-[VoiceForm](assigments/markdown/VoiceForm.md)
+ 
+
+### Forms Section
+
+![AadhaarNav](public/assets/images/AadhaarForm.png)
+This page consist of aadhaar form , the tabel which stores the form data 
+
+
+![PanForm](public/assets/images/PanForm.png)
+This page consist of Pan form , the tabel which stores the form data 
+
+![DlNav](public/assets/images/DlForm.png)
+This page consist of dl form , the tabel which stores the form data 
+
+![idNav](public/assets/images/VoterIdform.png)
+This page consist of dl form , the tabel which stores the form data 
+
+
+
+### Data tabel and Canva image
+
+![PanData](public/assets/images/PAN.png)
+the tabel data showing is showing in below canva Image with the option of download them
+
+![AadhaarData](public/assets/images/Aadhaar.png)
+the tabel data showing is showing in below canva Image with the option of download them
+
+![DlData](public/assets/images/License.png)
+the tabel data showing is showing in below canva Image with the option of download them
+
+![idData](public/assets/images/Voterid.png)
+the tabel data showing is showing in below canva Image with the option of download them
+
+ This section consists of the canva image that are generated from user data after clicking view button 
