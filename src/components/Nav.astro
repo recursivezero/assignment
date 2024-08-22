@@ -1,9 +1,27 @@
-<nav>
-    <ul>
-        <li><a href="/" class="nav-item">Home</a></li>
-        <li><a href="/aadhaar" class="nav-item" id="adhar">Aadhaar</a></li>
-        <li><a href="/dl" class="nav-item" id="dl">Driving License</a></li>
-        <li><a href="/pan" class="nav-item" id="pan">PAN Card</a></li>
-        <li><a href="/voter" class="nav-item" id="voter">Voter ID</a></li>
-    </ul>
+---
+const {
+  navs = [
+    { href: "/", label: "Home" },
+    { href: "/aadhaar", label: "Aadhaar", id: "adhar" },
+    { href: "/dl", label: "Driving License", id: "dl" },
+    { href: "/pan", label: "PAN Card", id: "pan" },
+    { href: "/voter", label: "Voter ID", id: "voter" },
+  ],
+  navClass = "nav",
+  itemClass = "nav-item",
+} = Astro.props;
+---
+
+<nav class={navClass}>
+  <ul>
+    {
+      navs.map((nav) => (
+        <li>
+          <a href={nav.href} class={itemClass} id={nav.id}>
+            {nav.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </nav>

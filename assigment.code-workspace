@@ -24,6 +24,10 @@
 			"titleBar.inactiveBackground": "#8f2b0a99",
 			"titleBar.inactiveForeground": "#e7e7e799"
 		},
-		"peacock.color": "#8f2b0a"
+		"peacock.color": "#8f2b0a",
+		"cSpell.words": [
+			"adhar",
+			"buttoncontainer"
+		]
 	}
 }

@@ -1,5 +1,12 @@
 ---
-
+const {
+  genderLabel = "Gender",
+  genderClass = "gender",
+  maleLabel = "Male",
+  femaleLabel = "Female",
+  containerClass = "container__gender",
+  required = true,
+} = Astro.props;
 ---
 
 <style is:inline>
@@ -9,44 +16,49 @@
     margin-bottom: 1rem;
     color: #f00;
     font-weight: bold;
-    .gender{
-      margin-right: 6px;
-    }
-    .g {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    input[type="radio"] {
-      margin-top: 3.8px;
-      vertical-align: middle;
-    }
-    label:not(.gen) {
-      margin-right: 5px;
-      color: var(--edit__txt--18);
-      margin-top: 3px;
-    }
+  }
+
+  .gender {
+    margin-right: 6px;
+  }
+
+  .g {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  input[type="radio"] {
+    margin-top: 3.8px;
+    vertical-align: middle;
+  }
+
+  label:not(.gen) {
+    margin-right: 5px;
+    color: var(--edit__txt--18);
+    margin-top: 3px;
   }
 </style>
-<div class="container__gender">
-  <label for="gender" class="gender">Gender</label>
+
+<div class={containerClass}>
+  <label for="gender" class={genderClass}>{genderLabel}</label>
   <div class="g">
     <input
       type="radio"
       id="gender_male"
       name="gender"
       value="male"
-      required
+      {required}
       checked
     />
-    <label for="gender_male">Male</label>
+    <label for="gender_male">{maleLabel}</label>
     <input
       type="radio"
       id="gender_female"
       name="gender"
       value="female"
-      required
+      {required}
     />
-    <label for="gender_female">Female</label>
+    <label for="gender_female">{femaleLabel}</label>
   </div>
 </div>

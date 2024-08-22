@@ -1,4 +1,13 @@
+---
+const {
+  resetLabel = "Reset",
+  saveLabel = "Save",
+  resetClass = "reset__button",
+  saveClass = "save__button",
+} = Astro.props;
+---
+
 <div class="buttoncontainer">
-    <button type="button" class="reset__button">Reset</button>
-    <button type="submit" class="save__button">Save</button>
+  <button type="button" class={resetClass}> {resetLabel} </button>
+  <button type="submit" class={saveClass}>{saveLabel} </button>
 </div>
