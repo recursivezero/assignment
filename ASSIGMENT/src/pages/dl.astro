@@ -74,6 +74,7 @@ const inlineStyle = `
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import { generateEntryHTML } from "/scripts/entryHelpers.js";
+
   const dlForm = document.getElementById("license");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
@@ -98,16 +99,22 @@ const inlineStyle = `
 
       if (documentNumber && holdingPersonName && DOB && DOE) {
         if (currentEditItem) {
-          updateEntry(
-            currentEditItem,
+          updateEntry({
+            item: currentEditItem,
             documentNumber,
             holdingPersonName,
             DOB,
             gender,
-            DOE
-          );
+            DOE,
+          });
         } else {
-          createNewEntry(documentNumber, holdingPersonName, DOB, gender, DOE);
+          createNewEntry({
+            documentNumber,
+            holdingPersonName,
+            DOB,
+            gender,
+            DOE,
+          });
         }
         resetForm();
       } else {
@@ -115,35 +122,34 @@ const inlineStyle = `
       }
     };
 
-    // Use generateEntryHTML for DL
-    const createNewEntry = (
+    const createNewEntry = ({
       documentNumber,
       holdingPersonName,
       DOB,
       gender,
-      DOE
-    ) => {
+      DOE,
+    }) => {
       entryCount++;
-      const newEntryHTML = generateEntryHTML(
+      const newEntryHTML = generateEntryHTML({
         entryCount,
         documentNumber,
         holdingPersonName,
-        formatDate(DOB),
+        DOB: formatDate(DOB),
         gender,
-        "License",
-        { DOE: formatDate(DOE) }
-      );
+        type: "License",
+        additionalFields: { DOE },
+      });
       container.insertAdjacentHTML("beforeend", newEntryHTML);
     };
 
-    const updateEntry = (
+    const updateEntry = ({
       item,
       documentNumber,
       holdingPersonName,
       DOB,
       gender,
-      DOE
-    ) => {
+      DOE,
+    }) => {
       const maleSymbol = String.fromCharCode(0x2642);
       const femaleSymbol = String.fromCharCode(0x2640);
       const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
@@ -183,13 +189,12 @@ const inlineStyle = `
       const gender = item.dataset.gender;
       const DOB = item.dataset.dob;
       const DOE = item.dataset.doe;
-      console.log(DOE);
 
       dlForm.querySelector("#doc-number").value = documentNumber;
       dlForm.querySelector("#doc-name").value = holdingPersonName;
       dlForm.querySelector("#doc-dob").value = convertToDateInputFormat(DOB);
       dlForm.querySelector(`#gender_${gender}`).checked = true;
-      dlForm.querySelector("#DOE_dl").value = convertToDateInputFormat(DOE);
+      dlForm.querySelector("#DOE_dl").value = DOE;
 
       currentEditItem = item;
     };
