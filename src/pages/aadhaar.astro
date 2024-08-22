@@ -13,7 +13,7 @@ const fields = [
     name: "documentNumber",
     placeholder: "1234 5678 9012",
     pattern: "[0-9]{12}",
-    required: true,
+    required: true
   },
   {
     id: "doc-name",
@@ -21,14 +21,14 @@ const fields = [
     type: "text",
     name: "holdingPersonName",
     placeholder: "RAM SINGH",
-    required: true,
+    required: true
   },
   {
     id: "doc-dob",
     label: "Date of Birth",
     type: "date",
     name: "DOB",
-    required: true,
+    required: true
   },
   {
     id: "doc-address",
@@ -36,9 +36,10 @@ const fields = [
     type: "textarea",
     name: "aadhaaraddress",
     placeholder: "as per aadhaar",
-    required: true,
-  },
+    required: true
+  }
 ];
+
 const inlineStyle = `
   background-color: antiquewhite;
 `;
@@ -55,234 +56,205 @@ const inlineStyle = `
     </p>
   </div>
   <section>
-    <FormLayout
-      formId="aadhaar"
-      formName="aadhaar"
-      fields={fields}
-      genderLabel="Gender"
-      style={inlineStyle}
-    />
+    <FormLayout formId="aadhaar" formName="aadhaar" fields={fields} genderLabel="Gender" style={inlineStyle} />
     <Button />
   </section>
-  <Tabel />
+  <Tabel>
+    <slot name="row" />
+  </Tabel>
   <div id="canvasContainer" class="canvas" style="display: none;">
     <canvas id="aadhaarCanvas"></canvas>
-    <button id="downloadButton" class="download" style="display: none;"
-      >Download Image</button
-    >
+    <button id="downloadButton" class="download" style="display: none;">Download Image</button>
   </div>
-</MainLayout>
-<script is:inline type="module">
-  import { generateImage } from "/scripts/image.js";
-  import { generateEntryHTML } from "/scripts/entryHelpers.js";
+  <script is:inline type="module">
+    import { generateImage } from "/scripts/image.js";
+    const aadhaarForm = document.getElementById("aadhaar");
+    const saveButton = document.querySelector(".save__button");
+    const resetButton = document.querySelector(".reset__button");
+    const container = document.querySelector(".container");
+    const canvas = document.getElementById("aadhaarCanvas");
+    const context = canvas ? canvas.getContext("2d") : null;
 
-  const aadhaarForm = document.getElementById("aadhaar");
-  const saveButton = document.querySelector(".save__button");
-  const resetButton = document.querySelector(".reset__button");
-  const container = document.querySelector(".container");
-  const canvas = document.getElementById("aadhaarCanvas");
-  const context = canvas ? canvas.getContext("2d") : null;
-  let entryCount = 0;
-  let currentEditItem = null;
+    let entryCount = 0;
+    let currentEditItem = null;
 
-  if (!context) {
-    console.error("Canvas context could not be obtained.");
-  } else {
-    const handleSubmit = (event) => {
-      event.preventDefault();
+    if (!context) {
+      console.error("Canvas context could not be obtained.");
+    } else {
+      //const handleSubmit = (event) => {
+      //  event.preventDefault();
+      //  const formData = new FormData(aadhaarForm);
+      //  console.log({ formData });
+      //  for (const [k, v] of formData.entries()) {
+      //    console.log({ k, v });
+      //  }
 
-      const formData = new FormData(aadhaarForm);
-      const documentNumber = formData.get("documentNumber")?.trim();
-      const holdingPersonName = formData.get("holdingPersonName")?.trim();
-      const DOB = formData.get("DOB")?.trim();
-      const gender = formData.get("gender");
-      const aadhaaraddress = formData.get("aadhaaraddress")?.trim();
+      //  if (documentNumber && holdingPersonName && DOB && aadhaaraddress) {
+      //    if (currentEditItem) {
+      //      updateEntry({
+      //        item: currentEditItem,
+      //        documentNumber,
+      //        holdingPersonName,
+      //        DOB,
+      //        gender,
+      //        aadhaaraddress
+      //      });
+      //    } else {
+      //      createNewEntry({
+      //        documentNumber,
+      //        holdingPersonName,
+      //        DOB,
+      //        gender,
+      //        aadhaaraddress
+      //      });
+      //    }
+      //    resetForm();
+      //  } else {
+      //    console.log("Please fill in all required fields.");
+      //  }
+      //};
 
-      if (documentNumber && holdingPersonName && DOB && aadhaaraddress) {
-        if (currentEditItem) {
-          updateEntry({
-            item: currentEditItem,
-            documentNumber,
-            holdingPersonName,
-            DOB,
-            gender,
-            aadhaaraddress,
-          });
-        } else {
-          createNewEntry({
-            documentNumber,
-            holdingPersonName,
-            DOB,
-            gender,
-            aadhaaraddress,
-          });
-        }
-        resetForm();
-      } else {
-        console.log("Please fill in all required fields.");
-      }
-    };
-
-    const createNewEntry = ({
-      documentNumber,
-      holdingPersonName,
-      DOB,
-      gender,
-      aadhaaraddress,
-    }) => {
-      entryCount++;
-      const newEntryHTML = generateEntryHTML({
-        entryCount,
-        documentNumber,
-        holdingPersonName,
-        DOB: formatDate(DOB),
-        gender,
-        type: "Aadhaar",
-        additionalFields: { aadhaaraddress },
-      });
-      container.insertAdjacentHTML("beforeend", newEntryHTML);
-      console.log({ aadhaaraddress });
-    };
-
-    const updateEntry = ({
-      item,
-      documentNumber,
-      holdingPersonName,
-      DOB,
-      gender,
-      aadhaaraddress,
-    }) => {
-      const maleSymbol = String.fromCharCode(0x2642);
-      const femaleSymbol = String.fromCharCode(0x2640);
-      const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-
-      item.dataset.documentNumber = documentNumber;
-      item.dataset.holdingPersonName = holdingPersonName;
-      item.dataset.dob = formatDate(DOB);
-      item.dataset.gender = gender;
-      item.dataset.aadhaaraddress = aadhaaraddress;
-
-      item.querySelector('[data-label="documentNumber"]').textContent =
-        documentNumber;
-      item.querySelector('[data-label="holdingPersonName"]').textContent =
-        holdingPersonName;
-      item.querySelector('[data-label="genderSymbol"]').textContent =
-        genderSymbol;
-      item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
-      item.querySelector('[data-label="aadhaaraddress"]').textContent =
-        aadhaaraddress;
-      currentEditItem = null;
-    };
-
-    const resetForm = () => {
-      aadhaarForm.reset();
-      currentEditItem = null;
-    };
-
-    const deleteItem = (event) => {
-      const item = event.target.closest(".item");
-      item.remove();
-    };
-
-    const editItem = (event) => {
-      const item = event.target.closest(".item");
-
-      const documentNumber = item.dataset.documentNumber;
-      const holdingPersonName = item.dataset.holdingPersonName;
-      const gender = item.dataset.gender;
-      const DOB = item.dataset.dob;
-      const aadhaaraddress = item.dataset.aadhaaraddress;
-
-      aadhaarForm.querySelector("#doc-number").value = documentNumber;
-      aadhaarForm.querySelector("#doc-name").value = holdingPersonName;
-      aadhaarForm.querySelector("#doc-dob").value =
-        convertToDateInputFormat(DOB);
-      aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
-      aadhaarForm.querySelector("#doc-address").value = aadhaaraddress;
-
-      currentEditItem = item;
-    };
-
-    const viewItem = (event) => {
-      const item = event.target.closest(".item");
-
-      const aadhaar_detail = {
-        number: item.dataset.documentNumber,
-        name: item.dataset.holdingPersonName,
-        gender: item.dataset.gender === "male" ? "♂" : "♀",
-        dob: item.dataset.dob,
-        address: item.dataset.aadhaaraddress,
+      const createNewEntry = ({ documentNumber, holdingPersonName, DOB, gender, aadhaaraddress }) => {
+        const data = {
+          entryCount,
+          documentNumber,
+          holdingPersonName,
+          DOB: formatDate(DOB),
+          gender,
+          type: "Aadhaar",
+          additionalFields: { aadhaaraddress }
+        };
+        console.log({ data });
       };
 
-      generateAadhaarImage(aadhaar_detail);
-    };
+      const updateEntry = ({ item, documentNumber, holdingPersonName, DOB, gender, aadhaaraddress }) => {
+        const maleSymbol = String.fromCharCode(0x2642);
+        const femaleSymbol = String.fromCharCode(0x2640);
+        const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
 
-    const buildDetail = ({ type, detail }) => {
-      const details = [
-        { label: "Number:", value: detail.number },
-        { label: "Name:", value: detail.name },
-        {
-          label: "Gender:",
-          value: detail.gender === "♂" ? "Male" : "Female",
-        },
-        { label: "Date of birth:", value: detail.dob },
-        { label: "Address:", value: detail.address },
-      ];
-      return { [type]: details };
-    };
+        item.dataset.documentNumber = documentNumber;
+        item.dataset.holdingPersonName = holdingPersonName;
+        item.dataset.dob = formatDate(DOB);
+        item.dataset.gender = gender;
+        item.dataset.aadhaaraddress = aadhaaraddress;
 
-    const generateAadhaarImage = (aadhaar_detail) => {
-      const data = buildDetail({ type: "aadhaar", detail: aadhaar_detail });
+        item.querySelector('[data-label="documentNumber"]').textContent = documentNumber;
+        item.querySelector('[data-label="holdingPersonName"]').textContent = holdingPersonName;
+        item.querySelector('[data-label="genderSymbol"]').textContent = genderSymbol;
+        item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
+        item.querySelector('[data-label="aadhaaraddress"]').textContent = aadhaaraddress;
+        currentEditItem = null;
+      };
 
-      generateImage({
-        title: "--Aadhaar Card--",
-        data,
-        canvas: document.getElementById("aadhaarCanvas"),
-        canvasContainer: document.getElementById("canvasContainer"),
-        downloadButton: document.getElementById("downloadButton"),
-        backgroundColor: "#D8BFD8",
+      const resetForm = () => {
+        aadhaarForm.reset();
+        currentEditItem = null;
+      };
+
+      const deleteItem = (event) => {
+        const item = event.target.closest(".item");
+        item.remove();
+      };
+
+      const editItem = (event) => {
+        const item = event.target.closest(".item");
+
+        const documentNumber = item.dataset.documentNumber;
+        const holdingPersonName = item.dataset.holdingPersonName;
+        const gender = item.dataset.gender;
+        const DOB = item.dataset.dob;
+        const aadhaaraddress = item.dataset.aadhaaraddress;
+
+        aadhaarForm.querySelector("#doc-number").value = documentNumber;
+        aadhaarForm.querySelector("#doc-name").value = holdingPersonName;
+        aadhaarForm.querySelector("#doc-dob").value = convertToDateInputFormat(DOB);
+        aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
+        aadhaarForm.querySelector("#doc-address").value = aadhaaraddress;
+
+        currentEditItem = item;
+      };
+
+      const viewItem = (event) => {
+        const item = event.target.closest(".item");
+
+        const aadhaar_detail = {
+          number: item.dataset.documentNumber,
+          name: item.dataset.holdingPersonName,
+          gender: item.dataset.gender === "male" ? "♂" : "♀",
+          dob: item.dataset.dob,
+          address: item.dataset.aadhaaraddress
+        };
+
+        generateAadhaarImage(aadhaar_detail);
+      };
+
+      const buildDetail = ({ type, detail }) => {
+        const details = [
+          { label: "Number:", value: detail.number },
+          { label: "Name:", value: detail.name },
+          {
+            label: "Gender:",
+            value: detail.gender === "♂" ? "Male" : "Female"
+          },
+          { label: "Date of birth:", value: detail.dob },
+          { label: "Address:", value: detail.address }
+        ];
+        return { [type]: details };
+      };
+
+      const generateAadhaarImage = (aadhaar_detail) => {
+        const data = buildDetail({ type: "aadhaar", detail: aadhaar_detail });
+
+        generateImage({
+          title: "--Aadhaar Card--",
+          data,
+          canvas: document.getElementById("aadhaarCanvas"),
+          canvasContainer: document.getElementById("canvasContainer"),
+          downloadButton: document.getElementById("downloadButton"),
+          backgroundColor: "#D8BFD8"
+        });
+      };
+
+      const formatDate = (date) => {
+        if (!date) return "";
+        const [year, month, day] = date.split("-");
+        return `${day}/${month}/${year}`;
+      };
+      const convertToDateInputFormat = (date) => {
+        if (!date) return "";
+        const [day, month, year] = date.split("/");
+        return `${year}-${month}-${day}`;
+      };
+
+      if (resetButton) {
+        resetButton.addEventListener("click", resetForm);
+      } else {
+        console.error("Reset button not found");
+      }
+
+      if (saveButton) {
+        //saveButton.addEventListener("click", handleSubmit);
+      } else {
+        console.error("Save button not found");
+      }
+
+      container.addEventListener("click", (event) => {
+        if (event.target.classList.contains("delete__btn")) {
+          deleteItem(event);
+        } else if (event.target.classList.contains("edit__btn")) {
+          editItem(event);
+        } else if (event.target.classList.contains("view__btn")) {
+          viewItem(event);
+        }
       });
-    };
 
-    const formatDate = (date) => {
-      if (!date) return "";
-      const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
-    };
-    const convertToDateInputFormat = (date) => {
-      if (!date) return "";
-      const [day, month, year] = date.split("/");
-      return `${year}-${month}-${day}`;
-    };
-
-    if (resetButton) {
-      resetButton.addEventListener("click", resetForm);
-    } else {
-      console.error("Reset button not found");
+      const navLinks = document.querySelectorAll(".nav-item");
+      const currentPath = window.location.pathname;
+      navLinks.forEach((link) => {
+        if (link.getAttribute("href") === currentPath) {
+          link.classList.add("active");
+        }
+      });
     }
-
-    if (saveButton) {
-      saveButton.addEventListener("click", handleSubmit);
-    } else {
-      console.error("Save button not found");
-    }
-
-    container.addEventListener("click", (event) => {
-      if (event.target.classList.contains("delete__btn")) {
-        deleteItem(event);
-      } else if (event.target.classList.contains("edit__btn")) {
-        editItem(event);
-      } else if (event.target.classList.contains("view__btn")) {
-        viewItem(event);
-      }
-    });
-
-    const navLinks = document.querySelectorAll(".nav-item");
-    const currentPath = window.location.pathname;
-    navLinks.forEach((link) => {
-      if (link.getAttribute("href") === currentPath) {
-        link.classList.add("active");
-      }
-    });
-  }
-</script>
+  </script>
+</MainLayout>

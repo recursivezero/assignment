@@ -12,7 +12,7 @@ const fields = [
     type: "text",
     name: "documentNumber",
     placeholder: "D123 4567 8901 234",
-    required: true,
+    required: true
   },
   {
     id: "doc-name",
@@ -20,14 +20,14 @@ const fields = [
     type: "text",
     name: "holdingPersonName",
     placeholder: "ZEN RAYN",
-    required: true,
+    required: true
   },
   {
     id: "doc-dob",
     label: "Date of Birth",
     type: "date",
     name: "DOB",
-    required: true,
+    required: true
   },
   {
     id: "doc-fathername",
@@ -35,8 +35,8 @@ const fields = [
     type: "text",
     name: "fathername",
     placeholder: "ZEN RAY",
-    required: true,
-  },
+    required: true
+  }
 ];
 const inlineStyle = `
   background-color: rgb(200, 239, 253);
@@ -53,27 +53,18 @@ const inlineStyle = `
       <p class="subheading">All fields are required</p>
     </p>
     <section>
-      <FormLayout
-        formId="pan"
-        formName="pan"
-        fields={fields}
-        genderLabel="Gender"
-        style={inlineStyle}
-      />
+      <FormLayout formId="pan" formName="pan" fields={fields} genderLabel="Gender" style={inlineStyle} />
       <Button />
     </section>
     <Tabel />
   </div>
   <div id="canvasContainer" class="canvas" style="display: none;">
     <canvas id="panCanvas"></canvas>
-    <button id="downloadButton" class="download" style="display: none;"
-      >Download Image</button
-    >
+    <button id="downloadButton" class="download" style="display: none;">Download Image</button>
   </div>
 </MainLayout>
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
-  import { generateEntryHTML } from "/scripts/entryHelpers.js";
 
   const panForm = document.querySelector(".form");
   const saveButton = document.querySelector(".save__button");
@@ -104,7 +95,7 @@ const inlineStyle = `
             holdingPersonName,
             DOB,
             gender,
-            fathername,
+            fathername
           });
         } else {
           createNewEntry({
@@ -112,7 +103,7 @@ const inlineStyle = `
             holdingPersonName,
             DOB,
             gender,
-            fathername,
+            fathername
           });
         }
         resetForm();
@@ -121,13 +112,7 @@ const inlineStyle = `
       }
     };
 
-    const createNewEntry = ({
-      documentNumber,
-      holdingPersonName,
-      DOB,
-      gender,
-      fathername,
-    }) => {
+    const createNewEntry = ({ documentNumber, holdingPersonName, DOB, gender, fathername }) => {
       entryCount++;
       const newEntryHTML = generateEntryHTML({
         entryCount,
@@ -136,19 +121,12 @@ const inlineStyle = `
         DOB: formatDate(DOB),
         gender,
         type: "PAN",
-        additionalFields: { fathername },
+        additionalFields: { fathername }
       });
-      container.insertAdjacentHTML("beforeend", newEntryHTML);
+      //container.insertAdjacentHTML("beforeend", newEntryHTML);
     };
 
-    const updateEntry = ({
-      item,
-      documentNumber,
-      holdingPersonName,
-      DOB,
-      gender,
-      fathername,
-    }) => {
+    const updateEntry = ({ item, documentNumber, holdingPersonName, DOB, gender, fathername }) => {
       const maleSymbol = String.fromCharCode(0x2642);
       const femaleSymbol = String.fromCharCode(0x2640);
       const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
@@ -159,12 +137,9 @@ const inlineStyle = `
       item.dataset.gender = gender;
       item.dataset.fathername = fathername;
 
-      item.querySelector('[data-label="documentNumber"]').textContent =
-        documentNumber;
-      item.querySelector('[data-label="holdingPersonName"]').textContent =
-        holdingPersonName;
-      item.querySelector('[data-label="genderSymbol"]').textContent =
-        genderSymbol;
+      item.querySelector('[data-label="documentNumber"]').textContent = documentNumber;
+      item.querySelector('[data-label="holdingPersonName"]').textContent = holdingPersonName;
+      item.querySelector('[data-label="genderSymbol"]').textContent = genderSymbol;
       item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
       item.querySelector('[data-label="fathername"]').textContent = fathername;
       currentEditItem = null;
@@ -206,7 +181,7 @@ const inlineStyle = `
         name: item.dataset.holdingPersonName,
         gender: item.dataset.gender === "male" ? "♂" : "♀",
         dob: item.dataset.dob,
-        fathername: item.dataset.fathername,
+        fathername: item.dataset.fathername
       };
 
       generatePanImage(pan_detail);
@@ -218,10 +193,10 @@ const inlineStyle = `
         { label: "Name:", value: detail.name },
         {
           label: "Gender:",
-          value: detail.gender === "♂" ? "Male" : "Female",
+          value: detail.gender === "♂" ? "Male" : "Female"
         },
         { label: "Date of birth:", value: detail.dob },
-        { label: "Father Name:", value: detail.fathername },
+        { label: "Father Name:", value: detail.fathername }
       ];
       return { [type]: details };
     };
@@ -236,7 +211,7 @@ const inlineStyle = `
         canvasContainer: document.getElementById("canvasContainer"),
         downloadButton: document.getElementById("downloadButton"),
         backgroundColor: "#87CEEB",
-        borderColor: "#7DF9FF",
+        borderColor: "#7DF9FF"
       });
     };
 

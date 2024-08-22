@@ -1,12 +1,26 @@
 ---
 import Gender from "../components/Gender.astro";
-const { formId, formName, fields, genderLabel, style } = Astro.props;
 import InputField from "../components/InputField.astro";
+const { formId, formName, fields, genderLabel, style } = Astro.props;
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    console.log({ data });
+    // Do something with the data
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
+}
 ---
 
-<form class="form" id={formId} name={formName} style={style}>
+---
+
+<form class="form" id={formId} name={formName} style={style} method="post">
   <div class="container__form">
-    {fields.map((field) => <InputField field={field} />)}
+    {fields.map((field: any) => <InputField field={field} />)}
     {genderLabel && <Gender />}
   </div>
 </form>
