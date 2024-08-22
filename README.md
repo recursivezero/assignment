@@ -15,10 +15,8 @@
 ## Installation
 
 To set up the project, clone the repository
-```bash
-git clone "https://github.com/ghanishth-rajput/Astro.git"
-cd "ASTRO"
 
+```bash
 npm install
 npm run dev
 ```
@@ -73,10 +71,6 @@ ASTRO
 │       └── Action.js
 |       └── app.js
 |       
-│   
-|
-│  
-│       
 ├── package.json
 ├── tsconfig.json
           
@@ -88,10 +82,9 @@ Here are some screenshots of the application:
 
 ### Document Entry Page
 
-![HomePage](<public/assets/images/HomePage.png>)
+![HomePage](public/assets/images/HomePage.png)
  Entry Page consist of front ui of the application with the options of forms selection in form of Nav links 
 
- 
 
 ### Forms Section
 
