@@ -1,12 +1,21 @@
-export function generateEntryHTML(entryCount, documentNumber, holdingPersonName, DOB, gender, type, additionalFields = {}) {
+export function generateEntryHTML({
+  entryCount, 
+  documentNumber, 
+  holdingPersonName, 
+  DOB, 
+  gender, 
+  type, 
+  additionalFields = {}
+}) {
   const displayFields = ["entryCount", "documentNumber", "holdingPersonName", "DOB", "genderSymbol", `${type}Type`];
+  
   const maleSymbol = String.fromCharCode(0x2642);
   const femaleSymbol = String.fromCharCode(0x2640);
   const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
 
   const fieldValues = {
     entryCount,
-     [`${type}Type`]: type,
+    [`${type}Type`]: type,
     documentNumber,
     holdingPersonName,
     genderSymbol,
@@ -31,5 +40,6 @@ export function generateEntryHTML(entryCount, documentNumber, holdingPersonName,
     </div>
   `;
 }
+
 
 

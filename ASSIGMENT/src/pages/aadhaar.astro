@@ -72,7 +72,6 @@ const inlineStyle = `
     >
   </div>
 </MainLayout>
-
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import { generateEntryHTML } from "/scripts/entryHelpers.js";
@@ -101,22 +100,22 @@ const inlineStyle = `
 
       if (documentNumber && holdingPersonName && DOB && aadhaaraddress) {
         if (currentEditItem) {
-          updateEntry(
-            currentEditItem,
+          updateEntry({
+            item: currentEditItem,
             documentNumber,
             holdingPersonName,
             DOB,
             gender,
-            aadhaaraddress
-          );
+            aadhaaraddress,
+          });
         } else {
-          createNewEntry(
+          createNewEntry({
             documentNumber,
             holdingPersonName,
             DOB,
             gender,
-            aadhaaraddress
-          );
+            aadhaaraddress,
+          });
         }
         resetForm();
       } else {
@@ -124,36 +123,35 @@ const inlineStyle = `
       }
     };
 
-    
-    const createNewEntry = (
+    const createNewEntry = ({
       documentNumber,
       holdingPersonName,
       DOB,
       gender,
-      aadhaaraddress
-    ) => {
+      aadhaaraddress,
+    }) => {
       entryCount++;
-      const newEntryHTML = generateEntryHTML(
+      const newEntryHTML = generateEntryHTML({
         entryCount,
         documentNumber,
         holdingPersonName,
-        formatDate(DOB),
+        DOB: formatDate(DOB),
         gender,
-        "Aadhaar",
-        { aadhaaraddress }
-      );
+        type: "Aadhaar",
+        additionalFields: { aadhaaraddress },
+      });
       container.insertAdjacentHTML("beforeend", newEntryHTML);
       console.log({ aadhaaraddress });
     };
 
-    const updateEntry = (
+    const updateEntry = ({
       item,
       documentNumber,
       holdingPersonName,
       DOB,
       gender,
-      aadhaaraddress
-    ) => {
+      aadhaaraddress,
+    }) => {
       const maleSymbol = String.fromCharCode(0x2642);
       const femaleSymbol = String.fromCharCode(0x2640);
       const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
@@ -194,7 +192,7 @@ const inlineStyle = `
       const gender = item.dataset.gender;
       const DOB = item.dataset.dob;
       const aadhaaraddress = item.dataset.aadhaaraddress;
-      console.log(aadhaaraddress);
+
       aadhaarForm.querySelector("#doc-number").value = documentNumber;
       aadhaarForm.querySelector("#doc-name").value = holdingPersonName;
       aadhaarForm.querySelector("#doc-dob").value =
