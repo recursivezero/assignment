@@ -39,7 +39,11 @@
     "fathername",
     "hearder",
     "Navs",
+    "stylesheet",
     "Tabel"
   ],
-  "editor.formatOnSaveMode": "modificationsIfAvailable"
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

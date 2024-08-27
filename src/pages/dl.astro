@@ -71,9 +71,16 @@ const inlineStyle = `
     </div>
   </div>
 </MainLayout>
+
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import { generateEntryHTML } from "/scripts/entryHelpers.js";
+  import {
+    formatDate,
+    convertToDateInputFormat,
+    navLinks,
+    deleteItem
+  } from "/scripts/formHandlers.js";
 
   const dlForm = document.getElementById("license");
   const saveButton = document.querySelector(".save__button");
@@ -176,11 +183,6 @@ const inlineStyle = `
       currentEditItem = null;
     };
 
-    const deleteItem = (event) => {
-      const item = event.target.closest(".item");
-      item.remove();
-    };
-
     const editItem = (event) => {
       const item = event.target.closest(".item");
 
@@ -241,18 +243,6 @@ const inlineStyle = `
       });
     };
 
-    const formatDate = (date) => {
-      if (!date) return "";
-      const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
-    };
-
-    const convertToDateInputFormat = (date) => {
-      if (!date) return "";
-      const [day, month, year] = date.split("/");
-      return `${year}-${month}-${day}`;
-    };
-
     if (resetButton) {
       resetButton.addEventListener("click", resetForm);
     } else {
@@ -272,14 +262,6 @@ const inlineStyle = `
         editItem(event);
       } else if (event.target.classList.contains("view__btn")) {
         viewItem(event);
-      }
-    });
-
-    const navLinks = document.querySelectorAll(".nav-item");
-    const currentPath = window.location.pathname;
-    navLinks.forEach((link) => {
-      if (link.getAttribute("href") === currentPath) {
-        link.classList.add("active");
       }
     });
   }
