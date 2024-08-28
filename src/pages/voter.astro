@@ -1,7 +1,7 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
-import Button from "../components/Button.astro";
+import ButtonGroup from "../components/ButtonGroup.astro";
 import Tabel from "../components/Tabel.astro";
 import FormLayout from "../layouts/FormLayout.astro";
 
@@ -41,6 +41,10 @@ const fields = [
 const inlineStyle = `
    background-color: rgb(219, 220, 249);
 `;
+const buttonList = [
+  { name: "reset", class: "reset__button", type: "button" },
+  { name: "save", class: "save__button", type: "submit" },
+];
 ---
 
 <MainLayout>
@@ -48,9 +52,9 @@ const inlineStyle = `
     <Nav />
   </nav>
   <div class="heading">
-    <p>
+   <p>
       Please enter the details in the below form
-      <p class="subheading">all feilds are required</p>
+      <span class="subheading">all fields are required</span>
     </p>
     <section>
       <FormLayout
@@ -61,7 +65,7 @@ const inlineStyle = `
         style={inlineStyle}
       />
 
-      <Button />
+      <ButtonGroup group={buttonList} />
     </section>
 
     <Tabel />
@@ -75,6 +79,16 @@ const inlineStyle = `
 </MainLayout>
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
+  import {
+    formatDate,
+    convertToDateInputFormat,
+    deleteItem,
+    navLinks,
+    handleSubmit as formHandleSubmit,
+    createNewEntry as formCreateNewEntry,
+    updateEntry as formUpdateEntry,
+    resetForm as formResetForm,
+  } from "/scripts/formHandlers.js";
 
   const voterForm = document.querySelector(".form");
   const saveButton = document.querySelector(".save__button");
@@ -83,119 +97,23 @@ const inlineStyle = `
   const canvas = document.getElementById("voterCanvas");
   const context = canvas.getContext("2d");
 
-  let entryCount = 0;
   let currentEditItem = null;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const formData = new FormData(voterForm);
-    const documentNumber = formData.get("documentNumber")?.trim();
-    const holdingPersonName = formData.get("holdingPersonName")?.trim();
-    const DOB = formData.get("DOB")?.trim();
-    const gender = formData.get("gender");
-    const fathername = formData.get("fathername")?.trim();
+  if (!context) {
+    console.error("Canvas context could not be obtained.");
+  } else {
+    const handleSubmit = (event) => {
+      formHandleSubmit(event, voterForm, currentEditItem, container, {
+        type: "VoterID",
+        additionalFields: ["fathername"],
+      });
+      currentEditItem = null;
+    };
 
-    if (documentNumber && holdingPersonName && DOB && fathername) {
-      if (currentEditItem) {
-        updateEntry(
-          currentEditItem,
-          documentNumber,
-          holdingPersonName,
-          DOB,
-          gender,
-          fathername
-        );
-      } else {
-        createNewEntry(
-          documentNumber,
-          holdingPersonName,
-          DOB,
-          gender,
-          fathername
-        );
-      }
-      resetForm();
-    } else {
-      console.log("Please fill in all required fields.");
-    }
-  };
-
-  const createNewEntry = (
-    documentNumber,
-    holdingPersonName,
-    DOB,
-    gender,
-    fathername
-  ) => {
-    entryCount++;
-    const maleSymbol = String.fromCharCode(0x2642);
-    const femaleSymbol = String.fromCharCode(0x2640);
-    const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-
-    container.insertAdjacentHTML(
-      "beforeend",
-      `
-           <div class="item" data-entry-id="${entryCount}" 
-                      data-document-number="${documentNumber}" 
-                      data-holding-person-name="${holdingPersonName}" 
-                      data-dob="${formatDate(DOB)}" 
-                      data-gender="${gender}" 
-                      data-fathername="${fathername}">
-                      <div data-label="entryCount">${entryCount}</div>
-                      <div data-label="voterType">Voter ID</div>
-                      <div data-label="documentNumber">${documentNumber}</div>
-                      <div data-label="holdingPersonName">${holdingPersonName}</div>
-                      <div data-label="genderSymbol">${genderSymbol}</div>
-                      <div data-label="DOB">${formatDate(DOB)}</div>
-          <div>
-            <button class="view__btn" type="button">View</button>
-            <button class="edit__btn" type="button">Edit</button>
-            <button class="delete__btn" type="button">Delete</button>
-        </div>
-    </div>
-    `
-    );
-  };
-
-  const updateEntry = (
-    item,
-    documentNumber,
-    holdingPersonName,
-    DOB,
-    gender,
-    fathername
-  ) => {
-    const maleSymbol = String.fromCharCode(0x2642);
-    const femaleSymbol = String.fromCharCode(0x2640);
-    const genderSymbol = gender === "male" ? maleSymbol : femaleSymbol;
-
-    item.dataset.documentNumber = documentNumber;
-    item.dataset.holdingPersonName = holdingPersonName;
-    item.dataset.dob = formatDate(DOB);
-    item.dataset.gender = gender;
-    item.dataset.fathername = fathername;
-
-    item.querySelector('[data-label="documentNumber"]').textContent =
-      documentNumber;
-    item.querySelector('[data-label="holdingPersonName"]').textContent =
-      holdingPersonName;
-    item.querySelector('[data-label="genderSymbol"]').textContent =
-      genderSymbol;
-    item.querySelector('[data-label="DOB"]').textContent = formatDate(DOB);
-
-    currentEditItem = null;
-  };
-
-  const resetForm = () => {
-    voterForm.reset();
-    currentEditItem = null;
-  };
-
-  const deleteItem = (event) => {
-    const item = event.target.closest(".item");
-    item.remove();
-  };
-
+    const resetForm = () => {
+      formResetForm(aadhaarForm);
+      currentEditItem = null;
+    };
   const editItem = (event) => {
     const item = event.target.closest(".item");
 
@@ -285,5 +203,6 @@ const inlineStyle = `
     if (link.getAttribute("href") === currentPath) {
       link.classList.add("active");
     }
-  });
+    });
+  }
 </script>

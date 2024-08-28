@@ -2,7 +2,7 @@
 import MainLayout from "../layouts/MainLayout.astro";
 import Nav from "../components/Nav.astro";
 import Tabel from "../components/Tabel.astro";
-import Button from "../components/Button.astro";
+import ButtonGroup from "../components/ButtonGroup.astro";
 import FormLayout from "../layouts/FormLayout.astro";
 
 const fields = [
@@ -42,6 +42,10 @@ const fields = [
 const inlineStyle = `
   background-color: antiquewhite;
 `;
+const buttonList = [
+  { name: "reset", class: "reset__button", type: "button" },
+  { name: "save", class: "save__button", type: "submit" },
+];
 ---
 
 <MainLayout>
@@ -62,7 +66,7 @@ const inlineStyle = `
       genderLabel="Gender"
       style={inlineStyle}
     />
-    <Button />
+    <ButtonGroup group={buttonList} />
   </section>
   <Tabel />
   <div id="canvasContainer" class="canvas" style="display: none;">
@@ -102,12 +106,12 @@ const inlineStyle = `
         type: "Aadhaar",
         additionalFields: ["aadhaaraddress"],
       });
-      currentEditItem = null; 
+      currentEditItem = null;
     };
 
     const resetForm = () => {
       formResetForm(aadhaarForm);
-      currentEditItem = null; 
+      currentEditItem = null;
     };
 
     const editItem = (event) => {
@@ -125,7 +129,7 @@ const inlineStyle = `
       aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
       aadhaarForm.querySelector("#doc-address").value = aadhaaraddress;
 
-      currentEditItem = item; 
+      currentEditItem = item;
     };
 
     const viewItem = (event) => {

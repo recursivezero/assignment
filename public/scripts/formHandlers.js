@@ -1,4 +1,5 @@
 import { generateEntryHTML } from "/scripts/entryHelpers.js";
+
 export const formatDate = (date) => {
   if (!date) return "";
   const [year, month, day] = date.split("-");

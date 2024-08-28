@@ -1,0 +1,13 @@
+---
+const { group } = Astro.props;
+---
+
+<div class="buttoncontainer">
+  {
+    group.map((item) => (
+      <button type={item.type} class={item.class}>
+        {item.name}
+      </button>
+    ))
+  }
+</div>
