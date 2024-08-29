@@ -1,15 +1,11 @@
-export const generateEntryHTML = (...fields) => {
-  const [
-    {
-      documentNumber,
-      holdingPersonName,
-      DOB,
-      gender,
-      type,
-      additionalFields = {},
-    },
-  ] = fields;
-
+export const generateEntryHTML = ({
+  documentNumber,
+  holdingPersonName,
+  DOB,
+  gender,
+  type,
+  ...restFields
+}) => {
   const displayFields = [
     "documentNumber",
     "holdingPersonName",
@@ -28,8 +24,12 @@ export const generateEntryHTML = (...fields) => {
     holdingPersonName,
     genderSymbol,
     DOB,
-    ...additionalFields,
+    ...restFields,
   };
+
+  const visibleFields = Object.entries(fieldValues).filter(([key]) =>
+    displayFields.includes(key)
+  );
 
   return `
     <div class="item" 
@@ -37,16 +37,12 @@ export const generateEntryHTML = (...fields) => {
          data-holding-person-name="${holdingPersonName}" 
          data-dob="${DOB}" 
          data-gender="${gender}" 
-         ${Object.entries(additionalFields)
+         ${Object.entries(restFields)
            .map(([key, value]) => `data-${key.toLowerCase()}="${value}"`)
            .join(" ")}>
         <div class="row">
-            ${Object.entries(fieldValues)
-              .map(([key, value]) =>
-                displayFields.includes(key)
-                  ? `<div data-label="${key}">${value}</div>`
-                  : `<div style="display:none;" data-label="${key}">${value}</div>`
-              )
+            ${visibleFields
+              .map(([key, value]) => `<div data-label="${key}">${value}</div>`)
               .join("")}
             <div class="action__group">
                <button class="view__btn" type="button">View</button>
