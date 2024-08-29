@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Nav from "../components/Nav.astro";
+import Heading from "../components/Heading.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import Tabel from "../components/Tabel.astro";
 import FormLayout from "../layouts/FormLayout.astro";
@@ -19,7 +19,7 @@ const fields = [
     label: "Name on Id",
     type: "text",
     name: "holdingPersonName",
-    placeholder: "ZEN RAYN",
+    placeholder: "RAM",
     required: true,
   },
   {
@@ -27,7 +27,7 @@ const fields = [
     label: "Father Name",
     type: "text",
     name: "fathername",
-    placeholder: "ZEN RAY",
+    placeholder: "RAM",
     required: true,
   },
   {
@@ -48,46 +48,36 @@ const buttonList = [
 ---
 
 <MainLayout>
-  <nav slot="nav">
-    <Nav />
-  </nav>
-  <div class="heading">
-   <p>
-      Please enter the details in the below form
-      <span class="subheading">all fields are required</span>
-    </p>
-    <section>
-      <FormLayout
-        formId="voter"
-        formName="voter"
-        fields={fields}
-        genderLabel="Gender"
-        style={inlineStyle}
-      />
+  <Heading headingText="Please enter the details in the below form" subheadingText="all fields are required" />
+  <section>
+    <FormLayout
+      formId="voter"
+      formName="voter"
+      fields={fields}
+      genderLabel="Gender"
+      style={inlineStyle}
+    />
 
-      <ButtonGroup group={buttonList} />
-    </section>
+    <ButtonGroup group={buttonList} />
+  </section>
 
-    <Tabel />
-    <div id="canvasContainer" class="canvas" style="display: none;">
-      <canvas id="voterCanvas"></canvas>
-      <button id="downloadButton" class="download" style="display: none;"
-        >Download Image</button
-      >
-    </div>
+  <Tabel />
+  <div id="canvasContainer" class="canvas" style="display: none;">
+    <canvas id="voterCanvas"></canvas>
+    <button id="downloadButton" class="download" style="display: none;"
+      >Download Image</button
+    >
   </div>
 </MainLayout>
+
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import {
     formatDate,
     convertToDateInputFormat,
     deleteItem,
-    navLinks,
     handleSubmit as formHandleSubmit,
-    createNewEntry as formCreateNewEntry,
-    updateEntry as formUpdateEntry,
-    resetForm as formResetForm,
+    resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
   const voterForm = document.querySelector(".form");
@@ -96,7 +86,6 @@ const buttonList = [
   const container = document.querySelector(".container");
   const canvas = document.getElementById("voterCanvas");
   const context = canvas.getContext("2d");
-
   let currentEditItem = null;
 
   if (!context) {
@@ -111,98 +100,78 @@ const buttonList = [
     };
 
     const resetForm = () => {
-      formResetForm(aadhaarForm);
+      resetform(voterForm);
       currentEditItem = null;
     };
-  const editItem = (event) => {
-    const item = event.target.closest(".item");
+    const editItem = (event) => {
+      const item = event.target.closest(".item");
 
-    const documentNumber = item.dataset.documentNumber;
-    const holdingPersonName = item.dataset.holdingPersonName;
-    const gender = item.dataset.gender;
-    const DOB = item.dataset.dob;
-    const fathername = item.dataset.fathername;
+      const documentNumber = item.dataset.documentNumber;
+      const holdingPersonName = item.dataset.holdingPersonName;
+      const gender = item.dataset.gender;
+      const DOB = item.dataset.dob;
+      const fathername = item.dataset.fathername;
 
-    voterForm.querySelector("#doc-number").value = documentNumber;
-    voterForm.querySelector("#doc-name").value = holdingPersonName;
-    voterForm.querySelector("#doc-dob").value = convertToDateInputFormat(DOB);
-    voterForm.querySelector(`#gender_${gender}`).checked = true;
-    voterForm.querySelector("#doc-fathername").value = fathername;
+      voterForm.querySelector("#doc-number").value = documentNumber;
+      voterForm.querySelector("#doc-name").value = holdingPersonName;
+      voterForm.querySelector("#doc-dob").value = convertToDateInputFormat(DOB);
+      voterForm.querySelector(`#gender_${gender}`).checked = true;
+      voterForm.querySelector("#doc-fathername").value = fathername;
 
-    currentEditItem = item;
-  };
-
-  const viewItem = (event) => {
-    const item = event.target.closest(".item");
-
-    const voter_detail = {
-      number: item.dataset.documentNumber,
-      name: item.dataset.holdingPersonName,
-      gender: item.dataset.gender === "male" ? "♂" : "♀",
-      dob: item.dataset.dob,
-      fathername: item.dataset.fathername,
+      currentEditItem = item;
     };
 
-    generateVoterImage(voter_detail);
-  };
+    const viewItem = (event) => {
+      const item = event.target.closest(".item");
 
-  const buildDetail = ({ type, detail }) => {
-    const details = [
-      { label: "Voter ID:", value: detail.number },
-      { label: "Name:", value: detail.name },
-      {
-        label: "Gender:",
-        value: detail.gender === "♂" ? "Male" : "Female",
-      },
-      { label: "Date of Birth:", value: detail.dob },
-      { label: "Father's Name:", value: detail.fathername },
-    ];
-    return { [type]: details };
-  };
+      const voter_detail = {
+        number: item.dataset.documentNumber,
+        name: item.dataset.holdingPersonName,
+        gender: item.dataset.gender === "male" ? "♂" : "♀",
+        dob: item.dataset.dob,
+        fathername: item.dataset.fathername,
+      };
 
-  const generateVoterImage = (voter_detail) => {
-    const data = buildDetail({ type: "voter", detail: voter_detail });
+      generateVoterImage(voter_detail);
+    };
 
-    generateImage({
-      title: "--Voter Card--",
-      data,
-      canvas: document.getElementById("voterCanvas"),
-      canvasContainer: document.getElementById("canvasContainer"),
-      downloadButton: document.getElementById("downloadButton"),
-      backgroundColor: "#fff",
-    });
-  };
+    const buildDetail = ({ type, detail }) => {
+      const details = [
+        { label: "Voter ID:", value: detail.number },
+        { label: "Name:", value: detail.name },
+        {
+          label: "Gender:",
+          value: detail.gender === "♂" ? "Male" : "Female",
+        },
+        { label: "Date of Birth:", value: detail.dob },
+        { label: "Father's Name:", value: detail.fathername },
+      ];
+      return { [type]: details };
+    };
 
-  const formatDate = (date) => {
-    if (!date) return "";
-    const [year, month, day] = date.split("-");
-    return `${day}/${month}/${year}`;
-  };
+    const generateVoterImage = (voter_detail) => {
+      const data = buildDetail({ type: "voter", detail: voter_detail });
 
-  const convertToDateInputFormat = (date) => {
-    if (!date) return "";
-    const [day, month, year] = date.split("/");
-    return `${year}-${month}-${day}`;
-  };
+      generateImage({
+        title: "--Voter Card--",
+        data,
+        canvas: document.getElementById("voterCanvas"),
+        canvasContainer: document.getElementById("canvasContainer"),
+        downloadButton: document.getElementById("downloadButton"),
+        backgroundColor: "#fff",
+      });
+    };
 
-  resetButton.addEventListener("click", resetForm);
-  saveButton.addEventListener("click", handleSubmit);
-  container.addEventListener("click", (event) => {
-    if (event.target.classList.contains("delete__btn")) {
-      deleteItem(event);
-    } else if (event.target.classList.contains("edit__btn")) {
-      editItem(event);
-    } else if (event.target.classList.contains("view__btn")) {
-      viewItem(event);
-    }
-  });
-
-  const navLinks = document.querySelectorAll(".nav-item");
-  const currentPath = window.location.pathname;
-  navLinks.forEach((link) => {
-    if (link.getAttribute("href") === currentPath) {
-      link.classList.add("active");
-    }
+    resetButton.addEventListener("click", resetForm);
+    saveButton.addEventListener("click", handleSubmit);
+    container.addEventListener("click", (event) => {
+      if (event.target.classList.contains("delete__btn")) {
+        deleteItem(event);
+      } else if (event.target.classList.contains("edit__btn")) {
+        editItem(event);
+      } else if (event.target.classList.contains("view__btn")) {
+        viewItem(event);
+      }
     });
   }
 </script>

@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Nav from "../components/Nav.astro";
+import Heading from "../components/Heading.astro";
 import Tabel from "../components/Tabel.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import FormLayout from "../layouts/FormLayout.astro";
@@ -42,6 +42,7 @@ const fields = [
 const inlineStyle = `
   background-color: antiquewhite;
 `;
+
 const buttonList = [
   { name: "reset", class: "reset__button", type: "button" },
   { name: "save", class: "save__button", type: "submit" },
@@ -49,15 +50,7 @@ const buttonList = [
 ---
 
 <MainLayout>
-  <nav slot="nav">
-    <Nav />
-  </nav>
-  <div class="heading">
-    <p>
-      Please enter the details in the below form
-      <span class="subheading">all fields are required</span>
-    </p>
-  </div>
+  <Heading headingText="Please enter the details in the below form" subheadingText="all fields are required" />
   <section>
     <FormLayout
       formId="aadhaar"
@@ -76,18 +69,14 @@ const buttonList = [
     >
   </div>
 </MainLayout>
-
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import {
     formatDate,
     convertToDateInputFormat,
     deleteItem,
-    navLinks,
     handleSubmit as formHandleSubmit,
-    createNewEntry as formCreateNewEntry,
-    updateEntry as formUpdateEntry,
-    resetForm as formResetForm,
+    resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
   const aadhaarForm = document.getElementById("aadhaar");
@@ -110,12 +99,13 @@ const buttonList = [
     };
 
     const resetForm = () => {
-      formResetForm(aadhaarForm);
+      resetform(aadhaarForm);
       currentEditItem = null;
     };
 
     const editItem = (event) => {
       const item = event.target.closest(".item");
+
       const documentNumber = item.dataset.documentNumber;
       const holdingPersonName = item.dataset.holdingPersonName;
       const gender = item.dataset.gender;
@@ -140,65 +130,37 @@ const buttonList = [
         name: item.dataset.holdingPersonName,
         gender: item.dataset.gender === "male" ? "♂" : "♀",
         dob: item.dataset.dob,
-        address: item.dataset.aadhaaraddress,
+        doe: item.dataset.doe,
       };
-
-      generateDocumentImage({
-        title: "--Aadhaar Card--",
-        data: buildDetail({ type: "aadhaar", detail: aadhaar_detail }),
-        canvas,
-        canvasContainer: document.getElementById("canvasContainer"),
-        downloadButton: document.getElementById("downloadButton"),
-        styles: {
-          backgroundColor: "#D8BFD8",
-        },
-      });
+      generateAadhaarImage(aadhaar_detail);
     };
 
     const buildDetail = ({ type, detail }) => {
       const details = [
         { label: "Number:", value: detail.number },
         { label: "Name:", value: detail.name },
-        {
-          label: "Gender:",
-          value: detail.gender === "♂" ? "Male" : "Female",
-        },
+        { label: "Gender:", value: detail.gender === "♂" ? "Male" : "Female" },
         { label: "Date of birth:", value: detail.dob },
         { label: "Address:", value: detail.address },
       ];
       return { [type]: details };
     };
 
-    const generateDocumentImage = ({
-      title,
-      data,
-      canvas,
-      canvasContainer,
-      downloadButton,
-      styles,
-    }) => {
+    const generateAadhaarImage = (dl_detail) => {
+      const data = buildDetail({ type: "dl", detail: dl_detail });
+      console.log({ data });
       generateImage({
-        title,
+        title: "--Aadhaar--",
         data,
-        canvas,
-        canvasContainer,
-        downloadButton,
-        ...styles,
+        canvas: document.getElementById("aadhaarCanvas"),
+        canvasContainer: document.getElementById("canvasContainer"),
+        downloadButton: document.getElementById("downloadButton"),
+        backgroundColor: "#D8BFD8",
+        borderColor: "#FFC0CB",
       });
     };
-
-    if (resetButton) {
-      resetButton.addEventListener("click", resetForm);
-    } else {
-      console.error("Reset button not found");
-    }
-
-    if (saveButton) {
-      saveButton.addEventListener("click", handleSubmit);
-    } else {
-      console.error("Save button not found");
-    }
-
+    resetButton.addEventListener("click", resetForm);
+    saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
       if (event.target.classList.contains("delete__btn")) {
         deleteItem(event);

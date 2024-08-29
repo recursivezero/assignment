@@ -1,11 +1,9 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Nav from "../components/Nav.astro";
 import Tabel from "../components/Tabel.astro";
-import Button from "../components/ButtonGroup.astro";
 import FormLayout from "../layouts/FormLayout.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
-
+import Heading from "../components/Heading.astro";
 const fields = [
   {
     id: "doc-number",
@@ -20,7 +18,7 @@ const fields = [
     label: "Name on License",
     type: "text",
     name: "holdingPersonName",
-    placeholder: "ZEN RAYN",
+    placeholder: "RAM",
     required: true,
   },
   {
@@ -38,9 +36,11 @@ const fields = [
     required: true,
   },
 ];
+
 const inlineStyle = `
    background-color: rgb(215, 250, 216);
 `;
+
 const buttonList = [
   { name: "reset", class: "reset__button", type: "button" },
   { name: "save", class: "save__button", type: "submit" },
@@ -48,32 +48,23 @@ const buttonList = [
 ---
 
 <MainLayout>
-  <nav slot="nav">
-    <Nav />
-  </nav>
-  <div class="heading">
-    <p>
-      Please enter the details in the below form
-      <span class="subheading">all fields are required</span>
-    </p>
-
-    <section>
-      <FormLayout
-        formId="license"
-        formName="license"
-        fields={fields}
-        genderLabel="Gender"
-        style={inlineStyle}
-      />
-      <ButtonGroup group={buttonList} />
-    </section>
-    <Tabel />
-    <div id="canvasContainer" class="canvas" style="display: none;">
-      <canvas id="dlCanvas"></canvas>
-      <button id="downloadButton" class="download" style="display: none;"
-        >Download Image</button
-      >
-    </div>
+  <Heading headingText="Please enter the details in the below form" subheadingText="all fields are required" />
+  <section>
+    <FormLayout
+      formId="license"
+      formName="license"
+      fields={fields}
+      genderLabel="Gender"
+      style={inlineStyle}
+    />
+    <ButtonGroup group={buttonList} />
+  </section>
+  <Tabel />
+  <div id="canvasContainer" class="canvas" style="display: none;">
+    <canvas id="dlCanvas"></canvas>
+    <button id="downloadButton" class="download" style="display: none;"
+      >Download Image</button
+    >
   </div>
 </MainLayout>
 
@@ -82,12 +73,8 @@ const buttonList = [
   import {
     formatDate,
     convertToDateInputFormat,
-    deleteItem,
-    navLinks,
     handleSubmit as formHandleSubmit,
-    createNewEntry as formCreateNewEntry,
-    updateEntry as formUpdateEntry,
-    resetForm as formResetForm,
+    resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
   const dlForm = document.getElementById("license");
@@ -109,7 +96,7 @@ const buttonList = [
       currentEditItem = null;
     };
     const resetForm = () => {
-      formResetForm(dlForm);
+      resetform(dlForm);
       currentEditItem = null;
     };
     const editItem = (event) => {
@@ -171,19 +158,8 @@ const buttonList = [
         borderColor: "#808000",
       });
     };
-
-    if (resetButton) {
-      resetButton.addEventListener("click", resetForm);
-    } else {
-      console.error("Reset button not found");
-    }
-
-    if (saveButton) {
-      saveButton.addEventListener("click", handleSubmit);
-    } else {
-      console.error("Save button not found");
-    }
-
+    resetButton.addEventListener("click", resetForm);
+    saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
       if (event.target.classList.contains("delete__btn")) {
         deleteItem(event);

@@ -1,6 +1,6 @@
 ---
 import MainLayout from "../layouts/MainLayout.astro";
-import Nav from "../components/Nav.astro";
+import Heading from "../components/Heading.astro";
 import Tabel from "../components/Tabel.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import FormLayout from "../layouts/FormLayout.astro";
@@ -48,44 +48,34 @@ const buttonList = [
 ---
 
 <MainLayout>
-  <nav slot="nav">
-    <Nav />
-  </nav>
-  <div class="heading">
-    <p>
-      Please enter the details in the below form
-      <span class="subheading">all fields are required</span>
-    </p>
-    <section>
-      <FormLayout
-        formId="pan"
-        formName="pan"
-        fields={fields}
-        genderLabel="Gender"
-        style={inlineStyle}
-      />
-      <ButtonGroup group={buttonList} />
-    </section>
-    <Tabel />
-  </div>
-  <div id="canvasContainer" class="canvas" style="display: none;">
-    <canvas id="panCanvas"></canvas>
-    <button id="downloadButton" class="download" style="display: none;"
-      >Download Image</button
-    >
-  </div>
+  <Heading headingText="Please enter the details in the below form" subheadingText="all fields are required" />
+  <section>
+    <FormLayout
+      formId="pan"
+      formName="pan"
+      fields={fields}
+      genderLabel="Gender"
+      style={inlineStyle}
+    />
+    <ButtonGroup group={buttonList} />
+  </section>
+  <Tabel />
 </MainLayout>
+<div id="canvasContainer" class="canvas" style="display: none;">
+  <canvas id="panCanvas"></canvas>
+  <button id="downloadButton" class="download" style="display: none;"
+    >Download Image</button
+  >
+</div>
+
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import {
     formatDate,
     convertToDateInputFormat,
     deleteItem,
-    navLinks,
     handleSubmit as formHandleSubmit,
-    createNewEntry as formCreateNewEntry,
-    updateEntry as formUpdateEntry,
-    resetForm as formResetForm,
+    resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
   const panForm = document.querySelector(".form");
@@ -108,7 +98,7 @@ const buttonList = [
     };
 
     const resetForm = () => {
-      formResetForm(panForm);
+      resetform(panForm);
       currentEditItem = null;
     };
 
@@ -171,19 +161,6 @@ const buttonList = [
         borderColor: "#7DF9FF",
       });
     };
-
-    const formatDate = (date) => {
-      if (!date) return "";
-      const [year, month, day] = date.split("-");
-      return `${day}/${month}/${year}`;
-    };
-
-    const convertToDateInputFormat = (date) => {
-      if (!date) return "";
-      const [day, month, year] = date.split("/");
-      return `${year}-${month}-${day}`;
-    };
-
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
@@ -193,14 +170,6 @@ const buttonList = [
         editItem(event);
       } else if (event.target.classList.contains("view__btn")) {
         viewItem(event);
-      }
-    });
-
-    const navLinks = document.querySelectorAll(".nav-item");
-    const currentPath = window.location.pathname;
-    navLinks.forEach((link) => {
-      if (link.getAttribute("href") === currentPath) {
-        link.classList.add("active");
       }
     });
   }

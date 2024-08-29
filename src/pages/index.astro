@@ -53,7 +53,7 @@ import Nav from "../components/Nav.astro";
       color: #c01552d6;
     }
   </style>
-  
+
   <div class="background-container">
     <img src="/assets/images/bgimage.jpg" alt="Image" class="image" />
     <div class="text-overlay">
@@ -64,12 +64,6 @@ import Nav from "../components/Nav.astro";
     </div>
   </div>
 </MainLayout>
-<script is:inline>
-  const navLinks = document.querySelectorAll(".nav-item");
-  const currentPath = window.location.pathname;
-  navLinks.forEach((link) => {
-    if (link.getAttribute("href") === currentPath) {
-      link.classList.add("active");
-    }
-  });
+<script is:inline type="module">
+  import { navLinks } from "/scripts/formHandlers.js";
 </script>
