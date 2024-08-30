@@ -1,10 +1,10 @@
 ---
-const { headers = ["Document", "Info", "Name", "Gender", "DOB", "Actions"] } =
-  Astro.props;
+const { list } = Astro.props;
+Astro.props;
 ---
 
 <div class="container">
   <div class="item header">
-    {headers.map((header) => <div>{header}</div>)}
+    {list.map((item) => <div>{item}</div>)}
   </div>
 </div>

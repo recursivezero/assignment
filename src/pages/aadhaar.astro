@@ -47,10 +47,14 @@ const buttonList = [
   { name: "reset", class: "reset__button", type: "button" },
   { name: "save", class: "save__button", type: "submit" },
 ];
+const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
 ---
 
 <MainLayout>
-  <Heading headingText="Please enter the details in the below form" subheadingText="all fields are required" />
+  <Heading
+    headingText="Please enter the details in the below form"
+    subheadingText="all fields are required"
+  />
   <section>
     <FormLayout
       formId="aadhaar"
@@ -61,7 +65,7 @@ const buttonList = [
     />
     <ButtonGroup group={buttonList} />
   </section>
-  <Tabel />
+  <Tabel list={headerList} />
   <div id="canvasContainer" class="canvas" style="display: none;">
     <canvas id="aadhaarCanvas"></canvas>
     <button id="downloadButton" class="download" style="display: none;"
