@@ -73,6 +73,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     >
   </div>
 </MainLayout>
+
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import {
@@ -81,6 +82,8 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     deleteItem,
     handleSubmit as formHandleSubmit,
     resetForm as resetform,
+    populateForm as populateForm,
+    generateImageData as generateImageData,
   } from "/scripts/formHandlers.js";
 
   const aadhaarForm = document.getElementById("aadhaar");
@@ -110,49 +113,32 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     const editItem = (event) => {
       const item = event.target.closest(".item");
 
-      const documentNumber = item.dataset.documentNumber;
-      const holdingPersonName = item.dataset.holdingPersonName;
-      const gender = item.dataset.gender;
-      const DOB = item.dataset.dob;
-      const aadhaaraddress = item.dataset.aadhaaraddress;
-
-      aadhaarForm.querySelector("#doc-number").value = documentNumber;
-      aadhaarForm.querySelector("#doc-name").value = holdingPersonName;
-      aadhaarForm.querySelector("#doc-dob").value =
-        convertToDateInputFormat(DOB);
-      aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
-      aadhaarForm.querySelector("#doc-address").value = aadhaaraddress;
-
+      const data = {
+        documentNumber: item.dataset.documentNumber,
+        holdingPersonName: item.dataset.holdingPersonName,
+        gender: item.dataset.gender,
+        DOB: item.dataset.dob,
+      };
+      const additionalFields = {
+        "doc-address": item.dataset.aadhaaraddress,
+      };
+      populateForm(aadhaarForm, data, additionalFields);
       currentEditItem = item;
     };
 
     const viewItem = (event) => {
       const item = event.target.closest(".item");
 
-      const aadhaar_detail = {
+      const aadhaarDetail = {
         number: item.dataset.documentNumber,
         name: item.dataset.holdingPersonName,
         gender: item.dataset.gender === "male" ? "♂" : "♀",
         dob: item.dataset.dob,
-        doe: item.dataset.doe,
+        address: item.dataset.aadhaaraddress,
       };
-      generateAadhaarImage(aadhaar_detail);
-    };
 
-    const buildDetail = ({ type, detail }) => {
-      const details = [
-        { label: "Number:", value: detail.number },
-        { label: "Name:", value: detail.name },
-        { label: "Gender:", value: detail.gender === "♂" ? "Male" : "Female" },
-        { label: "Date of birth:", value: detail.dob },
-        { label: "Address:", value: detail.address },
-      ];
-      return { [type]: details };
-    };
+      const data = generateImageData("aadhaar", aadhaarDetail);
 
-    const generateAadhaarImage = (dl_detail) => {
-      const data = buildDetail({ type: "dl", detail: dl_detail });
-      console.log({ data });
       generateImage({
         title: "--Aadhaar--",
         data,

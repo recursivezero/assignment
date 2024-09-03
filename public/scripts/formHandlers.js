@@ -144,4 +144,38 @@ export const resetForm = (form) => {
   form.reset();
 };
 
+export const populateForm = (form, data, additionalFields = {}) => {
+  form.querySelector("#doc-number").value = data.documentNumber;
+  form.querySelector("#doc-name").value = data.holdingPersonName;
+  form.querySelector("#doc-dob").value = convertToDateInputFormat(data.DOB);
+  form.querySelector(`#gender_${data.gender}`).checked = true;
+
+  Object.keys(additionalFields).forEach((fieldId) => {
+    form.querySelector(`#${fieldId}`).value = additionalFields[fieldId];
+  });
+};
+
+export const generateImageData = (type, details) => {
+  const detailMap = {
+    aadhaar: [
+      { label: "Number:", value: details.number },
+      { label: "Name:", value: details.name },
+      { label: "Gender:", value: details.gender === "♂" ? "Male" : "Female" },
+      { label: "Date of Birth:", value: details.dob },
+      { label: "Address:", value: details.address },
+    ],
+    dl: [
+      { label: "Number:", value: details.number },
+      { label: "Name:", value: details.name },
+      { label: "Gender:", value: details.gender === "♂" ? "Male" : "Female" },
+      { label: "Date of Birth:", value: details.dob },
+      { label: "Date of Expiry:", value: details.doe },
+    ],
+  };
+
+  return { [type]: detailMap[type] };
+};
+
+
+
 

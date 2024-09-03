@@ -1,9 +1,6 @@
 ---
 const {
-  genderLabel = "Gender",
   genderClass = "gender",
-  maleLabel = "Male",
-  femaleLabel = "Female",
   containerClass = "container__gender",
   required = true,
 } = Astro.props;
@@ -41,7 +38,7 @@ const {
 </style>
 
 <div class={containerClass}>
-  <label for="gender" class={genderClass}>{genderLabel}</label>
+  <label for="gender" class={genderClass}>Gender</label>
   <div class="g">
     <input
       type="radio"
@@ -51,7 +48,7 @@ const {
       {required}
       checked
     />
-    <label for="gender_male">{maleLabel}</label>
+    <label for="gender_male">Male</label>
     <input
       type="radio"
       id="gender_female"
@@ -59,6 +56,6 @@ const {
       value="female"
       {required}
     />
-    <label for="gender_female">{femaleLabel}</label>
+    <label for="gender_female">female</label>
   </div>
 </div>
