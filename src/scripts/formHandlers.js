@@ -1,5 +1,5 @@
-import { generateEntryHTML } from "/scripts/entryHelpers.js";
-
+import { generateEntryHTML } from "./entryHelpers.js";
+let jsonData = [];
 export const formatDate = (date) => {
   if (!date) return "";
   const [year, month, day] = date.split("-");
@@ -25,7 +25,14 @@ if (navLinks) {
 
 export const deleteItem = (event) => {
   const item = event.target.closest(".item");
+  if (!item) return;
+  const documentNumber = item.dataset.documentNumber;
+  if (!documentNumber) return;
+  jsonData = jsonData.filter(
+    (entry) => entry.documentNumber !== documentNumber
+  );
   item.remove();
+  updateTable(container);
 };
 
 export const handleSubmit = (
@@ -33,6 +40,8 @@ export const handleSubmit = (
   form,
   currentEditItem,
   container,
+  jsonData,
+  updateTable,
   { type = "default", additionalFields = [] }
 ) => {
   event.preventDefault();
@@ -57,12 +66,16 @@ export const handleSubmit = (
     };
 
     if (currentEditItem) {
-      updateEntry({ item: currentEditItem, ...entryData, type });
+      const index = jsonData.findIndex(
+        (item) => item.documentNumber === currentEditItem.dataset.documentNumber
+      );
+      jsonData[index] = entryData;
     } else {
-      createNewEntry(entryData, container, { type, additionalFields });
+      jsonData.push(entryData);
     }
-
+    updateTable(container);
     resetForm(form);
+    currentEditItem = null;
   } else {
     console.log("Please fill in all required fields.");
   }
@@ -144,14 +157,19 @@ export const resetForm = (form) => {
   form.reset();
 };
 
-export const populateForm = (form, data, additionalFields = {}) => {
-  form.querySelector("#doc-number").value = data.documentNumber;
-  form.querySelector("#doc-name").value = data.holdingPersonName;
-  form.querySelector("#doc-dob").value = convertToDateInputFormat(data.DOB);
-  form.querySelector(`#gender_${data.gender}`).checked = true;
-
-  Object.keys(additionalFields).forEach((fieldId) => {
-    form.querySelector(`#${fieldId}`).value = additionalFields[fieldId];
+export const populateForm = (formId, data) => {
+  const form = document.getElementById(formId);
+  data.forEach((item) => {
+    const element = form.querySelector(`#${item.id}`);
+    if (element) {
+      if (item.id.startsWith("gender")) {
+        element.checked = true;
+      } else if (element.type === "date") {
+        element.value = convertToDateInputFormat(item.value);
+      } else {
+        element.value = item.value;
+      }
+    }
   });
 };
 
@@ -175,7 +193,3 @@ export const generateImageData = (type, details) => {
 
   return { [type]: detailMap[type] };
 };
-
-
-
-

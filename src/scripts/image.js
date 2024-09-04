@@ -1,4 +1,4 @@
-export const generateImage=({
+export const generateImage = ({
   title,
   data,
   canvas,
@@ -9,7 +9,7 @@ export const generateImage=({
   backgroundColor = "#90EE90",
   borderColor = "#FF69B4",
   borderThickness = 4,
-}) =>{
+}) => {
   const context = canvas.getContext("2d");
   canvas.width = canvasWidth;
   canvas.height = canvasHeight;
@@ -64,4 +64,4 @@ export const generateImage=({
     canvasContainer.style.display = "none";
     downloadButton.style.display = "none";
   };
-}
+};
