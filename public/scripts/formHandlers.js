@@ -1,5 +1,5 @@
 import { generateEntryHTML } from "./entryHelpers.js";
-let jsonData = [];
+
 export const formatDate = (date) => {
   if (!date) return "";
   const [year, month, day] = date.split("-");
@@ -23,25 +23,11 @@ if (navLinks) {
   });
 }
 
-export const deleteItem = (event) => {
-  const item = event.target.closest(".item");
-  if (!item) return;
-  const documentNumber = item.dataset.documentNumber;
-  if (!documentNumber) return;
-  jsonData = jsonData.filter(
-    (entry) => entry.documentNumber !== documentNumber
-  );
-  item.remove();
-  updateTable(container);
-};
-
 export const handleSubmit = (
   event,
   form,
   currentEditItem,
   container,
-  jsonData,
-  updateTable,
   { type = "default", additionalFields = [] }
 ) => {
   event.preventDefault();
@@ -65,20 +51,36 @@ export const handleSubmit = (
       ...additionalValues,
     };
 
+    let jsonData = JSON.parse(localStorage.getItem("aadhaarData")) || [];
+
     if (currentEditItem) {
       const index = jsonData.findIndex(
-        (item) => item.documentNumber === currentEditItem.dataset.documentNumber
+        (item) => item.documentNumber === documentNumber
       );
-      jsonData[index] = entryData;
+      if (index !== -1) {
+        jsonData[index] = entryData;
+      }
+      updateEntry({ item: currentEditItem, ...entryData, type });
     } else {
       jsonData.push(entryData);
+      createNewEntry(entryData, container, { type, additionalFields });
     }
-    updateTable(container);
+
+    localStorage.setItem("aadhaarData", JSON.stringify(jsonData));
     resetForm(form);
-    currentEditItem = null;
   } else {
     console.log("Please fill in all required fields.");
   }
+};
+export const loadEntriesFromStorage = (container, type, additionalFields) => {
+  const jsonData = JSON.parse(localStorage.getItem("aadhaarData")) || [];
+  jsonData.forEach((entry, index) => {
+    createNewEntry(entry, container, {
+      type,
+      additionalFields,
+      entryCount: index,
+    });
+  });
 };
 
 export const createNewEntry = (
@@ -97,7 +99,6 @@ export const createNewEntry = (
   });
   container.insertAdjacentHTML("beforeend", newEntryHTML);
 };
-
 export const updateEntry = ({
   item,
   documentNumber,
@@ -110,7 +111,6 @@ export const updateEntry = ({
     console.error("Item is null or undefined.");
     return;
   }
-
   const numberElement = item.querySelector('[data-label="documentNumber"]');
   const nameElement = item.querySelector('[data-label="holdingPersonName"]');
   const dobElement = item.querySelector('[data-label="DOB"]');
@@ -118,20 +118,14 @@ export const updateEntry = ({
 
   if (numberElement) {
     numberElement.textContent = documentNumber;
-  } else {
-    console.error("Element with data-label 'documentNumber' not found.");
   }
 
   if (nameElement) {
     nameElement.textContent = holdingPersonName;
-  } else {
-    console.error("Element with data-label 'holdingPersonName' not found.");
   }
 
   if (dobElement) {
     dobElement.textContent = DOB;
-  } else {
-    console.error("Element with data-label 'DOB' not found.");
   }
 
   if (genderElement) {
@@ -139,17 +133,19 @@ export const updateEntry = ({
       gender === "male"
         ? String.fromCharCode(0x2642)
         : String.fromCharCode(0x2640);
-  } else {
-    console.error("Element with data-label 'genderSymbol' not found.");
   }
+
+  item.dataset.documentNumber = documentNumber;
+  item.dataset.holdingPersonName = holdingPersonName;
+  item.dataset.dob = DOB;
+  item.dataset.gender = gender;
 
   additionalFields.forEach((field) => {
     const fieldElement = item.querySelector(`[data-label="${field}"]`);
     if (fieldElement) {
       fieldElement.textContent = additionalFields[field];
-    } else {
-      console.error(`Element with data-label '${field}' not found.`);
     }
+    item.dataset[field] = additionalFields[field];
   });
 };
 

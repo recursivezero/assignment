@@ -49,6 +49,7 @@ const buttonList = [
 ];
 const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
 ---
+
 <MainLayout>
   <Heading
     headingText="Please enter the details in the below form"
@@ -72,10 +73,8 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     >
   </div>
 </MainLayout>
-
 <script is:inline type="module">
-  import { generateEntryHTML } from "../scripts/entryHelpers.js";
-  import { generateImage } from "../scripts/image.js";
+  import { generateImage } from "/scripts/image.js";
   import {
     formatDate,
     convertToDateInputFormat,
@@ -84,7 +83,9 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     resetForm as resetform,
     populateForm as populateForm,
     generateImageData as generateImageData,
-  } from "../scripts/formHandlers.js";
+    loadEntriesFromStorage,
+  } from "/scripts/formHandlers.js";
+
   const aadhaarForm = document.getElementById("aadhaar");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
@@ -92,24 +93,15 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   const canvas = document.getElementById("aadhaarCanvas");
   const context = canvas ? canvas.getContext("2d") : null;
   let currentEditItem = null;
-  let jsonData = [];
 
   if (!context) {
     console.error("Canvas context could not be obtained.");
   } else {
     const handleSubmit = (event) => {
-      formHandleSubmit(
-        event,
-        aadhaarForm,
-        currentEditItem,
-        container,
-        jsonData,
-        updateTable,
-        {
-          type: "Aadhaar",
-          additionalFields: ["aadhaaraddress"],
-        }
-      );
+      formHandleSubmit(event, aadhaarForm, currentEditItem, container, {
+        type: "Aadhaar",
+        additionalFields: ["aadhaaraddress"],
+      });
       currentEditItem = null;
     };
 
@@ -117,36 +109,23 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
       resetform(aadhaarForm);
       currentEditItem = null;
     };
-    const updateTable = (container) => {
-      const header = container.querySelector(".header");
-      const rows = container.querySelectorAll(".item:not(.header)");
-
-      rows.forEach((row) => row.remove());
-
-      jsonData.forEach((entryData) => {
-        const newEntryHTML = generateEntryHTML({
-          ...entryData,
-          type: "Aadhaar",
-        });
-        container.insertAdjacentHTML("beforeend", newEntryHTML);
-      });
-    };
 
     const editItem = (event) => {
       const item = event.target.closest(".item");
 
-      const data = jsonData.find(
-        (entry) => entry.documentNumber === item.dataset.documentNumber
-      );
+      const data = [
+        { id: "doc-number", value: item.dataset.documentNumber },
+        { id: "doc-name", value: item.dataset.holdingPersonName },
+        { id: "gender", value: item.dataset.gender },
+        { id: "doc-dob", value: item.dataset.dob },
+        {
+          id: "doc-address",
+          value: item.dataset.aadhaaraddress,
+          hideInTable: true,
+        },
+      ];
 
-      populateForm("aadhaar", [
-        { id: "doc-number", value: data.documentNumber },
-        { id: "doc-name", value: data.holdingPersonName },
-        { id: "gender", value: data.gender },
-        { id: "doc-dob", value: data.DOB },
-        { id: "doc-address", value: data.aadhaaraddress },
-      ]);
-
+      populateForm("aadhaar", data);
       currentEditItem = item;
     };
 
@@ -174,12 +153,26 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
       });
     };
 
+    const deleteEntry = (event) => {
+      deleteItem(event);
+
+      const item = event.target.closest(".item");
+      let jsonData = JSON.parse(localStorage.getItem("aadhaarData")) || [];
+      jsonData = jsonData.filter(
+        (entry) => entry.documentNumber !== item.dataset.documentNumber
+      );
+      localStorage.setItem("aadhaarData", JSON.stringify(jsonData));
+    };
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadEntriesFromStorage(container, "Aadhaar", ["aadhaaraddress"]);
+    });
+
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
       if (event.target.classList.contains("delete__btn")) {
-        deleteItem(event);
-        updateTable(container);
+        deleteEntry(event);
       } else if (event.target.classList.contains("edit__btn")) {
         editItem(event);
       } else if (event.target.classList.contains("view__btn")) {
