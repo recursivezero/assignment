@@ -74,17 +74,17 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   </div>
 </MainLayout>
 <script is:inline type="module">
-  import { generateImage } from "/scripts/image.js";
+  import { generateImage } from "../scripts/image.js";
   import {
     formatDate,
     convertToDateInputFormat,
     deleteItem,
     handleSubmit as formHandleSubmit,
     resetForm as resetform,
-    populateForm as populateForm,
-    generateImageData as generateImageData,
+    populateForm,
+    generateImageData,
     loadEntriesFromStorage,
-  } from "/scripts/formHandlers.js";
+  } from "../scripts/formHandlers.js";
 
   const aadhaarForm = document.getElementById("aadhaar");
   const saveButton = document.querySelector(".save__button");
@@ -97,13 +97,41 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   if (!context) {
     console.error("Canvas context could not be obtained.");
   } else {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+
+      // Handle form data submission locally
       formHandleSubmit(event, aadhaarForm, currentEditItem, container, {
         type: "Aadhaar",
         additionalFields: ["aadhaaraddress"],
       });
       currentEditItem = null;
+
+      // Prepare form data for server
+      const formData = new FormData(aadhaarForm);
+      const formObject = Object.fromEntries(formData.entries());
+
+      console.log("Form Data to be sent:", formObject); // Add this line
+
+      try {
+        const response = await fetch("/api/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+          console.log("Data saved successfully!");
+        } else {
+          console.error("Failed to save data.");
+        }
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
     };
+
+    // Load entries from server when the page loads
+    loadEntriesFromStorage(container, "Aadhaar", ["aadhaaraddress"]);
 
     const resetForm = () => {
       resetform(aadhaarForm);
@@ -117,7 +145,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
         { id: "doc-number", value: item.dataset.documentNumber },
         { id: "doc-name", value: item.dataset.holdingPersonName },
         { id: "gender", value: item.dataset.gender },
-        { id: "doc-dob", value: item.dataset.dob },
+        { id: "doc-dob", value: formatDate(item.dataset.dob) },
         {
           id: "doc-address",
           value: item.dataset.aadhaaraddress,
@@ -145,7 +173,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
       generateImage({
         title: "--Aadhaar--",
         data,
-        canvas: document.getElementById("aadhaarCanvas"),
+        canvas,
         canvasContainer: document.getElementById("canvasContainer"),
         downloadButton: document.getElementById("downloadButton"),
         backgroundColor: "#D8BFD8",
@@ -153,26 +181,12 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
       });
     };
 
-    const deleteEntry = (event) => {
-      deleteItem(event);
-
-      const item = event.target.closest(".item");
-      let jsonData = JSON.parse(localStorage.getItem("aadhaarData")) || [];
-      jsonData = jsonData.filter(
-        (entry) => entry.documentNumber !== item.dataset.documentNumber
-      );
-      localStorage.setItem("aadhaarData", JSON.stringify(jsonData));
-    };
-
-    window.addEventListener("DOMContentLoaded", () => {
-      loadEntriesFromStorage(container, "Aadhaar", ["aadhaaraddress"]);
-    });
-
+    // Add Event Listeners
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {
       if (event.target.classList.contains("delete__btn")) {
-        deleteEntry(event);
+        deleteItem(event);
       } else if (event.target.classList.contains("edit__btn")) {
         editItem(event);
       } else if (event.target.classList.contains("view__btn")) {

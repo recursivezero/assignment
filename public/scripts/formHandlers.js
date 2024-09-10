@@ -23,6 +23,37 @@ if (navLinks) {
   });
 }
 
+export const deleteItem = (event) => {
+  const item = event.target.closest(".item");
+  item.remove();
+};
+
+// Function to load entries from server
+export function loadEntriesFromStorage(container, type, additionalFields) {
+  fetch("/api/data")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Loaded data:", data);
+
+      // Filter or process the data as needed and then populate the container
+      const filteredData = data.filter((entry) => entry.type === type);
+
+      // Use helper to generate HTML for each entry and append to container
+      filteredData.forEach((entry) => {
+        const entryHtml = generateEntryHtml(entry, additionalFields);
+        container.insertAdjacentHTML("beforeend", entryHtml);
+      });
+    })
+    .catch((error) => {
+      console.error("Error loading data:", error);
+    });
+}
+
 export const handleSubmit = (
   event,
   form,
@@ -36,13 +67,21 @@ export const handleSubmit = (
   const documentNumber = formData.get("documentNumber")?.trim();
   const holdingPersonName = formData.get("holdingPersonName")?.trim();
   const DOB = formData.get("DOB")?.trim();
-  const gender = formData.get("gender");
+  const gender = formData.get("gender")?.trim();
   const additionalValues = additionalFields.reduce((acc, field) => {
     acc[field] = formData.get(field)?.trim();
     return acc;
   }, {});
 
-  if (documentNumber && holdingPersonName && DOB) {
+  console.log("Form Data:", {
+    documentNumber,
+    holdingPersonName,
+    DOB,
+    gender,
+    additionalValues,
+  });
+
+  if (documentNumber && holdingPersonName && DOB && gender) {
     const entryData = {
       documentNumber,
       holdingPersonName,
@@ -51,37 +90,19 @@ export const handleSubmit = (
       ...additionalValues,
     };
 
-    let jsonData = JSON.parse(localStorage.getItem("aadhaarData")) || [];
-
     if (currentEditItem) {
-      const index = jsonData.findIndex(
-        (item) => item.documentNumber === documentNumber
-      );
-      if (index !== -1) {
-        jsonData[index] = entryData;
-      }
       updateEntry({ item: currentEditItem, ...entryData, type });
     } else {
-      jsonData.push(entryData);
       createNewEntry(entryData, container, { type, additionalFields });
     }
 
-    localStorage.setItem("aadhaarData", JSON.stringify(jsonData));
     resetForm(form);
   } else {
     console.log("Please fill in all required fields.");
   }
 };
-export const loadEntriesFromStorage = (container, type, additionalFields) => {
-  const jsonData = JSON.parse(localStorage.getItem("aadhaarData")) || [];
-  jsonData.forEach((entry, index) => {
-    createNewEntry(entry, container, {
-      type,
-      additionalFields,
-      entryCount: index,
-    });
-  });
-};
+
+
 
 export const createNewEntry = (
   entryData,
