@@ -10,6 +10,20 @@ Each entry includes:
 4) Surnames: A list of common surnames associated with the branch.
 
 
+<h2>How to start project</h2>
+
+<strong>Step 1: Clone the repository:</strong>
+`https://github.com/recursivezero/assignment.git`
+<br/>
+<strong>Step 2: Navigate to the project folder:</strong>
+`cd your-repository`
+<br/>
+<strong>Step 3: Open the project in your code editor</strong>
+<br/>
+<strong>Step 4: Open index.html to see the project in action.</strong>
+
+
+
 ![pq1](https://github.com/user-attachments/assets/d6cfc92e-8ca0-473d-a181-7bfd9d6c40f3)
 
 
