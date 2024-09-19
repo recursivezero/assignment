@@ -31,6 +31,7 @@
   --nav__bg--3: #6fabeb;
   --nav__txt--4: #141313;
 }
+
 html {
   box-sizing: content-box;
 }
@@ -43,6 +44,7 @@ body {
   min-height: 100vh;
   font-size: 16px;
 }
+
 header {
   background-color: var(--header__txt);
   color: var(--header__bg--2);
@@ -59,16 +61,13 @@ footer {
   margin-top: auto;
   margin-block-end: -0.3cm;
 }
-.header-image {
-  height: 30px;
-  width: 85p;
-  margin-left: 2cm;
-}
+
 
 nav {
   background-color: #8fb4d361;
   text-align: center;
   box-shadow: #6fabeb;
+
   ul {
     display: flex;
     justify-content: center;
@@ -79,11 +78,13 @@ nav {
 
     li {
       margin: 0 1rem;
+
       a {
         color: black;
         text-decoration: none;
         font-family: initial;
         font-weight: 600;
+
         &:hover {
           text-decoration: underline;
         }
@@ -98,6 +99,15 @@ main {
   text-align: center;
 }
 
+.hide {
+  display: none;
+}
+
+.header-image {
+  height: 30px;
+  width: 85p;
+  margin-left: 2cm;
+}
 .canvas {
   display: flex;
   flex-direction: column;
@@ -117,6 +127,7 @@ main {
   cursor: pointer;
   position: relative;
   width: 10%;
+
   &:hover {
     background-color: var(--downloadButton__bg--13);
   }
@@ -126,6 +137,7 @@ main {
   #aadhaarCanvas {
     width: 90%;
   }
+
   .download {
     text-align: center;
   }
@@ -134,6 +146,7 @@ main {
 .delete__btn {
   color: var(--delete__txt--14);
   margin-top: 2px;
+
   &:hover {
     background-color: var(--bg__red__bg--5);
     color: var(--delete__txt--15);
@@ -142,6 +155,7 @@ main {
 
 .view__btn {
   color: var(--view__txt--16);
+
   &:hover {
     background-color: var(--view__txt--16);
     color: var(--header__bg--2);
@@ -150,6 +164,7 @@ main {
 
 .edit__btn {
   color: var(--edit__txt--17);
+
   &:hover {
     color: var(--edit__txt--18);
     background-color: var(--edit__txt--17);
@@ -161,12 +176,13 @@ main {
   margin-block-start: -0.8cm;
   text-size-adjust: 600px;
 }
+
 .subheading {
   color: var(--subheading__txt--2);
   margin-block-start: -0.3cm;
 }
 
-.buttoncontainer {
+.button__container {
   display: flex;
   justify-content: space-between;
   margin-top: 1rem;
@@ -182,6 +198,7 @@ button {
   text-transform: uppercase;
   transition: background-color 0.3s ease;
   width: 48%;
+
   &:hover {
     background-color: var(--button__bg--23);
   }
@@ -191,6 +208,7 @@ button {
   background-color: var(--saveButton__bg--24);
   color: var(--header__bg--2);
   font-weight: 700;
+
   &:hover {
     color: var(--saveButton__txt--25);
   }
@@ -200,6 +218,7 @@ button {
   background-color: var(--resetButton__bg--26);
   color: var(--header__bg--2);
   font-weight: 700;
+
   &:hover {
     color: var(--saveButton__txt--25);
   }
@@ -227,10 +246,11 @@ button {
     margin: 1.5rem auto;
     padding: 1.5rem;
   }
-  .buttoncontainer {
+.button__container {
     flex-direction: column;
     gap: 1rem;
   }
+
   .item,
   .item.header {
     grid-template-columns: repeat(5, 1fr);
@@ -242,10 +262,11 @@ button {
     margin: 1rem auto;
     padding: 1rem;
   }
-  .buttoncontainer {
+.button__container {
     flex-direction: column;
     gap: 0.5rem;
   }
+
   .item,
   .item.header {
     grid-template-columns: repeat(4, 1fr);
@@ -257,10 +278,11 @@ button {
     margin: 1rem auto;
     padding: 1rem;
   }
-  .buttoncontainer {
+.button__container {
     flex-direction: column;
     gap: 1rem;
   }
+
   .item,
   .item.header {
     grid-template-columns: repeat(3, 1fr);
@@ -272,7 +294,7 @@ button {
     margin: 1rem auto;
     padding: 0.5rem;
   }
-  .buttoncontainer {
+.button__container {
     flex-direction: column;
     gap: 1rem;
   }
@@ -283,6 +305,7 @@ button {
     font-size: 14px;
   }
 }
+
 section {
   background-color: var(--header__txt);
   border-radius: 8px;
@@ -292,6 +315,7 @@ section {
   padding: 2rem;
   margin-block-start: 0;
 }
+
 .nav-item.active {
   background-color: rgb(239, 241, 241);
   color: rgb(6, 6, 6);

@@ -1,13 +1,14 @@
 {
-  "name": "assigment",
+  "name": "@recursivezero/savedocs",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "server": "node server.js"
   },
   "dependencies": {
     "astro": "^4.15.4",
@@ -15,7 +16,12 @@
   },
   "description": "An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.",
   "main": "index.js",
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "save docs",
+    "Aadhaar",
+    "pan",
+    "document"
+  ],
+  "author": "RecursiveZero",
   "license": "ISC"
 }

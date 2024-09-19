@@ -6,7 +6,7 @@ import InputField from "../components/InputField.astro";
 
 <form class="form" id={formId} name={formName} style={style}>
   <div class="container__form">
-    {fields.map((field) => <InputField field={field} />)}
-    {genderLabel && <Gender />}
+    {fields.map((field: any) => <InputField field={field} />)}
+    {(<Gender />)}
   </div>
 </form>
