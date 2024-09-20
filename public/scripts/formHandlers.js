@@ -53,7 +53,6 @@ export function loadEntriesFromStorage(container, type, additionalFields) {
       console.error("Error loading data:", error);
     });
 }
-
 export const handleSubmit = (
   event,
   form,

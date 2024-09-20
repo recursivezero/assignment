@@ -74,6 +74,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   </div>
 </MainLayout>
 <script is:inline type="module">
+  console.log("Script is running");
   import { generateImage } from "../scripts/image.js";
   import {
     formatDate,
@@ -86,112 +87,161 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     loadEntriesFromStorage,
   } from "../scripts/formHandlers.js";
 
+  // Capture all form inputs and buttons
   const aadhaarForm = document.getElementById("aadhaar");
-  const saveButton = document.querySelector(".save__button");
-  const resetButton = document.querySelector(".reset__button");
-  const container = document.querySelector(".container");
-  const canvas = document.getElementById("aadhaarCanvas");
-  const context = canvas ? canvas.getContext("2d") : null;
-  let currentEditItem = null;
+  console.log("aadhaarForm:", aadhaarForm);
 
-  if (!context) {
-    console.error("Canvas context could not be obtained.");
+  if (!aadhaarForm) {
+    console.error("aadhaarForm not found.");
   } else {
-    const handleSubmit = async (event) => {
-      event.preventDefault();
+    console.log("aadhaarForm found.");
 
-      // Handle form data submission locally
-      formHandleSubmit(event, aadhaarForm, currentEditItem, container, {
-        type: "Aadhaar",
-        additionalFields: ["aadhaaraddress"],
-      });
-      currentEditItem = null;
+    const saveButton = document.querySelector(".save__button");
+    console.log("saveButton:", saveButton);
 
-      // Prepare form data for server
-      const formData = new FormData(aadhaarForm);
-      const formObject = Object.fromEntries(formData.entries());
+    const resetButton = document.querySelector(".reset__button");
+    console.log("resetButton:", resetButton);
 
-      console.log("Form Data to be sent:", formObject); // Add this line
+    const container = document.querySelector(".container");
+    console.log("container:", container);
 
-      try {
-        const response = await fetch("/api/save", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formObject),
+    const canvas = document.getElementById("aadhaarCanvas");
+    console.log("canvas:", canvas);
+
+    const context = canvas ? canvas.getContext("2d") : null;
+    let currentEditItem = null;
+
+    if (!context) {
+      console.error("Canvas context could not be obtained.");
+    } else {
+      console.log("Canvas context obtained successfully.");
+
+      // Handle form submission
+      const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log("Handle submit function triggered.");
+
+        // Logging all form input values before submission
+        const inputs = aadhaarForm.querySelectorAll("input, textarea");
+        inputs.forEach((input) => console.log(`${input.name}: ${input.value}`));
+
+        // Handle form data submission locally
+        formHandleSubmit(event, aadhaarForm, currentEditItem, container, {
+          type: "Aadhaar",
+          additionalFields: ["aadhaaraddress"],
         });
+        console.log("Form submission handled locally.");
 
-        if (response.ok) {
-          console.log("Data saved successfully!");
-        } else {
-          console.error("Failed to save data.");
+        // Prepare form data for server
+        const formData = new FormData(aadhaarForm);
+        const formObject = Object.fromEntries(formData.entries());
+
+        // Log collected form data
+        console.log("Collected Form Data:", formObject);
+
+        try {
+          console.log("Attempting to save data to the server...");
+          const response = await fetch("/api/save", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formObject),
+          });
+
+          if (response.ok) {
+            console.log("Data saved successfully!");
+          } else {
+            console.error("Failed to save data.");
+          }
+        } catch (error) {
+          console.error("Error saving data:", error);
         }
-      } catch (error) {
-        console.error("Error saving data:", error);
-      }
-    };
-
-    // Load entries from server when the page loads
-    loadEntriesFromStorage(container, "Aadhaar", ["aadhaaraddress"]);
-
-    const resetForm = () => {
-      resetform(aadhaarForm);
-      currentEditItem = null;
-    };
-
-    const editItem = (event) => {
-      const item = event.target.closest(".item");
-
-      const data = [
-        { id: "doc-number", value: item.dataset.documentNumber },
-        { id: "doc-name", value: item.dataset.holdingPersonName },
-        { id: "gender", value: item.dataset.gender },
-        { id: "doc-dob", value: formatDate(item.dataset.dob) },
-        {
-          id: "doc-address",
-          value: item.dataset.aadhaaraddress,
-          hideInTable: true,
-        },
-      ];
-
-      populateForm("aadhaar", data);
-      currentEditItem = item;
-    };
-
-    const viewItem = (event) => {
-      const item = event.target.closest(".item");
-
-      const aadhaarDetail = {
-        number: item.dataset.documentNumber,
-        name: item.dataset.holdingPersonName,
-        gender: item.dataset.gender === "male" ? "♂" : "♀",
-        dob: item.dataset.dob,
-        address: item.dataset.aadhaaraddress,
       };
 
-      const data = generateImageData("aadhaar", aadhaarDetail);
+      // Load entries from server when the page loads
+      loadEntriesFromStorage(container, "Aadhaar", ["aadhaaraddress"]);
+      console.log("Entries loaded from storage.");
 
-      generateImage({
-        title: "--Aadhaar--",
-        data,
-        canvas,
-        canvasContainer: document.getElementById("canvasContainer"),
-        downloadButton: document.getElementById("downloadButton"),
-        backgroundColor: "#D8BFD8",
-        borderColor: "#FFC0CB",
-      });
-    };
+      const resetForm = () => {
+        resetform(aadhaarForm);
+        currentEditItem = null;
+        console.log("Form reset.");
+      };
 
-    // Add Event Listeners
-    resetButton.addEventListener("click", resetForm);
-    saveButton.addEventListener("click", handleSubmit);
-    container.addEventListener("click", (event) => {
-      if (event.target.classList.contains("delete__btn")) {
-        deleteItem(event);
-      } else if (event.target.classList.contains("edit__btn")) {
-        editItem(event);
-      } else if (event.target.classList.contains("view__btn")) {
-        viewItem(event);
+      const editItem = (event) => {
+        const item = event.target.closest(".item");
+        console.log("Editing item:", item);
+
+        const data = [
+          { id: "doc-number", value: item.dataset.documentNumber },
+          { id: "doc-name", value: item.dataset.holdingPersonName },
+          { id: "gender", value: item.dataset.gender },
+          { id: "doc-dob", value: formatDate(item.dataset.dob) },
+          {
+            id: "doc-address",
+            value: item.dataset.aadhaaraddress,
+            hideInTable: true,
+          },
+        ];
+
+        populateForm("aadhaar", data);
+        currentEditItem = item;
+        console.log("Form populated with item data.");
+      };
+
+      const viewItem = (event) => {
+        const item = event.target.closest(".item");
+        console.log("Viewing item:", item);
+
+        const aadhaarDetail = {
+          number: item.dataset.documentNumber,
+          name: item.dataset.holdingPersonName,
+          gender: item.dataset.gender === "male" ? "♂" : "♀",
+          dob: item.dataset.dob,
+          address: item.dataset.aadhaaraddress,
+        };
+
+        const data = generateImageData("aadhaar", aadhaarDetail);
+
+        generateImage({
+          title: "--Aadhaar--",
+          data,
+          canvas,
+          canvasContainer: document.getElementById("canvasContainer"),
+          downloadButton: document.getElementById("downloadButton"),
+          backgroundColor: "#D8BFD8",
+          borderColor: "#FFC0CB",
+        });
+        console.log("Generated image for viewing item.");
+      };
+
+      // Add Event Listeners
+      if (resetButton) {
+        resetButton.addEventListener("click", resetForm);
+      } else {
+        console.error("resetButton not found.");
       }
-    });
+
+      if (saveButton) {
+        saveButton.addEventListener("click", handleSubmit);
+      } else {
+        console.error("saveButton not found.");
+      }
+
+      if (container) {
+        container.addEventListener("click", (event) => {
+          if (event.target.classList.contains("delete__btn")) {
+            deleteItem(event);
+          } else if (event.target.classList.contains("edit__btn")) {
+            editItem(event);
+          } else if (event.target.classList.contains("view__btn")) {
+            viewItem(event);
+          }
+        });
+      } else {
+        console.error("container not found.");
+      }
+
+      console.log("Event listeners added.");
+    }
   }
 </script>
