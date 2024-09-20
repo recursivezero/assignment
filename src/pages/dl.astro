@@ -4,38 +4,7 @@ import Tabel from "../components/Tabel.astro";
 import FormLayout from "../layouts/FormLayout.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import Heading from "../components/Heading.astro";
-const fields = [
-  {
-    id: "doc-number",
-    label: "License Number",
-    type: "text",
-    name: "documentNumber",
-    placeholder: "D123 4567 8901 234",
-    required: true,
-  },
-  {
-    id: "doc-name",
-    label: "Name on License",
-    type: "text",
-    name: "holdingPersonName",
-    placeholder: "RAM",
-    required: true,
-  },
-  {
-    id: "doc-dob",
-    label: "Date of Birth",
-    type: "date",
-    name: "DOB",
-    required: true,
-  },
-  {
-    id: "DOE_dl",
-    label: "Date of Expiry",
-    type: "date",
-    name: "DOE",
-    required: true,
-  },
-];
+import { LICENSE_FIELDS } from "../utils/constant";
 
 const inlineStyle = `
    background-color: rgb(215, 250, 216);
@@ -55,11 +24,9 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   />
   <section>
     <FormLayout
-      formId="license"
-      formName="license"
-      fields={fields}
-      genderLabel="Gender"
-      style={inlineStyle}
+      formId="licenseForm"
+      formName="licenseForm"
+      fields={LICENSE_FIELDS}
     />
     <ButtonGroup group={buttonList} />
   </section>
@@ -75,15 +42,13 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import {
-    formatDate,
-    convertToDateInputFormat,
     handleSubmit as formHandleSubmit,
     resetForm as resetform,
     populateForm as populateForm,
     generateImageData as generateImageData,
   } from "/scripts/formHandlers.js";
 
-  const dlForm = document.getElementById("license");
+  const dlForm = document.getElementById("licenseForm");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
   const container = document.querySelector(".container");
@@ -144,7 +109,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
         borderColor: "#808000",
       });
     };
-    
+
     resetButton.addEventListener("click", resetForm);
     saveButton.addEventListener("click", handleSubmit);
     container.addEventListener("click", (event) => {

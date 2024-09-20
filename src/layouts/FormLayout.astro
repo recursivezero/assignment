@@ -4,7 +4,7 @@ const { formId, formName, fields, genderLabel, style } = Astro.props;
 import InputField from "../components/InputField.astro";
 ---
 
-<form class="form" id={formId} name={formName} style={style}>
+<form class:list={[" form", formName]} id={formId} name={formName}>
   <div class="container__form">
     {fields.map((field: any) => <InputField field={field} />)}
     {(<Gender />)}

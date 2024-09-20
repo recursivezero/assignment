@@ -34,3 +34,70 @@ export const AADHAAR_FIELDS = [
     required: true,
   },
 ];
+
+export const LICENSE_FIELDS = [
+  {
+    id: "doc-number",
+    label: "License Number",
+    type: "text",
+    name: "documentNumber",
+    placeholder: "D123 4567 8901 234",
+    required: true,
+  },
+  {
+    id: "doc-name",
+    label: "Name on License",
+    type: "text",
+    name: "holdingPersonName",
+    placeholder: "RAM",
+    required: true,
+  },
+  {
+    id: "doc-dob",
+    label: "Date of Birth",
+    type: "date",
+    name: "DOB",
+    required: true,
+  },
+  {
+    id: "DOE_dl",
+    label: "Date of Expiry",
+    type: "date",
+    name: "DOE",
+    required: true,
+  },
+];
+
+export const PAN_FIELDS = [
+  {
+    id: "doc-number",
+    label: "PAN",
+    type: "text",
+    name: "documentNumber",
+    placeholder: "D123 4567 8901 234",
+    required: true,
+  },
+  {
+    id: "doc-name",
+    label: "Name on PAN",
+    type: "text",
+    name: "holdingPersonName",
+    placeholder: "RAM",
+    required: true,
+  },
+  {
+    id: "doc-dob",
+    label: "Date of Birth",
+    type: "date",
+    name: "DOB",
+    required: true,
+  },
+  {
+    id: "doc-fathername",
+    label: "Father Name",
+    type: "text",
+    name: "fathername",
+    placeholder: "RAY",
+    required: true,
+  },
+];
