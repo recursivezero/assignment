@@ -1,5 +1,6 @@
 import { generateEntryHTML } from "./entryHelpers.js";
 
+const SERVER_HOST = "http://localhost:3000";
 export const formatDate = (date) => {
   if (!date) return "";
   const [year, month, day] = date.split("-");
@@ -30,7 +31,13 @@ export const deleteItem = (event) => {
 
 // Function to load entries from server
 export function loadEntriesFromStorage(container, type, additionalFields) {
-  fetch("/api/data")
+  fetch(`${SERVER_HOST}/api/data`, {
+    method: "GET",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -100,8 +107,6 @@ export const handleSubmit = (
     console.log("Please fill in all required fields.");
   }
 };
-
-
 
 export const createNewEntry = (
   entryData,

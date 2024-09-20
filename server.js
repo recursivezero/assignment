@@ -3,6 +3,7 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { exec } from "child_process";
+import { SERVER_HOST } from "./src/utils/constant";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +23,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"));
 });
 
-app.post("/api/save", (req, res) => {
+app.post(`${SERVER_HOST}/api/save`, (req, res) => {
   const newData = req.body;
   console.log("Data received on server:", newData);
 
@@ -56,7 +57,7 @@ app.post("/api/save", (req, res) => {
   });
 });
 
-app.get("/api/data", (req, res) => {
+app.get(`${SERVER_HOST}/api/data`, (req, res) => {
   fs.readFile(dataFilePath, "utf8", (err, data) => {
     if (err) {
       return res.status(500).json({ error: "Error reading data file" });

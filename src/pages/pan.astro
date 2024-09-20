@@ -4,42 +4,10 @@ import Heading from "../components/Heading.astro";
 import Tabel from "../components/Tabel.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import FormLayout from "../layouts/FormLayout.astro";
+import { PAN_FIELDS } from "../utils/constant";
 
-const fields = [
-  {
-    id: "doc-number",
-    label: "PAN",
-    type: "text",
-    name: "documentNumber",
-    placeholder: "D123 4567 8901 234",
-    required: true,
-  },
-  {
-    id: "doc-name",
-    label: "Name on PAN",
-    type: "text",
-    name: "holdingPersonName",
-    placeholder: "RAM",
-    required: true,
-  },
-  {
-    id: "doc-dob",
-    label: "Date of Birth",
-    type: "date",
-    name: "DOB",
-    required: true,
-  },
-  {
-    id: "doc-fathername",
-    label: "Father Name",
-    type: "text",
-    name: "fathername",
-    placeholder: "RAY",
-    required: true,
-  },
-];
 const inlineStyle = `
-  background-color: rgb(200, 239, 253);
+
 `;
 const buttonList = [
   { name: "reset", class: "reset__button", type: "button" },
@@ -54,13 +22,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     subheadingText="all fields are required"
   />
   <section>
-    <FormLayout
-      formId="pan"
-      formName="pan"
-      fields={fields}
-      genderLabel="Gender"
-      style={inlineStyle}
-    />
+    <FormLayout formId="panForm" formName="panForm" fields={PAN_FIELDS} />
     <ButtonGroup group={buttonList} />
   </section>
   <Tabel list={headerList} />
@@ -82,7 +44,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
-  const panForm = document.querySelector(".form");
+  const panForm = document.querySelector("#panForm");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
   const container = document.querySelector(".container");

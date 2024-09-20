@@ -1,0 +1,32 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "cSpell.words": [
+      "savedocs"
+    ],
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#6ee967",
+      "activityBar.background": "#6ee967",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#747aeb",
+      "activityBarBadge.foreground": "#15202b",
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#6ee967",
+      "statusBar.background": "#44e23b",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#28cc1e",
+      "statusBarItem.remoteBackground": "#44e23b",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#44e23b",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#44e23b99",
+      "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#44e23b"
+  }
+}

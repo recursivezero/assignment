@@ -1,26 +1,34 @@
 # Offline Document Storage
 
-   An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.
- 
+An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.
+
 ## Table of Contents
 
-- [Installation](#installation)
-- [Introduction](#introduction)
-- [Features](#features)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Screenshots](#screenshots)
-
+- [Offline Document Storage](#offline-document-storage)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Usage](#usage)
+  - [Project Structure](#project-structure)
+  - [Screenshots](#screenshots)
+    - [Document Entry Page](#document-entry-page)
+    - [Forms Section](#forms-section)
+    - [Data tabel and Canvas image](#data-tabel-and-canvas-image)
 
 ## Installation
 
 To set up the project, clone the repository
-```bash
-git clone "https://github.com/ghanishth-rajput/Astro.git"
-cd "ASTRO"
 
+```bash
 npm install
 npm run dev
+```
+
+run server separately
+
+```bash
+npm run server
 ```
 
 ## Introduction
@@ -62,7 +70,7 @@ ASTRO
 ├── src
 |   ├── components
 │   │   └── Nav.astro
-    ├── layouts
+│   ├── layouts
 │   │   └── MainLayout.astro
 │   └── pages
 │   │   └── aadhaar.astro
@@ -73,13 +81,8 @@ ASTRO
 │       └── Action.js
 |       └── app.js
 |       
-│   
-|
-│  
-│       
 ├── package.json
 ├── tsconfig.json
-          
 ```
 
 ## Screenshots
@@ -90,8 +93,6 @@ Here are some screenshots of the application:
 
 ![HomePage](<public/assets/images/HomePage.png>)
  Entry Page consist of front ui of the application with the options of forms selection in form of Nav links 
-
- 
 
 ### Forms Section
 
@@ -108,20 +109,20 @@ This page consist of dl form , the tabel which stores the form data
 ![idNav](public/assets/images/VoterIdform.png)
 This page consist of dl form , the tabel which stores the form data 
 
-
-
-### Data tabel and Canva image
+### Data tabel and Canvas image
 
 ![PanData](public/assets/images/PAN.png)
-the tabel data showing is showing in below canva Image with the option of download them
+the tabel data showing is showing in below canvas Image with the option of download them
 
 ![AadhaarData](public/assets/images/Aadhaar.png)
-the tabel data showing is showing in below canva Image with the option of download them
+the tabel data showing is showing in below canvas Image with the option of download them
 
 ![DlData](public/assets/images/License.png)
-the tabel data showing is showing in below canva Image with the option of download them
+the tabel data showing is showing in below canvas Image with the option of download them
 
 ![idData](public/assets/images/Voterid.png)
-the tabel data showing is showing in below canva Image with the option of download them
+the tabel data showing is showing in below canvas Image with the option of download them
 
- This section consists of the canva image that are generated from user data after clicking view button 
+ This section consists of the canvas image that are generated from user data after clicking view button
+
+

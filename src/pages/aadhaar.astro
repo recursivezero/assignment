@@ -4,44 +4,7 @@ import Heading from "../components/Heading.astro";
 import Tabel from "../components/Tabel.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import FormLayout from "../layouts/FormLayout.astro";
-
-const fields = [
-  {
-    id: "doc-number",
-    label: "Aadhaar Number",
-    type: "text",
-    name: "documentNumber",
-    placeholder: "1234 5678 9012",
-    pattern: "[0-9]{12}",
-    required: true,
-  },
-  {
-    id: "doc-name",
-    label: "Name on Aadhaar",
-    type: "text",
-    name: "holdingPersonName",
-    placeholder: "RAM SINGH",
-    required: true,
-  },
-  {
-    id: "doc-dob",
-    label: "Date of Birth",
-    type: "date",
-    name: "DOB",
-    required: true,
-  },
-  {
-    id: "doc-address",
-    label: "Aadhaar Address",
-    type: "textarea",
-    name: "aadhaaraddress",
-    placeholder: "as per aadhaar",
-    required: true,
-  },
-];
-const inlineStyle = `
-  background-color: antiquewhite;
-`;
+import { AADHAAR_FIELDS } from "../utils/constant";
 
 const buttonList = [
   { name: "reset", class: "reset__button", type: "button" },
@@ -57,20 +20,16 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   />
   <section>
     <FormLayout
-      formId="aadhaar"
-      formName="aadhaar"
-      fields={fields}
-      genderLabel="Gender"
-      style={inlineStyle}
+      formId="aadhaarForm"
+      formName="aadhaarForm"
+      fields={AADHAAR_FIELDS}
     />
     <ButtonGroup group={buttonList} />
   </section>
   <Tabel list={headerList} />
-  <div id="canvasContainer" class="canvas" style="display: none;">
+  <div id="canvasContainer" class="canvas hide">
     <canvas id="aadhaarCanvas"></canvas>
-    <button id="downloadButton" class="download" style="display: none;"
-      >Download Image</button
-    >
+    <button id="downloadButton" class="download hide">Download Image</button>
   </div>
 </MainLayout>
 <script is:inline type="module">
@@ -78,7 +37,6 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   import { generateImage } from "../scripts/image.js";
   import {
     formatDate,
-    convertToDateInputFormat,
     deleteItem,
     handleSubmit as formHandleSubmit,
     resetForm as resetform,
@@ -87,12 +45,16 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     loadEntriesFromStorage,
   } from "../scripts/formHandlers.js";
 
-  // Capture all form inputs and buttons
-  const aadhaarForm = document.getElementById("aadhaar");
-  console.log("aadhaarForm:", aadhaarForm);
-
-  if (!aadhaarForm) {
-    console.error("aadhaarForm not found.");
+  const aadhaarForm = document.getElementById("aadhaarForm");
+  const saveButton = document.querySelector(".save__button");
+  const resetButton = document.querySelector(".reset__button");
+  const container = document.querySelector(".container");
+  const canvas = document.getElementById("aadhaarCanvas");
+  const context = canvas ? canvas.getContext("2d") : null;
+  let currentEditItem = null;
+  console.log({ aadhaarForm });
+  if (!context) {
+    console.error("Canvas context could not be obtained.");
   } else {
     console.log("aadhaarForm found.");
 
@@ -102,33 +64,10 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     const resetButton = document.querySelector(".reset__button");
     console.log("resetButton:", resetButton);
 
-    const container = document.querySelector(".container");
-    console.log("container:", container);
-
-    const canvas = document.getElementById("aadhaarCanvas");
-    console.log("canvas:", canvas);
-
-    const context = canvas ? canvas.getContext("2d") : null;
-    let currentEditItem = null;
-
-    if (!context) {
-      console.error("Canvas context could not be obtained.");
-    } else {
-      console.log("Canvas context obtained successfully.");
-
-      // Handle form submission
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log("Handle submit function triggered.");
-
-        // Logging all form input values before submission
-        const inputs = aadhaarForm.querySelectorAll("input, textarea");
-        inputs.forEach((input) => console.log(`${input.name}: ${input.value}`));
-
-        // Handle form data submission locally
-        formHandleSubmit(event, aadhaarForm, currentEditItem, container, {
-          type: "Aadhaar",
-          additionalFields: ["aadhaaraddress"],
+      try {
+        const response = await fetch(`${SERVER_HOST}/api/save`, {
+          method: "POST",
+          body: JSON.stringify(formObject),
         });
         console.log("Form submission handled locally.");
 
