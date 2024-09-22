@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center; */
     height: fit-content;
-    background-image: url(7309.jpg);
+    background-image: url(./assets/images/7309.jpg);
     background-position: 10em 80em;
     background-size: cover;
     overflow-x: hidden;
