@@ -123,6 +123,7 @@ the tabel data showing is showing in below canvas Image with the option of downl
 ![idData](public/assets/images/Voterid.png)
 the tabel data showing is showing in below canvas Image with the option of download them
 
- This section consists of the canvas image that are generated from user data after clicking view button
+![json](public/assets/images/jsondata.png)
+ This section consists of the data stored in backend
 
 
