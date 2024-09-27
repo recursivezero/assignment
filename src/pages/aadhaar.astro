@@ -32,18 +32,17 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     <button id="downloadButton" class="download hide">Download Image</button>
   </div>
 </MainLayout>
+
 <script is:inline type="module">
-  console.log("Script is running");
-  import { generateImage } from "../scripts/image.js";
+  import { generateImage } from "/scripts/image.js";
   import {
     formatDate,
+    convertToDateInputFormat,
     deleteItem,
     handleSubmit as formHandleSubmit,
     resetForm as resetform,
-    populateForm,
-    generateImageData,
-    loadEntriesFromStorage,
-  } from "../scripts/formHandlers.js";
+    generateImageData as generateImageData,
+  } from "/scripts/formHandlers.js";
 
   const aadhaarForm = document.getElementById("aadhaarForm");
   const saveButton = document.querySelector(".save__button");
@@ -52,135 +51,126 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   const canvas = document.getElementById("aadhaarCanvas");
   const context = canvas ? canvas.getContext("2d") : null;
   let currentEditItem = null;
-  console.log({ aadhaarForm });
+
   if (!context) {
     console.error("Canvas context could not be obtained.");
   } else {
-    console.log("aadhaarForm found.");
+    console.log("Canvas context obtained successfully.");
 
-    const saveButton = document.querySelector(".save__button");
-    console.log("saveButton:", saveButton);
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      console.log("Handling form submit");
+      const formData = new FormData(aadhaarForm);
+      const documentNumber = formData.get("documentNumber")?.trim();
+      const holdingPersonName = formData.get("holdingPersonName")?.trim();
+      const DOB = formData.get("DOB")?.trim();
+      const gender = formData.get("gender")?.trim();
+      const address = formData.get("address")?.trim();
 
-    const resetButton = document.querySelector(".reset__button");
-    console.log("resetButton:", resetButton);
+      console.log("Form Data:", {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+        address,
+      });
 
+      const formObject = {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+        address,
+      };
+      console.log(formObject);
       try {
-        const response = await fetch(`${SERVER_HOST}/api/save`, {
+        const response = await fetch("http://localhost:3000/api/save", {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formObject),
         });
-        console.log("Form submission handled locally.");
 
-        // Prepare form data for server
-        const formData = new FormData(aadhaarForm);
-        const formObject = Object.fromEntries(formData.entries());
+        if (response.ok) {
+          console.log("Data saved successfully!");
 
-        // Log collected form data
-        console.log("Collected Form Data:", formObject);
-
-        try {
-          console.log("Attempting to save data to the server...");
-          const response = await fetch("/api/save", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formObject),
+          // Add this newly saved entry to the table (for immediate reflection)
+          formHandleSubmit(event, aadhaarForm, currentEditItem, container, {
+            type: "Aadhaar",
+            additionalFields: ["address"],
           });
-
-          if (response.ok) {
-            console.log("Data saved successfully!");
-          } else {
-            console.error("Failed to save data.");
-          }
-        } catch (error) {
-          console.error("Error saving data:", error);
+        } else {
+          console.error("Failed to save data.");
         }
-      };
-
-      // Load entries from server when the page loads
-      loadEntriesFromStorage(container, "Aadhaar", ["aadhaaraddress"]);
-      console.log("Entries loaded from storage.");
-
-      const resetForm = () => {
-        resetform(aadhaarForm);
-        currentEditItem = null;
-        console.log("Form reset.");
-      };
-
-      const editItem = (event) => {
-        const item = event.target.closest(".item");
-        console.log("Editing item:", item);
-
-        const data = [
-          { id: "doc-number", value: item.dataset.documentNumber },
-          { id: "doc-name", value: item.dataset.holdingPersonName },
-          { id: "gender", value: item.dataset.gender },
-          { id: "doc-dob", value: formatDate(item.dataset.dob) },
-          {
-            id: "doc-address",
-            value: item.dataset.aadhaaraddress,
-            hideInTable: true,
-          },
-        ];
-
-        populateForm("aadhaar", data);
-        currentEditItem = item;
-        console.log("Form populated with item data.");
-      };
-
-      const viewItem = (event) => {
-        const item = event.target.closest(".item");
-        console.log("Viewing item:", item);
-
-        const aadhaarDetail = {
-          number: item.dataset.documentNumber,
-          name: item.dataset.holdingPersonName,
-          gender: item.dataset.gender === "male" ? "♂" : "♀",
-          dob: item.dataset.dob,
-          address: item.dataset.aadhaaraddress,
-        };
-
-        const data = generateImageData("aadhaar", aadhaarDetail);
-
-        generateImage({
-          title: "--Aadhaar--",
-          data,
-          canvas,
-          canvasContainer: document.getElementById("canvasContainer"),
-          downloadButton: document.getElementById("downloadButton"),
-          backgroundColor: "#D8BFD8",
-          borderColor: "#FFC0CB",
-        });
-        console.log("Generated image for viewing item.");
-      };
-
-      // Add Event Listeners
-      if (resetButton) {
-        resetButton.addEventListener("click", resetForm);
-      } else {
-        console.error("resetButton not found.");
+      } catch (error) {
+        console.error("Error saving data:", error);
       }
 
-      if (saveButton) {
-        saveButton.addEventListener("click", handleSubmit);
-      } else {
-        console.error("saveButton not found.");
-      }
+      currentEditItem = null;
+    };
 
-      if (container) {
-        container.addEventListener("click", (event) => {
-          if (event.target.classList.contains("delete__btn")) {
-            deleteItem(event);
-          } else if (event.target.classList.contains("edit__btn")) {
-            editItem(event);
-          } else if (event.target.classList.contains("view__btn")) {
-            viewItem(event);
-          }
-        });
-      } else {
-        console.error("container not found.");
-      }
+    // Load entries from server when the page loads
 
-      console.log("Event listeners added.");
-    }
+    const resetForm = () => {
+      resetform(aadhaarForm);
+      currentEditItem = null;
+      console.log("Form reset.");
+    };
+
+    const editItem = (event) => {
+      const item = event.target.closest(".item");
+      const documentNumber = item.dataset.documentNumber;
+      const holdingPersonName = item.dataset.holdingPersonName;
+      const gender = item.dataset.gender;
+      const DOB = item.dataset.dob;
+      const address = item.dataset.address;
+
+      aadhaarForm.querySelector("#doc-number").value = documentNumber;
+      aadhaarForm.querySelector("#doc-name").value = holdingPersonName;
+      aadhaarForm.querySelector("#doc-dob").value =
+        convertToDateInputFormat(DOB);
+      aadhaarForm.querySelector(`#gender_${gender}`).checked = true;
+      aadhaarForm.querySelector("#doc-address").value = address;
+      currentEditItem = item;
+    };
+
+    const viewItem = (event) => {
+      const item = event.target.closest(".item");
+      console.log("Viewing item:", item);
+
+      const aadhaarDetail = {
+        number: item.dataset.documentNumber,
+        name: item.dataset.holdingPersonName,
+        gender: item.dataset.gender === "male" ? "♂" : "♀",
+        dob: item.dataset.dob,
+        address: item.dataset.address,
+      };
+
+      const data = generateImageData("aadhaar", aadhaarDetail);
+
+      generateImage({
+        title: "--Aadhaar--",
+        data,
+        canvas,
+        canvasContainer: document.getElementById("canvasContainer"),
+        downloadButton: document.getElementById("downloadButton"),
+        backgroundColor: "#D8BFD8",
+        borderColor: "#FFC0CB",
+      });
+    };
+
+    // Add Event Listeners
+    resetButton.addEventListener("click", resetForm);
+    saveButton.addEventListener("click", handleSubmit);
+    container.addEventListener("click", (event) => {
+      if (event.target.classList.contains("delete__btn")) {
+        deleteItem(event);
+      } else if (event.target.classList.contains("edit__btn")) {
+        editItem(event);
+      } else if (event.target.classList.contains("view__btn")) {
+        viewItem(event);
+      }
+    });
+
+    console.log("Event listeners added.");
   }
 </script>

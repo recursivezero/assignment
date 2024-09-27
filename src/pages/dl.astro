@@ -42,9 +42,11 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
   import {
+    formatDate,
+    convertToDateInputFormat,
+    deleteItem,
     handleSubmit as formHandleSubmit,
     resetForm as resetform,
-    populateForm as populateForm,
     generateImageData as generateImageData,
   } from "/scripts/formHandlers.js";
 
@@ -59,13 +61,56 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   if (!context) {
     console.error("Canvas context could not be obtained.");
   } else {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+      event.preventDefault(); 
+      const formData = new FormData(dlForm);
+      const documentNumber = formData.get("documentNumber")?.trim();
+      const holdingPersonName = formData.get("holdingPersonName")?.trim();
+      const DOB = formData.get("DOB")?.trim();
+      const gender = formData.get("gender")?.trim();
+      const DOE = formData.get("DOE")?.trim();
+
+      console.log("Form Data:", {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+      });
+      const formObject = {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+        DOE,
+      };
+      console.log(formObject);
+      try {
+        const response = await fetch("http://localhost:3000/api/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+          console.log("Data saved successfully!");
+        } else {
+          console.error("Failed to save data.");
+        }
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
       formHandleSubmit(event, dlForm, currentEditItem, container, {
         type: "License",
         additionalFields: ["DOE"],
       });
+
       currentEditItem = null;
+
+      
+      //const formData = new FormData(dlForm);
     };
+
+    console.log("e");
     const resetForm = () => {
       resetform(dlForm);
       currentEditItem = null;
@@ -73,16 +118,17 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     const editItem = (event) => {
       const item = event.target.closest(".item");
 
-      const data = {
-        documentNumber: item.dataset.documentNumber,
-        holdingPersonName: item.dataset.holdingPersonName,
-        gender: item.dataset.gender,
-        DOB: item.dataset.dob,
-      };
-      const additionalFields = {
-        DOE_dl: item.dataset.doe,
-      };
-      populateForm(dlForm, data, additionalFields);
+      const documentNumber = item.dataset.documentNumber;
+      const holdingPersonName = item.dataset.holdingPersonName;
+      const gender = item.dataset.gender;
+      const DOB = item.dataset.dob;
+      const DOE = item.dataset.DOE;
+
+      dlForm.querySelector("#doc-number").value = documentNumber;
+      dlForm.querySelector("#doc-name").value = holdingPersonName;
+      dlForm.querySelector("#doc-dob").value = convertToDateInputFormat(DOB);
+      dlForm.querySelector(`#gender_${gender}`).checked = true;
+      dlForm.querySelector("#DOE_dl").value = convertToDateInputFormat(DOE);
       currentEditItem = item;
     };
 

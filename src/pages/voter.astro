@@ -4,40 +4,8 @@ import Heading from "../components/Heading.astro";
 import ButtonGroup from "../components/ButtonGroup.astro";
 import Tabel from "../components/Tabel.astro";
 import FormLayout from "../layouts/FormLayout.astro";
+import { VOTER_FIELDS } from "../utils/constant";
 
-const fields = [
-  {
-    id: "doc-number",
-    label: "Id Number",
-    type: "text",
-    name: "documentNumber",
-    placeholder: "D123 4567 8901 234",
-    required: true,
-  },
-  {
-    id: "doc-name",
-    label: "Name on Id",
-    type: "text",
-    name: "holdingPersonName",
-    placeholder: "RAM",
-    required: true,
-  },
-  {
-    id: "doc-fathername",
-    label: "Father Name",
-    type: "text",
-    name: "fathername",
-    placeholder: "RAM",
-    required: true,
-  },
-  {
-    id: "doc-dob",
-    label: "Date of Birth",
-    type: "date",
-    name: "DOB",
-    required: true,
-  },
-];
 const inlineStyle = `
    background-color: rgb(219, 220, 249);
 `;
@@ -57,7 +25,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     <FormLayout
       formId="voter"
       formName="voter"
-      fields={fields}
+      fields={VOTER_FIELDS}
       genderLabel="Gender"
       style={inlineStyle}
     />
@@ -84,7 +52,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
-  const voterForm = document.querySelector(".form");
+  const voterForm = document.querySelector("#voter");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
   const container = document.querySelector(".container");

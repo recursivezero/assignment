@@ -55,12 +55,53 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   if (!context) {
     console.error("Canvas context could not be obtained.");
   } else {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+      event.preventDefault(); 
+      const formData = new FormData(panForm);
+      const documentNumber = formData.get("documentNumber")?.trim();
+      const holdingPersonName = formData.get("holdingPersonName")?.trim();
+      const DOB = formData.get("DOB")?.trim();
+      const gender = formData.get("gender")?.trim();
+      const fathername = formData.get("fathername")?.trim();
+
+      console.log("Form Data:", {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+      });
+      const formObject = {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+        fathername,
+      };
+      console.log(formObject);
+
+       try {
+        const response = await fetch("http://localhost:3000/api/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+          console.log("Data saved successfully!");
+        } else {
+          console.error("Failed to save data.");
+        }
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
       formHandleSubmit(event, panForm, currentEditItem, container, {
         type: "Pan",
         additionalFields: ["fathername"],
       });
+
       currentEditItem = null;
+
+     
     };
 
     const resetForm = () => {

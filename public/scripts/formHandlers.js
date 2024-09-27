@@ -29,37 +29,7 @@ export const deleteItem = (event) => {
   item.remove();
 };
 
-// Function to load entries from server
-export function loadEntriesFromStorage(container, type, additionalFields) {
-  fetch(`${SERVER_HOST}/api/data`, {
-    method: "GET",
-    mode: "no-cors",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      console.log("Loaded data:", data);
 
-      // Filter or process the data as needed and then populate the container
-      const filteredData = data.filter((entry) => entry.type === type);
-
-      // Use helper to generate HTML for each entry and append to container
-      filteredData.forEach((entry) => {
-        const entryHtml = generateEntryHtml(entry, additionalFields);
-        container.insertAdjacentHTML("beforeend", entryHtml);
-      });
-    })
-    .catch((error) => {
-      console.error("Error loading data:", error);
-    });
-}
 export const handleSubmit = (
   event,
   form,
@@ -68,7 +38,8 @@ export const handleSubmit = (
   { type = "default", additionalFields = [] }
 ) => {
   event.preventDefault();
-
+  console.log(form);
+  
   const formData = new FormData(form);
   const documentNumber = formData.get("documentNumber")?.trim();
   const holdingPersonName = formData.get("holdingPersonName")?.trim();
@@ -79,13 +50,7 @@ export const handleSubmit = (
     return acc;
   }, {});
 
-  console.log("Form Data:", {
-    documentNumber,
-    holdingPersonName,
-    DOB,
-    gender,
-    additionalValues,
-  });
+
 
   if (documentNumber && holdingPersonName && DOB && gender) {
     const entryData = {
@@ -178,21 +143,6 @@ export const resetForm = (form) => {
   form.reset();
 };
 
-export const populateForm = (formId, data) => {
-  const form = document.getElementById(formId);
-  data.forEach((item) => {
-    const element = form.querySelector(`#${item.id}`);
-    if (element) {
-      if (item.id.startsWith("gender")) {
-        element.checked = true;
-      } else if (element.type === "date") {
-        element.value = convertToDateInputFormat(item.value);
-      } else {
-        element.value = item.value;
-      }
-    }
-  });
-};
 
 export const generateImageData = (type, details) => {
   const detailMap = {

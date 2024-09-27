@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "astro": "^4.15.4",
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "description": "An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.",

@@ -3,8 +3,9 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { exec } from "child_process";
-import { SERVER_HOST } from "./src/utils/constant";
+import cors from "cors";
 
+const SERVER_HOST = "http://localhost:3000";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,6 +13,8 @@ const app = express();
 const port = 3000;
 
 const publicPath = path.join(__dirname, "dist");
+
+app.use(cors()); // Enable CORS for all routes
 
 app.use(express.static(publicPath));
 
@@ -23,7 +26,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(publicPath, "index.html"));
 });
 
-app.post(`${SERVER_HOST}/api/save`, (req, res) => {
+app.post(`/api/save`, (req, res) => {
   const newData = req.body;
   console.log("Data received on server:", newData);
 
