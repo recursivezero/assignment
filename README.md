@@ -124,6 +124,6 @@ the tabel data showing is showing in below canvas Image with the option of downl
 the tabel data showing is showing in below canvas Image with the option of download them
 
 ![json](public/assets/images/jsondata.png)
- This section consists of the data stored in backend
+ This section consists of the data stored in backends
 
 

@@ -23,11 +23,10 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   />
   <section>
     <FormLayout
-      formId="voter"
-      formName="voter"
+      formId="voterForm"
+      formName="voterForm"
       fields={VOTER_FIELDS}
-      genderLabel="Gender"
-      style={inlineStyle}
+     
     />
 
     <ButtonGroup group={buttonList} />
@@ -52,7 +51,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     resetForm as resetform,
   } from "/scripts/formHandlers.js";
 
-  const voterForm = document.querySelector("#voter");
+  const voterForm = document.querySelector("#voterForm");
   const saveButton = document.querySelector(".save__button");
   const resetButton = document.querySelector(".reset__button");
   const container = document.querySelector(".container");
@@ -63,11 +62,50 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
   if (!context) {
     console.error("Canvas context could not be obtained.");
   } else {
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+      const formData = new FormData(voterForm);
+      const documentNumber = formData.get("documentNumber")?.trim();
+      const holdingPersonName = formData.get("holdingPersonName")?.trim();
+      const fathername = formData.get("fathername")?.trim();
+      const DOB = formData.get("DOB")?.trim();
+      const gender = formData.get("gender")?.trim();
+
+      console.log("Form Data:", {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+      });
+      const formObject = {
+        documentNumber,
+        holdingPersonName,
+        DOB,
+        gender,
+        fathername,
+      };
+      console.log(formObject);
+
+      try {
+        const response = await fetch("http://localhost:3000/api/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+          console.log("Data saved successfully!");
+        } else {
+          console.error("Failed to save data.");
+        }
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
       formHandleSubmit(event, voterForm, currentEditItem, container, {
         type: "VoterID",
         additionalFields: ["fathername"],
       });
+
       currentEditItem = null;
     };
 

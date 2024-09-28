@@ -26,13 +26,13 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     <ButtonGroup group={buttonList} />
   </section>
   <Tabel list={headerList} />
+  <div id="canvasContainer" class="canvas" style="display: none;">
+    <canvas id="panCanvas"></canvas>
+    <button id="downloadButton" class="download" style="display: none;"
+      >Download Image</button
+    >
+  </div>
 </MainLayout>
-<div id="canvasContainer" class="canvas" style="display: none;">
-  <canvas id="panCanvas"></canvas>
-  <button id="downloadButton" class="download" style="display: none;"
-    >Download Image</button
-  >
-</div>
 
 <script is:inline type="module">
   import { generateImage } from "/scripts/image.js";
@@ -56,7 +56,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
     console.error("Canvas context could not be obtained.");
   } else {
     const handleSubmit = async (event) => {
-      event.preventDefault(); 
+      event.preventDefault();
       const formData = new FormData(panForm);
       const documentNumber = formData.get("documentNumber")?.trim();
       const holdingPersonName = formData.get("holdingPersonName")?.trim();
@@ -79,7 +79,7 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
       };
       console.log(formObject);
 
-       try {
+      try {
         const response = await fetch("http://localhost:3000/api/save", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -100,8 +100,6 @@ const headerList = ["Document", "Info", "Name", "Gender", "DOB", "Actions"];
       });
 
       currentEditItem = null;
-
-     
     };
 
     const resetForm = () => {
