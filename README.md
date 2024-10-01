@@ -1,6 +1,6 @@
 # Offline Document Storage
 
-An offline application to store and manage personal documents such as Aadhaar Card, Driving License, and PAN Card.
+An offline application to store and manage personal documents such as Aadhaar Card, Driving License, Pan Card and Voter Card .
 
 ## Table of Contents
 
@@ -28,6 +28,7 @@ npm run dev
 run server separately
 
 ```bash
+npm install express
 npm run server
 ```
 
@@ -42,6 +43,7 @@ npm run server
 - Edit and update document information.
 - Delete unnecessary or outdated document entries.
 - Offline functionality ensures data security and privacy.
+- the data also saved to backend in data.json file for future use.
 
 ## Usage
 
@@ -50,6 +52,7 @@ npm run server
 3. Fill in the document details.
 4. Click on Save Details to save the document information.
 5. View, edit, or delete saved document details.
+
 
 ## Project Structure
 
@@ -63,24 +66,35 @@ ASTRO
 │   ├── assets
 │   │   └── images
 │   └── styles
-│       └── aadhaar.css
-|       └── dl.css
-|       └── pan.css
-|        └── style.css 
+│   |  └── common.css
+|   |  └── form.css
+|   |     
+|   └── scripts
+│   |   └── entryHelpers.js
+|   |   └── formHandlers.js
+|   |   └── image.js
+|   └── data.json
 ├── src
 |   ├── components
-│   │   └── Nav.astro
+│   │   └── ButtonGroup.astro
+|   |   └── Gender.astro
+|   |   └── Heading.astro
+|   |    └── InputField.astro
+|   |    └── Nav.astro
+|   |    └── Table.astro
 │   ├── layouts
 │   │   └── MainLayout.astro
+|   |    └── FormLayout.astro
 │   └── pages
 │   │   └── aadhaar.astro
 |   │   └── dl.astro
 |   │    └── index.astro
 |   │     └── pan.astro 
-│   └── script
-│       └── Action.js
-|       └── app.js
-|       
+|   |      └── voter.astro 
+│   └── utils
+│      └── constant.ts
+|  
+├── server.js     
 ├── package.json
 ├── tsconfig.json
 ```
