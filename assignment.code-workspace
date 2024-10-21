@@ -26,6 +26,12 @@
 			"titleBar.inactiveBackground": "#1e03aa99",
 			"titleBar.inactiveForeground": "#e7e7e799"
 		},
-		"peacock.color": "#1e03aa"
+		"peacock.color": "#1e03aa",
+		"deno.enable": true,
+		"deno.lint": true,
+		"editor.formatOnSave": true,
+		"[typescript]": {
+			"editor.defaultFormatter": "denoland.vscode-deno"
+		}
 	}
 }
