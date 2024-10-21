@@ -108,3 +108,5 @@ Create a web-based interactive map of India, where clicking on a specific state 
 ---
 
 This assignment will assess your ability to handle interactive UI, data management, user experience design, and documentation, all using fundamental web technologies. Happy coding!
+----
+© 2024 RecursiveZero, All rights reserved.
