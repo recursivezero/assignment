@@ -1,6 +1,7 @@
 # Internship Assignment: Interactive Indian Map Web Application
 
 ## Problem Statement
+
 Create a web-based interactive map of India, where clicking on a specific state or Union Territory (UT) opens a modal containing detailed information about it. Additionally, the border of the selected state should be highlighted, its capital displayed, and an option to copy the state's details should be available.
 
 ---
@@ -8,11 +9,13 @@ Create a web-based interactive map of India, where clicking on a specific state 
 ## Assignment Details
 
 ### 1. Interactive Map
+
 - Display a map of India with all states and Union Territories (UTs) outlined.
 - Each state/UT should be clickable.
 - Use a minimal and responsive design so that the map adjusts well across various devices (desktop, tablet, mobile).
 
 ### 2. State/UT Modal
+
 - When a user clicks on a state/UT, a modal should appear with the following information:
   - Name of the state/UT.
   - Capital city.
@@ -23,10 +26,12 @@ Create a web-based interactive map of India, where clicking on a specific state 
 - The modal should be visually appealing and closeable (with a "Close" button or clicking outside the modal).
 
 ### 3. State/UT Highlighting
+
 - Highlight the border of the selected state/UT upon click to make it visually distinct.
 - The highlight should disappear when the modal is closed.
 
 ### 4. Capital Display
+
 - Display the capital city of each state/UT on the map.
 - The capital should be indicated with a small dot or marker along with a label.
 - Upon state selection, the label for the capital city should become more prominent.
@@ -36,25 +41,30 @@ Create a web-based interactive map of India, where clicking on a specific state 
 ## Technical Guidelines
 
 ### 1. Tech Stack
+
 - Use HTML, CSS, and JavaScript for this project.
 - Consider using libraries like SVG for the map or any JS library like Leaflet.js/D3.js for a more interactive experience.
 - No frameworks (e.g., React, Angular, Vue) should be used, as this is intended to be a minimal project.
 
 ### 2. Data Source
+
 - Use a JSON file containing details of each state/UT, including name, capital, population, area, languages, traditional dance, literacy rate, and flag image.
 - Data should be sourced from official state/UT websites or their overview pages to ensure authenticity.
 - Include all states and Union Territories in India.
 
 ### 3. Design Considerations
+
 - The map should be easy to navigate and intuitive for users.
 - Ensure the modal and map are accessible (e.g., keyboard navigable).
 - Use CSS transitions and animations for smooth modal appearance and state/UT highlighting.
 
 ### 4. Performance
+
 - Ensure the map is responsive and does not lag during interactions.
 - Optimize the loading time of the map and data.
 
 ### 5. Code Quality
+
 - Write clean, modular code using ES6+ standards.
 - Use meaningful variable and function names.
 - Comment your code where necessary to explain logic.
@@ -108,5 +118,7 @@ Create a web-based interactive map of India, where clicking on a specific state 
 ---
 
 This assignment will assess your ability to handle interactive UI, data management, user experience design, and documentation, all using fundamental web technologies. Happy coding!
-----
-© 2024 RecursiveZero, All rights reserved.
+
+---
+
+© 2024 | RecursiveZero Private Limited | All rights reserved.

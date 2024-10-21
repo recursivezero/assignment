@@ -40,6 +40,8 @@ Below are assignment and task list. Each have separate branch name as `task/<ass
 
 [Societree](./docs/markdown/Societree.md)
 
+[IndiaMap](./docs/markdown/IndiaMap.md)
+
 ## How to Submit
 
 - Create a feature branch from task branch for eg. from  `task/<assignment>` , create `feature/<assignment>`
