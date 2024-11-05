@@ -1,0 +1,391 @@
+[
+    {
+      "id": 1,
+      "Caste": "Jhankar",
+      "Gotra": "Jhumazh",
+      "Deity": "Sudasan",
+      "Location": "",
+      "Surnames": [
+        "Kaliya",
+        "Kharad",
+        "Khivannya",
+        "Khuccha",
+        "Chaudhary",
+        "Sambarsomany",
+        "Jhalariya",
+        "Thinga",
+        "Dani",
+        "Nagla",
+        "Nausarya",
+        "Chausarya",
+        "Movanda",
+        "Mubabivwal",
+        "Memaani",
+        "Movnya"
+      ]
+    },
+    {
+      "id": 2,
+      "Caste": "Lada",
+      "Gotra": "Sitas",
+      "Deity": "Sanchag",
+      "Location": "",
+      "Surnames": [
+        "Agrasanya",
+        "Jola",
+        "Dagda",
+        "Dagdiya",
+        "Dharani",
+        "Bhakaroba",
+        "Muli",
+        "Modi",
+        "Hingya"
+      ]
+    },
+    {
+      "id": 3,
+      "Caste": "Tavari",
+      "Gotra": "Chavda",
+      "Deity": "Kashyap",
+      "Location": "",
+      "Surnames": [
+        "Asesh",
+        "Kuldhariņa",
+        "Jitani",
+        "Odani",
+        "Gaurani",
+        "Ghurka",
+        "Gheranit",
+        "Bhakarani",
+        "Bhaujani",
+        "Mohta",
+        "Gurkani"
+      ]
+    },
+    {
+      "id": 4,
+      "Caste": "Bajaj",
+      "Gotra": "Bhasali",
+      "Deity": "Gaahal",
+      "Location": "",
+      "Surnames": [
+        "Ganduka (Garka)",
+        "Gaucha",
+        "Gaudavat",
+        "Chamar",
+        "Dharu ka",
+        "Bahodya",
+        "Marchunya",
+        "Ramavat",
+        "Roly a",
+        "Lakhawat"
+      ]
+    },
+    {
+      "id": 5,
+      "Caste": "Birla",
+      "Gotra": "Balas",
+      "Deity": "Sanchay",
+      "Location": "",
+      "Surnames": [
+        "Gauriya",
+        "Gaadya",
+        "Gaureya",
+        "Puran",
+        "Badhaka",
+        "Badaliya"
+      ]
+    },
+    {
+      "id": 6,
+      "Caste": "Maloo",
+      "Gotra": "Khlans",
+      "Deity": "Sachaya",
+      "Location": "",
+      "Surnames": [
+        "Chaudhary",
+        "Dhiya",
+        "Tela",
+        "Mal",
+        "Loiwal",
+        "Sabu"
+      ]
+    },
+    {
+      "id": 7,
+      "Caste": "Maanudhannya",
+      "Gotra": "Jeslani",
+      "Deity": "Maanuchani",
+      "Location": "",
+      "Surnames": [
+        "Ghashdoly a",
+        "Chaudhary",
+        "Sum",
+        "Stahar",
+        "Shingi",
+        "Hira"
+      ]
+    },
+    {
+      "id": 8,
+      "Caste": "Dhoot",
+      "Gotra": "Phafedans",
+      "Deity": "Likashan",
+      "Location": "",
+      "Surnames": []
+    },                                                                                          
+    {
+      "id": 9,
+      "Caste": "Bhansali",
+      "Gotra": "Bhasali",
+      "Deity": "Chavda",
+      "Location": "",
+      "Surnames": []
+    },
+    {
+      "id": 10,
+      "Caste": "Aagsud",
+      "Gotra": "Kashyap",
+      "Deity": "Jakhan",
+      "Location": "",
+      "Surnames": []
+    },
+    {
+      "id": 11,
+      "Caste": "Malpani",
+      "Gotra": "Bhatyas",
+      "Deity": "Saangal",
+      "Location": "",
+      "Surnames": [
+        "Chola",
+        "Gangal",
+        "Juhari",
+        "Bhu ra",
+        "Maukha",
+        "Modi",
+        "Lulaani",
+        "Lolna"
+      ]
+    },
+    {
+      "id": 12,
+      "Caste": "Sikchi",
+      "Gotra": "Kashyap",
+      "Deity": "Panwar",
+      "Location": "",
+      "Surnames": [
+        "Seelani",
+        "Seelar"
+      ]
+    },
+    {
+      "id": 13,
+      "Caste": "Naulkha",
+      "Gotra": "Kashyap",
+      "Deity": "Pathay",
+      "Location": "",
+      "Surnames": [
+        "Nogja"
+      ]
+    },
+    {
+      "id": 14,
+      "Caste": "Kalantri",
+      "Gotra": "Kashyap",
+      "Deity": "Chavanda",
+      "Location": "",
+      "Surnames": [
+        "Maghar"
+      ]
+    },
+    {
+      "id": 15,
+      "Caste": "Mantri",
+      "Gotra": "Kavlay",
+      "Deity": "Sanchay",
+      "Location": "",
+      "Surnames": [
+        "Veli"
+      ]
+    },
+    {
+      "id": 16,
+      "Caste": "Devpura",
+      "Gotra": "Paras",
+      "Deity": "Padhay",
+      "Location": "",
+      "Surnames": [
+        "Kasubival"
+      ]
+    },
+    {
+      "id": 18,
+      "Caste": "Bangarad",
+      "Gotra": "Chudas",
+      "Deity": "Sanchay",
+      "Location": "",
+      "Surnames": [
+        "Tapdiya"
+      ]
+    },
+    {
+      "id": 19,
+      "Caste": "Tapdiya",
+      "Gotra": "Pipalan",
+      "Deity": "Ashapura",
+      "Location": "",
+      "Surnames": [
+        "Kadhari",
+        "Moongarad"
+      ]
+    },
+    {
+      "id": 20,
+      "Caste": "Chaukhada",
+      "Gotra": "Chandras",
+      "Deity": "Chivato da",
+      "Location": "",
+      "Surnames": [
+        "Chaudhary",
+        "Dhury a"
+      ]
+    },
+    {
+      "id": 21,
+      "Caste": "Kabra",
+      "Gotra": "Achitras",
+      "Deity": "Susamad",
+      "Location": "",
+      "Surnames": [
+        "Athariya",
+        "Kothari",
+        "Paladya",
+        "Bhagat",
+        "Mandkya",
+        "Singi",
+        "Ghaul"
+      ]
+    },
+    {
+      "id": 22,
+      "Caste": "Karva",
+      "Gotra": "Karvas",
+      "Deity": "Sanchay",
+      "Location": "",
+      "Surnames": [
+        "Kalan ki",
+        "Kagya",
+        "Kahour",
+        "Killal",
+        "Kitha"
+      ]
+    },
+    {
+      "id": 23,
+      "Caste": "Chaparwal",
+      "Gotra": "Kaushik",
+      "Deity": "Banvar",
+      "Location": "",
+      "Surnames": [
+        "Dujara",
+        "Dusaj"
+      ]
+    },
+    {
+        "id": 24,
+        "Caste": "Kalani",
+        "Gotra": "Ghaulas",
+        "Deity": "Chavanda",
+        "Location": "",
+        "Surnames": [
+        "Kalantri",
+        "Kaly a",
+        "Kulchya",
+        "Gattani",
+        "Markya"
+        ]
+    },
+    {
+        "id": 25,
+        "Caste": "Atal",
+        "Gotra": "Gautamasth",
+        "Deity": "Sachaya",
+        "Location": "",
+        "Surnames": [
+        "Gothnib al",
+        "Marothia"
+        ]
+    },
+    {
+        "id": 26,
+        "Caste": "Asava",
+        "Gotra": "Panchas",
+        "Deity": "Ashavari",
+        "Location": "",
+        "Surnames": [
+        "Nag",
+        "Mandowash",
+        "Vyapati",
+        "Markya"
+        ]
+    },
+    {
+        "id": 27,
+        "Caste": "Kasat",
+        "Gotra": "Allasas",
+        "Deity": "Sanchar",
+        "Location": "",
+        "Surnames": [
+        "Katmura",
+        "Khogta",
+        "Surjan"
+        ]
+    },
+    {
+        "id": 28,
+        "Caste": "Baldi",
+        "Gotra": "Laurs",
+        "Deity": "Gars",
+        "Location": "",
+        "Surnames": []
+    },
+    {
+        "id": 29,
+        "Caste": "Chechani",
+        "Gotra": "Seelas",
+        "Deity": "Dadyimati",
+        "Location": "",
+        "Surnames": [
+        "Dhulad"
+        ]
+    },
+    {
+        "id": 30,
+        "Caste": "Dwaraka",
+        "Gotra": "Kashyap",
+        "Deity": "Mirs",
+        "Location": "",
+        "Surnames": []
+    },
+    {
+        "id": 31,
+        "Caste": "Naynavala",
+        "Gotra": "Kashyap",
+        "Deity": "Nayan",
+        "Location": "",
+        "Surnames": [
+        "Rajani"
+        ]
+    },
+    {
+        "id": 32,
+        "Caste": "Porwal",
+        "Gotra": "Nanņans",
+        "Deity": "Matri",
+        "Location": "",
+        "Surnames": [
+        "Parwar",
+        "Dagdiya"
+        ]
+    }
+    ]

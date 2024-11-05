@@ -1,0 +1,163 @@
+---
+import "../styles/card.css";
+import { colors } from "../scripts/colors";
+---
+
+<div class="card-container" id="card-container"></div>
+
+<script type="module">
+    fetch("/englishTranslation.json")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((data) => {
+        if (!data) {
+            console.error("No data found in response");
+            return;
+        }
+
+        const cardContainer = document.getElementById("card-container");
+        if (!cardContainer) {
+            console.error("Card container element not found");
+            return;
+        }
+
+        cardContainer.innerHTML = "";
+        
+        const colors = [
+            '#FFB3BA', '#BAFFC9', '#BAE1FF', '#FFFFBA', '#FFDFBA',
+            '#E0BBE4', '#D2FF72', '#E9EFEC', '#FEC8D8', '#FFDFD3'
+        ];
+
+        function createKeyValuePairs(branch) {
+            return Object.entries(branch)
+                .filter(([key]) => ['Caste', 'Gotra', 'Deity'].includes(key)) // Filter for only desired keys
+                .map(([key, value]) => {
+                    // Customize icons based on the keys
+                    let icon = '';
+                    switch (key) {
+                        case 'Gotra':
+                            icon = '🧬';
+                            break;
+                        case 'Deity':
+                            icon = '🕉️';
+                            break;
+                        case 'Caste':
+                            icon = '🌿';
+                            break;
+                        default:
+                            icon = '🔑'; // Default icon for other keys (not used here)
+                    }
+                    return `
+                        <p title="${key}">${icon} : <span>${value}</span></p>
+                    `;
+                })
+                .join('');
+        }
+
+        function createSurnameCards(surnames, gotra, deity, branchName) {
+            return surnames.map(surname => `
+                <div class="surname-card">
+                    <p> ${surname}</p>
+                    <p><strong title="Gotra">🧬 :</strong> ${gotra}</p>
+                    <p><strong>🕉️ :</strong> ${deity}</p>
+                    <p><strong>🌿 :</strong> ${branchName}</p>
+                    <button class="copy-button" data-gotra="${gotra}" data-surname="${surname}" data-deity="${deity}" data-branch="${branchName}">
+                        ...
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        data.forEach((branch, index) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            const colorIndex = index % colors.length;
+            card.style.backgroundColor = colors[colorIndex];
+
+            const keyValueHTML = createKeyValuePairs(branch);
+            const surnamesHTML = createSurnameCards(branch.Surnames, branch.Gotra, branch.Deity, branch.Caste);
+            
+            const cardContent = `
+            <div class="card-header">
+                ${keyValueHTML}
+            </div>
+            <div class="card-body">
+                <h3>Surnames</h3>
+                <div class="surname-container">
+                    ${surnamesHTML}
+                </div>
+            </div>
+            <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname="${branch.Surnames.join(', ')}" data-deity="${branch.Deity}" data-branch="${branch.Caste}">
+                Copy All
+            </button>
+            `;
+
+            card.innerHTML = cardContent;
+
+            card.addEventListener("click", (event) => {
+                const target = event.target;
+                if (!target.closest('.surname-card') && !target.closest('.copy-button')) {
+                    card.classList.toggle("open");
+                    if (card.classList.contains("open")) {
+                        card.style.gridColumn = "1 / -1";
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    } else {
+                        card.style.gridColumn = "";
+                    }
+                }
+                event.stopPropagation();
+            });
+
+            card.addEventListener("keypress", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    card.click();
+                    event.preventDefault();
+                }
+            });
+
+            const copyButtons = card.querySelectorAll('.copy-button');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', event => {
+                    event.stopPropagation(); 
+                    const target = event.target;
+                    const gotra = target.getAttribute("data-gotra");
+                    const surname = target.getAttribute("data-surname");
+                    const deity = target.getAttribute("data-deity");
+                    const branch = target.getAttribute("data-branch");
+                    navigator.clipboard.writeText(`Surname: ${surname}, Gotra: ${gotra}, Deity: ${deity}, Caste: ${branch}`);
+                });
+            });
+
+            const copyButtonAll = card.querySelector('.copy-button-all');
+            copyButtonAll.addEventListener('click', event => {
+                event.stopPropagation();
+                const gotra = branch.Gotra;
+                const surnames = branch.Surnames;
+                const deity = branch.Deity;
+                const caste = branch.Caste;
+
+                const jsonData = JSON.stringify({
+                    gotra: gotra,
+                    surnames: surnames,
+                    deity: deity,
+                    caste: caste
+                }, null, 2); // Pretty print JSON with 2 spaces
+
+                navigator.clipboard.writeText(jsonData).then(() => {
+                    console.log('Copied to clipboard:', jsonData);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            });
+
+            cardContainer.appendChild(card);
+        });
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+</script>
