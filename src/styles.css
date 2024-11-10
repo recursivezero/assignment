@@ -1,0 +1,10 @@
+.state {
+    fill: lightgreen;
+    stroke: #000;
+    stroke-width: 0.5;
+}
+
+.state:hover {
+    fill: orange;
+    cursor: pointer;
+}
