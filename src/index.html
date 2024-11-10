@@ -1,10 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <title>India States Map</title>
+  </head>
+  <body>
+    <div id="stateModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-header">
+          <h2 id="stateName" style="margin: 0"></h2>
+          <button id="copyButton"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+        <div class="modal-body">
+          <div class="details">
+            <p><strong>Capital:</strong> <span id="stateCapital"></span></p>
+            <p><strong>Area:</strong> <span id="stateArea"></span></p>
+            <p><strong>Languages:</strong> <span id="stateLanguages"></span></p>
+            <p><strong>Dance Forms:</strong> <span id="stateDance"></span></p>
+            <p>
+              <strong>Literacy Rate:</strong> <span id="stateLiteracy"></span>
+            </p>
+          </div>
+          <div class="description" id="stateDescription"></div>
+        </div>
+      </div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

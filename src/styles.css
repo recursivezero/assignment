@@ -1,3 +1,8 @@
+svg {
+    width: 100%;
+    height: auto;
+}
+
 .state {
     fill: lightgreen;
     stroke: #000;
@@ -7,4 +12,98 @@
 .state:hover {
     fill: orange;
     cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Increased z-index */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow-y: auto; /* Allow scrolling for long content */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Reduced from 15% to 5% */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 800px; /* Increased from 600px */
+    border-radius: 8px;
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+#copyButton {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#copyButton:hover {
+    background-color: #45a049;
+}
+
+.details {
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+.description {
+    margin-top: 20px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.capital-marker {
+    fill: #ff4444;
+    stroke: white;
+    stroke-width: 1px;
+    transition: all 0.3s ease;
+}
+
+.capital-marker:hover {
+    r: 5;
+}
+
+.capital-marker.active {
+    r: 5;
+    fill: #ff0000;
+    stroke-width: 2px;
+}
+
+.capital-label {
+    font-size: 8px;
+    font-family: Arial, sans-serif;
+    fill: #333;
+    pointer-events: none;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.capital-label.active {
+    font-size: 10px;
+    font-weight: bold;
+    opacity: 1;
 }
