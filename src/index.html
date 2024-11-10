@@ -3,20 +3,37 @@
   <head>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <title>India States Map</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <title>Explore India - Interactive State Map</title>
   </head>
   <body>
+    <div class="header">
+        <h1>Explore India</h1>
+        <p>Click on any state to discover its rich culture and heritage</p>
+    </div>
+
+    <div class="map-container">
+        <!-- SVG will be inserted here by JavaScript -->
+        <div class="zoom-controls">
+            <button class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button class="zoom-button" onclick="window.indiaMap.resetZoom()">
+                <i class="fas fa-home"></i>
+            </button>
+        </div>
+    </div>
+
     <div id="stateModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <div class="modal-header">
           <h2 id="stateName" style="margin: 0"></h2>
-          <button id="copyButton"><i class="fas fa-copy"></i> Copy</button>
+          <button id="copyButton"><i class="fas fa-copy"></i> Copy Details</button>
         </div>
         <div class="modal-body">
           <div class="details">
@@ -28,7 +45,7 @@
               <strong>Literacy Rate:</strong> <span id="stateLiteracy"></span>
             </p>
           </div>
-          <div class="description" id="stateDescription"></div>
+              <div class="description" id="stateDescription"></div>
         </div>
       </div>
     </div>
