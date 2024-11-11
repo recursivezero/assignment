@@ -1,14 +1,13 @@
-// Constants for map configuration
 const MAP_CONFIG = {
     center: [ 78.9629, 22.5937 ],
-    scale: 1000, // Reduced scale
+    scale: 1000,
     width: window.innerWidth * 0.8,
     height: window.innerHeight * 0.7,
     initialTransform: null
 };
 
-// Class to handle map rendering and interactions
 class IndiaMap {
+    // Main class handling the map visualization and interaction
     constructor(config) {
         this.config = config;
         this.stateData = {};
@@ -17,10 +16,11 @@ class IndiaMap {
         this.zoom = d3.zoom()
             .scaleExtent([ 1, 8 ])
             .on("zoom", (event) => this.handleZoom(event));
-        this.initializeSVG(); // Call this in constructor
-        this.initialTransform = null; // Store initial transform
+        this.initializeSVG();
+        this.initialTransform = null;
     }
-
+    
+    // Initialize SVG container and set up zoom behavior
     initializeSVG() {
         this.svg = d3.select(".map-container")
             .append("svg")
@@ -29,7 +29,6 @@ class IndiaMap {
 
         this.mapGroup = this.svg.append("g");
 
-        // Store initial transform after map is rendered
         this.initialTransform = d3.zoomIdentity
             .translate(this.config.width / 2, this.config.height / 2)
             .scale(1);
@@ -37,6 +36,7 @@ class IndiaMap {
         this.svg.call(this.zoom);
     }
 
+    // Create Mercator projection for India map
     createProjection() {
         return d3.geoMercator()
             .center(this.config.center)
@@ -44,6 +44,7 @@ class IndiaMap {
             .translate([ this.config.width / 2, this.config.height / 2 ]);
     }
 
+    // Load GeoJSON and state data from external files
     async loadData() {
         try {
             const [ geoData, states ] = await Promise.all([
@@ -58,12 +59,13 @@ class IndiaMap {
         }
     }
 
+    // Handle zoom and pan events
     handleZoom(event) {
         this.mapGroup.attr("transform", event.transform);
     }
 
     renderMap(geoData) {
-        if (!this.mapGroup) return; // Add safety check
+        if (!this.mapGroup) return;
 
         this.mapGroup.selectAll("path")
             .data(geoData.features)
@@ -125,14 +127,6 @@ class IndiaMap {
     }
 
     resetZoom() {
-        if (this.svg && this.zoom) {
-            this.svg.transition()
-                .duration(750)
-                .call(this.zoom.transform, this.initialTransform);
-        }
-    }
-
-    resetZoom() {
         this.svg.transition()
             .duration(750)
             .call(
@@ -141,12 +135,10 @@ class IndiaMap {
                     .scale(1)
             );
     }
-
-
 }
 
-// Class to handle modal functionality
 class StateModal {
+    // Handles state information modal display and interactions
     constructor(stateData, stateName) {
         this.stateData = stateData || {};
         this.stateName = stateName;
@@ -161,12 +153,10 @@ class StateModal {
         closeBtn.onclick = () => this.hide();
         copyBtn.onclick = () => this.copyContent();
 
-        // Handle clicking outside modal
         window.onclick = (event) => {
             if (event.target === this.modal) this.hide();
         };
 
-        // Add  ape key handler
         document.addEventListener('keydown', (event) => {
             if (event.key === 'Escape' && this.modal.style.display === 'block') {
                 this.hide();
@@ -224,18 +214,16 @@ class StateModal {
     }
 }
 
-// Add after DOMContentLoaded event listener
+// Theme toggle functionality for dark/light mode
 function setupThemeToggle() {
     const themeToggle = document.querySelector('.theme-toggle');
     
-    // Check system preference
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
     themeToggle.innerHTML = prefersDark 
         ? '<i class="fas fa-sun"></i>' 
         : '<i class="fas fa-moon"></i>';
     
-    // Listen for system theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         const newTheme = e.matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
@@ -244,7 +232,6 @@ function setupThemeToggle() {
             : '<i class="fas fa-moon"></i>';
     });
 
-    // Handle manual toggles
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';

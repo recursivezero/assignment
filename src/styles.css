@@ -1,3 +1,4 @@
+/* Base styles */
 body {
     margin: 0;
     padding: 0;
@@ -6,6 +7,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
+/* Header styles */
 .header {
     text-align: center;
     padding: 1rem;
@@ -30,6 +32,7 @@ body {
     font-size: 0.95rem;
 }
 
+/* Map container and SVG styles */
 .map-container {
     background: white;
     margin: 1rem auto;
@@ -51,6 +54,7 @@ svg {
     display: block;
 }
 
+/* State and capital styling */
 .state {
     fill: #c7d2fe;
     stroke: #4f46e5;
@@ -69,13 +73,13 @@ svg {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000; /* Increased z-index */
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-    overflow-y: auto; /* Allow scrolling for long content */
+    overflow-y: auto;
     backdrop-filter: blur(3px);
 }
 
@@ -126,12 +130,12 @@ svg {
     margin-bottom: 1.5rem;
     padding: 1.5rem 2rem;
     border-bottom: 1px solid #e9ecef;
-    background: #6366f1;  /* Softer blue */
+    background: #6366f1;
     margin: 0;
     border-bottom: none;
     border-radius: 16px 16px 0 0;
     position: relative;
-    padding-right: 60px; /* Make space for close button */
+    padding-right: 60px;
 }
 
 .modal-header h2 {
@@ -162,7 +166,6 @@ svg {
     padding: 2rem;
 }
 
-/* Update copy button styles */
 #copyButton {
     padding: 0.6rem 1.2rem;
     background: white;
@@ -199,7 +202,7 @@ svg {
 }
 
 .details strong {
-    color: #6366f1;  /* Softer blue */
+    color: #6366f1; 
     min-width: 100px;
     display: inline-block;
     font-weight: 500;
@@ -261,7 +264,6 @@ svg {
     opacity: 1;
 }
 
-/* Update zoom controls positioning */
 .zoom-controls {
     position: absolute;
     top: 2rem;
@@ -274,10 +276,6 @@ svg {
     border-radius: 12px;
     backdrop-filter: blur(4px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-[data-theme="dark"] .zoom-controls {
-    background: rgba(30, 41, 59, 0.9);
 }
 
 .zoom-button {
@@ -381,7 +379,7 @@ svg {
     box-shadow: 0 2px 8px rgba(129, 140, 248, 0.3);
 }
 
-/* Theme toggle button */
+/* Theme toggle and zoom controls */
 .theme-toggle {
     background: white;
     border: 1px solid #4f46e5;
@@ -423,6 +421,10 @@ svg {
 
 [data-theme="dark"] .capital-label {
     fill: #e2e8f0;
+}
+
+[data-theme="dark"] .zoom-controls {
+    background: rgba(30, 41, 59, 0.9);
 }
 
 [data-theme="dark"] svg {
