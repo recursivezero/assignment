@@ -1,8 +1,8 @@
 const MAP_CONFIG = {
     center: [ 78.9629, 22.5937 ],
-    scale: 1000,
-    width: window.innerWidth * 0.8,
-    height: window.innerHeight * 0.7,
+    scale: 900,
+    width: window.innerWidth - 60,
+    height: window.innerHeight - 180,
     initialTransform: null
 };
 
@@ -18,8 +18,10 @@ class IndiaMap {
             .on("zoom", (event) => this.handleZoom(event));
         this.initializeSVG();
         this.initialTransform = null;
+        this.handleResize = this.handleResize.bind(this);
+        window.addEventListener('resize', this.handleResize);
     }
-    
+
     // Initialize SVG container and set up zoom behavior
     initializeSVG() {
         this.svg = d3.select(".map-container")
@@ -86,26 +88,26 @@ class IndiaMap {
             if (!coords) return;
 
             const [ x, y ] = this.projection(coords);
-            this.addCapitalMarker(capitals, x, y, stateName, data.capital.name);
+            if (isNaN(x) || isNaN(y)) return;
+
+            const g = capitals.append("g")
+                .attr("class", "capital-group")
+                .attr("data-state", stateName);
+
+            g.append("circle")
+                .attr("cx", 0)
+                .attr("cy", 0)
+                .attr("r", 3)
+                .attr("class", "capital-marker");
+
+            g.append("text")
+                .attr("x", 0)
+                .attr("y", -10)
+                .attr("class", "capital-label")
+                .text(data.capital.name);
+
+            g.attr("transform", `translate(${x},${y})`);
         });
-    }
-
-    addCapitalMarker(container, x, y, stateName, capitalName) {
-        const g = container.append("g")
-            .attr("class", "capital-group")
-            .attr("data-state", stateName);
-
-        g.append("circle")
-            .attr("cx", x)
-            .attr("cy", y)
-            .attr("r", 3)
-            .attr("class", "capital-marker");
-
-        g.append("text")
-            .attr("x", x)
-            .attr("y", y - 10)
-            .attr("class", "capital-label")
-            .text(capitalName);
     }
 
     handleStateClick(stateName) {
@@ -134,6 +136,26 @@ class IndiaMap {
                 d3.zoomIdentity
                     .scale(1)
             );
+    }
+
+    handleResize() {
+        this.config.width = window.innerWidth - 60;
+        this.config.height = window.innerHeight - 180;
+
+        this.svg
+            .attr("viewBox", `0 0 ${this.config.width} ${this.config.height}`);
+
+        this.projection
+            .center(this.config.center)
+            .scale(this.config.scale)
+            .translate([ this.config.width / 2, this.config.height / 2 ]);
+
+        this.mapGroup.selectAll("path")
+            .attr("d", this.path);
+
+        // Update capital positions
+        this.mapGroup.selectAll(".capital-group").remove();
+        this.renderCapitals();
     }
 }
 
@@ -217,28 +239,28 @@ class StateModal {
 // Theme toggle functionality for dark/light mode
 function setupThemeToggle() {
     const themeToggle = document.querySelector('.theme-toggle');
-    
+
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    themeToggle.innerHTML = prefersDark 
-        ? '<i class="fas fa-sun"></i>' 
+    themeToggle.innerHTML = prefersDark
+        ? '<i class="fas fa-sun"></i>'
         : '<i class="fas fa-moon"></i>';
-    
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         const newTheme = e.matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
-        themeToggle.innerHTML = e.matches 
-            ? '<i class="fas fa-sun"></i>' 
+        themeToggle.innerHTML = e.matches
+            ? '<i class="fas fa-sun"></i>'
             : '<i class="fas fa-moon"></i>';
     });
 
     themeToggle.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
+
         document.documentElement.setAttribute('data-theme', newTheme);
-        themeToggle.innerHTML = newTheme === 'dark' 
-            ? '<i class="fas fa-sun"></i>' 
+        themeToggle.innerHTML = newTheme === 'dark'
+            ? '<i class="fas fa-sun"></i>'
             : '<i class="fas fa-moon"></i>';
     });
 }
