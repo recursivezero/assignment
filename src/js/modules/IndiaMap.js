@@ -1,12 +1,6 @@
-const MAP_CONFIG = {
-    center: [ 78.9629, 22.5937 ],
-    scale: 900,
-    width: window.innerWidth - 60,
-    height: window.innerHeight - 180,
-    initialTransform: null
-};
+import { StateModal } from './StateModal.js';
 
-class IndiaMap {
+export class IndiaMap {
     // Main class handling the map visualization and interaction
     constructor(config) {
         this.config = config;
@@ -20,6 +14,19 @@ class IndiaMap {
         this.initialTransform = null;
         this.handleResize = this.handleResize.bind(this);
         window.addEventListener('resize', this.handleResize);
+
+        // Add cleanup method
+        this.cleanup = this.cleanup.bind(this);
+        window.addEventListener('beforeunload', this.cleanup);
+    }
+
+    cleanup() {
+        window.removeEventListener('resize', this.handleResize);
+        window.removeEventListener('beforeunload', this.cleanup);
+        // Clear any D3 selections
+        if (this.svg) {
+            this.svg.selectAll('*').remove();
+        }
     }
 
     // Initialize SVG container and set up zoom behavior
@@ -58,7 +65,19 @@ class IndiaMap {
             this.renderCapitals();
         } catch (error) {
             console.error("Error loading data:", error);
+            // Add user-friendly error handling here
+            this.handleDataLoadError();
         }
+    }
+
+    handleDataLoadError() {
+        // Add error UI feedback
+        const container = document.querySelector('.map-container');
+        container.innerHTML = `
+            <div class="error-message">
+                Failed to load map data. Please try refreshing the page.
+            </div>
+        `;
     }
 
     // Handle zoom and pan events
@@ -158,115 +177,3 @@ class IndiaMap {
         this.renderCapitals();
     }
 }
-
-class StateModal {
-    // Handles state information modal display and interactions
-    constructor(stateData, stateName) {
-        this.stateData = stateData || {};
-        this.stateName = stateName;
-        this.modal = document.getElementById("stateModal");
-        this.setupEventListeners();
-    }
-
-    setupEventListeners() {
-        const closeBtn = this.modal.querySelector(".close");
-        const copyBtn = this.modal.querySelector("#copyButton");
-
-        closeBtn.onclick = () => this.hide();
-        copyBtn.onclick = () => this.copyContent();
-
-        window.onclick = (event) => {
-            if (event.target === this.modal) this.hide();
-        };
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && this.modal.style.display === 'block') {
-                this.hide();
-            }
-        });
-    }
-
-    show() {
-        this.updateModalContent();
-        this.modal.style.display = "block";
-    }
-
-    hide() {
-        const modalContent = this.modal.querySelector('.modal-content');
-        modalContent.classList.add('closing');
-
-        setTimeout(() => {
-            this.modal.style.display = "none";
-            modalContent.classList.remove('closing');
-        }, 300);
-    }
-
-    updateModalContent() {
-        const elements = {
-            "stateName": this.stateName,
-            "stateCapital": this.stateData.capital.name,
-            "stateArea": this.stateData.area,
-            "stateLanguages": this.stateData.languages,
-            "stateDance": this.stateData.danceforms,
-            "stateLiteracy": this.stateData.literacy,
-            "stateDescription": this.stateData.description
-        };
-
-        Object.entries(elements).forEach(([ id, value ]) => {
-            document.getElementById(id).textContent = value || "N/A";
-        });
-    }
-
-    async copyContent() {
-        try {
-            const content = this.modal.querySelector(".modal-body").innerText;
-            await navigator.clipboard.writeText(content);
-            this.showCopyFeedback();
-        } catch (error) {
-            console.error("Failed to copy content:", error);
-        }
-    }
-
-    showCopyFeedback() {
-        const copyBtn = this.modal.querySelector("#copyButton");
-        copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-        setTimeout(() => {
-            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy';
-        }, 2000);
-    }
-}
-
-// Theme toggle functionality for dark/light mode
-function setupThemeToggle() {
-    const themeToggle = document.querySelector('.theme-toggle');
-
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
-    themeToggle.innerHTML = prefersDark
-        ? '<i class="fas fa-sun"></i>'
-        : '<i class="fas fa-moon"></i>';
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        const newTheme = e.matches ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        themeToggle.innerHTML = e.matches
-            ? '<i class="fas fa-sun"></i>'
-            : '<i class="fas fa-moon"></i>';
-    });
-
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        document.documentElement.setAttribute('data-theme', newTheme);
-        themeToggle.innerHTML = newTheme === 'dark'
-            ? '<i class="fas fa-sun"></i>'
-            : '<i class="fas fa-moon"></i>';
-    });
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    window.indiaMap = new IndiaMap(MAP_CONFIG);
-    window.indiaMap.loadData();
-    setupThemeToggle();
-});

@@ -1,0 +1,38 @@
+/* Header styles */
+.header {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 0;
+    margin-bottom: 1rem;
+    max-width: 100%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.header h1 {
+    margin: 0;
+    color: #212529;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.header p {
+    color: #6c757d;
+    margin: 0.5rem 0 0;
+    font-size: 0.95rem;
+}
+
+/* Dark mode styles for header */
+[data-theme="dark"] .header {
+    background: #1e293b;
+    border-bottom: 1px solid #334155;
+}
+
+[data-theme="dark"] .header h1 {
+    color: #f8fafc;
+}
+
+[data-theme="dark"] .header p {
+    color: #94a3b8;
+}
