@@ -1,17 +1,100 @@
 ---
-import Main from "../layouts/Main.astro";
-import Header from "../layouts/Header.astro";
-import Info from "../components/info.astro";
-import Legend from "../components/legend.astro";
-import Footer from "../layouts/Footer.astro";
-import Card from "../layouts/Card.astro";
-import "../styles/global.css"
+import Footer from "../layouts/Footer.astro"
 ---
 
-<Main>
-  <Header />
-  <Info />
-  <Legend />
-  <Card />
-  <Footer />
-</Main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Visualization</title>
+</head>
+<body>
+    <h1>Welcome to</h1>
+    <h2>Recursive Zero's</h2>
+    <h3>Tree Visualizations</h3>
+
+    <div class="container">
+        <h4><a href="/cards/" target="_parent">&#x1F9EC; Family Tree Visualization</a></h4>
+        <h4><a href="/states/">&#x1F30F; State Tree Visualization</a></h4>
+    </div>
+
+    <Footer/>
+</body>
+</html>
+
+<style>
+
+    @font-face 
+    {
+        font-family: gilroy;
+        src: url(./gilroy/Gilroy-Regular.ttf);
+    }
+
+    *
+    {
+        background-color: black;
+        color: white;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "gilroy";
+        text-align: center;
+    }
+
+    h2, h3
+    {
+        background: linear-gradient(to right, #954FEC, #9B5AEE, #fff);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    h1
+    {
+        margin-top: 2em;
+        font-size: 4em;
+    }
+
+    h2
+    {
+        font-size: 2.5em;
+        margin-top: 0.5em;
+    }
+
+    h3
+    {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+        margin-bottom: 2em;
+    }
+
+    .container
+    {
+        margin-bottom: 4em;
+    }
+
+    a
+    {
+        color: rgb(255, 190, 69);
+        text-decoration: none;
+    }
+
+    h4
+    {
+        margin-top: 1em;
+    }
+
+
+    @media screen and (max-width: 700px)
+{
+
+    h1, h2, h3
+    {
+        font-size: 1.5em;
+        text-align: center;
+        /* padding: 2em; */
+    }
+}
+
+
+</style>

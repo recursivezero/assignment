@@ -10,7 +10,6 @@
 {
     letter-spacing: 8px;
     width: 100%;
-    white-space: nowrap;
     text-align: center;
     overflow: hidden;
     animation: typing 3s steps(23), cursor 3s step-end infinite alternate;
@@ -32,6 +31,22 @@
     #text
         {
             font-size: 28px;
-            white-space: wrap;
+            /* white-space: wrap; */
         }
+}
+
+@media screen and (max-width: 670px)
+{
+    #text 
+    {
+        animation: none;
+        /* white-space: normal; */
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 8px;
+        width: 100%;
+        padding: 1em;
+        text-align: center;
+    }
+
 }

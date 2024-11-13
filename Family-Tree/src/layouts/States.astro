@@ -1,0 +1,105 @@
+---
+import "../styles/states.css";
+---
+
+<div class="card-container" id="card-container"></div>
+
+<script>
+    import { stateColors } from "../utils/constants.ts";
+    console.log(stateColors);
+
+    fetch("/states.json")
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then((data) => {
+        if (!data) {
+            console.error("No data found in response");
+            return;
+        }
+
+        const cardContainer = document.getElementById("card-container");
+        if (!cardContainer) {
+            console.error("Card container element not found");
+            return;
+        }
+
+        cardContainer.innerHTML = "";
+
+        function createDistrictCard(district, state, capital, languages) {
+            return `
+                <div class="district-card">
+                    <p><strong>District:</strong> ${district}</p>
+                    <button class="copy-button" data-state="${state}" data-capital="${capital}" data-languages="${languages.join(', ')}" data-district="${district}">
+                        Copy
+                    </button>
+                </div>
+            `;
+        }
+
+        data.forEach((stateInfo, index) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            const colorIndex = index % stateColors.length;
+            card.style.backgroundColor = stateColors[colorIndex];
+
+
+            const cardContent = `
+            <div class="card-header">
+                <p><strong title="State">📍: ${stateInfo.state}</strong></p>
+                <p><strong title="Capital">🏛️: ${stateInfo.capital}</strong></p>
+                <p><strong title="Languages">🗣️: ${stateInfo.languages.join(', ')}</strong></p>
+            </div>
+            <div class="card-body hidden">
+                ${stateInfo.districts.map(district => createDistrictCard(district, stateInfo.state, stateInfo.capital, stateInfo.languages)).join('')}
+            </div>
+            `;
+
+            card.innerHTML = cardContent;
+
+            // Toggle to view district
+            card.addEventListener("click", (event) => {
+                const target = event.target as HTMLElement;
+                if (!target.closest('.district-card') && !target.closest('.copy-button')) {
+                    card.classList.toggle("open");
+                    const cardBody = card.querySelector('.card-body');
+                    if (card.classList.contains("open")) {
+                        card.style.gridColumn = "1 / -1";
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        cardBody.classList.remove("hidden");  
+                    } else {
+                        card.style.gridColumn = "";
+                        cardBody.classList.add("hidden");
+                    }
+                }
+                event.stopPropagation();
+            });
+
+
+            const copyButtons = card.querySelectorAll('.copy-button');
+            copyButtons.forEach((copyButton) => {
+                copyButton.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const state = copyButton.getAttribute("data-state");
+                    const capital = copyButton.getAttribute("data-capital");
+                    const languages = copyButton.getAttribute("data-languages");
+                    const district = copyButton.getAttribute("data-district");
+                    const textToCopy = `State: ${state}, Capital: ${capital}, Languages: ${languages}, District: ${district}`;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        alert("Copied to clipboard: " + textToCopy);
+                    }).catch(err => {
+                        console.error("Failed to copy: ", err);
+                    });
+                });
+            });
+
+            cardContainer.appendChild(card);
+        });
+    })
+    .catch((error) => {
+        console.error("Error fetching data: ", error);
+    });
+</script>

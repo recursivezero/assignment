@@ -1,12 +1,14 @@
 ---
 import "../styles/card.css";
-import { colors } from "../scripts/colors";
 ---
 
 <div class="card-container" id="card-container"></div>
 
-<script type="module">
-    fetch("/englishTranslation.json")
+<script>
+    import { colors } from "../utils/constants.ts"
+    console.log(colors)
+
+    fetch("/main.json")
     .then((response) => {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -26,17 +28,11 @@ import { colors } from "../scripts/colors";
         }
 
         cardContainer.innerHTML = "";
-        
-        const colors = [
-            '#FFB3BA', '#BAFFC9', '#BAE1FF', '#FFFFBA', '#FFDFBA',
-            '#E0BBE4', '#D2FF72', '#E9EFEC', '#FEC8D8', '#FFDFD3'
-        ];
 
         function createKeyValuePairs(branch) {
             return Object.entries(branch)
-                .filter(([key]) => ['Caste', 'Gotra', 'Deity'].includes(key)) // Filter for only desired keys
+                .filter(([key]) => ['Caste', 'Gotra', 'Deity'].includes(key))
                 .map(([key, value]) => {
-                    // Customize icons based on the keys
                     let icon = '';
                     switch (key) {
                         case 'Gotra':
@@ -49,7 +45,7 @@ import { colors } from "../scripts/colors";
                             icon = '🌿';
                             break;
                         default:
-                            icon = '🔑'; // Default icon for other keys (not used here)
+                            icon = '🔑';
                     }
                     return `
                         <p title="${key}">${icon} : <span>${value}</span></p>
@@ -61,16 +57,17 @@ import { colors } from "../scripts/colors";
         function createSurnameCards(surnames, gotra, deity, branchName) {
             return surnames.map(surname => `
                 <div class="surname-card">
-                    <p> ${surname}</p>
                     <p><strong title="Gotra">🧬 :</strong> ${gotra}</p>
                     <p><strong>🕉️ :</strong> ${deity}</p>
                     <p><strong>🌿 :</strong> ${branchName}</p>
-                    <button class="copy-button" data-gotra="${gotra}" data-surname="${surname}" data-deity="${deity}" data-branch="${branchName}">
+                    <p><strong>hi :</strong> ${surname.hi}</p>
+                    <button class="copy-button" data-gotra="${gotra}" data-surname="${surname.en}" data-deity="${deity}" data-branch="${branchName}">
                         ...
                     </button>
                 </div>
             `).join('');
         }
+
 
         data.forEach((branch, index) => {
             const card = document.createElement("div");
@@ -91,7 +88,7 @@ import { colors } from "../scripts/colors";
                     ${surnamesHTML}
                 </div>
             </div>
-            <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname="${branch.Surnames.join(', ')}" data-deity="${branch.Deity}" data-branch="${branch.Caste}">
+            <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname="${branch.Surnames.map(surname => surname.en).join(', ')}" data-deity="${branch.Deity}" data-branch="${branch.Caste}">
                 Copy All
             </button>
             `;
@@ -99,7 +96,7 @@ import { colors } from "../scripts/colors";
             card.innerHTML = cardContent;
 
             card.addEventListener("click", (event) => {
-                const target = event.target;
+                const target = event.target as HTMLElement;
                 if (!target.closest('.surname-card') && !target.closest('.copy-button')) {
                     card.classList.toggle("open");
                     if (card.classList.contains("open")) {
@@ -123,34 +120,17 @@ import { colors } from "../scripts/colors";
             copyButtons.forEach(button => {
                 button.addEventListener('click', event => {
                     event.stopPropagation(); 
-                    const target = event.target;
+                    const target = event.target as HTMLElement;
                     const gotra = target.getAttribute("data-gotra");
                     const surname = target.getAttribute("data-surname");
                     const deity = target.getAttribute("data-deity");
                     const branch = target.getAttribute("data-branch");
-                    navigator.clipboard.writeText(`Surname: ${surname}, Gotra: ${gotra}, Deity: ${deity}, Caste: ${branch}`);
-                });
-            });
-
-            const copyButtonAll = card.querySelector('.copy-button-all');
-            copyButtonAll.addEventListener('click', event => {
-                event.stopPropagation();
-                const gotra = branch.Gotra;
-                const surnames = branch.Surnames;
-                const deity = branch.Deity;
-                const caste = branch.Caste;
-
-                const jsonData = JSON.stringify({
-                    gotra: gotra,
-                    surnames: surnames,
-                    deity: deity,
-                    caste: caste
-                }, null, 2); // Pretty print JSON with 2 spaces
-
-                navigator.clipboard.writeText(jsonData).then(() => {
-                    console.log('Copied to clipboard:', jsonData);
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
+                    const textToCopy = `Gotra: ${gotra}, Surname: ${surname}, Deity: ${deity}, Branch: ${branch}`;
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        alert("Copied to clipboard: " + textToCopy);
+                    }).catch(err => {
+                        console.error("Failed to copy: ", err);
+                    });
                 });
             });
 
@@ -158,6 +138,7 @@ import { colors } from "../scripts/colors";
         });
     })
     .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error fetching data: ", error);
     });
 </script>
+
