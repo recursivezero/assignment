@@ -1,9 +1,26 @@
+@font-face 
+{
+    font-family: gilroy;
+    src: url(/gilroy/Gilroy-Regular.ttf);
+}
+
+
 #desc 
 {
+    /* font-weight: 600; */
     margin: auto;
-    width: 50%;
+    width: 60%;
     margin-bottom: 2em;
     text-align: center;
     font-size: 1.5em;
     font-family: "gilroy";
+
+}
+
+@media screen and (max-width : 660px)
+{
+    #desc 
+    {
+        font-weight: 600;
+    }
 }

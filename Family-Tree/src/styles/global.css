@@ -1,7 +1,7 @@
 @font-face 
 {
     font-family: gilroy;
-    src: url(./gilroy/Gilroy-Regular.ttf);
+    src: url(/gilroy/Gilroy-Regular.ttf);
 }
 
 body 
@@ -9,7 +9,7 @@ body
     margin: 0;
     padding: 0;
     height: fit-content;
-    background: linear-gradient(#88C273, #FFF1DB, #D4BDAC);
+    /* background: linear-gradient(); */
     background-position: 10em 80em;
     background-size: cover;
     overflow-x: hidden;

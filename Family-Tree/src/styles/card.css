@@ -10,7 +10,7 @@
 
 .card {
     background: #fff1d5;
-    border: 2px solid #ddd;
+    border: 2px solid #9b9b9b81;
     border-radius: 50%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 200px;
@@ -170,18 +170,19 @@
       font-size: 0.9em;
     }
   }
-  
-  
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 469px) {
     .surname-card {
-      padding: 0.6em; 
+      padding: 0.8em;
     }
+  }
   
-    .copy-button {
-      top: 0.3em;
-      right: 0.3em;
-      padding: 0.3em 0.6em;
-      font-size: 0.8em;
+  
+  @media screen and (max-width: 495px) {
+    #card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
 

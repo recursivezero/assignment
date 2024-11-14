@@ -50,3 +50,13 @@
     }
 
 }
+
+#header-title p {
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    #header-title p {
+        white-space: normal;
+    }
+}

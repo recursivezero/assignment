@@ -12,6 +12,7 @@ export const colors = [
   "#FFDFD3",
 ];
 
+
 export const stateColors = [
   "#B9E5E8",
   "#D4BEE4",
@@ -20,7 +21,7 @@ export const stateColors = [
   "#DCF2F1",
   "#FFCF9D",
   "#FFF1DB",
-  "#A0D683",
+  "#A0D800",
   "#D8DBBD",
   "#DFF2EB",
 ];

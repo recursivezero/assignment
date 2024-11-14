@@ -58,9 +58,9 @@ import "../styles/card.css";
             return surnames.map(surname => `
                 <div class="surname-card">
                     <p><strong title="Gotra">🧬 :</strong> ${gotra}</p>
-                    <p><strong>🕉️ :</strong> ${deity}</p>
-                    <p><strong>🌿 :</strong> ${branchName}</p>
-                    <p><strong>hi :</strong> ${surname.hi}</p>
+                    <p><strong title="Deity">🕉️ :</strong> ${deity}</p>
+                    <p><strong title="Caste">🌿 :</strong> ${branchName}</p>
+                    <p><strong title="Surname">🌳:</strong> ${surname.hi}</p>
                     <button class="copy-button" data-gotra="${gotra}" data-surname="${surname.en}" data-deity="${deity}" data-branch="${branchName}">
                         ...
                     </button>

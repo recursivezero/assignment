@@ -19,8 +19,8 @@
     border: 2px solid #ddd;
     border-radius: 8%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    height: 250px;
+    width: 230px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -219,12 +219,26 @@
     .state-card {
       padding: 0.8em;
     }
+
+    .card-container
+    {
+      margin: 1em;
+    }
   
     .copy-button {
       top: 0.5em;
       right: 0.5em;
       padding: 0.4em 0.8em;
       font-size: 0.9em;
+    }
+  }
+
+  @media screen and (max-width: 525px) {
+    #card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
   }
   
