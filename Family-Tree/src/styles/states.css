@@ -247,6 +247,11 @@
     .state-card {
       padding: 0.6em; 
     }
+
+    .card
+    {
+      margin-bottom: 2em;
+    }
   
     .copy-button {
       top: 0.3em;

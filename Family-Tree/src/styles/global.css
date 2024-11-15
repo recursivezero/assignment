@@ -9,7 +9,11 @@ body
     margin: 0;
     padding: 0;
     height: fit-content;
-    /* background: linear-gradient(); */
+    background: #FFF94C;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFF94C, #bcd1ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFF94C, #bcd1ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
     background-position: 10em 80em;
     background-size: cover;
     overflow-x: hidden;

@@ -1,3 +1,10 @@
+@font-face 
+{
+    font-family: gilroy;
+    src: url(/gilroy/Gilroy-Regular.ttf);
+}
+
+
 #header-title 
 {
     margin: 1em;

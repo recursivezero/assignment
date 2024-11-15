@@ -5,8 +5,8 @@ import "../styles/card.css";
 <div class="card-container" id="card-container"></div>
 
 <script>
-    import { colors } from "../utils/constants.ts"
-    console.log(colors)
+    import { colors } from "../utils/constants.ts";
+    console.log(colors);
 
     fetch("/main.json")
     .then((response) => {
@@ -68,7 +68,6 @@ import "../styles/card.css";
             `).join('');
         }
 
-
         data.forEach((branch, index) => {
             const card = document.createElement("div");
             card.className = "card";
@@ -78,6 +77,8 @@ import "../styles/card.css";
             const keyValueHTML = createKeyValuePairs(branch);
             const surnamesHTML = createSurnameCards(branch.Surnames, branch.Gotra, branch.Deity, branch.Caste);
             
+            const surnamesJson = branch.Surnames.length > 0 ? JSON.stringify(branch.Surnames.map(surname => surname.en)) : '[]';
+
             const cardContent = `
             <div class="card-header">
                 ${keyValueHTML}
@@ -88,7 +89,7 @@ import "../styles/card.css";
                     ${surnamesHTML}
                 </div>
             </div>
-            <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname="${branch.Surnames.map(surname => surname.en).join(', ')}" data-deity="${branch.Deity}" data-branch="${branch.Caste}">
+            <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname='${surnamesJson}' data-deity="${branch.Deity}" data-branch="${branch.Caste}">
                 Copy All
             </button>
             `;
@@ -109,13 +110,6 @@ import "../styles/card.css";
                 event.stopPropagation();
             });
 
-            card.addEventListener("keypress", (event) => {
-                if (event.key === "Enter" || event.key === " ") {
-                    card.click();
-                    event.preventDefault();
-                }
-            });
-
             const copyButtons = card.querySelectorAll('.copy-button');
             copyButtons.forEach(button => {
                 button.addEventListener('click', event => {
@@ -125,12 +119,39 @@ import "../styles/card.css";
                     const surname = target.getAttribute("data-surname");
                     const deity = target.getAttribute("data-deity");
                     const branch = target.getAttribute("data-branch");
-                    const textToCopy = `Gotra: ${gotra}, Surname: ${surname}, Deity: ${deity}, Branch: ${branch}`;
+                    const textToCopy = JSON.stringify({
+                        Gotra: gotra,
+                        Surname: surname,
+                        Deity: deity,
+                        Caste: branch
+                    });
+                    
                     navigator.clipboard.writeText(textToCopy).then(() => {
                         alert("Copied to clipboard: " + textToCopy);
                     }).catch(err => {
                         console.error("Failed to copy: ", err);
                     });
+                });
+            });
+
+            const copyAllButton = card.querySelector('.copy-button-all');
+            copyAllButton.addEventListener('click', event => {
+                event.stopPropagation();
+                const gotra = copyAllButton.getAttribute("data-gotra");
+                const surnames = JSON.parse(copyAllButton.getAttribute("data-surname"));
+                const deity = copyAllButton.getAttribute("data-deity");
+                const branch = copyAllButton.getAttribute("data-branch");
+                const textToCopyAll = JSON.stringify({
+                    Gotra: gotra,
+                    Surnames: surnames,
+                    Deity: deity,
+                    Caste: branch
+                });
+                
+                navigator.clipboard.writeText(textToCopyAll).then(() => {
+                    alert("Copied all to clipboard: " + textToCopyAll);
+                }).catch(err => {
+                    console.error("Failed to copy all: ", err);
                 });
             });
 
@@ -141,4 +162,3 @@ import "../styles/card.css";
         console.error("Error fetching data: ", error);
     });
 </script>
-

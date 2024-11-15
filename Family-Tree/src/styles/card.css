@@ -184,6 +184,11 @@
       align-items: center;
       justify-content: center;
     }
+
+      .card
+    {
+      margin-bottom: 2.5em;
+    }
   }
 
 .surname-card > p
