@@ -4,6 +4,10 @@ An interactive web application that visualizes India's states and union territor
 
 ![India Map Explorer](screenshots/main-view.png)
 
+## Website Link
+
+Visit the live application at [Explore India Map](https://india-map.netlify.app).
+
 ## Features
 
 - Interactive SVG map of India with clickable states
@@ -127,3 +131,8 @@ src/
 
 - D3.js community for visualization tools
 - Indian government data portals for state information
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
