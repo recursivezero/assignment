@@ -1,0 +1,286 @@
+{
+  "states": [
+    {
+      "state": "Andhra Pradesh",
+      "dance": {
+        "name": "Kuchipudi",
+        "type": "Classical",
+        "description": "A graceful classical dance form that originated in the village of Kuchipudi. Known for its dramatic elements, rhythmic footwork, and unique Tarangam performance on a brass plate.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Kuchipudi",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Kuchipudi_Performance_DS.jpg"
+      }
+    },
+    {
+      "state": "Arunachal Pradesh",
+      "path": "",
+      "dance": {
+        "name": "Bardo Chham",
+        "type": "Folk",
+        "description": "A masked dance performed by the Monpa tribe, depicting the victory of good over evil through elaborate costumes and symbolic movements.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Bardo_Chham",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Bardo_Chham_Dance.jpg"
+      }
+    },
+    {
+      "state": "Assam",
+      "path": "m 1252.381,602.9526 -9.1022,13.65331 2.0687,10.34342 c 0,0 -3.7236,-0.82748 -5.7923,-1.24121 -2.0687,-0.41374 -8.2748,-1.65495 -8.2748,-1.65495 0,0 -4.1373,2.89616 -5.7923,4.13737 -1.6549,1.24121 -10.3434,1.65495 -10.3434,1.65495 l -4.1374,1.24121 c 0,0 -2.8961,2.06868 -5.7923,1.24121 -2.8961,-0.82748 -5.3786,-1.65495 -7.0335,-0.41374 -1.655,1.24121 0.8275,4.13737 -5.3786,4.5511 -6.206,0.41374 -15.722,2.89616 -17.3769,1.24121 -1.655,-1.65494 -8.2748,-7.86099 -8.2748,-7.86099 l -4.9648,-0.41374 -4.5511,3.72363 c 0,0 -4.5511,0 -5.7923,2.48242 -1.2412,2.48242 0.8275,4.5511 -1.655,4.13737 -2.4824,-0.41374 -6.6197,-1.65495 -6.6197,-1.65495 l -2.4825,2.48242 -6.206,3.30989 -14.0671,15.30826 c 0,0 3.3099,20.2731 4.9649,21.10057 1.6549,0.82748 10.7571,4.96484 10.7571,4.96484 0,0 3.3099,0.41374 3.3099,4.13737 0,3.72363 -2.4824,2.06868 -2.0687,6.61979 0.4138,4.5511 2.0687,9.51594 2.0687,9.51594 l 2.4824,5.79232 47.5798,-13.65332 68.2665,3.3099 -7.4472,19.44562 4.1373,7.861 c 0,0 8.2748,4.96484 10.3434,5.79231 2.0687,0.82748 4.1374,2.06869 4.1374,2.06869 l -4.9648,0.41374 c 0,0 -7.4473,0.41373 -5.3786,3.72363 2.0687,3.30989 4.9648,4.96484 5.3786,7.03352 0.4137,2.06868 0,4.13737 0,4.13737 0,0 -5.3786,-0.82748 -5.7923,4.96484 -0.4138,5.79231 -0.4138,9.51594 -0.4138,9.51594 l 8.6885,18.61815 c 0,0 25.6517,0.82748 27.7203,-1.65494 2.0687,-2.48242 11.1709,-11.99837 14.4808,-20.2731 3.3099,-8.27474 14.0671,-33.92641 13.6533,-50.47588 -0.4137,-16.54947 14.8946,-34.75388 26.0655,-52.54456 11.1708,-17.79068 31.8577,-44.68357 40.1324,-49.23467 8.2748,-4.5511 26.0654,-17.79068 26.0654,-17.79068 0,0 19.8594,-17.37694 20.2731,-19.44562 0.4138,-2.06869 -6.6198,-17.79068 -6.6198,-17.79068 l -0.4137,-24.8242 c 0,0 -23.583,-4.96484 -33.9264,1.65494 -10.3434,6.61979 -45.511,24.82421 -65.3704,33.51268 -19.8594,8.68847 -39.305,25.65167 -44.6836,27.30662 -5.3785,1.65495 -31.8577,9.92968 -31.8577,9.92968 z",
+      "dance": {
+        "name": "Bihu",
+        "type": "Folk",
+        "description": "An energetic dance performed during the Bihu festival, characterized by brisk hip movements and rapid hand gestures, celebrating harvest and springtime.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Bihu_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Bihu_Dance.jpg"
+      }
+    },
+    {
+      "state": "Bihar",
+      "dance": {
+        "name": "Bidesia",
+        "type": "Folk",
+        "description": "A folk theater-dance form that portrays the story of migrant workers and their separation from loved ones, combining elements of dance, drama, and music.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Bidesia",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d8/Bidesia_Dance.jpg"
+      }
+    },
+    {
+      "state": "Chhattisgarh",
+      "dance": {
+        "name": "Panthi",
+        "type": "Folk",
+        "description": "A spiritual dance form of the Satnami community, combining devotional songs with synchronized dance movements.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Panthi_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c1/Panthi_Dance.jpg"
+      }
+    },
+    {
+      "state": "Goa",
+      "dance": {
+        "name": "Fugdi",
+        "type": "Folk",
+        "description": "A fast-paced traditional dance performed by women during Hindu festivals, especially Ganesh Chaturthi.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Fugdi",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Fugdi_Dance.jpg"
+      }
+    },
+    {
+      "state": "Gujarat",
+      "dance": {
+        "name": "Garba",
+        "type": "Folk",
+        "description": "A traditional dance performed during Navratri, featuring circular movements around a central lamp or idol of Goddess Durga.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Garba_(dance)",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Garba_Dance.jpg"
+      }
+    },
+    {
+      "state": "Haryana",
+      "dance": {
+        "name": "Phag",
+        "type": "Folk",
+        "description": "A traditional dance performed during the Holi festival, celebrating the arrival of spring with vibrant movements.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Phag_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a3/Phag_Dance.jpg"
+      }
+    },
+    {
+      "state": "Himachal Pradesh",
+      "dance": {
+        "name": "Nati",
+        "type": "Folk",
+        "description": "A traditional dance of the Kullu valley, performed during festivals and social gatherings with rhythmic movements.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Nati_(dance)",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Kullu_Nati.jpg"
+      }
+    },
+    {
+      "state": "Jharkhand",
+      "dance": {
+        "name": "Chhau",
+        "type": "Folk",
+        "description": "A semi-classical Indian dance with martial art movements, performed with elaborate masks and vigorous movements.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Chhau_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d5/Chhau_Dance.jpg"
+      }
+    },
+    {
+      "state": "Karnataka",
+      "dance": {
+        "name": "Yakshagana",
+        "type": "Folk",
+        "description": "A traditional theater-dance form combining dance, music, dialogue, costume, make-up, and stage techniques.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Yakshagana",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e3/Yakshagana_Performance.jpg"
+      }
+    },
+    {
+      "state": "Kerala",
+      "dance": {
+        "name": "Kathakali",
+        "type": "Classical",
+        "description": "A major form of classical Indian dance-drama, known for its colorful make-up, elaborate costumes and face masks.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Kathakali",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/2/2f/Kathakali_Performance.jpg"
+      }
+    },
+    {
+      "state": "Madhya Pradesh",
+      "dance": {
+        "name": "Jawara",
+        "type": "Folk",
+        "description": "A harvest dance celebrating the sowing season and spring, performed with traditional instruments.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Jawara_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Jawara_Dance.jpg"
+      }
+    },
+    {
+      "state": "Maharashtra",
+      "dance": {
+        "name": "Lavani",
+        "type": "Folk",
+        "description": "A traditional dance form known for its powerful rhythm and expressive performances, performed to the beat of the Dholki.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Lavani",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Lavani_Dance.jpg"
+      }
+    },
+    {
+      "state": "Manipur",
+      "dance": {
+        "name": "Manipuri",
+        "type": "Classical",
+        "description": "A classical Indian dance characterized by gentle movements and religious themes, particularly focused on Radha-Krishna.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Manipuri_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c4/Manipuri_Dance.jpg"
+      }
+    },
+    {
+      "state": "Meghalaya",
+      "dance": {
+        "name": "Ka Shad Mastieh",
+        "type": "Folk",
+        "description": "A traditional religious dance of the Khasi tribe performed during festivals and ceremonies.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Ka_Shad_Mastieh",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Ka_Shad_Mastieh.jpg"
+      }
+    },
+    {
+      "state": "Mizoram",
+      "dance": {
+        "name": "Cheraw",
+        "type": "Folk",
+        "description": "A bamboo dance requiring great skill and coordination, performed with dancers moving between rhythmically clapping bamboo poles.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Cheraw_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Cheraw_Dance.jpg"
+      }
+    },
+    {
+      "state": "Nagaland",
+      "dance": {
+        "name": "War Dance",
+        "type": "Folk",
+        "description": "A traditional dance depicting warfare and victory celebrations of various Naga tribes.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Naga_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Naga_War_Dance.jpg"
+      }
+    },
+    {
+      "state": "Odisha",
+      "dance": {
+        "name": "Odissi",
+        "type": "Classical",
+        "description": "One of the oldest surviving dance forms of India, known for its sculpturesque poses and fluid movements.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Odissi",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Odissi_Dance.jpg"
+      }
+    },
+    {
+      "state": "Punjab",
+      "dance": {
+        "name": "Bhangra",
+        "type": "Folk",
+        "description": "An energetic harvest dance traditionally performed by farmers to celebrate the coming of spring.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Bhangra_(dance)",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Bhangra_Dance.jpg"
+      }
+    },
+    {
+      "state": "Rajasthan",
+      "dance": {
+        "name": "Ghoomar",
+        "type": "Folk",
+        "description": "A traditional women's dance performed on special occasions, featuring graceful pirouetting while moving in and out of a circle.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Ghoomar",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Ghoomar_Dance.jpg"
+      }
+    },
+    {
+      "state": "Sikkim",
+      "dance": {
+        "name": "Singhi Chham",
+        "type": "Folk",
+        "description": "A masked dance depicting the snow lion of Tibet, performed during Buddhist festivals.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Singhi_Chham",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Singhi_Chham.jpg"
+      }
+    },
+    {
+      "state": "Tamil Nadu",
+      "dance": {
+        "name": "Bharatanatyam",
+        "type": "Classical",
+        "description": "One of the most popular classical Indian dances, known for its grace, purity, tenderness, and sculpturesque poses.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Bharatanatyam",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Bharatanatyam_Dance.jpg"
+      }
+    },
+    {
+      "state": "Telangana",
+      "dance": {
+        "name": "Perini Shivatandavam",
+        "type": "Classical",
+        "description": "An ancient dance form performed by male dancers, originally performed by warriors before going into battle.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Perini_Shivatandavam",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Perini_Dance.jpg"
+      }
+    },
+    {
+      "state": "Tripura",
+      "dance": {
+        "name": "Hojagiri",
+        "type": "Folk",
+        "description": "A folk dance performed by women balancing bottles on their heads while dancing on earthen pitchers.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Hojagiri_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Hojagiri_Dance.jpg"
+      }
+    },
+    {
+      "state": "Uttar Pradesh",
+      "dance": {
+        "name": "Kathak",
+        "type": "Classical",
+        "description": "A major classical dance form known for its rhythmic footwork, spins, and expressive storytelling.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Kathak",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Kathak_Performance.jpg"
+      }
+    },
+    {
+      "state": "Uttarakhand",
+      "dance": {
+        "name": "Chaupai",
+        "type": "Folk",
+        "description": "A traditional dance form performed during religious and social occasions in the Kumaon region.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Chaupai_dance",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Chaupai_Dance.jpg"
+      }
+    },
+    {
+      "state": "West Bengal",
+      "dance": {
+        "name": "Gaudiya Nritya",
+        "type": "Classical",
+        "description": "A classical dance form that evolved from the traditional dance forms of Bengal, depicting stories of Radha-Krishna.",
+        "wikipedia": "https://en.wikipedia.org/wiki/Gaudiya_Nritya",
+        "image": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Gaudiya_Nritya.jpg"
+      }
+    }
+  ]
+}
