@@ -1,65 +1,12 @@
 ---
-
+import "../styles/legend.css";
 ---
 
-<fieldset>
-    <legend>Symbols</legend>
-    <span>&#x1F9EC; : Gotra</span>
-    <span>&#x1F549; : Deity</span>
-    <span>&#x1F33F; : Caste</span>
-</fieldset>
-
-
-<style>
-
-    @font-face 
-    {
-        font-family: gilroy;
-        src: url(/gilroy/Gilroy-Regular.ttf);
-    }
-
-
-    span
-    {
-        font-family: "gilroy";
-        font-weight: 600;
-    }
-
-    legend
-    {
-        font-family: "gilroy";
-        font-size: 15px;
-        font-style: italic;
-        width: fit-content;
-    }
-    fieldset
-    {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        border: 1px solid #000;
-        gap: 2em;
-        width: 25%;
-        margin: auto;
-        margin-bottom: 3em;
-        padding-bottom: 1em;
-        background-color: #b9b8b540;
-    }
-
-    fieldset legend
-    {
-        font-weight: 600;
-        font-size: 1.3em;
-        padding: 1em;
-    }
-
-    @media screen and (max-width: 1134px)
-    {
-        fieldset
-        {
-            flex-direction: column;
-        }
-    }
-
-</style>
+<div id="legend">
+    <h3>Symbols</h3>
+    <div class="tree">
+        <span>&#x1F9EC; : Gotra</span>
+        <span>&#x1F549; : Deity</span>
+        <span>&#x1F33F; : Caste</span>
+    </div>
+</div>

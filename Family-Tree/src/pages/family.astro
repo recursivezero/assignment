@@ -2,16 +2,18 @@
 import Main from "../layouts/Main.astro";
 import Header from "../layouts/Header.astro";
 import Info from "../components/info.astro";
-import Legend from "../components/legend.astro";
+// import Legend from "../components/legend.astro";
 import Footer from "../layouts/Footer.astro";
 import Card from "../layouts/Card.astro";
+import Dialog from "../components/dialog.astro";
 import "../styles/global.css"
 ---
 
 <Main>
+  <Dialog/>
   <Header />
   <Info />
-  <Legend />
+  <!-- <Legend /> -->
   <Card />
   <Footer />
 </Main>

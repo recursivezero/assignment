@@ -1,15 +1,15 @@
 @font-face {
     font-family: gilroy;
-    src: url(./gilroy/Gilroy-Regular.ttf);
+    src: url(/gilroy/Gilroy-Regular.ttf);
 }
 
 body {
     margin: 0;
     padding: 0;
     height: fit-content;
-    background: linear-gradient(#DFD3C3, #F8EDE3, #D0B8A8);
-    background-position: 10em 80em;
-    background-size: cover;
+    /* background: linear-gradient(#DFD3C3, #F8EDE3, #D0B8A8); */
+    /* background-position: 10em 80em; */
+    /* background-size: cover; */
     overflow-x: hidden;
     font-family: "PP Woodland";
 }

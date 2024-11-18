@@ -10,8 +10,8 @@ body
     padding: 0;
     height: fit-content;
     color: #fff;
-    background: #0064b5;
-    /* background-image: url(../../public/india.jpg); */
+    /* background: #60b7ff; */
+    background-image: url(../../public/india.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

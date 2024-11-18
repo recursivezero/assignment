@@ -1,64 +1,14 @@
 ---
-
+import "../styles/legend.css";
 ---
 
-<fieldset>
-    <legend>Symbols</legend>
-    <span>&#128205 : State</span>
-    <span>&#x1F3DB : Capital</span>
-    <span>&#x1F5E3 : Languages</span>
-</fieldset>
+<div id="legend">
+    <h3>Symbols</h3>
+    <div class="tree">
+        <span>&#128205 : State</span>
+        <span>&#x1F3DB : Capital</span>
+        <span>&#x1F5E3 : Languages</span>
+    </div>
+</div>
 
 
-<style>
-
-@font-face 
-    {
-        font-family: gilroy;
-        src: url(/gilroy/Gilroy-Regular.ttf);
-    }
-
-
-    span
-    {
-        font-family: "gilroy";
-        font-weight: 600;
-    }
-    
-    legend
-    {
-        font-size: 15px;
-        font-style: italic;
-        width: fit-content;
-    }
-    fieldset
-    {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        gap: 2em;
-        width: 28%;
-        border: 1px solid #000;
-        margin: auto;
-        margin-bottom: 3em;
-        padding-bottom: 1em;
-        background-color: #b9b8b52b;
-    }
-
-    fieldset legend
-    {
-        font-weight: 600;
-        font-size: 1.3em;
-        padding: 1em;
-    }
-
-    @media screen and (max-width: 1134px)
-    {
-        fieldset
-        {
-            flex-direction: column;
-        }
-    }
-
-</style>

@@ -1,7 +1,7 @@
 @font-face 
 {
     font-family: gilroy;
-    src: url(../../public/gilroy/Gilroy-Regular.ttf);
+    src: url(/gilroy/Gilroy-Regular.ttf);
 }
 
 .card-container {
@@ -15,10 +15,14 @@
 }
 
 .card {
+    color: #fff;
     background: #fff1d5;
-    border: 2px solid #ddd;
+    /* border: 2px solid #ddd; */
+    border: 1px solid;
     border-radius: 8%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    padding: 10px;
+    box-shadow: 5px 10px #ddd;  
     width: 230px;
     height: 180px;
     display: flex;

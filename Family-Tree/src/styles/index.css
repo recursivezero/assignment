@@ -1,0 +1,70 @@
+@font-face 
+{
+    font-family: gilroy;
+    src: url(./gilroy/Gilroy-Regular.ttf);
+}
+
+*
+{
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "gilroy";
+    text-align: center;
+}
+
+h2, h3
+{
+    background: linear-gradient(to right, #954FEC, #9B5AEE, #fff);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+h1
+{
+    margin-top: 2em;
+    font-size: 4em;
+}
+
+h2
+{
+    font-size: 2.5em;
+    margin-top: 0.5em;
+}
+
+h3
+{
+    margin-top: 0.5em;
+    font-size: 1.5em;
+    margin-bottom: 2em;
+}
+
+.container
+{
+    margin-bottom: 4em;
+}
+
+a
+{
+    color: rgb(255, 190, 69);
+    text-decoration: none;
+}
+
+h4
+{
+    margin-top: 1em;
+}
+
+
+@media screen and (max-width: 700px)
+{
+
+    h1, h2, h3
+    {
+        font-size: 1.5em;
+        text-align: center;
+        /* padding: 2em; */
+    }
+}
