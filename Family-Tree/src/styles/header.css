@@ -1,0 +1,69 @@
+@font-face 
+{
+    font-family: gilroy;
+    src: url(/gilroy/Gilroy-Regular.ttf);
+}
+
+
+#header-title 
+{
+    margin: 1em;
+    font-size: 3em;
+    text-align: center;
+    font-family: "PP Woodland";
+}
+
+#text 
+{
+    letter-spacing: 8px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    animation: typing 3s steps(23), cursor 3s step-end infinite alternate;
+    animation-timing-function: linear;
+}
+
+@keyframes cursor 
+{
+    50% { border-color: transparent }
+}   
+
+@keyframes typing
+{
+    from { width: 0; }
+}
+    
+@media screen and (max-width: 950px)
+{
+    #text
+        {
+            font-size: 28px;
+            /* white-space: wrap; */
+        }
+}
+
+@media screen and (max-width: 670px)
+{
+    #text 
+    {
+        animation: none;
+        /* white-space: normal; */
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 8px;
+        width: 100%;
+        padding: 1em;
+        text-align: center;
+    }
+
+}
+
+#header-title p {
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    #header-title p {
+        white-space: normal;
+    }
+}

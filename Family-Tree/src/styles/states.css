@@ -1,0 +1,299 @@
+@font-face 
+{
+    font-family: gilroy;
+    src: url(/gilroy/Gilroy-Regular.ttf);
+}
+
+.card-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 60px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    color: #fff;
+    background: #fff1d5;
+    /* border: 2px solid #ddd; */
+    border: 1px solid;
+    border-radius: 8%;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    padding: 10px;
+    box-shadow: 5px 10px #ddd;  
+    width: 230px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* margin-right: 2em; */
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 10px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    transition: max-height 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),padding 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), margin 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    width: 100%;
+    text-align: center;
+}
+
+.card-header h2 {
+    margin: 0 0 5px;
+    font-size: 1.2em;
+    word-wrap: break-word;
+}
+
+.card-header p {
+    margin: 3px 0;
+    font-size: 0.9em;
+}
+
+.card-body {
+    display: none;
+    padding-top: 20px;
+}
+
+.card.open {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    overflow: visible;
+    padding-bottom: 20px;
+    margin-bottom: 1em;
+}
+
+.card.open .card-body {
+    display: block;
+}
+
+.state-section {
+    position: relative;
+    padding-top: 20px;
+}
+
+.state-heading {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.state-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.state-card {
+    position: relative;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+.state-card p
+{
+  font-size:1.3em; 
+  font-weight: 600;
+}
+
+
+/* Styles for the district cards */
+.district-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.district-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+  font-weight: 500;
+}
+
+.district-card:hover {
+  transform: scale(1.05);
+  background-color: #e0f7fa;
+  border-color: #00acc1;
+}
+
+/* Optional: Flex layout for better alignment */
+.card-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Initially hide the district cards */
+.card-body.hidden {
+  display: none;
+}
+
+/* Display the district cards when the card is open */
+.card.open .card-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Style for district cards */
+.district-card {
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.copy-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.copy-button:hover {
+  background-color: #45a049;
+}
+
+.copy-button:active {
+  background-color: #3e8e41;
+}
+
+
+  .card p
+  {
+    font-size: 0.9em;
+    margin: 1em;
+  }
+
+  .card p span
+  {
+    font-weight: 500;
+  }
+
+  .card .copy-button-all
+  {
+    display: none;
+  }
+
+  .open .copy-button-all
+  {
+    display: block;
+    margin-top: 2em;
+    padding: 1em 1em;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 768px) {
+    .state-card {
+      padding: 0.8em;
+    }
+
+    .card-container
+    {
+      margin: 1em;
+    }
+  
+    .copy-button {
+      top: 0.5em;
+      right: 0.5em;
+      padding: 0.4em 0.8em;
+      font-size: 0.9em;
+    }
+  }
+
+  @media screen and (max-width: 525px) {
+    #card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  
+  
+  @media screen and (max-width: 480px) {
+    .state-card {
+      padding: 0.6em; 
+    }
+
+    .card
+    {
+      margin-bottom: 2em;
+    }
+  
+    .copy-button {
+      top: 0.3em;
+      right: 0.3em;
+      padding: 0.3em 0.6em;
+      font-size: 0.8em;
+    }
+  }
+
+.state-card > p
+{
+    text-align: left;
+}
+
+.state-card span
+{
+    text-align: left;
+    font-weight: 600;
+}
+
+.state-card .state-head
+{
+    text-align: left;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.state-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.state-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.state-card p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}

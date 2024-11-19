@@ -1,0 +1,117 @@
+---
+
+---
+<style>
+    /* #navbar
+    {
+        position: fixed;
+        
+    }
+
+    button
+    {
+        position: sticky;
+        top: 0;
+        left: 100%;
+        z-index: 99;
+        padding: 0.8em;
+        margin: 0.5em;
+        border: none;
+        border-radius: 10px;
+        font-size: 1em;
+        font-weight: 600;
+    } */
+
+    @font-face 
+    {
+        font-family: gilroy;
+        src: url(/gilroy/Gilroy-Regular.ttf);
+    }
+
+    span
+    {
+        padding-right: 1.5em;
+    }
+
+    #navbar {
+        position: fixed;
+        top: 0; 
+        left: 0;
+        width: 100%;
+        background-color: rgb(0, 0, 0);
+        z-index: 99;
+        display: flex;
+        justify-content: end;
+        /* padding: 0.5em; Add some padding */
+
+    }
+
+    button {
+        font-family: "gilroy";
+        margin-top: 1em;
+        margin-right: 1em;
+        margin-bottom: 1em;
+        /* margin-left: auto; */
+        padding: 0.8em;
+        border: none;
+        border-radius: 10px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 500px)
+    {
+
+        #navbar
+        {
+            justify-content: center;
+        }
+        button
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 3em;
+            /* margin: auto; */
+            
+        }
+    }
+    
+</style>
+<div id="navbar">
+    <button id="increase">A+</button>
+    <button id="decrease">A-</button>
+    <button onclick="openDialog()">Know More</button>
+</div>
+
+<dialog id="myDialog">
+    <div class="tree">
+        <span>&#128205 : State</span>
+        <span>&#x1F3DB : Capital</span>
+        <span>&#x1F5E3 : Languages</span>
+    </div>
+</dialog>
+
+<script client : only>
+        const dialog = document.getElementById('myDialog');
+    function openDialog() {
+        dialog.showModal();
+    }
+    dialog.addEventListener('click', () => dialog.close()); // Close on click
+    
+    const increaseBtn = document.getElementById('increase');
+    const decreaseBtn = document.getElementById('decrease');
+    const content = document.querySelector('body');
+    let fontSize = 16;
+    increaseBtn.addEventListener('click', () => {
+      fontSize += 2;
+      content.style.fontSize = fontSize + 'px';
+    });
+
+    decreaseBtn.addEventListener('click', () => {
+      fontSize = Math.max(10, fontSize - 2);
+      content.style.fontSize = fontSize + 'px';
+    });
+
+</script>
