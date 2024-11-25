@@ -12,8 +12,8 @@ export function setupThemeToggle() {
         const newTheme = e.matches ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', newTheme);
         themeToggle.innerHTML = e.matches
-            ? '<i class="fas fa-sun"></i>'
-            : '<i class="fas fa-moon"></i>';
+            ? '<b>&#9728;</b>'
+            : '<b>&#9790;</b>';
     });
 
     themeToggle.addEventListener('click', () => {
@@ -22,7 +22,7 @@ export function setupThemeToggle() {
 
         document.documentElement.setAttribute('data-theme', newTheme);
         themeToggle.innerHTML = newTheme === 'dark'
-            ? '<i class="fas fa-sun"></i>'
-            : '<i class="fas fa-moon"></i>';
+            ? '<b>&#9728;</b>'
+            : '<b>&#9790;</b>';
     });
 }
