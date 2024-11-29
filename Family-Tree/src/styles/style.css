@@ -3,6 +3,26 @@
     src: url(/gilroy/Gilroy-Regular.ttf);
 }
 
+:root {
+  --bg-color: white;
+  --text-color: black;
+}
+.dark-mode {
+  --bg-color: black;
+  --text-color: white;
+}
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+h1,h3,h2,h4,a, .container, footer, div, button, label, select
+{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+
 body {
     margin: 0;
     padding: 0;
@@ -16,7 +36,7 @@ body {
 
 /* Scrollbar styles */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,7 +45,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #c49c00; 
+    background: #808080; 
     border-radius: 10px;
 }
 

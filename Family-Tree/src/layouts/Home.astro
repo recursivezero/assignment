@@ -1,0 +1,60 @@
+---
+
+---
+
+
+<h1 data-i18n="welcome">Welcome</h1>
+<h2 data-i18n="title">Recursive Zero's Tree</h2>
+<h3 data-i18n="subtitle">Tree Visualizations</h3>
+
+<div class="container">
+    <h4>
+        <a href="/family/" target="_blank" data-i18n="family_tree">&#x1F9EC; Family Tree Visualization</a>
+    </h4>
+    <h4>
+        <a href="/indian-states/" target="_blank" data-i18n="state_tree">&#x1F30F; State Tree Visualization</a>
+    </h4>
+</div>
+
+<script>
+
+    const button = document.getElementById("theme-toggle");
+    button.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+
+    const translations = {};
+    let currentLanguage = 'en';
+
+    async function loadLanguage(lang) {
+      try {
+        const response = await fetch(`/locales/${lang}.json`);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch language file: ${lang}`);
+        }
+        translations[lang] = await response.json();
+        currentLanguage = lang;
+        updateContent();
+      } catch (error) {
+        console.error('Error loading language:', error);
+      }
+    }
+
+    function translate(key) {
+      return translations[currentLanguage]?.[key] || key;
+    }
+
+    function updateContent() {
+      document.querySelectorAll('[data-i18n]').forEach((element) => {
+        const key = element.getAttribute('data-i18n');
+        element.textContent = translate(key);
+      });
+    }
+
+    document.getElementById('languageSwitcher').addEventListener('change', (event) => {
+      const selectedLanguage = event.target.value;
+      loadLanguage(selectedLanguage);
+    });
+
+    loadLanguage(currentLanguage); // Load default language on page load
+</script>
