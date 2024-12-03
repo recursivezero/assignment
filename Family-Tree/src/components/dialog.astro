@@ -117,25 +117,46 @@
         top: 0; 
         left: 0;
         width: 100%;
+        background-color: #000;
         z-index: 99;
         display: flex;
+        gap: 20px;
         justify-content: end;
     }
     
     button {
-        font-family: "Gilroy"; /* Default font */
-        background-color: #001486;
-        color: #fff;
-        margin-top: 1em;
+        font-family: "Gilroy";
+        background-color: #fff;
+        color: #000;
+        margin-top: 0.8em;
         margin-right: 1em;
         margin-bottom: 1em;
-        padding: 0.8em;
+        padding: 0.7em;
         border: none;
         border-radius: 10px;
         font-size: 1em;
-        font-weight: 600;
+        font-weight: 900;
         cursor: pointer;
     }
+
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+
+
+    #fontSwitcher
+    {
+        padding: 0;
+        margin-top: 1em;
+        background-color: #ffffff;
+        font-weight: 600;
+        text-align: center;
+        height: 3em;
+        border-radius: 10px;
+        box-shadow: rgba(255, 255, 255, 0.886) 0px 2px 5px;
+    }
+
 
     @media screen and (max-width: 500px) {
         #navbar {
@@ -151,7 +172,7 @@
 </style>
 
 <div id="navbar">
-    <label for="fontSwitcher">Select Font</label>
+    <button><a href="/">Home</a></button>
     <select id="fontSwitcher">
         <option value="Gilroy">Gilroy</option>
         <option value="Arial, sans-serif">Arial</option>
@@ -160,7 +181,7 @@
         <option value="Courier New, monospace">Courier New</option>
         <option value="Georgia, serif">Georgia</option>
     </select>
-    <button onclick="openDialog()">Know More</button>
+    <button onclick="openDialog()">&#x3F;</button>
 </div>
 
 <dialog id="myDialog">
@@ -171,7 +192,7 @@
     </div>
 </dialog>
 
-<script>
+<script client: only>
     const dialog = document.getElementById('myDialog');
     function openDialog() {
         dialog.showModal(); // Opens as a modal

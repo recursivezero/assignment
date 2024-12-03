@@ -1,27 +1,7 @@
 ---
-
 ---
+
 <style>
-    /* #navbar
-    {
-        position: fixed;
-        
-    }
-
-    button
-    {
-        position: sticky;
-        top: 0;
-        left: 100%;
-        z-index: 99;
-        padding: 0.8em;
-        margin: 0.5em;
-        border: none;
-        border-radius: 10px;
-        font-size: 1em;
-        font-weight: 600;
-    } */
-
     @font-face 
     {
         font-family: gilroy;
@@ -42,16 +22,14 @@
         z-index: 99;
         display: flex;
         justify-content: end;
-        /* padding: 0.5em; Add some padding */
-
+        gap: 20px;
     }
 
     button {
         font-family: "gilroy";
-        margin-top: 1em;
+        margin-top: 0.8em;
         margin-right: 1em;
         margin-bottom: 1em;
-        /* margin-left: auto; */
         padding: 0.8em;
         border: none;
         border-radius: 10px;
@@ -59,10 +37,26 @@
         font-weight: 600;
         cursor: pointer;
     }
+    
+    a{
+        text-decoration: none;
+        color: #000;
+    }
+
+    #fontSwitcher
+    {
+        padding: 0;
+        margin-top: 1em;
+        background-color: #ffffff;
+        font-weight: 600;
+        text-align: center;
+        height: 3em;
+        border-radius: 10px;
+        box-shadow: rgba(255, 255, 255, 0.886) 0px 2px 5px;
+    }
 
     @media screen and (max-width: 500px)
     {
-
         #navbar
         {
             justify-content: center;
@@ -73,45 +67,43 @@
             align-items: center;
             justify-content: center;
             margin-top: 3em;
-            /* margin: auto; */
-            
         }
     }
-    
 </style>
+
 <div id="navbar">
-    <button id="increase">A+</button>
-    <button id="decrease">A-</button>
-    <button onclick="openDialog()">Know More</button>
+    <button><a href="/">Home</a></button>
+    <select id="fontSwitcher">
+        <option value="Gilroy">Gilroy</option>
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="Verdana, sans-serif">Verdana</option>
+        <option value="Times New Roman, serif">Times New Roman</option>
+        <option value="Courier New, monospace">Courier New</option>
+        <option value="Georgia, serif">Georgia</option>
+    </select>
+    <button onclick="openDialog()">&#x3F;</button>
 </div>
 
 <dialog id="myDialog">
     <div class="tree">
         <span>&#128205 : State</span>
         <span>&#x1F3DB : Capital</span>
+        <span>&#x1F697; : Vehicle Code</span>
         <span>&#x1F5E3 : Languages</span>
     </div>
 </dialog>
 
 <script client : only>
-        const dialog = document.getElementById('myDialog');
+    const dialog = document.getElementById('myDialog');
+    const fontSwitcher = document.getElementById('fontSwitcher');
+
     function openDialog() {
         dialog.showModal();
     }
-    dialog.addEventListener('click', () => dialog.close()); // Close on click
-    
-    const increaseBtn = document.getElementById('increase');
-    const decreaseBtn = document.getElementById('decrease');
-    const content = document.querySelector('body');
-    let fontSize = 16;
-    increaseBtn.addEventListener('click', () => {
-      fontSize += 2;
-      content.style.fontSize = fontSize + 'px';
-    });
 
-    decreaseBtn.addEventListener('click', () => {
-      fontSize = Math.max(10, fontSize - 2);
-      content.style.fontSize = fontSize + 'px';
-    });
+    dialog.addEventListener('click', () => dialog.close());
 
+    fontSwitcher.addEventListener('change', (event) => {
+        document.body.style.fontFamily = event.target.value; // Change the font of the body
+    });
 </script>

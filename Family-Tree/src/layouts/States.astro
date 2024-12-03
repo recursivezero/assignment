@@ -2,6 +2,63 @@
 import "../styles/states.css";
 ---
 
+<!-- <style>
+    .card-header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.card-header p {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.card-header strong {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.card-header strong::before {
+    content: ''; 
+    display: inline-block;
+    width: 24px; 
+    height: 24px;
+    margin-right: 8px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Specific styles for each icon */
+.card-header strong[title="State"]::before {
+    content: '📍'; /* Use the state icon */
+    width: auto; /* Allow the icon to take its natural width */
+}
+
+.card-header strong[title="Capital"]::before {
+    content: '🏛️'; /* Use the capital icon */
+    width: auto; /* Allow the icon to take its natural width */
+}
+
+.card-header strong[title="Languages"]::before {
+    content: '🗣️'; /* Use the language icon */
+    width: auto; /* Allow the icon to take its natural width */
+}
+</style> -->
+
+<style>
+    .card-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    /* gap: 10px;
+    padding: 10px; */
+}
+</style>
+
 <div class="card-container" id="card-container"></div>
 
 <script>
@@ -49,9 +106,10 @@ import "../styles/states.css";
 
             const cardContent = `
             <div class="card-header">
-                <p><strong title="State">📍: ${stateInfo.state}</strong></p>
-                <p><strong title="Capital">🏛️: ${stateInfo.capital}</strong></p>
-                <p><strong title="Languages">🗣️: ${stateInfo.languages.join(', ')}</strong></p>
+                <p><span class="info-icon">📍:</span> <strong title="State">${stateInfo.state}</strong></p>
+                <p><span class="info-icon">🏛️:</span> <strong title="Capital">${stateInfo.capital}</strong></p>
+                <p><span class="info-icon">🚗:</span> <strong title="Vehicle_Code">${stateInfo.vehicle_code}</strong></p>
+                <p><span class="info-icon">🗣️:</span> <strong title="Languages">${stateInfo.languages.join(', ')}</strong></p>
             </div>
             <div class="card-body hidden">
                 ${stateInfo.districts.map(district => createDistrictCard(district, stateInfo.state, stateInfo.capital, stateInfo.languages)).join('')}

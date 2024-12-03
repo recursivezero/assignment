@@ -1,0 +1,8 @@
+1) Blog Page
+2) Modal and dialog
+3) internationalisation - i18n, a11y
+
+-------------------------
+
+1) using CSS dark and light toggle
+-------------------

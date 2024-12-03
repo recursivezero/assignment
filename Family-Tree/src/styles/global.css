@@ -70,8 +70,8 @@ body
     white-space: nowrap;
     text-align: center;
     overflow: hidden;
-    animation: typing 3s steps(23), cursor 3s step-end infinite alternate;
-    animation-timing-function: linear;
+    /* animation: typing 3s steps(23), cursor 3s step-end infinite alternate;
+    animation-timing-function: linear; */
 }
 
 @keyframes cursor {

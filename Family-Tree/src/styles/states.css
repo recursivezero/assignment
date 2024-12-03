@@ -9,7 +9,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 60px;
-    padding: 20px;
+    /* padding: 20px; */
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -40,6 +40,7 @@
     z-index: 1;
     transition: max-height 0.6s cubic-bezier(0.25, 0.8, 0.25, 1),padding 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), margin 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
     overflow: hidden;
+    margin-bottom: 1em;
 }
 
 .card:hover {
@@ -49,9 +50,18 @@
     transform: scale(1.2, 1.2);
 }
 
+.open:hover
+{
+  transform: none;
+}
+
 .card-header {
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .card-header h2 {
@@ -63,6 +73,7 @@
 .card-header p {
     margin: 3px 0;
     font-size: 0.9em;
+    font-weight: 800;
 }
 
 .card-body {
@@ -135,11 +146,11 @@
   font-size: 14px;
   color: #333;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .district-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.3);
   background-color: #e0f7fa;
   border-color: #00acc1;
 }
@@ -198,12 +209,12 @@
   .card p
   {
     font-size: 0.9em;
-    margin: 1em;
+    margin: 0.3em;
   }
 
   .card p span
   {
-    font-weight: 500;
+    font-weight: 800;
   }
 
   .card .copy-button-all
@@ -281,7 +292,7 @@
 .state-card .state-head
 {
     text-align: left;
-    font-weight: 600;
+    font-weight: 900;
     font-size: 1.5em;
 }
 

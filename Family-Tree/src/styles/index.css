@@ -24,7 +24,7 @@ h2, h3
 
 h1
 {
-    margin-top: 0.8em;
+    /* margin-top: 0.8em; */
     font-size: 5em;
 }
 
@@ -38,12 +38,24 @@ h3
 {
     /* margin-top: 0.5em; */
     font-size: 2.5em;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 .container
 {
+    /* width: 50%; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* margin: auto; */
+    padding: 1em;
     margin-bottom: 4em;
+    /* box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px; */
+}
+
+#family-box
+{
+    font-weight: 600;
 }
 
 a

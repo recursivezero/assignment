@@ -2,6 +2,28 @@
 import "../styles/card.css";
 ---
 
+<style>
+    .surname-card {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    margin: 10px 0; /* Add some margin for spacing */
+    gap: 8px; /* Space between icon and text */
+}
+
+.surname-card p {
+    margin: 0; /* Remove default margin */
+    display: flex; /* Use flexbox for the paragraph */
+    align-items: center; /* Center items vertically */
+    flex: 1; /* Allow the paragraph to take the remaining space */
+}
+
+.surname-card strong {
+    min-width: 20px; /* Ensure a minimum width for the icon */
+    display: inline-block; /* Keep the icon and text in line */
+    text-align: center; /* Center align the icon */
+}
+</style>
+
 <div class="card-container" id="card-container"></div>
 
 <script>
