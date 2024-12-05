@@ -1,112 +1,7 @@
-<!-- ---
-
 ---
-<style>
-    @font-face 
-    {
-        font-family: gilroy;
-        src: url(/gilroy/Gilroy-Regular.ttf);
-    }
-
-    span
-    {
-        padding-right: 1.5em;
-    }
-
-    #navbar {
-        position: fixed;
-        top: 0; 
-        left: 0;
-        width: 100%;
-        z-index: 99;
-        display: flex;
-        justify-content: end;
-        /* padding: 0.5em; Add some padding */
-        
-    }
-    
-    button {
-        font-family: "gilroy";
-        background-color: #001486;
-        color: #fff;
-        margin-top: 1em;
-        margin-right: 1em;
-        margin-bottom: 1em;
-        /* margin-left: auto; */
-        padding: 0.8em;
-        border: none;
-        border-radius: 10px;
-        font-size: 1em;
-        font-weight: 600;
-        cursor: pointer;
-    }
-
-    @media screen and (max-width: 500px)
-    {
-
-        #navbar
-        {
-            justify-content: center;
-        }
-        button
-        {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 3em;
-            /* margin: auto; */
-            
-        }
-    }
-    
-</style>
-
-<div id="navbar">
-    <label for="fontSwitcher">Select Font</label>
-    <select id="fontSwitcher">
-        <option value=""></option>
-        <option value=""></option>
-        <option value=""></option>
-    </select>
-    <button onclick="openDialog()">Know More</button>
-</div>
-
-
-<dialog id="myDialog">
-    <div class="tree">
-        <span>&#x1F9EC; : Gotra</span>
-        <span>&#x1F549; : Deity</span>
-        <span>&#x1F33F; : Caste</span>
-    </div>
-</dialog>
-
-<script client : only>
-        const dialog = document.getElementById('myDialog');
-    function openDialog() {
-        dialog.showModal(); // Opens as a modal
-    }
-    dialog.addEventListener('click', () => dialog.close());
-
-    const increaseBtn = document.getElementById('increase');
-    const decreaseBtn = document.getElementById('decrease');
-    const content = document.querySelector('body');
-    let fontSize = 16;
-    increaseBtn.addEventListener('click', () => {
-      fontSize += 2;
-      content.style.fontSize = fontSize + 'px';
-    });
-
-    decreaseBtn.addEventListener('click', () => {
-      fontSize = Math.max(10, fontSize - 2);
-      content.style.fontSize = fontSize + 'px';
-    });
-
-</script> -->
-
-
+import FamilyHeader from "../layouts/FamilyHeader.astro";
 ---
 
----
 <style>
     span {
         padding-right: 1.5em;
@@ -114,23 +9,25 @@
 
     #navbar {
         position: fixed;
-        top: 0; 
-        left: 0;
+        /* top: 0; 
+        left: 0; */
+        margin: auto;
         width: 100%;
         background-color: #000;
         z-index: 99;
         display: flex;
         gap: 20px;
-        justify-content: end;
+        justify-content: center;
+        align-items: center;
     }
     
     button {
         font-family: "Gilroy";
         background-color: #fff;
         color: #000;
-        margin-top: 0.8em;
-        margin-right: 1em;
-        margin-bottom: 1em;
+        /* margin-top: 0.8em; */
+        /* margin-right: 1em; */
+        /* margin-bottom: 1em; */
         padding: 0.7em;
         border: none;
         border-radius: 10px;
@@ -148,7 +45,7 @@
     #fontSwitcher
     {
         padding: 0;
-        margin-top: 1em;
+        /* margin-top: 1em; */
         background-color: #ffffff;
         font-weight: 600;
         text-align: center;
@@ -173,6 +70,7 @@
 
 <div id="navbar">
     <button><a href="/">Home</a></button>
+    <FamilyHeader/>
     <select id="fontSwitcher">
         <option value="Gilroy">Gilroy</option>
         <option value="Arial, sans-serif">Arial</option>
