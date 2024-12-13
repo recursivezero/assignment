@@ -4,183 +4,179 @@ import "../styles/card.css";
 
 <style>
     .surname-card {
-    display: flex; /* Use flexbox for layout */
-    align-items: center; /* Center items vertically */
-    margin: 10px 0; /* Add some margin for spacing */
-    gap: 8px; /* Space between icon and text */
-}
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+        gap: 8px;
+    }
 
-.surname-card p {
-    margin: 0; /* Remove default margin */
-    display: flex; /* Use flexbox for the paragraph */
-    align-items: center; /* Center items vertically */
-    flex: 1; /* Allow the paragraph to take the remaining space */
-}
+    .surname-card p {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        flex: 1;
+    }
 
-.surname-card strong {
-    min-width: 20px; /* Ensure a minimum width for the icon */
-    display: inline-block; /* Keep the icon and text in line */
-    text-align: center; /* Center align the icon */
-}
+    .surname-card strong {
+        min-width: 20px;
+        display: inline-block;
+        text-align: center;
+    }
+
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-bar {
+        width: 50%;
+        padding: 10px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 1em;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .highlight {
+        background-color: yellow;
+    }
+
+    .open {
+        grid-column: 1 / -1;
+    }
 </style>
+<div class="search-container">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search by Gotra, Deity, Caste, or Surname (Hindi/English)" />
+</div>
 
 <div class="card-container" id="card-container"></div>
 
 <script>
     import { colors } from "../utils/constants.ts";
-    console.log(colors);
 
     fetch("/main.json")
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then((data) => {
-        if (!data) {
-            console.error("No data found in response");
-            return;
-        }
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            const cardContainer = document.getElementById("card-container");
+            const searchInput = document.getElementById("searchInput");
 
-        const cardContainer = document.getElementById("card-container");
-        if (!cardContainer) {
-            console.error("Card container element not found");
-            return;
-        }
+            function highlightText(text, query) {
+                if (!query) return text;
+                const regex = new RegExp(`(${query.trim()})`, "gi");
+                return text.replace(regex, `<span style='background-color: yellow' class="highlight">$1</span>`);
+            }
 
-        cardContainer.innerHTML = "";
+            function createKeyValuePairs(branch, query) {
+                return Object.entries(branch)
+                    .filter(([key]) => ["Caste", "Gotra", "Deity"].includes(key))
+                    .map(([key, value]) => {
+                        let icon = "";
+                        switch (key) {
+                            case "Gotra":
+                                icon = "🧬";
+                                break;
+                            case "Deity":
+                                icon = "🕉";
+                                break;
+                            case "Caste":
+                                icon = "🌿";
+                                break;
+                            default:
+                                icon = "🔑";
+                        }
+                        const highlightedValue = highlightText(value, query);
+                        return `
+                            <p title="${key}">${icon} : <span>${highlightedValue}</span></p>
+                        `;
+                    })
+                    .join("");
+            }
 
-        function createKeyValuePairs(branch) {
-            return Object.entries(branch)
-                .filter(([key]) => ['Caste', 'Gotra', 'Deity'].includes(key))
-                .map(([key, value]) => {
-                    let icon = '';
-                    switch (key) {
-                        case 'Gotra':
-                            icon = '🧬';
-                            break;
-                        case 'Deity':
-                            icon = '🕉️';
-                            break;
-                        case 'Caste':
-                            icon = '🌿';
-                            break;
-                        default:
-                            icon = '🔑';
+            function createSurnameCards(surnames, gotra, deity, branchName, query) {
+                return surnames.map((surname) => `
+                    <div class="surname-card">
+                        <p><strong title="Gotra">🧬 :</strong> ${highlightText(gotra, query)}</p>
+                        <p><strong title="Deity">🕉 :</strong> ${highlightText(deity, query)}</p>
+                        <p><strong title="Caste">🌿 :</strong> ${highlightText(branchName, query)}</p>
+                        <p><strong title="Surname">🌳:</strong> ${highlightText(surname.hi, query)}</p>
+                        <button class="copy-button" data-gotra="${gotra}" data-surname="${surname.en}" data-deity="${deity}" data-branch="${branchName}">
+                            ...
+                        </button>
+                    </div>
+                `).join("");
+            }
+
+            function filterAndDisplayCards(filteredData, query) {
+                cardContainer.innerHTML = ""; // Clear the container before rendering filtered cards
+
+                filteredData.forEach((branch, index) => {
+                    const card = document.createElement("div");
+                    card.className = "card";
+                    const colorIndex = index % colors.length;
+                    card.style.backgroundColor = colors[colorIndex];
+
+                    const keyValueHTML = createKeyValuePairs(branch, query);
+                    const surnamesHTML = createSurnameCards(branch.Surnames, branch.Gotra, branch.Deity, branch.Caste, query);
+
+                    const surnamesJson = branch.Surnames.length > 0 ? JSON.stringify(branch.Surnames.map((surname) => surname.en)) : "[]";
+
+                    const cardContent = `
+                        <div class="card-header">
+                            ${keyValueHTML}
+                        </div>
+                        <div class="card-body">
+                            <h3>Surnames</h3>
+                            <div class="surname-container">
+                                ${surnamesHTML}
+                            </div>
+                        </div>
+                        <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname='${surnamesJson}' 
+                        data-deity="${branch.Deity}" data-branch="${branch.Caste}">
+                            Copy All
+                        </button>`;
+
+                    card.innerHTML = cardContent;
+
+                    if (query && (card.innerHTML.toLowerCase().includes(query.toLowerCase()))) {
+                        card.classList.add("open");
                     }
-                    return `
-                        <p title="${key}">${icon} : <span>${value}</span></p>
-                    `;
-                })
-                .join('');
-        }
 
-        function createSurnameCards(surnames, gotra, deity, branchName) {
-            return surnames.map(surname => `
-                <div class="surname-card">
-                    <p><strong title="Gotra">🧬 :</strong> ${gotra}</p>
-                    <p><strong title="Deity">🕉️ :</strong> ${deity}</p>
-                    <p><strong title="Caste">🌿 :</strong> ${branchName}</p>
-                    <p><strong title="Surname">🌳:</strong> ${surname.hi}</p>
-                    <button class="copy-button" data-gotra="${gotra}" data-surname="${surname.en}" data-deity="${deity}" data-branch="${branchName}">
-                        ...
-                    </button>
-                </div>
-            `).join('');
-        }
-
-        data.forEach((branch, index) => {
-            const card = document.createElement("div");
-            card.className = "card";
-            const colorIndex = index % colors.length;
-            card.style.backgroundColor = colors[colorIndex];
-
-            const keyValueHTML = createKeyValuePairs(branch);
-            const surnamesHTML = createSurnameCards(branch.Surnames, branch.Gotra, branch.Deity, branch.Caste);
-            
-            const surnamesJson = branch.Surnames.length > 0 ? JSON.stringify(branch.Surnames.map(surname => surname.en)) : '[]';
-
-            const cardContent = `
-            <div class="card-header">
-                ${keyValueHTML}
-            </div>
-            <div class="card-body">
-                <h3>Surnames</h3>
-                <div class="surname-container">
-                    ${surnamesHTML}
-                </div>
-            </div>
-            <button class="copy-button-all" data-gotra="${branch.Gotra}" data-surname='${surnamesJson}' data-deity="${branch.Deity}" data-branch="${branch.Caste}">
-                Copy All
-            </button>
-            `;
-
-            card.innerHTML = cardContent;
-
-            card.addEventListener("click", (event) => {
-                const target = event.target as HTMLElement;
-                if (!target.closest('.surname-card') && !target.closest('.copy-button')) {
-                    card.classList.toggle("open");
-                    if (card.classList.contains("open")) {
-                        card.style.gridColumn = "1 / -1";
-                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    } else {
-                        card.style.gridColumn = "";
-                    }
-                }
-                event.stopPropagation();
-            });
-
-            const copyButtons = card.querySelectorAll('.copy-button');
-            copyButtons.forEach(button => {
-                button.addEventListener('click', event => {
-                    event.stopPropagation(); 
-                    const target = event.target as HTMLElement;
-                    const gotra = target.getAttribute("data-gotra");
-                    const surname = target.getAttribute("data-surname");
-                    const deity = target.getAttribute("data-deity");
-                    const branch = target.getAttribute("data-branch");
-                    const textToCopy = JSON.stringify({
-                        Gotra: gotra,
-                        Surname: surname,
-                        Deity: deity,
-                        Caste: branch
-                    });
-                    
-                    navigator.clipboard.writeText(textToCopy).then(() => {
-                        alert("Copied to clipboard: " + textToCopy);
-                    }).catch(err => {
-                        console.error("Failed to copy: ", err);
-                    });
+                    cardContainer.appendChild(card);
                 });
-            });
+            }
 
-            const copyAllButton = card.querySelector('.copy-button-all');
-            copyAllButton.addEventListener('click', event => {
-                event.stopPropagation();
-                const gotra = copyAllButton.getAttribute("data-gotra");
-                const surnames = JSON.parse(copyAllButton.getAttribute("data-surname"));
-                const deity = copyAllButton.getAttribute("data-deity");
-                const branch = copyAllButton.getAttribute("data-branch");
-                const textToCopyAll = JSON.stringify({
-                    Gotra: gotra,
-                    Surnames: surnames,
-                    Deity: deity,
-                    Caste: branch
-                });
-                
-                navigator.clipboard.writeText(textToCopyAll).then(() => {
-                    alert("Copied all to clipboard: " + textToCopyAll);
-                }).catch(err => {
-                    console.error("Failed to copy all: ", err);
-                });
-            });
+            filterAndDisplayCards(data, "");
 
-            cardContainer.appendChild(card);
+            searchInput.addEventListener("input", () => {
+                const query = searchInput.value.toLowerCase();
+
+                const filteredData = data.filter((branch) => {
+                    const gotra = branch.Gotra.toLowerCase();
+                    const deity = branch.Deity.toLowerCase();
+                    const caste = branch.Caste.toLowerCase();
+                    const surnames = Array.isArray(branch.Surnames) ? branch.Surnames : [];
+                    const surnameTexts = surnames.map((surname) => `${surname.en?.toLowerCase() || ""} ${surname.hi?.toLowerCase() || ""}`);
+
+                    return (
+                        gotra.includes(query) ||
+                        deity.includes(query) ||
+                        caste.includes(query) ||
+                        surnameTexts.some((surname) => surname.includes(query))
+                    );
+                });
+
+                filterAndDisplayCards(filteredData, query);
+            });
+        })
+        .catch((error) => {
+            console.error("Error fetching data: ", error);
         });
-    })
-    .catch((error) => {
-        console.error("Error fetching data: ", error);
-    });
 </script>

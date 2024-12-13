@@ -11,7 +11,7 @@ body
     height: fit-content;
     color: #fff;
     /* background: #60b7ff; */
-    background-image: url(../../public/india.jpg);
+    background-image: url(/india.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

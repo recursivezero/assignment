@@ -1,5 +1,6 @@
 ---
 import Header from "./Header.astro";
+import LightDarkMode from "../components/lightDarkMode.astro";
 ---
 
 <style>
@@ -9,27 +10,20 @@ import Header from "./Header.astro";
       src: url(/gilroy/Gilroy-Regular.ttf);
   }
 
-
-  nav
+  div #navbar
   {
     background-color: #000;
   }
 
   #navbar
   {
-    /* padding: 1.2em; */
     background: none;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-  }
-
-  label
-  {
-    padding: 0.5em; 
-    background: none;
-    color: #fff;
+    margin-bottom: -1.8em;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
   }
 
   #languageSwitcher
@@ -38,7 +32,8 @@ import Header from "./Header.astro";
     background: none;
     border-radius: 10px;
     border: none;
-    color: #fff;
+    background-color: #000;
+    color: #ffffff;
     box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
   }
 
@@ -61,12 +56,58 @@ import Header from "./Header.astro";
 <nav>
   <div id="navbar">
     <Header/>
-    <!-- <label for="languageSwitcher" data-i18n="language">Choose Language</label> -->
+    <!-- Language Selector -->
     <select id="languageSwitcher">
       <option value="en">English</option>
-      <option value="fr">French</option>
-      <option value="de">German</option>
+      <option value="hindi">Hindi</option>
     </select>
-    <button id="theme-toggle">&#128161;</button>
+    <LightDarkMode/>
   </div>
 </nav>
+
+<script>
+  const translations = {};
+  let currentLanguage = localStorage.getItem("language") || 'en';  // Get language from localStorage or default to 'en'
+
+  // Load language data
+  async function loadLanguage(lang) {
+    try {
+      const response = await fetch(`/locales/${lang}.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch language file: ${lang}`);
+      }
+      translations[lang] = await response.json();
+      currentLanguage = lang;
+      localStorage.setItem("language", lang);  // Save the selected language to localStorage
+      updateContent(); // Update the content with the newly loaded language
+    } catch (error) {
+      console.error('Error loading language:', error);
+    }
+  }
+
+  // Translate text based on the key
+  function translate(key) {
+    return translations[currentLanguage]?.[key] || key;
+  }
+
+  // Update all text content with the selected language
+  function updateContent() {
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const key = element.getAttribute('data-i18n');
+      element.textContent = translate(key);
+    });
+  }
+
+  // Event listener for language change
+  document.getElementById('languageSwitcher').addEventListener('change', (event) => {
+    const selectedLanguage = event.target.value;
+    loadLanguage(selectedLanguage);
+  });
+
+  // Initialize the page with the language from localStorage (or default language)
+  window.addEventListener("DOMContentLoaded", () => {
+    loadLanguage(currentLanguage); // Load language from localStorage or default
+    document.getElementById('languageSwitcher').value = currentLanguage; // Set the dropdown to the selected language
+  });
+
+</script>

@@ -1,34 +1,31 @@
 ---
-import "../styles/header.css"
+import "../styles/header.css";
 ---
 
 <div id="header-title">
-    <p id="text">&#x950 Lineage</p>
+    <p id="text">Genealogy</p>
 </div>
 
 <style>
-    #header-title p {
-    white-space: nowrap;
-}
+    #header-title {
+        display: flex;
+        align-items: center;
+        margin: 0;
+    }
 
-#text
-    {
-        /* margin-top: 2em; */
+    #header-title p {
+        white-space: nowrap;
         margin: 0;
         color: #7A83F6;
-    }
-    @media screen and (max-width: 500px)
-    {
-        #text
-        {
-            margin-top: 4em;
-            font-size: 30px;
-        }
+        font-size: 1.2em;
     }
 
-@media (max-width: 600px) {
-    #header-title p {
-        white-space: normal;
+    @media screen and (max-width: 500px) {
+        #header-title {
+            width: 100%;
+        }
+        #header-title p {
+            font-size: 1em;
+        }
     }
-}
 </style>

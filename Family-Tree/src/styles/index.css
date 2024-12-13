@@ -6,7 +6,8 @@
 
 *
 {
-    background-color: black;
+    background-color: #000;
+    /* background: #1D1F20; */
     color: white;
     margin: 0;
     padding: 0;
@@ -58,16 +59,32 @@ h3
     font-weight: 600;
 }
 
+
 a
 {
     color: rgb(255, 190, 69);
     text-decoration: none;
+    border: 1px solid #fff;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
+    cursor: url("/tap.png");
+}
+
+a:hover
+{
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 6px 12px;
 }
 
 h4
 {
     margin-top: 0.5em;
     font-size: 2em;
+}
+
+h4:hover
+{
+    transform: scale(1.1);
 }
 
 

@@ -4,10 +4,6 @@
     src: url(/gilroy/Gilroy-Regular.ttf);
 }
 
-:root{
-    
-}
-
 
 body 
 {
@@ -15,9 +11,7 @@ body
     padding: 0;
     height: fit-content;
     /* color: #fff; */
-    color: light-dark(#fff, #000);
-    /* background: #0064b5; */
-    background-color: light-dark(#000, #fff);
+    background-color: #000;
     /* background-image: url(../../public/india.jpg); */
     background-position: center;
     background-size: cover;

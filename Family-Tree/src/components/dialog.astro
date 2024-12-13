@@ -1,85 +1,134 @@
 ---
 import FamilyHeader from "../layouts/FamilyHeader.astro";
+import LightDarkMode from "./lightDarkMode.astro";
 ---
 
 <style>
-    span {
-        padding-right: 1.5em;
+    #header-navbar-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: #000000;
+        padding: 0.5em 2em;
+        /* position: fixed; */
+        width: 100%;
+        z-index: 99;
+        border-bottom: 1px solid #fff;
     }
 
     #navbar {
-        position: fixed;
-        /* top: 0; 
-        left: 0; */
-        margin: auto;
-        width: 100%;
-        background-color: #000;
-        z-index: 99;
         display: flex;
-        gap: 20px;
-        justify-content: center;
+        gap: 15px;
         align-items: center;
     }
-    
+
     button {
         font-family: "Gilroy";
-        background-color: #fff;
-        color: #000;
-        /* margin-top: 0.8em; */
-        /* margin-right: 1em; */
-        /* margin-bottom: 1em; */
-        padding: 0.7em;
+        background-color: #000000;
+        color: #ffffff;
+        padding: 0.5em 1em;
         border: none;
         border-radius: 10px;
-        font-size: 1em;
-        font-weight: 900;
+        font-size: 0.9em;
+        font-weight: bold;
         cursor: pointer;
+        box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
     }
 
-    a{
+    a {
         text-decoration: none;
-        color: #000;
+        color: #fff;
+
     }
 
-
-    #fontSwitcher
-    {
-        padding: 0;
-        /* margin-top: 1em; */
-        background-color: #ffffff;
+    #fontSwitcher {
+        padding: 0.1em;
+        background-color: #000000;
         font-weight: 600;
         text-align: center;
-        height: 3em;
-        border-radius: 10px;
-        box-shadow: rgba(255, 255, 255, 0.886) 0px 2px 5px;
+        border-radius: 8px;
+        color: #fff;
+        height: 2.5em;
+        box-shadow: rgba(255, 255, 255, 0.886) 0px 4px 10px;
     }
 
+    .tree span
+    {
+        padding-right: 0.8em;
+    }
+
+    #know-more
+    {
+        position: fixed;
+        right: 1em;
+        z-index: 99;
+        background-color: #fff;
+        color: #000;
+        box-shadow: rgb(148, 148, 148) 0px 4px 10px;
+    }
+
+    :root {
+    --bg-color: white;
+    --text-color: black;
+    }
+
+    body.dark-mode {
+    --bg-color: black;
+    --text-color: white;
+    }
+
+    #theme-toggle
+  {
+    background-color: rgb(23, 23, 23);
+    border-radius: 20px;
+    padding: 0.2em;
+    border: none;
+    box-shadow: rgb(255, 255, 255) 0px 3px 8px;
+  }
+
+  #theme-toggle:hover
+  {
+    transform: scale(1.2);
+  }
+
+
+    button:hover
+    {
+        transform: scale(1.1);
+    }
 
     @media screen and (max-width: 500px) {
+        #header-navbar-container {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
+        }
         #navbar {
-            justify-content: center;
+            justify-content: flex-start;
+            gap: 10px;
         }
         button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 3em;
+            margin: 0;
         }
     }
 </style>
 
-<div id="navbar">
+<div id="header-navbar-container">
     <button><a href="/">Home</a></button>
-    <FamilyHeader/>
-    <select id="fontSwitcher">
-        <option value="Gilroy">Gilroy</option>
-        <option value="Arial, sans-serif">Arial</option>
-        <option value="Verdana, sans-serif">Verdana</option>
-        <option value="Times New Roman, serif">Times New Roman</option>
-        <option value="Courier New, monospace">Courier New</option>
-        <option value="Georgia, serif">Georgia</option>
-    </select>
-    <button onclick="openDialog()">&#x3F;</button>
+    <FamilyHeader />
+    <div id="navbar">
+        <select id="fontSwitcher">
+            <option value="Gilroy">Gilroy</option>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+            <option value="Times New Roman, serif">Times New Roman</option>
+            <option value="Courier New, monospace">Courier New</option>
+            <option value="Georgia, serif">Georgia</option>
+        </select>
+        <button id="know-more" onclick="openDialog()">&#x3F;</button>
+        <!-- <button id="theme-toggle">&#128161;</button> -->
+        <LightDarkMode/>
+    </div>
 </div>
 
 <dialog id="myDialog">
@@ -91,6 +140,13 @@ import FamilyHeader from "../layouts/FamilyHeader.astro";
 </dialog>
 
 <script client: only>
+
+const button = document.getElementById("theme-toggle");
+  button.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+  });
+
+
     const dialog = document.getElementById('myDialog');
     function openDialog() {
         dialog.showModal(); // Opens as a modal
