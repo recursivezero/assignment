@@ -1,5 +1,16 @@
 {
+  "name": "family-tree",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
   "dependencies": {
+    "astro": "^4.16.7",
     "i18next": "^23.16.5"
   }
 }
