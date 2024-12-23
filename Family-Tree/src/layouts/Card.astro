@@ -47,7 +47,13 @@ import "../styles/card.css";
     .open {
         grid-column: 1 / -1;
     }
+
+    .card.open {
+        max-height: none;
+        transition: max-height 0.3s ease;
+    }
 </style>
+
 <div class="search-container">
     <input type="text" id="searchInput" class="search-bar" placeholder="Search by Gotra, Deity, Caste, or Surname (Hindi/English)" />
 </div>
@@ -145,7 +151,16 @@ import "../styles/card.css";
 
                     card.innerHTML = cardContent;
 
-                    if (query && (card.innerHTML.toLowerCase().includes(query.toLowerCase()))) {
+                    // Add event listener for clicking the card
+                    card.addEventListener("click", (event) => {
+                        // Avoid triggering when clicking the buttons inside the card
+                        if (!event.target.classList.contains("copy-button") && !event.target.classList.contains("copy-button-all")) {
+                            card.classList.toggle("open");
+                        }
+                    });
+
+                    // Automatically open cards that match the query
+                    if (query && card.innerHTML.toLowerCase().includes(query.toLowerCase())) {
                         card.classList.add("open");
                     }
 

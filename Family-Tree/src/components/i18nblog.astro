@@ -1,0 +1,69 @@
+---
+import "../styles/blog.css";
+---
+
+
+<div class="container">
+    <h1>I18N (Internationalization) Blog <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m226-559 78 33q14-28 29-54t33-52l-56-11-84 84Zm142 83 114 113q42-16 90-49t90-75q70-70 109.5-155.5T806-800q-72-5-158 34.5T492-656q-42 42-75 90t-49 90Zm178-65q-23-23-23-56.5t23-56.5q23-23 57-23t57 23q23 23 23 56.5T660-541q-23 23-57 23t-57-23Zm19 321 84-84-11-56q-26 18-52 32.5T532-299l33 79Zm313-653q19 121-23.5 235.5T708-419l20 99q4 20-2 39t-20 33L538-80l-84-197-171-171-197-84 167-168q14-14 33.5-20t39.5-2l99 20q104-104 218-147t235-24ZM157-321q35-35 85.5-35.5T328-322q35 35 34.5 85.5T327-151q-25 25-83.5 43T82-76q14-103 32-161.5t43-83.5Zm57 56q-10 10-20 36.5T180-175q27-4 53.5-13.5T270-208q12-12 13-29t-11-29q-12-12-29-11.5T214-265Z"/></svg></h1>
+    <div id="head"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m422-232 207-248H469l29-227-185 267h139l-30 208ZM320-80l40-280H160l360-520h80l-40 320h240L400-80h-80Zm151-390Z"/></svg> How to Add Multiple Languages to Your Website Using JavaScript and <span class="i18n-head">Astro I18N</span> <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m226-559 78 33q14-28 29-54t33-52l-56-11-84 84Zm142 83 114 113q42-16 90-49t90-75q70-70 109.5-155.5T806-800q-72-5-158 34.5T492-656q-42 42-75 90t-49 90Zm178-65q-23-23-23-56.5t23-56.5q23-23 57-23t57 23q23 23 23 56.5T660-541q-23 23-57 23t-57-23Zm19 321 84-84-11-56q-26 18-52 32.5T532-299l33 79Zm313-653q19 121-23.5 235.5T708-419l20 99q4 20-2 39t-20 33L538-80l-84-197-171-171-197-84 167-168q14-14 33.5-20t39.5-2l99 20q104-104 218-147t235-24ZM157-321q35-35 85.5-35.5T328-322q35 35 34.5 85.5T327-151q-25 25-83.5 43T82-76q14-103 32-161.5t43-83.5Zm57 56q-10 10-20 36.5T180-175q27-4 53.5-13.5T270-208q12-12 13-29t-11-29q-12-12-29-11.5T214-265Z"/></svg></div>
+    <p>Making your website support multiple languages (called Internationalization or I18N) can seem tricky, but it's actually quite simple! In this guide, I'll show you how to do it step by step using just plain JavaScript. No libraries or frameworks are needed. </p>
+
+    <div class="guide">
+        <!-- folder structure -->
+        <div class="folder-structure">
+            <h3>&rarr; Folder Structure</h3>
+            <iframe
+  src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%252Flocales%250A%2520%2520en.json%250A%2520%2520es.json%250Aindex.html%250Ai18n.js"
+  style="width: 234px; height: 279px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+            </iframe>
+        </div>
+        
+        <hr>
+
+        <div class="step1">
+            <h3>&rarr; Step 1: Create Language Files</h3>
+            <div class="english">
+                <h3 id="english">English (en.json):</h3>
+                <iframe
+  src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%257B%250A%2520%2520%2522welcome%2522%253A%2520%2522Welcome%2522%252C%250A%2520%2520%2522logout%2522%253A%2520%2522Log%2520Out%2522%250A%257D"
+  style="width: 344px; height: 260px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+                </iframe>
+
+                <h3 id="spanish">Spanish (es.json):</h3>
+                <iframe
+  src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%257B%250A%2520%2520%2522welcome%2522%253A%2520%2522Bienvenido%2522%252C%250A%2520%2520%2522logout%2522%253A%2520%2522Cerrar%2520sesi%25C3%25B3n%2522%250A%257D"
+  style="width: 378px; height: 260px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+                </iframe>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- html snippet -->
+        <div class="step2">
+            <h3>&rarr; Step 2: Create an <span class="i18n-head">index.html</span> page</h3>
+            <iframe
+  src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=%253C%21DOCTYPE%2520html%253E%250A%253Chtml%2520lang%253D%2522en%2522%253E%250A%253Chead%253E%250A%2520%2520%253Cmeta%2520charset%253D%2522UTF-8%2522%253E%250A%2520%2520%253Cmeta%2520name%253D%2522viewport%2522%2520content%253D%2522width%253Ddevice-width%252C%2520initial-scale%253D1.0%2522%253E%250A%2520%2520%253Ctitle%253ELanguage%2520Switcher%253C%252Ftitle%253E%250A%253C%252Fhead%253E%250A%253Cbody%253E%250A%2520%2520%253Cp%2520data-i18n%253D%2522welcome%2522%253EWelcome%253C%252Fp%253E%250A%2520%2520%253Cbutton%2520data-i18n%253D%2522logout%2522%253ELog%2520Out%253C%252Fbutton%253E%250A%2520%2520%253Cselect%2520id%253D%2522languageSwitcher%2522%253E%250A%2520%2520%2520%2520%253Coption%2520value%253D%2522en%2522%253EEnglish%253C%252Foption%253E%250A%2520%2520%2520%2520%253Coption%2520value%253D%2522es%2522%253EEspa%25C3%25B1ol%253C%252Foption%253E%250A%2520%2520%253C%252Fselect%253E%250A%2520%2520%253Cscript%2520src%253D%2522i18n.js%2522%253E%253C%252Fscript%253E%250A%253C%252Fbody%253E%250A%253C%252Fhtml%253E"
+  style="width: 757px; height: 503px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+            </iframe>
+        </div>
+        
+        <hr>
+
+        <!-- JS Implementation -->
+
+        <div class="step3">
+            <h3>&rarr; Step 3: Create an <span class="i18n-head">i18n.js</span> file</h3>
+        </div>
+        <iframe
+  src="https://carbon.now.sh/embed?bg=rgba%28171%2C+184%2C+195%2C+1%29&t=seti&wt=none&l=auto&width=680&ds=true&dsyoff=20px&dsblur=68px&wc=true&wa=true&pv=56px&ph=56px&ln=false&fl=1&fm=Hack&fs=14px&lh=133%25&si=false&es=2x&wm=false&code=const%2520translations%2520%253D%2520%257B%257D%253B%2520%252F%252F%2520Object%2520to%2520store%2520loaded%2520language%2520translations%250Alet%2520currentLanguage%2520%253D%2520%27en%27%253B%2520%252F%252F%2520Default%2520language%2520is%2520set%2520to%2520English%250A%250A%252F%252F%2520Function%2520to%2520load%2520the%2520language%2520file%2520dynamically%250Aasync%2520function%2520loadLanguage%28lang%29%2520%257B%250A%2520%2520try%2520%257B%250A%2520%2520%2520%2520const%2520response%2520%253D%2520await%2520fetch%28%2560.%252Flocales%252F%2524%257Blang%257D.json%2560%29%253B%2520%252F%252F%2520Fetch%2520the%2520appropriate%2520JSON%2520file%250A%2520%2520%2520%2520translations%255Blang%255D%2520%253D%2520await%2520response.json%28%29%253B%2520%252F%252F%2520Parse%2520and%2520store%2520translations%2520in%2520the%2520object%250A%2520%2520%2520%2520currentLanguage%2520%253D%2520lang%253B%2520%252F%252F%2520Update%2520the%2520current%2520language%250A%2520%2520%2520%2520updateContent%28%29%253B%2520%252F%252F%2520Refresh%2520the%2520page%2520content%2520with%2520the%2520new%2520translations%250A%2520%2520%257D%2520catch%2520%28error%29%2520%257B%250A%2520%2520%2520%2520console.error%28%27Error%2520loading%2520language%2520file%253A%27%252C%2520error%29%253B%2520%252F%252F%2520Log%2520an%2520error%2520if%2520file%2520loading%2520fails%250A%2520%2520%257D%250A%257D%250A%250A%252F%252F%2520Function%2520to%2520get%2520the%2520translation%2520for%2520a%2520given%2520key%250Afunction%2520translate%28key%29%2520%257B%250A%2520%2520return%2520translations%255BcurrentLanguage%255D%253F.%255Bkey%255D%2520%257C%257C%2520key%253B%2520%252F%252F%2520Return%2520the%2520translation%2520or%2520the%2520key%2520itself%2520if%2520not%2520found%250A%257D%250A%250A%252F%252F%2520Function%2520to%2520update%2520all%2520translatable%2520elements%2520on%2520the%2520page%250Afunction%2520updateContent%28%29%2520%257B%250A%2520%2520document.querySelectorAll%28%27%255Bdata-i18n%255D%27%29.forEach%28%28element%29%2520%253D%253E%2520%257B%250A%2520%2520%2520%2520const%2520key%2520%253D%2520element.getAttribute%28%27data-i18n%27%29%253B%2520%252F%252F%2520Get%2520the%2520translation%2520key%2520from%2520the%2520element%250A%2520%2520%2520%2520element.textContent%2520%253D%2520translate%28key%29%253B%2520%252F%252F%2520Set%2520the%2520translated%2520text%250A%2520%2520%257D%29%253B%250A%257D%250A%250A%252F%252F%2520Event%2520listener%2520for%2520language%2520selection%2520changes%250A%252F%252F%2520Updates%2520the%2520language%2520based%2520on%2520user%2520selection%250Adocument.getElementById%28%27languageSwitcher%27%29.addEventListener%28%27change%27%252C%2520%28event%29%2520%253D%253E%2520%257B%250A%2520%2520const%2520selectedLanguage%2520%253D%2520event.target.value%253B%2520%252F%252F%2520Get%2520the%2520selected%2520language%2520code%250A%2520%2520loadLanguage%28selectedLanguage%29%253B%2520%252F%252F%2520Load%2520and%2520apply%2520the%2520selected%2520language%250A%257D%29%253B%250A%250A%252F%252F%2520Load%2520the%2520default%2520language%2520when%2520the%2520page%2520loads%250AloadLanguage%28currentLanguage%29%253B"
+  style="width: 1024px; height: 894px; border:0; transform: scale(1); overflow:hidden;"
+  sandbox="allow-scripts allow-same-origin">
+        </iframe>
+    </div>
+
+</div>

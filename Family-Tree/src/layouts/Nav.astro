@@ -37,7 +37,7 @@ import LightDarkMode from "../components/lightDarkMode.astro";
     box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
   }
 
-  #theme-toggle
+  /* #theme-toggle
   {
     background-color: rgb(23, 23, 23);
     border-radius: 20px;
@@ -49,6 +49,46 @@ import LightDarkMode from "../components/lightDarkMode.astro";
   #theme-toggle:hover
   {
     transform: scale(1.2);
+  } */
+
+  :root {
+    --bg-color: white;
+    --text-color: black;
+  }
+  [data-theme="dark"] {
+    --bg-color: black;
+    --text-color: white;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  #theme-toggle {
+    cursor: pointer;
+    padding: 0.5em;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 1em;
+  }
+
+  #i18nBtn
+  {
+    text-decoration: none;
+  }
+  
+  a
+  {
+    color: rgb(255, 190, 69);
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
   }
 
 </style>
@@ -62,10 +102,28 @@ import LightDarkMode from "../components/lightDarkMode.astro";
       <option value="hindi">Hindi</option>
     </select>
     <LightDarkMode/>
+    <a id="i18nBtn" href="/blog/" target="_blank">i18n Blog</a>
   </div>
 </nav>
 
 <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      console.log(currentTheme)
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
   const translations = {};
   let currentLanguage = localStorage.getItem("language") || 'en';  // Get language from localStorage or default to 'en'
 

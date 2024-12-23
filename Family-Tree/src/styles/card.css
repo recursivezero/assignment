@@ -13,6 +13,17 @@
     margin: 0 auto;
 }
 
+main
+{
+  background: url(/voxels-republic-eUBp69MTaNU-unsplash.jpg);
+  background-size: cover;
+}
+
+footer
+{
+  color: #fff;
+}
+
 .card {
     background: #fff1d5;
     border: 2px solid #9b9b9b81;
