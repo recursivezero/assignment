@@ -1,23 +1,31 @@
 @font-face {
     font-family: gilroy;
-    src: url(./gilroy/Gilroy-Regular.ttf);
+    src: url(../src/assets/fonts/gilroy/Gilroy-Regular.ttf);
 }
 
 body {
-    /* font-family: Arial, sans-serif; */
     margin: 0;
     padding: 0;
     /* display: flex;
     justify-content: center;
     align-items: center; */
     height: fit-content;
-    /* background-color: #f4f4f4; */
-    /* background-color: #E9B02F; */
-    background-image: url(7309.jpg);
+    background-image: url(./assets/images/7309.jpg);
     background-position: 10em 80em;
     background-size: cover;
     overflow-x: hidden;
     font-family: "PP Woodland";
+}
+
+#element
+{
+    color: rgb(122, 0, 0);
+}
+
+#element > img
+{
+    width: 50px;
+    height: 50px;
 }
 
 #header-title
@@ -55,6 +63,8 @@ body {
     background: #e1fdff;
     background: #fff1d5;
     border: 1px solid #ddd;
+    color: rgb(122, 0, 0);
+    font-weight: 600;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     flex-basis: 300px;
@@ -64,11 +74,11 @@ body {
     overflow: hidden;
     flex-grow: 0;
     flex-shrink: 0;
-    max-height: 3.9em; /* Adjust this value to fit your card's initial height */
+    max-height: 3.9em; 
 }
 
 .card.open {
-    max-height: 20em; /* Adjust this value to fit your card's expanded height */
+    max-height: 22em;
 }
 
 .card:hover {
@@ -120,6 +130,7 @@ body {
 .surname-node {
     /* overflow-y: scroll; */
     background: #f7f7f7;
+    color: rgb(63, 121, 19);
     margin: 10px;
     padding: 10px;
     border-radius: 5px;
@@ -128,8 +139,20 @@ body {
     transition: transform 0.2s;
 }
 
+#surName
+{
+    color: #000;
+}
+
 .surname-node:hover {
     transform: scale(1.03);
+}
+
+footer
+{
+    text-align: center;
+    padding: 1em;
+    font-weight: 600;
 }
 
 @media only screen and (max-width: 800px) {

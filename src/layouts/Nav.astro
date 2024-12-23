@@ -1,0 +1,171 @@
+---
+import Header from "./Header.astro";
+import LightDarkMode from "../components/lightDarkMode.astro";
+---
+
+<style>
+  @font-face 
+  {
+      font-family: gilroy;
+      src: url(/gilroy/Gilroy-Regular.ttf);
+  }
+
+  div #navbar
+  {
+    background-color: #000;
+  }
+
+  #navbar
+  {
+    background: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: -1.8em;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  }
+
+  #languageSwitcher
+  {
+    padding: 0.5em;
+    background: none;
+    border-radius: 10px;
+    border: none;
+    background-color: #000;
+    color: #ffffff;
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
+  }
+
+  /* #theme-toggle
+  {
+    background-color: rgb(23, 23, 23);
+    border-radius: 20px;
+    padding: 0.2em;
+    border: none;
+    box-shadow: rgb(255, 255, 255) 0px 3px 8px;
+  }
+
+  #theme-toggle:hover
+  {
+    transform: scale(1.2);
+  } */
+
+  :root {
+    --bg-color: white;
+    --text-color: black;
+  }
+  [data-theme="dark"] {
+    --bg-color: black;
+    --text-color: white;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  #theme-toggle {
+    cursor: pointer;
+    padding: 0.5em;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 1em;
+  }
+
+  #i18nBtn
+  {
+    text-decoration: none;
+  }
+  
+  a
+  {
+    color: rgb(255, 190, 69);
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
+  }
+
+</style>
+
+<nav>
+  <div id="navbar">
+    <Header/>
+    <!-- Language Selector -->
+    <select id="languageSwitcher">
+      <option value="en">English</option>
+      <option value="hindi">Hindi</option>
+    </select>
+    <LightDarkMode/>
+    <a id="i18nBtn" href="/blog/" target="_blank">i18n Blog</a>
+  </div>
+</nav>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      console.log(currentTheme)
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+
+  const translations = {};
+  let currentLanguage = localStorage.getItem("language") || 'en';  // Get language from localStorage or default to 'en'
+
+  // Load language data
+  async function loadLanguage(lang) {
+    try {
+      const response = await fetch(`/locales/${lang}.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch language file: ${lang}`);
+      }
+      translations[lang] = await response.json();
+      currentLanguage = lang;
+      localStorage.setItem("language", lang);  // Save the selected language to localStorage
+      updateContent(); // Update the content with the newly loaded language
+    } catch (error) {
+      console.error('Error loading language:', error);
+    }
+  }
+
+  // Translate text based on the key
+  function translate(key) {
+    return translations[currentLanguage]?.[key] || key;
+  }
+
+  // Update all text content with the selected language
+  function updateContent() {
+    document.querySelectorAll('[data-i18n]').forEach((element) => {
+      const key = element.getAttribute('data-i18n');
+      element.textContent = translate(key);
+    });
+  }
+
+  // Event listener for language change
+  document.getElementById('languageSwitcher').addEventListener('change', (event) => {
+    const selectedLanguage = event.target.value;
+    loadLanguage(selectedLanguage);
+  });
+
+  // Initialize the page with the language from localStorage (or default language)
+  window.addEventListener("DOMContentLoaded", () => {
+    loadLanguage(currentLanguage); // Load language from localStorage or default
+    document.getElementById('languageSwitcher').value = currentLanguage; // Set the dropdown to the selected language
+  });
+
+</script>

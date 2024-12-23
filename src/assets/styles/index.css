@@ -1,0 +1,100 @@
+@font-face 
+{
+    font-family: gilroy;
+    src: url(./gilroy/Gilroy-Regular.ttf);
+}
+
+*
+{
+    background-color: #000;
+    /* background: #1D1F20; */
+    color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "gilroy";
+    text-align: center;
+}
+
+h2, h3
+{
+    background: linear-gradient(to right, #954FEC, #9B5AEE, #fff);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+h1
+{
+    /* margin-top: 0.8em; */
+    font-size: 5em;
+}
+
+h2
+{
+    font-size: 3.5em;
+    /* margin-top: 0.5em; */
+}
+
+h3
+{
+    /* margin-top: 0.5em; */
+    font-size: 2.5em;
+    margin-bottom: 1em;
+}
+
+.container
+{
+    /* width: 50%; */
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* margin: auto; */
+    padding: 1em;
+    margin-bottom: 4em;
+    /* box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px; */
+}
+
+#family-box
+{
+    font-weight: 600;
+}
+
+
+a
+{
+    color: rgb(255, 190, 69);
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 0.5em;
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
+    cursor: url("/tap.png");
+}
+
+a:hover
+{
+    box-shadow: rgba(255, 255, 255, 0.886) 0px 6px 12px;
+}
+
+h4
+{
+    margin-top: 0.5em;
+    font-size: 2em;
+}
+
+h4:hover
+{
+    transform: scale(1.1);
+}
+
+
+@media screen and (max-width: 700px)
+{
+
+    h1, h2, h3
+    {
+        font-size: 1.5em;
+        text-align: center;
+        /* padding: 2em; */
+    }
+}
