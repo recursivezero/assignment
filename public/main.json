@@ -1,0 +1,406 @@
+[
+  {
+    "id": 1,
+    "Caste": "झंवर",
+    "Gotra": "झूमाझ", 
+    "Deity": "सुद्रासण / गाहल",
+    "Location": "",
+    "Surnames": [
+        {"hi" : "कालीया", "en" : "Kaliya"},
+        {"hi" : "खरड़", "en" : "Kharad"},
+        {"hi" : "खीवंन्या", "en" : "Khivannjya"},
+        {"hi" : "खुच्चा", "en" : "Khuccha"},
+        {"hi" : "चौधरी", "en" : "Chaudhary"},
+        {"hi" : "संबरसोमानी", "en" : "Sambarsomani"},  
+        {"hi" : "झालरीया", "en" : "Jhalariya"},
+        {"hi" : "ठीनगा", "en" : "Thinga"},
+        {"hi" : "डाणी", "en" : "Dani"},
+        {"hi" : "नागला", "en" : "Nagla"},
+        {"hi" : "नौसरया", "en" : "Nausarya"},
+        {"hi" : "चौसरया", "en" : "Pausarya"},
+        {"hi" : "मोवण्डा", "en" : "Movanda"},
+        {"hi" : "मुवाणीवाल", "en" : "Muvaniwal"},
+        {"hi" : "मेमाणी", "en" : "Memaani"},
+        {"hi" : "मोवण्या", "en" : "Movnya"}
+    ]
+  },
+  {
+    "id": 2,
+    "Caste": "लढ्ढा",
+    "Gotra": "सीलास",
+    "Deity": "संचाय",
+    "Location": "",
+    "Surnames": [
+      { "hi": "अठासन्या", "en": "Athasanya" },
+      {"hi" : "चौधरी", "en" : "Chaudhary" },
+      { "hi": "जोला", "en": "Jola" },
+      { "hi": "दगड़ा", "en": "Dagda" },
+      { "hi": "दागडिया", "en": "Dagadiya" },
+      { "hi": "धाराणी", "en": "Dharani" },
+      { "hi": "भाकरोबा", "en": "Bhakaroba" },
+      { "hi": "मूंजी", "en": "Munji" },
+      { "hi": "मोदी", "en": "Modi" },
+      { "hi": "हींग्या", "en": "Hingya" }
+    ]
+  },
+  {
+    "id": 3,
+    "Caste": "टावरी",
+    "Gotra": "चावडा",
+    "Deity": "कश्यप",
+    "Location": "",
+    "Surnames": [
+      { "hi": "आसेश", "en": "Asara" },
+      { "hi": "कुलधारिणा", "en": "Kuladharina" },
+      { "hi": "खेताणी", "en": "Khetani" },
+      { "hi": "गौदाणी", "en": "Gaudani" },
+      { "hi": "ओदाणी", "en": "Odani" },
+      { "hi": "गौराणी", "en": "Gaurani" },
+      { "hi": "घुरका", "en": "Ghurka" },
+      { "hi": "घेराणी", "en": "Gheranit" },
+      { "hi": "भकराणी", "en": "Bhakarani" },
+      { "hi": "भौजाणी", "en": "Bhojani" },
+      { "hi": "मोहता", "en": "Mohta" },
+      { "hi": "गुरकाणी", "en": "Gurkani" }
+    ]
+  },
+  {
+    "id": 4,
+    "Caste": "बजाज",
+    "Gotra": "भंसाली",
+    "Deity": "गाहल",
+    "Location": "",
+    "Surnames": [
+      { "hi": "गवदुका ", "en": "Gavduka" },
+      { "hi": "गौचा", "en": "Gaucha" },
+      { "hi": "गौदावत", "en": "Gaudavat" },
+      { "hi": "चामर", "en": "Chamar" },
+      { "hi": "धारुका", "en": "Dharuka" },
+      { "hi": "बहोड्या", "en": "Bahodya" },
+      { "hi": "मरचुन्या", "en": "Marchunya" },
+      { "hi": "रामावत", "en": "Ramavat" },
+      { "hi": "रोल्या", "en": "Rolya" },
+      { "hi": "लखावत", "en": "Lakhavat" }
+    ]
+  },
+  {
+    "id": 5,
+    "Caste": "बिड़ला",
+    "Gotra": "बालास",
+    "Deity": "संचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "गौरिया",  "en" : "Gauriya"},
+      {"hi" : "गाडया", "en" : "Gadaya"},
+      {"hi" : "गौरेया", "en" : "Gaureya"},
+      {"hi" : "धुरया", "en" : "Dhuraya"},
+      {"hi" : "घुनरया", "en" : "Ghunraya"},
+      {"hi" : "बडहका", "en" : "Badhaka"},
+      {"hi" : "बडालिया", "en" : "Badaliya"}
+    ]
+  },
+  {
+    "id": 6,
+    "Caste": "मालू",
+    "Gotra": "खलांस",
+    "Deity": "सचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "चौधरी", "en" : "Chaudhary"}, 
+      {"hi" : "धीया", "en" : "Dhiya"},
+      {"hi" : "तेला", "en" : "Tela"},
+      {"hi" : "माल", "en" : "Mal"},
+      {"hi" : "लोईवाल", "en" : "Loiwal"},
+      {"hi" : "साबु", "en" : "Sabu"}
+    ]
+  },
+  {
+    "id": 7,
+    "Caste": "माणूधन्या",
+    "Gotra": "जेसलाणी",
+    "Deity": "माणूधणी",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "घश्डोल्या", "en" : "Ghashdolya"},
+      {"hi" : "चौधरी", "en" : "Chaudhary"},
+      {"hi" : "सुम", "en" : "Sum"},
+      {"hi" : "स्याहर", "en" : "Syahar"},
+      {"hi" : "सिंगी", "en" : "Singi"},
+      {"hi" : "हीरा", "en" : "Hira"}
+    ]
+  },
+  {
+    "id": 8,
+    "Caste": "धूत",
+    "Gotra": "फाफडांस",
+    "Deity": "लीकाशन",
+    "Location": "",
+    "Surnames": [
+      {}
+    ]
+  },
+  {
+    "id": 9,
+    "Caste": "भंसाली",
+    "Gotra": "भंसाली",
+    "Deity": "चावडा",
+    "Location": "",
+    "Surnames": [
+      {}
+    ]
+  },
+  {
+    "id": 10,
+    "Caste": "आगसूड",
+    "Gotra": "कश्यप",
+    "Deity": "जाखण",
+    "Location": "",
+    "Surnames": [
+      {}
+    ]
+  },
+  {
+    "id": 11,
+    "Caste": "मालपाणी",
+    "Gotra": "भटयास",
+    "Deity": "साँगल",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "चोला", "en" : "Chola"},
+      {"hi" : "गंगल", "en" : "Gangal"},
+      {"hi" : "जुहरी", "en" : "Juhari"},
+      {"hi" : "भुरा", "en" : "Bhura"},
+      {"hi" : "मूथा", "en" : "Mutha"},
+      {"hi" : "मोदी", "en" : "Modi"},
+      {"hi" : "लूलाणी", "en" : "Lulaani"},
+      {"hi" : "लोलणा", "en" : "Lolna"}
+    ]
+  },
+  {
+    "id": 12,
+    "Caste": "सिकची",
+    "Gotra": "कश्यप",
+    "Deity": "पंवार",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "सीलाणी", "en" : "Seelani"},
+      {"hi" : "सीलार", "en" : "Seelar"}
+    ]
+  },
+  {
+    "id": 13,
+    "Caste": "नौलखा",
+    "Gotra": "कश्यप",
+    "Deity": "पाठाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "नोगजा", "en" : "Nogja"}
+    ]
+  },
+  {
+    "id": 14,
+    "Caste": "कलंत्री",
+    "Gotra": "कश्यप",
+    "Deity": "चावंडा",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "माछर", "en" : "Machar"}
+    ]
+  },
+  {
+    "id": 15,
+    "Caste": "मंत्री",
+    "Gotra": "कवलाय",
+    "Deity": "संचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "वेली", "en" : "Veli"}
+    ]
+  },
+  {
+    "id": 16,
+    "Caste": "देवपुरा",
+    "Gotra": "पारस",
+    "Deity": "पाढाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "कसुबीवाल", "en" : "Kasubival"}
+    ]
+  },
+  {
+    "id": 18,
+    "Caste": "बांगरड",
+    "Gotra": "चूडास",
+    "Deity": "संचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "तापड़या", "en" : "Tapadaya"}
+    ]
+  },
+  {
+    "id": 19,
+    "Caste": "तापडिया",
+    "Gotra": "पीपलान",
+    "Deity": "आशापुरा",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "कधारी", "en" : "Kadhari"},
+      {"hi" : "मूंगरड", "en" : "Moongarad"},
+      {"hi" : "धाछ्या", "en" : "Dhachya"}
+    ]
+  },
+  {
+    "id": 20,
+    "Caste": "चौखडा",
+    "Gotra": "चन्द्रास",
+    "Deity": "जीवण",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "चौधरी", "en" : "Chaudhary"},
+      {"hi" : "धुरया", "en" : "Dhurya"},
+      {"hi" : "चिवतोड़ा", "en" : "Chivtoda"}
+    ]
+  },
+  {
+    "id": 21,
+    "Caste": "काबरा",
+    "Gotra": "अचित्रास",
+    "Deity": "सुसमाद",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "अठारया", "en" : "Athariya"},
+      {"hi" : "कोठारी", "en" : "Kothari"},
+      {"hi" : "पालड्या", "en" : "Paladya"},
+      {"hi" : "मगत", "en" : "Magat"},
+      {"hi" : "मांडक्या", "en" : "Mandkya"},
+      {"hi" : "सिंगी", "en" : "Singi"},
+      {"hi" : "घौल", "en" : "Ghaul"}
+    ]
+  },
+  {
+    "id": 22,
+    "Caste": "करवा",
+    "Gotra": "करवास",
+    "Deity": "संचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "कलंकी", "en" : "Kalanki"},
+      {"hi" : "काग्या", "en" : "Kagya"},
+      {"hi" : "काहौर", "en" : "Kahour"},
+      {"hi" : "किलल", "en" : "Killal"},
+      {"hi" : "किया", "en" : "Kiya"}
+    ]
+  },
+  {
+    "id": 23,
+    "Caste": "छापरवाल",
+    "Gotra": "कौशिक",
+    "Deity": "बंधर",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "दुजारा", "en" : "Dujara"},
+      {"hi" : "दुसाज", "en" : "Dusaj"} 
+    ]
+  },
+  {
+    "id": 24,
+    "Caste": "कालाणी",
+    "Gotra": "घौलास",
+    "Deity": "चावंडा",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "कलन्त्री", "en" : "Kalantri"},
+      {"hi" : "काल्या", "en" : "Kalya"},
+      {"hi" : "कूलच्या", "en" : "Kulchya"},
+      {"hi" : "गट्टाणी", "en" : "Gattani"},
+      {"hi" : "मारक्या", "en" : "Markya"}
+    ]
+  },
+  {
+    "id": 25,
+    "Caste": "अटल",
+    "Gotra": "गौतमस्थ",
+    "Deity": "सचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "गोठणीबाल", "en" : "Gothnibal"},
+      {"hi" : "मरोठिया", "en" : "Marothia"}
+    ]
+  },
+  {
+    "id": 26,
+    "Caste": "असावा",
+    "Gotra": "पंचास",
+    "Deity": "आशावरी",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "नाग", "en" : "Nag"},
+      {"hi" : "मण्डोवश", "en" : "Mandowash"},
+      {"hi" : "व्यपति", "en" : "Vyapati"},
+      {"hi" : "मारक्या", "en" : "Markya"}
+    ]
+  },
+  {
+    "id": 27,
+    "Caste": "कासट",
+    "Gotra": "अल्लसास",
+    "Deity": "संचाय",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "कटमुरा", "en" : "Katmura"},
+      {"hi" : "खोगटा", "en" : "Khogta"},
+      {"hi" : "सुरजन", "en" : "Surjan"}
+    ]
+  },
+  {
+    "id": 28,
+    "Caste": "बालदी",
+    "Gotra": "लौरस",
+    "Deity": "गारस",
+    "Location": "",
+    "Surnames": [
+      {}
+    ]
+  },
+  {
+    "id": 29,
+    "Caste": "चेचाणी",
+    "Gotra": "सीलास",
+    "Deity": "दद्यीमती",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "धुलद", "en" : "Dhulad"}
+    ]
+  },
+  {
+    "id": 30,
+    "Caste": "द्वारका",
+    "Gotra": "कश्यप",
+    "Deity": "मीरस",
+    "Location": "",
+    "Surnames": [
+      {}
+    ]
+  },
+  {
+    "id": 31,
+    "Caste": "नयणवाला",
+    "Gotra": "कश्यप",
+    "Deity": "नयण",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "राजानी", "en" : "Rajani"}
+    ]
+  },
+  {
+    "id": 32,
+    "Caste": "पोरवाल",
+    "Gotra": "नानणांस",
+    "Deity": "मात्री",
+    "Location": "",
+    "Surnames": [
+      {"hi" : "परवार", "en" : "Parwar"},
+      {"hi" : "दागडिया", "en" : "Dagdiya"}
+    ]
+  }
+]

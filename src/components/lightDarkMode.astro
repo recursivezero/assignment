@@ -1,0 +1,50 @@
+---
+---
+
+<style>
+  :root {
+    --bg-color: white;
+    --text-color: black;
+  }
+  [data-theme="dark"] {
+    --bg-color: black;
+    --text-color: white;
+  }
+
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  #theme-toggle {
+    cursor: pointer;
+    padding: 0.5em;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 50%;
+    font-size: 1em;
+  }
+</style>
+
+<!-- Toggle Button -->
+<button id="theme-toggle" aria-label="Toggle Theme">&#128161;</button>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('theme') || 'light';
+
+    document.documentElement.setAttribute('data-theme', savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  });
+</script>
