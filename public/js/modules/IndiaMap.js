@@ -15,7 +15,7 @@ export class IndiaMap {
         this.handleResize = this.handleResize.bind(this);
         window.addEventListener('resize', this.handleResize);
 
-        // Add cleanup method
+        // Cleanup method
         this.cleanup = this.cleanup.bind(this);
         window.addEventListener('beforeunload', this.cleanup);
     }
@@ -65,13 +65,12 @@ export class IndiaMap {
             this.renderCapitals();
         } catch (error) {
             console.error("Error loading data:", error);
-            // Add user-friendly error handling here
             this.handleDataLoadError();
         }
     }
 
     handleDataLoadError() {
-        // Add error UI feedback
+        // Error UI feedback
         const container = document.querySelector('.map-container');
         container.innerHTML = `
             <div class="error-message">

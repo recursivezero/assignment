@@ -1,0 +1,40 @@
+/* Light theme variables */
+:root {
+  --primary-color: #4f46e5;
+  --secondary-color: #6366f1;
+  --background-color: #eef2f7;
+  --text-color: #212529;
+  --border-color: #e9ecef;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+
+  /* Modal specific variables */
+  --modal-bg: white;
+  --modal-header-bg: #6366f1;
+  --modal-details-bg: #f5f7ff;
+  --modal-details-text: #495057;
+  --modal-details-border: #e1e8ef;
+  --modal-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  --primary-color: #818cf8;
+  --secondary-color: #6366f1;
+  --background-color: #0f172a;
+  --text-color: #e2e8f0;
+  --border-color: #334155;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+
+  /* Modal specific variables */
+  --modal-bg: #1e293b;
+  --modal-header-bg: #3730a3;
+  --modal-details-bg: #0f172a;
+  --modal-details-text: #e2e8f0;
+  --modal-details-border: #334155;
+  --modal-shadow: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
