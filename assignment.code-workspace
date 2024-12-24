@@ -1,31 +1,216 @@
 {
-  "settings": {
-    "workbench.colorCustomizations": {
-      "activityBar.activeBackground": "#d475fd",
-      "activityBar.background": "#d475fd",
-      "activityBar.foreground": "#15202b",
-      "activityBar.inactiveForeground": "#15202b99",
-      "activityBarBadge.background": "#fee2a1",
-      "activityBarBadge.foreground": "#15202b",
-      "commandCenter.border": "#e7e7e799",
-      "sash.hoverBorder": "#d475fd",
-      "sideBar.border": "#d475fd",
-      "statusBar.background": "#c443fc",
-      "statusBar.foreground": "#e7e7e7",
-      "statusBarItem.hoverBackground": "#d475fd",
-      "statusBarItem.remoteBackground": "#c443fc",
-      "statusBarItem.remoteForeground": "#e7e7e7",
-      "tab.activeBorder": "#d475fd",
-      "titleBar.activeBackground": "#c443fc",
-      "titleBar.activeForeground": "#e7e7e7",
-      "titleBar.inactiveBackground": "#c443fc99",
-      "titleBar.inactiveForeground": "#e7e7e799"
-    },
-    "peacock.color": "#c443fc"
-  },
   "folders": [
     {
       "path": "."
     }
-  ]
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "activityBar.activeBackground": "#65c89b",
+      "activityBar.background": "#65c89b",
+      "activityBar.foreground": "#15202b",
+      "activityBar.inactiveForeground": "#15202b99",
+      "activityBarBadge.background": "#945bc4",
+      "activityBarBadge.foreground": "#e7e7e7",
+      "commandCenter.border": "#15202b99",
+      "sash.hoverBorder": "#65c89b",
+      "statusBar.background": "#42b883",
+      "statusBar.foreground": "#15202b",
+      "statusBarItem.hoverBackground": "#359268",
+      "statusBarItem.remoteBackground": "#42b883",
+      "statusBarItem.remoteForeground": "#15202b",
+      "titleBar.activeBackground": "#42b883",
+      "titleBar.activeForeground": "#15202b",
+      "titleBar.inactiveBackground": "#42b88399",
+      "titleBar.inactiveForeground": "#15202b99",
+      "sideBar.border": "#65c89b",
+      "tab.activeBorder": "#65c89b"
+    },
+    "peacock.color": "#42b883",
+    "workbench.colorTheme": "Firefox Dark",
+    "editor.suggestSelection": "first",
+    "files.exclude": {
+      ".git/**": true,
+      "**/.git": false,
+      "**/node_modules/": true,
+      "scripts/**": true,
+      "stories/**": true
+    },
+    "editor.bracketPairColorization.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "[typescript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "explicit"
+      }
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "explicit"
+      }
+    },
+    "[html]": {
+      "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[css]": {
+      "editor.foldingStrategy": "indentation"
+    },
+    "eslint.validate": [
+      "mdx",
+      "markdown",
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "astro"
+    ],
+    "eslint.options": {
+      "extensions": [
+        ".js",
+        ".jsx",
+        ".md",
+        ".mdx",
+        ".ts",
+        ".tsx",
+        ".astro"
+      ]
+    },
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.minimap.renderCharacters": false,
+    "editor.comments.insertSpace": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    },
+    "typescript.inlayHints.parameterTypes.enabled": true,
+    "typescript.inlayHints.parameterNames.suppressWhenArgumentMatchesName": false,
+    "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+    "editor.fontFamily": "'Fira Code', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    "zenMode.centerLayout": false,
+    "prettier.printWidth": 120,
+    "workbench.list.multiSelectModifier": "alt",
+    "editor.defaultFormatter": "astro-build.astro-vscode",
+    "editor.linkedEditing": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "scss.lint.emptyRules": "ignore",
+    "editor.formatOnSave": true,
+    "typescript.preferences.quoteStyle": "double",
+    "javascript.preferences.quoteStyle": "double",
+    "prettier.singleQuote": false,
+    "explorer.confirmDelete": false,
+    "editor.snippetSuggestions": "top",
+    "explorer.confirmDragAndDrop": false,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "git.confirmSync": false,
+    "workbench.startupEditor": "none",
+    "window.autoDetectColorScheme": true,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+      "*.ts": "${capture}.js",
+      "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+      "*.jsx": "${capture}.js",
+      "*.tsx": "${capture}.ts",
+      "tsconfig.json": "tsconfig.*.json, jsconfig.json",
+      "package.json": "package-lock.json",
+      ".gitignore": ".prettier*, .editorconfig, .eslint*, .npm*, .nojekyll",
+      "README.md": "*.md",
+      "astro.config.mjs": "*.config.js, *.config.ts, *.config.mjs"
+    },
+    "git.enableSmartCommit": true,
+    "git.autofetch": true,
+    "explorer.excludeGitIgnore": false,
+    "git.branchPrefix": "feature/",
+    "git.branchRandomName.enable": true,
+    "git.branchRandomName.dictionary": [
+      "animals",
+      "numbers"
+    ],
+    "search.showLineNumbers": true,
+    "workbench.editorAssociations": {
+      "*.log": "default"
+    },
+    "editor.minimap.enabled": true,
+    "window.zoomLevel": 0,
+    "editor.fontSize": 14,
+    "[javascriptreact]": {},
+    "editor.accessibilitySupport": "off",
+    "editor.minimap.size": "fit",
+    "cSpell.customDictionaries": {
+      "myDictionary": {
+        "name": "myDictionary",
+        "path": "~/myDictionary.txt",
+        "scope": "user",
+        "addWords": true
+      },
+      "custom": true
+    },
+    "debug.javascript.codelens.npmScripts": "never",
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact"
+    },
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "editor.detectIndentation": false,
+    "markdownlint.config": {
+      "MD007": false
+    },
+    "cSpell.words": [
+      "headlessui",
+      "heroicons",
+      "hyperlegible",
+      "Mohta",
+      "nojekyll",
+      "recursivezero",
+      "sanyukat",
+      "sportrop",
+      "threadzip"
+    ],
+    "css.lint.unknownAtRules": "ignore",
+    "files.autoSave": "afterDelay",
+    "editor.dragAndDrop": false,
+    "editor.tabCompletion": "onlySnippets",
+    "editor.formatOnSaveMode": "modifications",
+    "files.eol": "\r\n",
+    "files.readonlyExclude": {
+      "dist/**": true
+    },
+    "window.title": "${rootNameShort}${separator}${activeEditorShort}${separator}${activeFolderMedium}",
+    "explorer.fileNesting.expand": false,
+    "search.exclude": {
+      "dist/**": true,
+      "package-lock.json": true
+    },
+    "peacock.affectSideBarBorder": true,
+    "prettier.quoteProps": "consistent",
+    "prettier.documentSelectors": [
+      "**/*.astro"
+    ],
+    "[astro]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "always"
+      }
+    },
+    "git.branchProtection": [
+      "main",
+      "develop"
+    ],
+    "git.enableCommitSigning": false,
+    "git.postCommitCommand": "push",
+    "workbench.tree.enableStickyScroll": false,
+    "editor.stickyScroll.enabled": true,
+    "workbench.editor.pinnedTabSizing": "compact",
+    "prettier.trailingComma": "none",
+    "editor.inlayHints.enabled": "offUnlessPressed",
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
 }
