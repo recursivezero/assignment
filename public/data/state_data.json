@@ -1,0 +1,398 @@
+{
+  "Andhra Pradesh": {
+    "capital": {
+      "name": "Amaravati",
+      "coordinates": [80.648, 16.573]
+    },
+    "area": "160,205 km²",
+    "languages": "Telugu",
+    "danceforms": "Kuchipudi",
+    "literacy": "67.41%",
+    "description": "Andhra Pradesh is known for its rich cultural heritage, long coastline, and the second longest river bridge in Asia - Godavari Bridge. The state is India's leading producer of rice and is called 'The Rice Bowl of India'."
+  },
+  "Arunachal Pradesh": {
+    "capital": {
+      "name": "Itanagar",
+      "coordinates": [93.615, 27.0844]
+    },
+    "area": "83,743 km²",
+    "languages": "English",
+    "danceforms": "Bihu, Chhemsa",
+    "literacy": "66.95%",
+    "description": "Arunachal Pradesh is renowned for its pristine landscapes, diverse tribes, and rich biodiversity. It is often referred to as the 'Land of the Rising Sun' due to its geographical location."
+  },
+  "Assam": {
+    "capital": {
+      "name": "Dispur",
+      "coordinates": [91.774, 26.1445]
+    },
+    "area": "78,438 km²",
+    "languages": "Assamese",
+    "danceforms": "Bihu",
+    "literacy": "73.18%",
+    "description": "Assam is famous for its tea plantations, the mighty Brahmaputra River, and rich wildlife, including the one-horned rhinoceros in Kaziranga National Park."
+  },
+  "Bihar": {
+    "capital": {
+      "name": "Patna",
+      "coordinates": [85.1376, 25.5941]
+    },
+    "area": "94,163 km²",
+    "languages": "Hindi, Urdu",
+    "danceforms": "Bidesia, Jhijhiya",
+    "literacy": "63.82%",
+    "description": "Bihar is known for its historical significance, being the birthplace of Buddhism and Jainism. The state boasts ancient universities like Nalanda and strong agricultural productivity."
+  },
+  "Chhattisgarh": {
+    "capital": {
+      "name": "Raipur",
+      "coordinates": [81.6296, 21.2514]
+    },
+    "area": "135,194 km²",
+    "languages": "Hindi, Chhattisgarhi",
+    "danceforms": "Panthi, Raut Nacha",
+    "literacy": "71.04%",
+    "description": "Chhattisgarh is rich in mineral resources and boasts dense forests, waterfalls, and ancient temples. It is a hub for traditional crafts and tribal cultures."
+  },
+  "Goa": {
+    "capital": {
+      "name": "Panaji",
+      "coordinates": [73.818, 15.4909]
+    },
+    "area": "3,702 km²",
+    "languages": "Konkani",
+    "danceforms": "Dekhni, Fugdi",
+    "literacy": "88.70%",
+    "description": "Goa is India's smallest state by area, famous for its beautiful beaches, vibrant nightlife, Portuguese-influenced architecture, and rich cultural festivals."
+  },
+  "Gujarat": {
+    "capital": {
+      "name": "Gandhinagar",
+      "coordinates": [72.6369, 23.2156]
+    },
+    "area": "196,024 km²",
+    "languages": "Gujarati",
+    "danceforms": "Garba, Dandiya",
+    "literacy": "78.03%",
+    "description": "Gujarat is renowned for its economic dynamism, vibrant culture, historical sites, and significant contributions to India's independence movement."
+  },
+  "Haryana": {
+    "capital": {
+      "name": "Chandigarh",
+      "coordinates": [76.7794, 30.7333]
+    },
+    "area": "44,212 km²",
+    "languages": "Hindi",
+    "danceforms": "Ghoomar, Phag",
+    "literacy": "75.55%",
+    "description": "Haryana is a key agricultural hub, known for its robust economy, sports achievements, and cultural festivals celebrating Punjabi heritage."
+  },
+  "Himachal Pradesh": {
+    "capital": {
+      "name": "Shimla",
+      "coordinates": [77.1734, 31.1048]
+    },
+    "area": "55,673 km²",
+    "languages": "Hindi, Pahari",
+    "danceforms": "Nati, Kinnauri",
+    "literacy": "82.80%",
+    "description": "Himachal Pradesh is famous for its stunning Himalayan landscapes, hill stations, temples, and adventure tourism activities like trekking and skiing."
+  },
+  "Jharkhand": {
+    "capital": {
+      "name": "Ranchi",
+      "coordinates": [85.3096, 23.3441]
+    },
+    "area": "79,714 km²",
+    "languages": "Hindi, Bengali, Santali",
+    "danceforms": "Jhumar, Chhau",
+    "literacy": "67.63%",
+    "description": "Jharkhand is rich in mineral resources and forests. It is known for its tribal culture, waterfalls, and vibrant festivals."
+  },
+  "Karnataka": {
+    "capital": {
+      "name": "Bengaluru",
+      "coordinates": [77.5946, 12.9716]
+    },
+    "area": "191,791 km²",
+    "languages": "Kannada",
+    "danceforms": "Yakshagana, Dollu Kunitha",
+    "literacy": "75.36%",
+    "description": "Karnataka is home to the Silicon Valley of India, Bengaluru. The state is known for its rich cultural heritage, Hoysala architecture, and IT industry. It hosts several UNESCO World Heritage sites including Hampi."
+  },
+  "Kerala": {
+    "capital": {
+      "name": "Thiruvananthapuram",
+      "coordinates": [76.9366, 8.5241]
+    },
+    "area": "38,863 km²",
+    "languages": "Malayalam",
+    "danceforms": "Kathakali, Mohiniyattam",
+    "literacy": "96.2%",
+    "description": "Kerala, known as 'God's Own Country', has the highest literacy rate in India. Famous for its backwaters, beaches, and Ayurvedic traditions, it's also known for its spice production and diverse wildlife."
+  },
+  "Madhya Pradesh": {
+    "capital": {
+      "name": "Bhopal",
+      "coordinates": [77.4126, 23.2599]
+    },
+    "area": "308,252 km²",
+    "languages": "Hindi",
+    "danceforms": "Gaur Dance, Bhavai",
+    "literacy": "70.61%",
+    "description": "Madhya Pradesh is known for its rich history, majestic forts, and temples. It is home to several national parks, including Kanha and Bandhavgarh, which are famous for their tiger populations."
+  },
+  "Maharashtra": {
+    "capital": {
+      "name": "Mumbai",
+      "coordinates": [72.8777, 19.076]
+    },
+    "area": "307,713 km²",
+    "languages": "Marathi",
+    "danceforms": "Lavani, Koli",
+    "literacy": "82.34%",
+    "description": "Maharashtra is India's second-most populous state and the world's second-most populous sub-national entity. Home to Mumbai, the financial capital of India, it's known for its rich history, including the Maratha Empire."
+  },
+  "Manipur": {
+    "capital": {
+      "name": "Imphal",
+      "coordinates": [93.9368, 24.817]
+    },
+    "area": "22,327 km²",
+    "languages": "Meitei (Manipuri)",
+    "danceforms": "Raas Leela, Manipuri Classical Dance",
+    "literacy": "79.85%",
+    "description": "Manipur is renowned for its classical dance form Manipuri, scenic landscapes, and vibrant festivals. It is also known for its rich biodiversity and traditional handicrafts."
+  },
+  "Meghalaya": {
+    "capital": {
+      "name": "Shillong",
+      "coordinates": [91.8933, 25.5788]
+    },
+    "area": "22,429 km²",
+    "languages": "English, Khasi, Garo",
+    "danceforms": "Wangala, Shad Suk Mynsiem",
+    "literacy": "75.48%",
+    "description": "Meghalaya, meaning 'abode of clouds', is famous for its high rainfall, picturesque landscapes, living root bridges, and rich tribal culture."
+  },
+  "Mizoram": {
+    "capital": {
+      "name": "Aizawl",
+      "coordinates": [92.7173, 23.7271]
+    },
+    "area": "21,081 km²",
+    "languages": "Mizo",
+    "danceforms": "Cheraw (Bamboo Dance), Khuallam",
+    "literacy": "91.58%",
+    "description": "Mizoram is known for its lush green hills, vibrant festivals, and unique bamboo dance. It boasts a high literacy rate and a strong sense of community."
+  },
+  "Nagaland": {
+    "capital": {
+      "name": "Kohima",
+      "coordinates": [94.1077, 25.6751]
+    },
+    "area": "16,579 km²",
+    "languages": "English",
+    "danceforms": "Gangte, Cheraw",
+    "literacy": "80.11%",
+    "description": "Nagaland is celebrated for its diverse indigenous tribes, colorful festivals like Hornbill, and rich traditions in weaving and handicrafts."
+  },
+  "Odisha": {
+    "capital": {
+      "name": "Bhubaneswar",
+      "coordinates": [85.8245, 20.2961]
+    },
+    "area": "155,707 km²",
+    "languages": "Odia",
+    "danceforms": "Odissi",
+    "literacy": "73.45%",
+    "description": "Odisha is known for its ancient temples, classical dance form Odissi, rich tribal culture, and beautiful beaches along the Bay of Bengal."
+  },
+  "Punjab": {
+    "capital": {
+      "name": "Chandigarh",
+      "coordinates": [76.7794, 30.7333]
+    },
+    "area": "50,362 km²",
+    "languages": "Punjabi",
+    "danceforms": "Bhangra, Giddha",
+    "literacy": "75.84%",
+    "description": "Punjab is the heartland of the Sikh religion, renowned for its vibrant music, dance, and rich agricultural produce. It celebrates festivals with great enthusiasm and has a strong cultural heritage."
+  },
+  "Rajasthan": {
+    "capital": {
+      "name": "Jaipur",
+      "coordinates": [75.7873, 26.9124]
+    },
+    "area": "342,239 km²",
+    "languages": "Hindi, Rajasthani",
+    "danceforms": "Ghoomar, Kalbeliya",
+    "literacy": "67.06%",
+    "description": "Rajasthan, the Land of Kings, is famous for its majestic forts, palaces, desert landscapes, and rich cultural heritage. It hosts vibrant festivals and is known for its handicrafts and traditional music."
+  },
+  "Sikkim": {
+    "capital": {
+      "name": "Gangtok",
+      "coordinates": [88.6065, 27.3389]
+    },
+    "area": "7,096 km²",
+    "languages": "English, Nepali",
+    "danceforms": "Chokey, Shimla",
+    "literacy": "81.42%",
+    "description": "Sikkim is a Himalayan state known for its stunning mountain views, biodiversity, Buddhist monasteries, and vibrant cultural festivals."
+  },
+  "Tamil Nadu": {
+    "capital": {
+      "name": "Chennai",
+      "coordinates": [80.2707, 13.0827]
+    },
+    "area": "130,058 km²",
+    "languages": "Tamil",
+    "danceforms": "Bharatanatyam",
+    "literacy": "80.33%",
+    "description": "Tamil Nadu is known for its rich Dravidian culture, classical dance, music, and magnificent temples. The state is a major center for textile production and IT services."
+  },
+  "Telangana": {
+    "capital": {
+      "name": "Hyderabad",
+      "coordinates": [78.4867, 17.385]
+    },
+    "area": "112,077 km²",
+    "languages": "Telugu, Urdu",
+    "danceforms": "Perini Sivatandavam, Lambadi",
+    "literacy": "66.5%",
+    "description": "Telangana is known for its historic sites like Charminar, its thriving IT industry in Hyderabad, and rich cuisine featuring biryani and haleem."
+  },
+  "Tripura": {
+    "capital": {
+      "name": "Agartala",
+      "coordinates": [91.2868, 23.8315]
+    },
+    "area": "10,486 km²",
+    "languages": "Bengali, Kokborok",
+    "danceforms": "Hojagiri, Garia",
+    "literacy": "87.75%",
+    "description": "Tripura is known for its scenic landscapes, rich tribal culture, and historical temples. It has a high literacy rate and vibrant festivals like Durga Puja."
+  },
+  "Uttar Pradesh": {
+    "capital": {
+      "name": "Lucknow",
+      "coordinates": [80.9462, 26.8467]
+    },
+    "area": "240,928 km²",
+    "languages": "Hindi",
+    "danceforms": "Kathak",
+    "literacy": "73.20%",
+    "description": "Uttar Pradesh is India's most populous state, home to iconic landmarks like the Taj Mahal, Varanasi, and a rich cultural and historical heritage."
+  },
+  "Uttarakhand": {
+    "capital": {
+      "name": "Dehradun",
+      "coordinates": [78.0322, 30.3165]
+    },
+    "area": "53,483 km²",
+    "languages": "Hindi, Sanskrit",
+    "danceforms": "Chholiya, Jhora",
+    "literacy": "78.82%",
+    "description": "Uttarakhand, known as 'Devbhumi', is famed for its Himalayan landscapes, pilgrim sites, adventure tourism, and pristine natural beauty."
+  },
+  "West Bengal": {
+    "capital": {
+      "name": "Kolkata",
+      "coordinates": [88.3639, 22.5726]
+    },
+    "area": "88,752 km²",
+    "languages": "Bengali",
+    "danceforms": "Gaudiya Nritya, Chhau",
+    "literacy": "76.26%",
+    "description": "West Bengal is renowned for its cultural heritage, intellectual legacy, vibrant arts scene, and landmarks like the Howrah Bridge and Sundarbans mangrove forests."
+  },
+  "Andaman and Nicobar Islands": {
+    "capital": {
+      "name": "Port Blair",
+      "coordinates": [92.748, 11.6234]
+    },
+    "area": "8,249 km²",
+    "languages": "Hindi, English",
+    "danceforms": "Gor Sagar Dance",
+    "literacy": "86.91%",
+    "description": "The Andaman and Nicobar Islands are known for their pristine beaches, diverse marine life, and historical sites from the colonial era and World War II."
+  },
+  "Chandigarh": {
+    "capital": {
+      "name": "Chandigarh",
+      "coordinates": [76.7794, 30.7333]
+    },
+    "area": "114 km²",
+    "languages": "Hindi, Punjabi, English",
+    "danceforms": "Bhangra, Giddha",
+    "literacy": "86.41%",
+    "description": "Chandigarh is a modern city renowned for its architecture and urban design, planned by Le Corbusier. It serves as the capital for both Punjab and Haryana."
+  },
+  "Dadra and Nagar Haveli and Daman and Diu": {
+    "capital": {
+      "name": "Daman",
+      "coordinates": [72.8328, 20.3974]
+    },
+    "area": "603 km²",
+    "languages": "Gujarati, Hindi, English",
+    "danceforms": "Garba, Dandiya",
+    "literacy": "89.21%",
+    "description": "This union territory is known for its Portuguese colonial architecture, beautiful beaches, and vibrant local culture blending Indian and Portuguese influences."
+  },
+  "Delhi": {
+    "capital": {
+      "name": "New Delhi",
+      "coordinates": [77.209, 28.6139]
+    },
+    "area": "1,484 km²",
+    "languages": "Hindi, English",
+    "danceforms": "Kathak, Bharatanatyam",
+    "literacy": "86.21%",
+    "description": "Delhi, the national capital territory, is a bustling metropolis blending history and modernity. It houses significant landmarks like the Red Fort, India Gate, and vibrant markets."
+  },
+  "Jammu and Kashmir": {
+    "capital": {
+      "name": "Srinagar (Summer), Jammu (Winter)",
+      "coordinates": [74.7973, 34.0837]
+    },
+    "area": "55,673 km²",
+    "languages": "Kashmiri, Urdu, Hindi, Dogri",
+    "danceforms": "Rouf, Chakri",
+    "literacy": "68.74%",
+    "description": "Jammu and Kashmir is renowned for its breathtaking landscapes, including Dal Lake, the Himalayas, and rich cultural heritage with diverse traditions."
+  },
+  "Ladakh": {
+    "capital": {
+      "name": "Leh",
+      "coordinates": [77.577, 34.1526]
+    },
+    "area": "59,146 km²",
+    "languages": "Ladakhi, Hindi, English",
+    "danceforms": "Chham, Shardy",
+    "literacy": "70.51%",
+    "description": "Ladakh, known as 'Land of High Passes', is famous for its stark landscapes, Buddhist monasteries, and adventurous trekking routes amidst the Himalayas."
+  },
+  "Lakshadweep": {
+    "capital": {
+      "name": "Kavaratti",
+      "coordinates": [72.642, 10.5667]
+    },
+    "area": "32 km²",
+    "languages": "Malayalam",
+    "danceforms": "Lagori, Kolkali",
+    "literacy": "92.28%",
+    "description": "Lakshadweep is India's smallest union territory, consisting of beautiful coral islands known for their pristine beaches, coral reefs, and vibrant marine life."
+  },
+  "Puducherry": {
+    "capital": {
+      "name": "Puducherry",
+      "coordinates": [79.8083, 11.9416]
+    },
+    "area": "479 km²",
+    "languages": "Tamil, French, English",
+    "danceforms": "Koodiyattam, Bharatanatyam",
+    "literacy": "86.39%",
+    "description": "Puducherry, formerly Pondicherry, is known for its French colonial architecture, serene beaches, and as a center for yoga and spiritual retreats."
+  }
+}

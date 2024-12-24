@@ -12,6 +12,7 @@
 
 # production
 /build/*
+/.astro/*
 
 # misc
 .DS_Store
@@ -30,3 +31,6 @@ desktop.ini
 
 **/log/
 npm-debug.log*
+
+# GitHub
+/.github/*

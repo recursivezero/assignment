@@ -1,6 +1,6 @@
 # Interactive India Map Explorer
 
-An interactive web application that visualizes India's states and union territories, providing detailed information about each region's culture, demographics and heritage.
+An interactive web application built with Astro.js that visualizes India's states and union territories, providing detailed information about each region's culture, demographics and heritage.
 
 ![India Map Explorer](screenshots/main-view.png)
 
@@ -28,49 +28,80 @@ Visit the live application at [Explore India Map](https://india-map.netlify.app)
 
 ### Prerequisites
 
-- A modern web browser
-- Local development server (e.g., Live Server for VS Code)
+- Node.js 16+
+- npm/yarn
 
 ### Installation
 
 1. Clone the repository:
-2. Start a local development server. If using VS Code:
-    - Install "Live Server" extension
-    - Right click on src/index.html
-    - Select "Open with Live Server"
-3. Open <http://localhost:5500/src> in your browser
+
+    ```bash
+    git clone https://github.com/yourusername/assignment.git
+    cd assignment
+    git checkout origin/task/india-map
+    ```
+
+2. Install dependencies:
+
+    ```bash
+    npm install
+    ```
+
+3. Start development server:
+
+    ```bash
+    npm run dev
+    ```
+
+4. Start build server:
+
+    ```bash
+    npm run build
+    npm run preview
+    ```
+
+    Deploy the `dist` directory to your preferred hosting service.
 
 ### Project Structure
 
 ```plaintext
-src/
-├── css/
+/
+├── src/
 │   ├── components/
-│   │   ├── controls.css
-│   │   ├── header.css
-│   │   ├── map.css
-│   │   ├── modal.css
-│   │   └── themes.css
-│   └── main.css
-├── data/
-│   ├── india.geojson
-│   └── state_data.json
-├── js/
-│   ├── config/
-│   │   └── mapConfig.js
-│   ├── modules/
-│   │   ├── IndiaMap.js
-│   │   ├── StateModal.js
-│   │   └── ThemeToggle.js
-│   └── main.js
-└── index.html
+│   │   ├── Header.astro
+│   │   ├── IndiaMap.astro
+│   │   └── StateModal.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   └── index.astro
+│   └── styles/
+│       ├── components/
+│       │   ├── controls.css
+│       │   ├── header.css
+│       │   ├── map.css
+│       │   ├── modal.css
+│       │   └── themes.css
+│       └── main.css
+└── public/
+    ├── data/
+    │   ├── india.geojson
+    │   └── state_data.json
+    └── js/
+        ├── config/
+        │   └── mapConfig.js
+        ├── modules/
+        │   ├── IndiaMap.js
+        │   ├── StateModal.js
+        │   └── ThemeToggle.js
+        └── main.js
 ```
 
 ## Technical Approach
 
 ### Architecture
 
-- Pure JavaScript with ES6 modules
+- Built with Astro.js for static site generation
 - D3.js for map visualization and interactions
 - CSS variables for theming
 - JSON data storage for state information
@@ -78,31 +109,36 @@ src/
 ### Key Features Implementation
 
 1. **Map Visualization**
-    - Uses D3.js Mercator projection
-    - SVG path elements for states
-    - Interactive capital markers
-2. State Information
-    - Modal-based detail view
-    - Copy to clipboard functionality
-    - Rich cultural and demographic data
-3. User Interface
-    - Dark/Light theme switcher
-    - Zoom controls
-    - Responsive layout
+   - Uses D3.js Mercator projection
+   - SVG path elements for states
+   - Interactive capital markers
+
+2. **State Information**
+   - Modal-based detail view
+   - Copy to clipboard functionality
+   - Rich cultural and demographic data
+
+3. **User Interface**
+   - Dark/Light theme switcher
+   - Zoom controls
+   - Responsive layout
 
 ### Key Design Decisions
 
-1. **Modular Structure**: Separated components into distinct modules for better maintainability
-    - `IndiaMap.js`: Core map visualization
-    - `StateModal.js`: Modal display and interactions
-    - `ThemeToggle.js`: Theme switching functionality
+1. **Component Structure**:
+   - Astro components for static parts
+   - JavaScript modules for interactive features
+   - Separated concerns for better maintainability
+
 2. **Responsive Design**:
-    - Fluid layout that adapts to different screen sizes
-    - Dynamic recalculation of map dimensions on window resize
+   - Fluid layout that adapts to different screen sizes
+   - Dynamic recalculation of map dimensions on window resize
+
 3. **Performance Optimizations**:
-    - Event delegation for map interactions
-    - Efficient D3.js selections
-    - Clean-up handlers to prevent memory leaks
+   - Static site generation with Astro
+   - Event delegation for map interactions
+   - Efficient D3.js selections
+   - Clean-up handlers to prevent memory leaks
 
 ## Areas for Improvement
 
@@ -124,8 +160,8 @@ src/
 ## Known Issues
 
 1. Capital markers may overlap in densely populated regions
-2. Zoom behaviour needs fine-tuning when zooming out
-3. Copy functionality might not work in some older browsers
+2. Zoom behavior needs fine-tuning when zooming out
+3. Initial load might show a flash of unstyled content
 
 ## Acknowledgments
 
@@ -135,4 +171,3 @@ src/
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-

@@ -1,0 +1,35 @@
+---
+import "../styles/main.css";
+import "../styles/components/controls.css";
+import "../styles/components/header.css";
+import "../styles/components/map.css";
+import "../styles/components/modal.css";
+import "../styles/components/themes.css";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Interactive map of India showcasing states, capitals, and cultural information"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <title>Explore India - Interactive State Map</title>
+  </head>
+  <body>
+    <slot />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
