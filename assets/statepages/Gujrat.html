@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gujarat - Garba Dance</title>
+    <link rel="stylesheet" href="/styles/state-styles.css" />
+  </head>
+  <body>
+    <a href="/index.html" class="home-button">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" />
+      </svg>
+      Home
+    </a>
+
+    <h1>Garba Dance - Gujarat</h1>
+
+    <div class="main-container">
+      <div id="state-svg-container">
+        <h2>State Map</h2>
+        <div id="state-svg"></div>
+      </div>
+
+      <div class="right-content">
+        <img src="/assets/images/Gujrat.jpg" alt="Garba Dance" />
+        <div class="content-text">
+          <table class="info-table">
+            <tr>
+              <th colspan="2">Quick Facts</th>
+            </tr>
+            <tr>
+              <td>Dance Form</td>
+              <td>Garba</td>
+            </tr>
+            <tr>
+              <td>Origin</td>
+              <td>Gujarat, India</td>
+            </tr>
+            <tr>
+              <td>Festival</td>
+              <td>Navaratri</td>
+            </tr>
+            <tr>
+              <td>Duration</td>
+              <td>Nine Nights</td>
+            </tr>
+            <tr>
+              <td>Significance</td>
+              <td>Worship of Goddess Durga</td>
+            </tr>
+            <tr>
+              <td>Formation</td>
+              <td>Circular Dance</td>
+            </tr>
+            <tr>
+              <td>Name Origin</td>
+              <td>Sanskrit word 'Garbha'</td>
+            </tr>
+          </table>
+          <a href="https://en.wikipedia.org/wiki/Garba_(dance)" target="_blank">
+            Read more about Garba Dance on Wikipedia
+          </a>
+        </div>
+      </div>
+    </div>
+    <script src="/js-files/loadSVG.js"></script>
+    <script>
+      const stateKey = "Gujrat";
+      const svgPath = `/assets/svg/${stateKey}.svg`;
+
+      window.onload = function () {
+        loadStateSVG(svgPath);
+      };
+    </script>
+  </body>
+</html>

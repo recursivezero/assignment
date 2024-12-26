@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tamil Nadu - Bharatanatyam Dance</title>
+    <link rel="stylesheet" href="/styles/state-styles.css" />
+  </head>
+  <a href="/index.html" class="home-button">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" />
+    </svg>
+    Home
+  </a>
+  <body>
+    <h1>Bharatanatyam - Tamil Nadu</h1>
+    <div class="main-container">
+      <div id="state-svg-container">
+        <h3>State Map</h3>
+        <div id="state-svg"></div>
+      </div>
+
+      <div class="right-content">
+        <img src="/assets/images/tamilnadu.jpeg" alt="Bharatanatyam" />
+        <div class="content-text">
+          <table class="info-table">
+            <tr>
+              <th colspan="2">Quick Facts</th>
+            </tr>
+            <tr>
+              <td>Dance Form</td>
+              <td>Bharatanatyam</td>
+            </tr>
+            <tr>
+              <td>Origin</td>
+              <td>Tamil Nadu, India</td>
+            </tr>
+            <tr>
+              <td>Festival</td>
+              <td>Margazhi Festival, Temple Festivals</td>
+            </tr>
+            <tr>
+              <td>Duration</td>
+              <td>Varies</td>
+            </tr>
+            <tr>
+              <td>Significance</td>
+              <td>Preservation of Indian Cultural Heritage</td>
+            </tr>
+            <tr>
+              <td>Formation</td>
+              <td>Solo or Group</td>
+            </tr>
+            <tr>
+              <td>Name Origin</td>
+              <td>From 'Bharata' and 'Natya', meaning dance of Bharata</td>
+            </tr>
+          </table>
+          <a href="https://en.wikipedia.org/wiki/Bharatanatyam" target="_blank"
+            >Read more about Bharatanatyam on Wikipedia</a
+          >
+        </div>
+      </div>
+    </div>
+    <script src="/js-files/loadSVG.js"></script>
+
+    <script>
+      const stateKey = "TamilNadu";
+      const svgPath = `/assets/svg/${stateKey}.svg`;
+
+      // Load the SVG when the page loads
+      window.onload = function () {
+        loadStateSVG(svgPath);
+      };
+    </script>
+  </body>
+</html>
