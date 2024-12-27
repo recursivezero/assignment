@@ -1,21 +1,29 @@
 ---
-
+import i18nInit from "../utils/i18n"; // Import initialized i18nInit
 ---
 
-<h1 style="margin-bottom: -0.2em; margin-top: 0.2em;" data-i18n="welcome">Welcome</h1>
-<h2 data-i18n="title">Recursive Zero's Tree</h2>
-<h3 data-i18n="subtitle">Tree Visualizations</h3>
+<!DOCTYPE html>
+<html lang={i18nInit.language}>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <h1 style="margin-bottom: -0.2em; margin-top: 0.2em;">{i18nInit.t("main.welcome")}</h1>
+  <h2>{i18nInit.t("main.title")}</h2>
+  <h3>{i18nInit.t("main.subtitle")}</h3>
 
-<div class="container">
-    <div id="family-box">
-      <h4>
-        <a href="/family/" target="_blank" data-i18n="family_tree">&#x1F9EC Family Tree Visualization</a>
-    </h4>
-    </div>
-    <div id="state-box">
-      <h4>
-        <a href="/indian-states/" target="_blank" data-i18n="state_tree">&#x1F30F State Tree Visualization</a>
-    </h4>
-    </div>
-</div>
-
+  <div class="container">
+      <div id="family-box">
+        <h4>
+          <a href="/family/" target="_blank">{i18nInit.t("main.family_tree")}</a>
+      </h4>
+      </div>
+      <div id="state-box">
+        <h4>
+          <a href="/indian-states/" target="_blank">{i18nInit.t("main.state_tree")}</a>
+      </h4>
+      </div>
+  </div>
+</body>
+</html>

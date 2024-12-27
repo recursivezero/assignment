@@ -1,11 +1,14 @@
 ---
 import Main from "../layouts/Main.astro";
-import Nav from "../layouts/Nav.astro";
 import Footer from "../layouts/Footer.astro";
-import Blogs from "../components/i18nblog.astro";
+import Blogs from "../content/i18nblog.md";
+import "../styles/blog.css";
+import i18next, { t, changeLanguage } from "i18next";
+
+changeLanguage("en");
 ---
+
 <Main>
-    <Nav/>
-    <Blogs/>
-    <Footer/>
+  <Blogs />
+  <Footer />
 </Main>

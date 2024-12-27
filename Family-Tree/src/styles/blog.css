@@ -6,56 +6,26 @@
 body
 {
     /* background : url(../../public/voxels-republic-eUBp69MTaNU-unsplash.jpg); */
-    background-color: #000;
+    background-color: #171616;
     background-size: cover;
     color: #fff;
     font-family: "Gilroy";
+    padding: 0 4em;
 }
 
-svg
-{
-    background: #251FAE;
-    color: #251FAE;
-    background: linear-gradient(to right, #a29eff 31%, #cd8fff 65%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; 
-}
-
-#navbar
-{
-    margin-bottom: -1.8em;
-    font-family: "Gilroy";
-}
-
-#text
-{
-    font-family: "Gilroy";
-}
-
-a
-{
-    display: none;
-}
 
 h1
 {
     text-align: center;
     text-decoration: underline #858585;
     font-size: 2em;
+    margin-bottom: 1.5em;
     background: #251FAE;
     background: linear-gradient(to right, #a29eff 31%, #cd8fff 65%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-p
-{
-    font-size: 1.3em;
-    font-style: italic;
-    box-shadow: 2px 3px 4px #fafafa;
-    padding: 0.5em;
-    background-color: #1f1f1f;
-}
 
 /* Scrollbar styles */
 ::-webkit-scrollbar 
@@ -80,67 +50,3 @@ p
     background: #8e8e8e; 
 }
 
-.container
-{
-    padding: 1.5em;
-}
-
-#head
-{
-    font-size: 1.8em;
-}
-
-.guide
-{
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    /* border: 1px solid #fff; */
-    padding: 2em;
-}
-
-.i18n-head
-{
-    font-family: PP Woodland;
-    font-style: italic;
-    color: #fff;
-    text-decoration: underline;
-    cursor: pointer;
-    font-weight: 800;
-    background: #251FAE;
-    background: linear-gradient(to right, #a29eff 31%, #cd8fff 65%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.step1> h3, .step2, .step3
-{
-    text-decoration: underline;
-    font-size: 1.3em;
-}
-
-#english, #spanish
-{
-    font-size: 1.3em;
-}
-
-.step2
-{
-    overflow: hidden;
-}
-
-#content
-{
-    font-style: italic;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 1.1em;
-}
-
-hr
-{
-    background-color: #fff;
-    color:#fff;
-    width: 100%;
-}

@@ -107,65 +107,63 @@ import LightDarkMode from "../components/lightDarkMode.astro";
 </nav>
 
 <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Debugging: Log initialization
+    console.log("Initializing language switcher and theme toggle...");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const themeToggle = document.getElementById('theme-toggle');
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      console.log(currentTheme)
+    // Theme toggle logic
+    const themeToggle = document.getElementById("theme-toggle");
+    const savedTheme = localStorage.getItem("theme") || "light";
 
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+    console.log(`Loaded theme: ${savedTheme}`);
+
+    themeToggle.addEventListener("click", () => {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      const newTheme = currentTheme === "light" ? "dark" : "light";
+
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+
+      // Debugging: Log theme change
+      console.log(`Theme changed to: ${newTheme}`);
     });
-  });
 
-  const translations = {};
-  let currentLanguage = localStorage.getItem("language") || 'en';  // Get language from localStorage or default to 'en'
+    // Language switcher logic
+    const languageSwitcher = document.getElementById("languageSwitcher");
+    const savedLanguage = localStorage.getItem("language") || "en";
 
-  // Load language data
-  async function loadLanguage(lang) {
-    try {
-      const response = await fetch(`/locales/${lang}.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch language file: ${lang}`);
+    // Debugging: Log initial language
+    console.log(`Initial language: ${savedLanguage}`);
+
+    async function updateLanguage(lang) {
+      try {
+        // Debugging: Log language update attempt
+        console.log(`Updating language to: ${lang}`);
+
+        // Save selected language in localStorage
+        localStorage.setItem("language", lang);
+
+        // Reload the page with the selected language
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set("lang", lang);
+        window.location.href = currentUrl.toString();
+      } catch (error) {
+        // Debugging: Log any errors
+        console.error("Error updating language:", error);
       }
-      translations[lang] = await response.json();
-      currentLanguage = lang;
-      localStorage.setItem("language", lang);  // Save the selected language to localStorage
-      updateContent(); // Update the content with the newly loaded language
-    } catch (error) {
-      console.error('Error loading language:', error);
     }
-  }
 
-  // Translate text based on the key
-  function translate(key) {
-    return translations[currentLanguage]?.[key] || key;
-  }
-
-  // Update all text content with the selected language
-  function updateContent() {
-    document.querySelectorAll('[data-i18n]').forEach((element) => {
-      const key = element.getAttribute('data-i18n');
-      element.textContent = translate(key);
+    languageSwitcher.addEventListener("change", (event) => {
+      const selectedLanguage = event.target.value;
+      updateLanguage(selectedLanguage);
     });
-  }
 
-  // Event listener for language change
-  document.getElementById('languageSwitcher').addEventListener('change', (event) => {
-    const selectedLanguage = event.target.value;
-    loadLanguage(selectedLanguage);
+    // Initialize language switcher with saved language
+    languageSwitcher.value = savedLanguage;
+    console.log("Language switcher initialized.");
   });
-
-  // Initialize the page with the language from localStorage (or default language)
-  window.addEventListener("DOMContentLoaded", () => {
-    loadLanguage(currentLanguage); // Load language from localStorage or default
-    document.getElementById('languageSwitcher').value = currentLanguage; // Set the dropdown to the selected language
-  });
-
 </script>
+
+
+

@@ -1,4 +1,5 @@
 ---
+import { changeLanguage } from "i18next";
 import Main from "../layouts/Main.astro";
 // import StateHeader from "../layouts/StateHeader.astro";
 import StateInfo from "../components/stateInfo.astro";
@@ -6,7 +7,9 @@ import StateInfo from "../components/stateInfo.astro";
 import Footer from "../layouts/Footer.astro";
 import State from "../layouts/States.astro";
 import StateDialog from "../components/stateDialog.astro";
-import "../styles/statesglobal.css"
+import "../styles/statesglobal.css";
+
+changeLanguage("en");
 ---
 
 <Main >

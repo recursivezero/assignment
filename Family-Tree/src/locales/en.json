@@ -1,0 +1,9 @@
+{
+    "main": {
+      "welcome": "Welcome to",
+      "title": "Recursive Zero's",
+      "subtitle": "Tree Visualizations",
+      "family_tree": "🌲 Family Tree Visualization",
+      "state_tree": "🌍 State Tree Visualization"
+    }
+  }
