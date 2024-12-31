@@ -63,7 +63,7 @@ import "../styles/card.css";
 <script>
     import { colors } from "../utils/constants.ts";
 
-    fetch("/main.json")
+    fetch("/mocks/family.json")
         .then((response) => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -132,7 +132,7 @@ import "../styles/card.css";
                     const keyValueHTML = createKeyValuePairs(branch, query);
                     const surnamesHTML = createSurnameCards(branch.Surnames, branch.Gotra, branch.Deity, branch.Caste, query);
 
-                    const surnamesJson = branch.Surnames.length > 0 ? JSON.stringify(branch.Surnames.map((surname) => surname.en)) : "[]";
+                    const surnamesJson = branch.Surnames.length > 0 ? JSON.stringify(branch.Surnames.map((surname) => surname.hi)) : "[]";
 
                     const cardContent = `
                         <div class="card-header">
@@ -153,10 +153,18 @@ import "../styles/card.css";
 
                     // Add event listener for clicking the card
                     card.addEventListener("click", (event) => {
-                        // Avoid triggering when clicking the buttons inside the card
-                        if (!event.target.classList.contains("copy-button") && !event.target.classList.contains("copy-button-all")) {
-                            card.classList.toggle("open");
+                        // Prevent toggling if selecting text or clicking on buttons inside the card
+                        if (
+                            event.target.classList.contains("copy-button") ||
+                            event.target.classList.contains("copy-button-all") ||
+                            event.target.tagName === "SPAN" || // Prevent toggle if selecting text
+                            event.target.tagName === "P"    // Prevent toggle if clicking on a paragraph element
+                        ) {
+                            return;
                         }
+
+                        // Toggle the card open/close
+                        card.classList.toggle("open");
                     });
 
                     // Automatically open cards that match the query
@@ -190,8 +198,47 @@ import "../styles/card.css";
 
                 filterAndDisplayCards(filteredData, query);
             });
+
+            // Add event listeners for copy buttons
+            document.addEventListener("click", (event) => {
+                // Handle the "Copy" button click
+                if (event.target.classList.contains("copy-button")) {
+                    const gotra = event.target.dataset.gotra;
+                    const surname = event.target.dataset.surname;
+                    const deity = event.target.dataset.deity;
+                    const branch = event.target.dataset.branch;
+
+                    const textToCopy = `Gotra: ${gotra}, Surname: ${surname}, Deity: ${deity}, Branch: ${branch}`;
+
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        alert("Copied to clipboard!");
+                    }).catch((err) => {
+                        console.error("Error copying text: ", err);
+                    });
+                }
+
+                // Handle the "Copy All" button click
+                if (event.target.classList.contains("copy-button-all")) {
+                    const gotra = event.target.dataset.gotra;
+                    const surnames = JSON.parse(event.target.dataset.surname); // parse surname array
+                    const deity = event.target.dataset.deity;
+                    const branch = event.target.dataset.branch;
+
+                    const textToCopy = `Gotra: ${gotra}, Deity: ${deity}, Branch: ${branch}, Surnames: ${JSON.stringify(surnames)}`;
+
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        alert("Copied all data to clipboard!");
+                    }).catch((err) => {
+                        console.error("Error copying text: ", err);
+                    });
+                }
+            });
+
         })
         .catch((error) => {
             console.error("Error fetching data: ", error);
         });
 </script>
+

@@ -37,19 +37,7 @@ import LightDarkMode from "../components/lightDarkMode.astro";
     box-shadow: rgba(255, 255, 255, 0.886) 0px 3px 8px;
   }
 
-  /* #theme-toggle
-  {
-    background-color: rgb(23, 23, 23);
-    border-radius: 20px;
-    padding: 0.2em;
-    border: none;
-    box-shadow: rgb(255, 255, 255) 0px 3px 8px;
-  }
 
-  #theme-toggle:hover
-  {
-    transform: scale(1.2);
-  } */
 
   :root {
     --bg-color: white;
@@ -95,73 +83,42 @@ import LightDarkMode from "../components/lightDarkMode.astro";
 
 <nav>
   <div id="navbar">
-    <Header/>
+    <Header />
     <!-- Language Selector -->
     <select id="languageSwitcher">
       <option value="en">English</option>
       <option value="hindi">Hindi</option>
     </select>
-    <LightDarkMode/>
+    <LightDarkMode />
     <a id="i18nBtn" href="/blog/" target="_blank">i18n Blog</a>
   </div>
 </nav>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // Debugging: Log initialization
-    console.log("Initializing language switcher and theme toggle...");
+    const themeToggle = document.getElementById("theme-toggle");
+    const languageSwitcher = document.getElementById("languageSwitcher");
 
     // Theme toggle logic
-    const themeToggle = document.getElementById("theme-toggle");
     const savedTheme = localStorage.getItem("theme") || "light";
-
     document.documentElement.setAttribute("data-theme", savedTheme);
-    console.log(`Loaded theme: ${savedTheme}`);
-
     themeToggle.addEventListener("click", () => {
       const currentTheme = document.documentElement.getAttribute("data-theme");
       const newTheme = currentTheme === "light" ? "dark" : "light";
-
       document.documentElement.setAttribute("data-theme", newTheme);
       localStorage.setItem("theme", newTheme);
-
-      // Debugging: Log theme change
-      console.log(`Theme changed to: ${newTheme}`);
     });
 
     // Language switcher logic
-    const languageSwitcher = document.getElementById("languageSwitcher");
     const savedLanguage = localStorage.getItem("language") || "en";
-
-    // Debugging: Log initial language
-    console.log(`Initial language: ${savedLanguage}`);
-
-    async function updateLanguage(lang) {
-      try {
-        // Debugging: Log language update attempt
-        console.log(`Updating language to: ${lang}`);
-
-        // Save selected language in localStorage
-        localStorage.setItem("language", lang);
-
-        // Reload the page with the selected language
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.set("lang", lang);
-        window.location.href = currentUrl.toString();
-      } catch (error) {
-        // Debugging: Log any errors
-        console.error("Error updating language:", error);
-      }
-    }
-
+    languageSwitcher.value = savedLanguage;
     languageSwitcher.addEventListener("change", (event) => {
       const selectedLanguage = event.target.value;
-      updateLanguage(selectedLanguage);
+      localStorage.setItem("language", selectedLanguage);
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set("lang", selectedLanguage);
+      window.location.href = currentUrl.toString();
     });
-
-    // Initialize language switcher with saved language
-    languageSwitcher.value = savedLanguage;
-    console.log("Language switcher initialized.");
   });
 </script>
 

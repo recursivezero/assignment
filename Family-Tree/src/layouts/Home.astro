@@ -1,5 +1,5 @@
 ---
-import i18nInit from "../utils/i18n"; // Import initialized i18nInit
+import i18nInit from "../utils/i18n";
 ---
 
 <!DOCTYPE html>
@@ -7,23 +7,30 @@ import i18nInit from "../utils/i18n"; // Import initialized i18nInit
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{i18nInit.t("main.welcome")} {i18nInit.t("main.title")}</title>
 </head>
 <body>
-  <h1 style="margin-bottom: -0.2em; margin-top: 0.2em;">{i18nInit.t("main.welcome")}</h1>
+  <h1 style="margin-bottom: -0.2em; margin-top: 0.2em;">
+    {i18nInit.t("main.welcome")}
+  </h1>
   <h2>{i18nInit.t("main.title")}</h2>
   <h3>{i18nInit.t("main.subtitle")}</h3>
 
   <div class="container">
-      <div id="family-box">
-        <h4>
-          <a href="/family/" target="_blank">{i18nInit.t("main.family_tree")}</a>
+    <div id="family-box">
+      <h4>
+        <a href="/family/" target="_blank">
+          {i18nInit.t("main.family_tree")}
+        </a>
       </h4>
-      </div>
-      <div id="state-box">
-        <h4>
-          <a href="/indian-states/" target="_blank">{i18nInit.t("main.state_tree")}</a>
+    </div>
+    <div id="state-box">
+      <h4>
+        <a href="/indian-states/" target="_blank">
+          {i18nInit.t("main.state_tree")}
+        </a>
       </h4>
-      </div>
+    </div>
   </div>
 </body>
 </html>
