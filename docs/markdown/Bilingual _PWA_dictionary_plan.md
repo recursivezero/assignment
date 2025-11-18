@@ -1,5 +1,6 @@
-Here is a structured Product Plan Document for your bilingual vocabulary mobile app / PWA. It captures all your requirements — ideal for guiding development or prompting other AI agents.
+# Bilingual Dictionary
 
+Here is a structured Product Plan Document for your bilingual vocabulary mobile app / PWA. It captures all your requirements — ideal for guiding development or prompting other AI agents.
 
 ---
 
@@ -8,7 +9,6 @@ Here is a structured Product Plan Document for your bilingual vocabulary mobile 
 1. 📌 Overview
 
 A mobile-first PWA for building and managing bilingual (Hindi-English) word entries. Targeted at learners, kids, and personal use, the app works completely offline using IndexedDB and supports JSON import/export, responsive design, and customizable themes.
-
 
 ---
 
@@ -30,11 +30,9 @@ category (like "fruit", "emotion") — also shown as chips
 
 notes (optional)
 
-
 Auto timestamps: createdAt, updatedAt
 
 Duplicate check on [english + hindi] pair
-
 
 🔍 Search
 
@@ -46,7 +44,6 @@ Suggestion includes matched text highlight and direct meaning
 
 Results displayed in order of match relevance
 
-
 📇 Entry View
 
 Tap to show popover:
@@ -56,8 +53,6 @@ Edit, Copy buttons
 Delete with optional "Don't ask again" toggle
 
 Show all details (highlighted Hindi/English depending on query)
-
-
 
 📥 Import / 📤 Export
 
@@ -73,9 +68,7 @@ Auto-add createdAt, updatedAt
 
 Skips invalid or duplicate entries
 
-
 Copy entry as plain text (just word + meaning)
-
 
 ⚙️ Settings
 
@@ -89,7 +82,6 @@ Import button (JSON file upload)
 
 PWA Install prompt
 
-
 📦 Storage
 
 Data stored in IndexedDB
@@ -99,9 +91,6 @@ Two stores:
 vocab_entries
 
 settings
-
-
-
 
 ---
 
@@ -125,9 +114,6 @@ Detail: Card with all info, copy/download options
 
 Settings: Preferences and import/export
 
-
-
-
 ---
 
 4. 🌐 PWA Behavior
@@ -142,24 +128,21 @@ Custom manifest + icons
 
 Export/download triggers use Blob API
 
-
-
 ---
 
 5. 📁 Data Model
 
 {
-  "id": 1234567890,
-  "english": "apple",
-  "hindi": "सेब",
-  "example": "An apple a day keeps the doctor away.",
-  "type": "noun",
-  "category": ["fruit"],
-  "notes": "Very common word",
-  "createdAt": 1711234567890,
-  "updatedAt": 1711234567890
+"id": 1234567890,
+"english": "apple",
+"hindi": "सेब",
+"example": "An apple a day keeps the doctor away.",
+"type": "noun",
+"category": ["fruit"],
+"notes": "Very common word",
+"createdAt": 1711234567890,
+"updatedAt": 1711234567890
 }
-
 
 ---
 
@@ -175,8 +158,6 @@ Vite (build tool)
 
 Deployed via Netlify, Firebase Hosting, or GitHub Pages
 
-
-
 ---
 
 7. 🧠 Extra Considerations
@@ -191,9 +172,6 @@ Data can be grouped by type/category
 
 Support long-press or copy icon for quick copy of Hindi/English
 
-
-
 ---
 
 Would you like this exported as a PDF or Markdown file? I can also give you a prompt version to use with other agents.
-
