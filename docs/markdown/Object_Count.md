@@ -115,3 +115,5 @@ The logic should rely on **image analysis**, not manual hardcoding.
 ---
 
 Good luck! This assignment tests how well you can make machines “see” structure inside visual chaos 📷🧠
+
+&copy; 2026 RecursiveZero, All rights reserved.
