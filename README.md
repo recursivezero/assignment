@@ -56,3 +56,25 @@ Create a dynamic and visually appealing webpage for an intern assignment with th
 **Note:** This assignment aims to evaluate your skills in web development, design aesthetics, and attention to detail. Good luck!
 
 &copy; 2024 RecursiveZero Private Limited, All rights reserved.
+
+## 🚀 How to Run the Project
+
+### Using VS Code Live Server
+
+1. Open the project in VS Code  
+2. Install Live Server extension  
+3. Right-click index.html  
+4. Click "Open with Live Server"  
+
+---
+
+## 📸 Screenshots
+
+### Light Mode
+![Light Mode](./assets/light.png)
+
+### Dark Mode
+![Dark Mode](./assets/dark.png)
+
+### Timeline View
+![Timeline](./assets/timeline.png)
