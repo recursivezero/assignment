@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tripura - Hojagiri Dance</title>
+    <link rel="stylesheet" href="/styles/state-styles.css" />
+  </head>
+  <a href="/index.html" class="home-button">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" />
+    </svg>
+    Home
+  </a>
+  <body>
+    <h1>Hojagiri Dance - Tripura</h1>
+    <div class="main-container">
+      <div id="state-svg-container">
+        <h3>State Map</h3>
+        <div id="state-svg"></div>
+      </div>
+
+      <div class="right-content">
+        <img src="/assets/images/tripura.jpg" alt="Hojagiri Dance" />
+        <div class="content-text">
+          <table class="info-table">
+            <tr>
+              <th colspan="2">Quick Facts</th>
+            </tr>
+            <tr>
+              <td>Dance Form</td>
+              <td>Hojagiri</td>
+            </tr>
+            <tr>
+              <td>Origin</td>
+              <td>Tripura, India</td>
+            </tr>
+            <tr>
+              <td>Festival</td>
+              <td>Hojagiri Festival, Diwali</td>
+            </tr>
+            <tr>
+              <td>Duration</td>
+              <td>Varies</td>
+            </tr>
+            <tr>
+              <td>Significance</td>
+              <td>Celebration of Reang Tribe Culture</td>
+            </tr>
+            <tr>
+              <td>Formation</td>
+              <td>Women's Candle Dance</td>
+            </tr>
+            <tr>
+              <td>Name Origin</td>
+              <td>From 'Hojagiri', a Reang word implying a dance of light</td>
+            </tr>
+          </table>
+          <a href="https://en.wikipedia.org/wiki/Tripura" target="_blank"
+            >Read more about Hojagiri Dance on Wikipedia</a
+          >
+        </div>
+      </div>
+    </div>
+    <script src="/js-files/loadSVG.js"></script>
+
+    <script>
+      const stateKey = "Tripura";
+      const svgPath = `/assets/svg/${stateKey}.svg`;
+
+      // Load the SVG when the page loads
+      window.onload = function () {
+        loadStateSVG(svgPath);
+      };
+    </script>
+  </body>
+</html>

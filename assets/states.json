@@ -1,0 +1,212 @@
+{
+  "andhra": {
+      "id": "Andhra.html",
+      "name": "Andhra Pradesh",
+      "dance": "Kuchipudi Dance",
+      "image": "assets/images/andhra.jpg",
+      "svg": "assets/svg/Andhra.svg"
+  },
+  "assam": {
+    "id": "Assam.html",
+    "name": "Assam",
+    "dance": "Bihu Dance",
+    "image": "assets/images/assam.jpg",
+    "svg": "assets/svg/assam.svg"
+  },
+  "arunachalpradesh": {
+      "id": "ArunachalPradesh.html",
+      "name": "Arunachal Pradesh",
+      "dance": "Bari Dance",
+      "image": "assets/images/arunachal.jpeg",
+      "svg": "assets/svg/ArunachalPradesh.svg"
+  },
+  "bihar": {
+      "id": "Bihar.html",
+      "name": "Bihar",
+      "dance": "Bihar Folk Dance",
+      "image": "assets/images/bihar.jpeg",
+      "svg": "assets/svg/Bihar.svg"
+  },
+  "chhatisgarh": {
+      "id": "Chhatisgarh.html",
+      "name": "Chhattisgarh",
+      "dance": "Raut Nacha",
+      "image": "assets/images/chattisgarh.jpg",
+      "svg": "assets/svg/Chhatisgarh.svg"
+  },
+  "delhi": {
+      "id": "Delhi.html",
+      "name": "Delhi",
+      "dance": "Kathak",
+      "image": "assets/images/delhi.jpg",
+      "svg": "assets/svg/Delhi.svg"
+  },
+  "telangana": {
+    "id": "Telangana.html",
+    "name": "Telangana",
+    "dance": "Perini Shiva Thandavam",
+    "image": "assets/images/telangana.jpg",
+    "svg": "assets/svg/Telangana.svg"
+  },
+  "goa": {
+      "id": "Goa.html", 
+      "name": "Goa",
+      "dance": "Dekhnni",
+      "image": "assets/images/goa.jpg",
+      "svg": "assets/svg/Goa.svg"
+  },
+  "gujarat": {
+      "id": "Gujrat.html",
+      "name": "Gujarat",
+      "dance": "Garba",
+      "image": "assets/images/Gujrat.jpg",
+      "svg": "assets/svg/Gujrat.svg"
+  },
+  "kerala": {
+    "id": "Kerala.html",
+    "name": "Kerala",
+    "dance": "Kathakali",
+    "image": "assets/images/kerala.jpg",
+    "svg": "assets/svg/Kerala.svg"
+  },
+  "karnataka": {
+      "id": "Karnataka.html",  
+      "name": "Karnataka",
+      "dance": "Karnataka Folk Dance",
+      "image": "assets/images/karnataka.jpg",
+      "svg": "assets/svg/Karnataka.svg"
+  },
+  "maharashtra": {
+    "id": "Maharashtra.html",
+    "name": "Maharashtra",
+    "dance": "Lavani",
+    "image": "assets/images/maharashtra.jpg",
+    "svg": "assets/svg/Maharashtra.svg"
+  },
+  "madhyapradesh": {
+      "id": "MadhyaPradesh.html",
+      "name": "Madhya Pradesh",
+      "dance": "Gond Dance",
+      "image": "assets/images/madhyapradesh.jpg",
+      "svg": "assets/svg/MadhyaPradesh.svg"
+  },
+  "uttarpradesh": {
+    "id": "UttarPradesh.html",
+    "name": "Uttar Pradesh",
+    "dance": "Kathak",
+    "image": "assets/images/uttarpradesh.jpg",
+    "svg": "assets/svg/UttarPradesh.svg"
+  },
+  "nagaland": {
+    "id": "Nagaland.html",
+    "name": "Nagaland",
+    "dance": "Heka Dance",
+    "image": "assets/images/nagaland.jpeg",
+    "svg": "assets/svg/Nagaland.svg"
+  },
+  "manipur": {
+      "id": "Manipur.html",
+      "name": "Manipur",
+      "dance": "Manipuri Dance",
+      "image": "assets/images/manipur.jpeg",
+      "svg": "assets/svg/Manipur.svg"
+  },
+  "meghalaya": {
+      "id": "Meghalaya.html",
+      "name": "Meghalaya",
+      "dance": "Laho Dance",
+      "image": "assets/images/meghalaya.jpeg",
+      "svg": "assets/svg/Meghalaya.svg"
+  },
+  "mizoram": {
+      "id": "Mizoram.html",
+      "name": "Mizoram",
+      "dance": "Cheraw Dance",
+      "image": "assets/images/mizoram.jpg",
+      "svg": "assets/svg/Mizoram.svg"
+  },
+  "odisha": {
+      "id": "Odisha.html",
+      "name": "Odisha",
+      "dance": "Odissi",
+      "image": "assets/images/odisha.jpg",
+      "svg": "assets/svg/Odisha.svg"
+  },
+  "rajasthan": {
+      "id": "Rajasthan.html",
+      "name": "Rajasthan",
+      "dance": "Ghoomar",
+      "image": "assets/images/rajasthan.jpg",
+      "svg": "assets/svg/Rajasthan.svg"
+  },
+  "sikkim": {
+      "id": "Sikkim.html",
+      "name": "Sikkim",
+      "dance": "Chyabrung Dance",
+      "image": "assets/images/sikkim.jpg",
+      "svg": "assets/svg/Sikkim.svg"
+  },
+  "tamilnadu": {
+      "id": "TamilNadu.html",
+      "name": "Tamil Nadu",
+      "dance": "Bharatanatyam",
+      "image": "assets/images/tamilnadu.jpeg",
+      "svg": "assets/svg/TamilNadu.svg"
+  },
+  "haryana": {
+      "id": "Harayana.html",
+      "name": "Haryana",
+      "dance": "Ghoomar",
+      "image": "assets/images/Haryana.jpeg",
+      "svg": "assets/svg/Harayana.svg"
+  },
+  "punjab": {
+    "id": "punjab.html",
+    "name": "Punjab",
+    "dance": "Bhangra",
+    "image": "assets/images/punjab.jpg",
+    "svg": "assets/svg/punjab.svg"
+  },
+  "tripura": {
+      "id": "Tripura.html",
+      "name": "Tripura",
+      "dance": "Hojagiri Dance",
+      "image": "assets/images/tripura.jpg",
+      "svg": "assets/svg/Tripura.svg"
+  },
+  "uttarakhand": {
+      "id": "Uttarakhand.html",
+      "name": "Uttarakhand",
+      "dance": "Langvir Dance",
+      "image": "assets/images/uttarakhnad.jpeg",
+      "svg": "assets/svg/Uttarakhand.svg"
+  },
+  "himachalpradesh": {
+    "id": "HimachalPradesh.html",
+    "name": "Himachal Pradesh",
+    "dance": "Nati Dance",
+    "image": "assets/images/himachal.jpg",
+    "svg": "assets/svg/HimachalPradesh.svg"
+  },
+  "jammuandkashmir": {
+    "id": "Kashmir.html",
+    "name": "Jammu and Kashmir",
+    "dance": "Rauf Dance",
+    "image": "assets/images/kashmir.jpeg",
+    "svg": "assets/svg/Kashmir.svg"
+  },
+  "westbengal": {
+      "id": "WestBengal.html",
+      "name": "West Bengal",
+      "dance": "Bhatiali",
+      "image": "assets/images/westbengal.jpg",
+      "svg": "assets/svg/WestBengal.svg"
+  },
+  "jharkhand": {
+      "id": "Jharkhand.html",
+      "name": "Jharkhand",
+      "dance": "Chhau Dance",
+      "image": "assets/images/jharkhand.jpg",
+      "svg": "assets/svg/Jharkhand.svg"
+  }
+}

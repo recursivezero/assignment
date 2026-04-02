@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive India Map</title>
+  <link rel="stylesheet" href="/styles/Home-styles.css"> 
+</head>
+<body>
+
+  <!-- Header Section -->
+  <h1>Explore Dances Of India</h1>
+
+  <!-- Map Container -->
+  <div class="map-container">
+    <svg id="india-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1800">
+      <!-- State paths will be dynamically injected here by JS -->
+    </svg>
+  </div>
+
+  <!-- Popup Section -->
+  <div id="state-popup">
+    <span class="close-popup">&times;</span>
+    <div id="popup-state-name">State Name</div>
+    <img id="popup-state-image" src="" alt="State Image">
+    <div id="popup-state-info">State Information</div>
+    <div id="pop-up-buttons">
+      <button class="copy-button">Copy Info</button>
+      <button id="see-more-button">See More</button>
+    </div>
+    
+  </div>
+
+  <script src="/js-files/index.js"></script> 
+</body>
+</html>

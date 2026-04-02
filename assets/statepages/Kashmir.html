@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dance Form of Jammu and Kashmir</title>
+    <link rel="stylesheet" href="/styles/state-styles.css" />
+  </head>
+
+  <body>
+    <a href="/index.html" class="home-button">
+      <svg width="24" height="24" viewBox="0 0 24 24">
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z" />
+      </svg>
+      Home
+    </a>
+
+    <h1>Rouf - Kashmir</h1>
+    <div class="main-container">
+      <div id="state-svg-container">
+        <h3>State Map</h3>
+        <div id="state-svg"></div>
+      </div>
+
+      <div class="right-content">
+        <img src="/assets/images/kashmir.jpeg" alt="Rouf" />
+        <div class="content-text">
+          <table class="info-table">
+            <tr>
+              <th colspan="2">Quick Facts</th>
+            </tr>
+            <tr>
+              <td>Dance Form</td>
+              <td>Rouf</td>
+            </tr>
+            <tr>
+              <td>Origin</td>
+              <td>Kashmir, India</td>
+            </tr>
+            <tr>
+              <td>Festival</td>
+              <td>Eid, Ramzan</td>
+            </tr>
+            <tr>
+              <td>Duration</td>
+              <td>Varies</td>
+            </tr>
+            <tr>
+              <td>Significance</td>
+              <td>Celebration of Joy and Community</td>
+            </tr>
+            <tr>
+              <td>Formation</td>
+              <td>Women's Group Dance</td>
+            </tr>
+            <tr>
+              <td>Name Origin</td>
+              <td>From the Kashmiri word 'Rauf', linked to joy</td>
+            </tr>
+          </table>
+          <a href="https://en.wikipedia.org/wiki/Rouf" target="_blank"
+            >Read more about Rouf on Wikipedia</a
+          >
+        </div>
+      </div>
+    </div>
+    <script src="/js-files/loadSVG.js"></script>
+
+    <script>
+      const stateKey = "Kashmir";
+      const svgPath = `/assets/svg/${stateKey}.svg`;
+
+      // Load the SVG when the page loads
+      window.onload = function () {
+        loadStateSVG(svgPath);
+      };
+    </script>
+  </body>
+</html>

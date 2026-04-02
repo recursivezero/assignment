@@ -1,0 +1,216 @@
+/* General Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: 700;
+  color: #2c3e50;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 1s ease-out
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+  position: relative;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Popup Styles */
+#state-popup {
+  display: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 500px;
+  min-width: 400px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+@keyframes popupSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#state-popup img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  aspect-ratio: 3/3;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+#popup-state-name {
+  font-size: 2.0rem;
+  font-weight: bold;
+}
+
+#popup-state-info {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+
+.copy-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 18px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 2px;
+  margin-right: 35px;
+}
+
+.copy-button:hover {
+  background-color: #45a049;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+#see-more-button{
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 18px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#see-more-button:hover, #home-button:hover {
+  background-color: #0056b3;
+}
+
+/* Close Button in Popup */
+.close-popup {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-popup:hover {
+  color: #ff0000;
+}
+
+/* Tooltip Styles */
+.tooltip {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  z-index: 1000;
+  display: none;
+}
+
+/* Hover Effects for States in Map */
+path {
+  fill: #aee38a;
+  cursor: pointer;
+  transition: fill 0.2s ease, transform 0.1s ease;
+}
+
+path:hover {
+  fill: #FFA500;
+  transform: scale(1.05);
+}
+
+
+  /* Make Popup Responsive */
+  @media (max-width: 768px) {
+    #state-popup {
+      width: 50%;
+      height: 50%;
+      min-width: unset;
+      max-width: unset;
+      padding: 5px;
+      top: auto;
+   
+    }
+    h1 {
+        font-size: 20px
+      }
+    
+      #popup-state-name {
+        font-size: 1.5rem;
+      }
+    
+      #popup-state-info {
+        font-size: 1rem;
+      }
+    
+      .popup-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+    
+      .copy-button,
+      #see-more-button {
+        max-width: unset;
+        flex: unset;
+        font-size: 0.9rem;
+
+      }
+    
+      #state-popup img {
+        max-height: 200px;
+        margin-top: 15px;
+      }
+    }
+  

@@ -42,11 +42,7 @@ Here are some examples of the India Map and the popup in action:
 
 ### Full Map
 
-![India Map](/docs/India-map.png)
-
-### State-Page
-
-![State-Page](/docs/State-Page.png)
+![India Map](/docs/imdia-map.png)
 
 
 ## License
