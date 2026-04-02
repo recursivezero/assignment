@@ -1,0 +1,142 @@
+:root {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #1e293b;
+  --subtext: #64748b;
+  --accent: linear-gradient(180deg, #7c3aed, #06b6d4);
+}
+
+.dark {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --subtext: #94a3b8;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* INPUT */
+.input-box {
+  display: flex;
+  gap: 10px;
+  background: var(--card);
+  padding: 10px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#addBtn {
+  background: #3b82f6;
+  color: white;
+}
+
+/* TIMELINE */
+.timeline {
+  position: relative;
+  margin-top: 30px;
+  padding-left: 30px;
+}
+
+/* vertical line */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background: #cbd5f5;
+  border-radius: 10px;
+}
+
+/* CARD */
+.card {
+  position: relative;
+  background: var(--card);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* DOT */
+.card::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 20px;
+  width: 12px;
+  height: 12px;
+  background: #3b82f6;
+  border-radius: 50%;
+}
+
+/* Gradient line on card */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  border-radius: 10px;
+  background: var(--accent);
+}
+
+/* TEXT */
+.value {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.meta {
+  font-size: 14px;
+  color: var(--subtext);
+}
+
+.user {
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .input-box {
+    flex-direction: column;
+  }
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  transition: 0.3s;
+}
