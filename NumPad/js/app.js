@@ -8,9 +8,15 @@ const themeBtn = document.getElementById("themeBtn");
 
 
 
-
 addBtn.addEventListener("click", () => {
-  const value = input.value.trim();
+  const rawValue = input.value;
+
+  if (!rawValue || !rawValue.trim()) {
+    alert("Please enter a valid value");
+    return;
+  }
+
+  const value = rawValue.trim();
 
   const result = createEntry(value);
 
