@@ -1,6 +1,6 @@
 # Brand Address
 
-## Objective
+Below are assignment and task list. Each have separate branch name as `task/<assignment-title>`
 
 Create a web-based portal where users can easily access and search for details of various brands, companies, or organizations. The portal should have a beautiful UI, be easy to navigate, and provide fast search functionality.
 
@@ -14,60 +14,42 @@ Create a web-based portal where users can easily access and search for details o
 
 2.Search Functionality
 
-- Implement a fast and efficient search feature.
-- Users should be able to search by brand name or tags.
-- Search results should display relevant details in a clear and organized manner.
+## Assignment List
 
-3.User-Friendly Interface
+[BrandAddress](./docs/markdown/AuthenticInfo.md)  
 
-- Design a beautiful and intuitive UI for the portal.
-- Ensure easy navigation between pages and features.
-- Consider responsive design for various devices.
+[DateMatics](./docs/markdown/DateMatics.md)
 
-4.Tagging System
+[DynImagic](./docs/markdown/DynImagic.md)
 
-- Implement a tagging system to categorize brands.
-- Tags should enhance the search experience and aid in organizing information.
+[FamilyTree](./docs/markdown/FamilyTree.md)
 
-5.Data Validation and Error Handling
+[HinDictionary](./docs/markdown/HinDictionary.md)
 
-- Validate user inputs to ensure data accuracy.
-- Implement error handling for any potential issues during data entry or search.
+[ImageSearch](./docs/markdown/ImageSearch.md)
 
-6.Security Measures
+[DanceCase](./docs/markdown/DanceCase.md)
 
-- Ensure data security and implement measures to protect user information.
-- Employ best practices to prevent unauthorized access.
+[MaturityMatrix](./docs/markdown/MaturityMatrix.md)
 
-7.Documentation
+[NumPad](./docs/markdown/NumPad.md)
 
-- Provide clear documentation for users on how to use the portal.
-- Include a guide on adding, editing, and searching for brand information.
+[PNR](./docs/markdown/PNR_PWA.md)
 
-8.Testing
+[SafeDocs](./docs/markdown/SafeDocs.md)
 
-- Conduct thorough testing to identify and fix any bugs or issues.
-- Test the portal's performance, especially the search functionality.
+[VoiceForm](./docs/markdown/VoiceForm.md)
 
-9.Submission
-    - Interns should submit the project source code and any necessary files.
-    - Include a brief report on the design choices made and challenges faced during development.
+[Societree](./docs/markdown/Societree.md)
 
-## Evaluation Criteria
+[IndiaMap](./docs/markdown/IndiaMap.md)
 
-Interns will be evaluated based on the following criteria:
+## How to Submit
 
-- UI design and user experience.
-- Functionality and performance of the search feature.
-- Security measures implemented.
-- Quality of code and documentation.
+- Create a feature branch from task branch for eg. from  `task/<assignment>` , create `feature/<assignment>`
+- Commit the code in your feature branch
+- Raise PR against the `task/<assignment>` branch
 
-## Submission Deadline
+## Contact Us
 
-[Specify the deadline for the intern to submit the completed assignment.]
-
-## Note
-
-Interns are encouraged to be creative and innovative in their approach to designing the portal. The goal is to create a user-friendly and visually appealing platform for accessing brand information efficiently.
-
-&copy; 2024 RecursiveZero Private Limited, All rights reserved.
+if find any issue create and issue or email on <recursivezero@outlook.com>

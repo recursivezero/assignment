@@ -23,9 +23,9 @@ desktop.ini
 
 # IDE
 *.sublime-*
-*.code-workspace
+# *.code-workspace
 /.idea
-.vscode/*
+# .vscode/*
 *~
 
 **/log/
