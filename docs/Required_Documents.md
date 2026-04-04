@@ -27,6 +27,7 @@ Please provide the following required documents details in order to verification
 13. **T-Shirt Size:** S / M / L / XL
 14. **Internship Preferences:** 2 months / 6 months
 15. **System Details:** (Laptop Model / OS)
+16. **UPI Address:**
 
 ### Academic Details (For Students)
 
