@@ -1,8 +1,14 @@
 # NumPad
 
+Below are assignment and task list. Each have separate branch name as `task/<assignment-title>`
+
+---
+
 ## Objective
 
 Create a dynamic and visually appealing webpage for an intern assignment with the following specifications.
+
+---
 
 ## Requirements
 
@@ -22,37 +28,68 @@ Create a dynamic and visually appealing webpage for an intern assignment with th
 4. **Responsiveness:**
    - Ensure mobile responsiveness for an optimal user experience.
 
+---
+
 ## Deliverables
 
-1. **Webpage Design:**
-   - Develop a visually pleasing interface with a focus on user experience.
+1. **Webpage Design**
+2. **Codebase**
+3. **User Guide**
 
-2. **Codebase:**
-   - Provide well-documented HTML, CSS, and JavaScript code.
+---
 
-3. **User Guide:**
-   - Include instructions on how to use the webpage effectively.
+## 🚀 How to Run the Project
 
-## Evaluation Criteria
+### Using VS Code Live Server
 
-1. **Functionality:**
-   - Successful implementation of input handling,  and timeline display.
+1. Open the project in VS Code  
+2. Install Live Server extension  
+3. Right-click index.html  
+4. Click "Open with Live Server"  
 
-2. **Design Aesthetics:**
-   - Effective use of fonts and seamless integration of dark and light themes.
+---
 
-3. **Responsiveness:**
-   - Webpage should be optimized for both desktop and mobile devices.
+## 📸 Screenshots
 
-4. **Code Quality:**
-   - Well-structured and commented code for easy understanding and maintenance.
+### Light Mode
+![Light Mode](./NumPad/assets/light.png)
 
-## Submission Guidelines
+### Dark Mode
+![Dark Mode](./NumPad/assets/dark.png)
 
-- Deadline: 1 Week
-- Submit the assignment by pushing your code in github repo.
-- Include any additional notes or considerations.
+### Timeline View
+![Timeline](./NumPad/assets/timeline.png)
 
-**Note:** This assignment aims to evaluate your skills in web development, design aesthetics, and attention to detail. Good luck!
+---
 
-&copy; 2024 RecursiveZero Private Limited, All rights reserved.
+## Assignment List
+
+[BrandAddress](./docs/markdown/AuthenticInfo.md)  
+[DateMatics](./docs/markdown/DateMatics.md)  
+[DynImagic](./docs/markdown/DynImagic.md)  
+[FamilyTree](./docs/markdown/FamilyTree.md)  
+[HinDictionary](./docs/markdown/HinDictionary.md)  
+[ImageSearch](./docs/markdown/ImageSearch.md)  
+[DanceCase](./docs/markdown/DanceCase.md)  
+[MaturityMatrix](./docs/markdown/MaturityMatrix.md)  
+[NumPad](./docs/markdown/NumPad.md)  
+[PNR](./docs/markdown/PNR_PWA.md)  
+[SafeDocs](./docs/markdown/SafeDocs.md)  
+[VoiceForm](./docs/markdown/VoiceForm.md)  
+[Societree](./docs/markdown/Societree.md)  
+[IndiaMap](./docs/markdown/IndiaMap.md)
+
+---
+
+## How to Submit
+
+- Create a feature branch from `task/<assignment>`
+- Create `feature/<assignment>`
+- Commit your code
+- Raise PR against `task/<assignment>`
+
+---
+
+## Contact
+
+recursivezero@outlook.com
