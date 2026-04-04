@@ -1,16 +1,18 @@
-# Internship assignment
+# Brand Address
 
 Below are assignment and task list. Each have separate branch name as `task/<assignment-title>`
 
-## Task List
+Create a web-based portal where users can easily access and search for details of various brands, companies, or organizations. The portal should have a beautiful UI, be easy to navigate, and provide fast search functionality.
 
-- Array of objects which have title and other property; run a function that will title case all strings
+## Requirements
 
-- Create a VS code extension which show file modification and creation tim in bottom bar
+1.Brand Information Entry
 
-- Create Unit test for a react component
+- Users should be able to add details for a specific brand, company, or organization.
+- Required details: Official email address, company website, social media handles.
+- Users should be able to add tags to categorize the brand.
 
-- Chrome extension which read network request and display in good accordion format
+2.Search Functionality
 
 ## Assignment List
 
