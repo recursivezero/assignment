@@ -1,53 +1,70 @@
-# Internship Assignment: Image Search Functionality in Python
+# **Internship Assignment: AI/ML-Based Image Search Feature**
 
-## Objective
+**Position:** Engineering Intern (AI/ML)  
+**Duration:** 7 Days  
+**Submission:** GitHub
 
-Develop a Python-based image search algorithm that searches for details based on an input image. If results are found, display relevant details; otherwise, gracefully handle the case of no results. Additionally, ensure proper documentation for the code and push it to a GitHub repository.
+## **Objective**
 
-## Tasks
+Develop an **AI/ML-powered image search feature** that allows users to upload an image and retrieve visually similar images from a dataset. The solution should leverage machine learning models for feature extraction and similarity matching.
 
-### Image Search Algorithm
+### **Key Tasks**
 
-Implement an image search algorithm using a suitable image processing library (e.g., OpenCV).
-Use a pre-trained model or an API for image recognition and feature extraction.
+1. **Dataset Acquisition**
 
-### Search Result Details
+   - Download a suitable image dataset from **Kaggle** (e.g., [Fashion-MNIST](https://www.kaggle.com/datasets/zalando-research/fashionmnist), [CIFAR-10](https://www.kaggle.com/datasets/fedesoriano/cifar10-python-in-csv), or any relevant dataset).
+   - Preprocess the dataset (resize, normalize, augment if needed).
 
-Display relevant details based on the image search results (e.g., image description, tags, or related information).
+2. **Feature Extraction with AI/ML**
 
-### Graceful Error and Exception Handling
+   - Use a **pre-trained CNN model** (e.g., ResNet, VGG, or MobileNet) to extract image embeddings.
+   - Implement a feature vector database (can use **FAISS, Annoy, or Scikit-learn’s Nearest Neighbors** for efficient search).
 
-Implement a mechanism to gracefully handle the scenario when no results are found.
-Provide a user-friendly message explaining the absence of results.
+3. **Similarity Search Implementation**
 
-### GitHub Repository
+   - Build a function that takes an input image and returns the top **N most similar images** from the dataset.
+   - Use **cosine similarity or Euclidean distance** for matching.
 
-Create a GitHub repository for the project.
-Commit the code with clear and concise commit messages.
-Include a README.md file with instructions on how to set up and run the image search algorithm.
+4. **User Interface (Optional but Recommended)**
 
-### Documentation
+   - Develop a simple **Flask/FastAPI** backend to upload images and display results.
+   - (Bonus) Create a basic **Streamlit/React frontend** for interaction.
 
-Document the code thoroughly, including explanations of functions, classes, and important code blocks.
-Provide an overview of the image search algorithm and how it works.
-Include any dependencies, setup instructions, and troubleshooting tips.
+5. **Optimization & Evaluation**
+   - Measure search accuracy (e.g., Precision@K).
+   - Optimize for speed (reduce search latency).
 
-## Submission
+### **Deliverables (Submit via GitHub)**
 
-Push the completed code to the GitHub repository.
-Ensure that the README.md file contains all necessary information for someone new to the project.
+✅ **GitHub Repository** with:
 
-## Evaluation Criteria
+- Well-documented code (README.md with setup instructions).
+- Jupyter Notebook / Python script for model training & testing.
+- Backend API code (if applicable).
+- Sample test images & output examples.
 
-- Functionality of the image search algorithm.
-- Clarity and completeness of documentation.
-- Graceful handling of no-results scenario.
-- Effectiveness of the search result details display.
-- Clean and well-organized code.
-- Proper utilization of version control (GitHub).
+### **Tech Stack Suggestions**
+
+- **Languages:** Python
+- **Libraries:** TensorFlow/PyTorch, OpenCV, Scikit-learn, FAISS/Annoy
+- **Backend (Optional):** Flask/FastAPI
+- **Version Control:** Git/GitHub
+
+### **Evaluation Criteria**
+
+✔ **Functionality** (Does the search work accurately?)  
+✔ **Code Quality** (Clean, modular, well-documented)  
+✔ **Performance** (Speed vs. accuracy trade-offs)  
+✔ **Innovation** (Any extra features like filters, UI improvements)
+
+---
+
+**Submission Deadline:** A week from Today.
 
 ## Note
 
-Feel free to use any suitable Python libraries or frameworks for image processing and recognition. The focus should be on creating a functional and well-documented image search algorithm. Good Luck
+Feel free to use any libraries or frameworks you find suitable for the image processing and recognition and UI development. The goal is to create a functional and well-documented application that meets the specified requirements.
 
-&copy; 2023 RecursiveZero, All rights reserved.
+**Good Luck!** 🚀 Let’s build something awesome!
+
+&copy; 2025 RecursiveZero, All rights reserved.

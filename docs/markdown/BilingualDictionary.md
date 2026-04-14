@@ -12,7 +12,7 @@ A mobile-first PWA for building and managing bilingual (Hindi-English) word entr
 
 ---
 
-2. 🎯 Core Features
+1. 🎯 Core Features
 
 🔤 Add / Edit / Delete Word Entry
 
@@ -94,7 +94,7 @@ settings
 
 ---
 
-3. 🖼 UI Design
+1. 🖼 UI Design
 
 Minimal, touch-optimized UI
 
@@ -116,7 +116,7 @@ Settings: Preferences and import/export
 
 ---
 
-4. 🌐 PWA Behavior
+1. 🌐 PWA Behavior
 
 Fully installable on Android/iOS via browser
 
@@ -130,7 +130,7 @@ Export/download triggers use Blob API
 
 ---
 
-5. 📁 Data Model
+1. 📁 Data Model
 
 {
 "id": 1234567890,
@@ -146,7 +146,7 @@ Export/download triggers use Blob API
 
 ---
 
-6. 🛠️ Tech Stack
+1. 🛠️ Tech Stack
 
 Vanilla JavaScript (ES Modules)
 
@@ -160,7 +160,7 @@ Deployed via Netlify, Firebase Hosting, or GitHub Pages
 
 ---
 
-7. 🧠 Extra Considerations
+1. 🧠 Extra Considerations
 
 All inputs trimmed and converted to lowercase where needed
 
