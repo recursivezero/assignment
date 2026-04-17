@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic page settings -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Change background color by entering a 6-digit number">
+    <title>Color Number</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- main container -->
+    <div class="page-container">
+        <!-- header -->
+        <header class="page-header">
+            <h1>Color Number</h1>
+            <p class="subtitle">Enter a 6-digit number to change the background</p>
+        </header>
+
+        <!-- main content -->
+        <main class="content-wrapper">
+            <!-- where user enters the color number -->
+            <section class="input-section">
+                <h2 class="section-title">Color Input</h2>
+                <label for="colorInput" class="input-label">Enter a 6-Digit Number:</label>
+                <input 
+                    type="text" 
+                    id="colorInput" 
+                    class="color-input" 
+                    placeholder="e.g., FF0000"
+                    maxlength="6"
+                    inputmode="numeric"
+                >
+                <p class="input-hint">Numbers only (0-9). Example: FF0000 for red</p>
+                <!-- error shows here -->
+                <div id="errorMessage" class="error-message hidden"></div>
+            </section>
+
+            <!-- shows current color in different formats -->
+            <section class="display-section">
+                <h2 class="section-title">Current Color</h2>
+                
+                <!-- as number -->
+                <div class="display-area">
+                    <p class="display-label">Number:</p>
+                    <div id="colorDisplay" class="color-display">000000</div>
+                </div>
+
+                <!-- as hex code -->
+                <div class="hex-area">
+                    <p class="display-label">Hex:</p>
+                    <div id="hexDisplay" class="hex-display">#000000</div>
+                </div>
+
+                <!-- as rgb -->
+                <div class="rgb-area">
+                    <p class="display-label">RGB:</p>
+                    <div id="rgbDisplay" class="rgb-display">rgb(0, 0, 0)</div>
+                </div>
+
+                <!-- color name -->
+                <div class="color-name-area">
+                    <p class="display-label">Name:</p>
+                    <div id="colorNameDisplay" class="color-name-display">Black</div>
+                </div>
+
+                <!-- how bright the color is -->
+                <div class="brightness-area">
+                    <p class="display-label">Brightness:</p>
+                    <div class="brightness-container">
+                        <div id="brightnessBar" class="brightness-bar"></div>
+                        <div id="brightnessPercent" class="brightness-percent">0%</div>
+                    </div>
+                </div>
+
+                <!-- live preview of color -->
+                <div class="preview-area">
+                    <p class="display-label">Preview:</p>
+                    <div id="colorSwatch" class="color-swatch"></div>
+                </div>
+            </section>
+
+            <!-- buttons -->
+            <section class="button-section">
+                <div class="button-group">
+                    <button id="resetBtn" class="reset-btn btn">Reset</button>
+                    <button id="randomBtn" class="random-btn btn">Random</button>
+                    <button id="copyBtn" class="copy-btn btn">Copy Code</button>
+                </div>
+            </section>
+
+            <!-- saved colors -->
+            <section class="history-section">
+                <h2 class="section-title">Color History</h2>
+                <div id="colorHistory" class="color-history"></div>
+                <button id="clearHistoryBtn" class="clear-history-btn btn" style="display: none;">
+                    Clear History
+                </button>
+            </section>
+        </main>
+
+        <!-- footer -->
+        <footer class="page-footer">
+            <p class="footer-text">
+                Color Generator • <span id="currentColor">Color: #000000</span>
+            </p>
+        </footer>
+    </div>
+
+    <!-- our code -->
+    <script src="script.js"></script>
+</body>
+</html>
