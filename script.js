@@ -38,7 +38,7 @@ function validateInput(val) {
     if (val === "") return { valid: false, msg: "" };
     if (val.length < 6) return { valid: false, msg: `need ${6 - val.length} more` };
     if (val.length > 6) return { valid: false, msg: "only 6 digits" };
-    if (!/^[0-9A-Fa-f]{6}$/.test(val)) return { valid: false, msg: "numbers only" };
+    if (!/^[0-9]{6}$/.test(val)) return { valid: false, msg: "numbers only" };
     return { valid: true, msg: "" };
 }
 
@@ -81,7 +81,7 @@ function onInputChange(e) {
 function onPaste(e) {
     e.preventDefault();
     const text = (e.clipboardData || window.clipboardData).getData('text');
-    if (!/^[0-9A-Fa-f]{6}$/.test(text)) return;
+    if (!/^[0-9]{6}$/.test(text)) return;
     e.target.value = text;
     onInputChange({ target: e.target });
 }
