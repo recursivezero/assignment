@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a0f1e" />
+  <meta name="description" content="Indian Railways PNR Status & Tatkal Alarm PWA" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>RailTrack — Indian Railways PWA</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#060b18; --surface:#0d1529; --card:#111d38; --border:#1e2f55;
+      --accent:#ff6b35; --accent2:#00d4aa; --accent3:#f7c948;
+      --text:#e8eaf6; --muted:#7c8db5; --danger:#ff4560;
+      --success:#00e396; --rail-blue:#1565c0;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Noto Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(30,47,85,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(30,47,85,.35) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+
+    /* TICKER */
+    .ticker-wrap{position:fixed;top:0;left:0;right:0;background:var(--rail-blue);height:28px;overflow:hidden;z-index:1000;display:flex;align-items:center}
+    .ticker-label{background:var(--accent);color:#fff;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:11px;letter-spacing:2px;padding:0 14px;height:100%;display:flex;align-items:center;flex-shrink:0;white-space:nowrap}
+    .ticker-content{display:flex;animation:ticker 40s linear infinite;white-space:nowrap}
+    .ticker-content span{font-family:'Space Mono',monospace;font-size:10px;color:#b3c5ff;padding:0 40px;letter-spacing:1px}
+    @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+    /* HEADER */
+    header{position:relative;z-index:10;padding:56px 24px 0;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo-icon{width:44px;height:44px;background:var(--accent);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 0 20px rgba(255,107,53,.4)}
+    .logo-text{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:26px;letter-spacing:3px;color:#fff}
+    .logo-text span{color:var(--accent)}
+    .logo-sub{font-size:9px;letter-spacing:3px;color:var(--muted);font-family:'Space Mono',monospace;margin-top:2px}
+    .status-pill{display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:11px;font-family:'Space Mono',monospace;color:var(--muted)}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:var(--success);box-shadow:0 0 8px var(--success);animation:pulse 2s ease infinite}
+    .status-dot.offline{background:var(--danger);box-shadow:0 0 8px var(--danger)}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+    /* NAV */
+    nav{position:relative;z-index:10;display:flex;gap:4px;padding:24px 24px 0;overflow-x:auto;scrollbar-width:none}
+    nav::-webkit-scrollbar{display:none}
+    .tab{flex-shrink:0;background:var(--surface);border:1px solid var(--border);border-radius:8px 8px 0 0;padding:10px 20px;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.5px;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+    .tab.active{background:var(--card);border-bottom-color:var(--card);color:var(--accent);border-top:2px solid var(--accent)}
+    .tab:hover:not(.active){color:var(--text);border-color:#2a3e6e}
+
+    /* MAIN */
+    main{position:relative;z-index:10;padding:0 24px 100px}
+    .panel{background:var(--card);border:1px solid var(--border);border-top:none;border-radius:0 12px 12px 12px;padding:28px;display:none;animation:fadeIn .3s ease}
+    .panel.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+    .section-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:2px;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+    .section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent)}
+    .section-sub{font-size:12px;color:var(--muted);margin-bottom:20px;letter-spacing:.5px}
+
+    /* INPUTS */
+    .input-row{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .input-group{flex:1;min-width:180px}
+    label{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:6px;text-transform:uppercase}
+    input,select{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'Space Mono',monospace;font-size:13px;transition:border-color .2s;outline:none;letter-spacing:1px}
+    input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(255,107,53,.15)}
+    input::placeholder{color:#3a4a6b}
+    select option{background:var(--surface)}
+
+    /* BUTTONS */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border:none;border-radius:8px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:14px;letter-spacing:2px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+    .btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.08);opacity:0;transition:opacity .2s}
+    .btn:hover::after{opacity:1}
+    .btn-primary{background:var(--accent);color:#fff;box-shadow:0 4px 20px rgba(255,107,53,.3)}
+    .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 28px rgba(255,107,53,.45)}
+    .btn-secondary{background:var(--surface);color:var(--text);border:1px solid var(--border)}
+    .btn-success{background:var(--accent2);color:var(--bg)}
+    .btn-danger{background:var(--danger);color:#fff}
+    .btn-ghost{background:transparent;color:var(--accent2);border:1px solid var(--accent2)}
+    .btn-sm{padding:7px 14px;font-size:11px}
+
+    /* API SOURCE BADGE */
+    .api-source-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:20px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;margin-bottom:16px}
+    .badge-live{background:rgba(0,227,150,.12);border:1px solid rgba(0,227,150,.3);color:var(--success)}
+    .badge-mock{background:rgba(247,201,72,.12);border:1px solid rgba(247,201,72,.3);color:var(--accent3)}
+    .badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:pulse 1.5s infinite}
+
+    /* API STEPS */
+    .api-steps{display:none;gap:8px;flex-direction:column;margin:16px 0 4px}
+    .api-steps.show{display:flex}
+    .api-step{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);display:flex;align-items:center;gap:8px}
+    .api-step.done{color:var(--success)}
+    .api-step.active-step{color:var(--accent2)}
+    .step-dot{width:8px;height:8px;border-radius:50%;background:var(--border);flex-shrink:0}
+    .api-step.done .step-dot{background:var(--success)}
+    .api-step.active-step .step-dot{background:var(--accent2);animation:pulse 1s infinite}
+    .api-progress{height:3px;background:var(--border);border-radius:2px;margin:8px 0 16px;overflow:hidden;display:none}
+    .api-progress.show{display:block}
+    .api-progress-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .15s linear}
+
+    /* PNR RESULT */
+    .pnr-result{margin-top:20px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;display:none}
+    .pnr-result.show{display:block;animation:fadeIn .4s ease}
+    .pnr-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+    .pnr-train-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;letter-spacing:1px}
+    .pnr-number{font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px}
+    .status-badge{padding:6px 16px;border-radius:20px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.5px}
+    .status-cnf{background:rgba(0,227,150,.15);color:var(--success);border:1px solid rgba(0,227,150,.3)}
+    .status-wl{background:rgba(247,201,72,.15);color:var(--accent3);border:1px solid rgba(247,201,72,.3)}
+    .status-rac{background:rgba(255,69,96,.15);color:var(--danger);border:1px solid rgba(255,69,96,.3)}
+    .pnr-route{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+    .station-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 16px;flex:1;min-width:120px}
+    .station-code{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:22px;letter-spacing:2px;color:var(--accent2)}
+    .station-name{font-size:11px;color:var(--muted);margin-top:2px}
+    .pnr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-bottom:20px}
+    .pnr-field{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px}
+    .pnr-field-label{font-size:9px;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:5px}
+    .pnr-field-value{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:16px}
+    .passenger-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}
+    .passenger-table th{text-align:left;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--border)}
+    .passenger-table td{padding:10px 12px;border-bottom:1px solid rgba(30,47,85,.5);font-family:'Rajdhani',sans-serif;font-weight:500;font-size:15px}
+    .passenger-table tr:last-child td{border-bottom:none}
+    .td-cnf{color:var(--success);font-weight:700}
+    .td-wl{color:var(--accent3);font-weight:700}
+    .td-rac{color:var(--danger);font-weight:700}
+
+    /* ERROR BOX */
+    .error-box{background:rgba(255,69,96,.08);border:1px solid rgba(255,69,96,.3);border-radius:10px;padding:16px 20px;margin-top:16px;display:none}
+    .error-box.show{display:block;animation:fadeIn .3s ease}
+    .error-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:16px;color:var(--danger);margin-bottom:6px}
+    .error-msg{font-size:12px;color:var(--muted);line-height:1.7}
+
+    /* TRAINS */
+    .train-cards{display:grid;gap:16px}
+    .train-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+    .train-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent2)}
+    .train-card:hover{border-color:#2a3e6e;transform:translateY(-2px)}
+    .train-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
+    .train-number{font-family:'Space Mono',monospace;font-size:11px;color:var(--accent2);letter-spacing:1px}
+    .train-name-big{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px;letter-spacing:1px;margin-top:2px}
+    .train-route-row{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-family:'Space Mono',monospace;font-size:12px}
+    .stn{color:var(--accent2);font-weight:700}
+    .train-timings{display:flex;gap:8px;flex-wrap:wrap}
+    .timing-tag{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;font-family:'Space Mono',monospace;color:var(--muted)}
+    .timing-tag b{color:var(--text)}
+    .train-card-actions{display:flex;gap:8px;margin-top:14px}
+    .empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+    .empty-icon{font-size:48px;margin-bottom:12px}
+    .empty-state p{font-size:13px;letter-spacing:.5px}
+    .quick-trains{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+    .quick-train-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 12px;font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);cursor:pointer;transition:all .2s;letter-spacing:.5px}
+    .quick-train-btn:hover{border-color:var(--accent2);color:var(--accent2)}
+
+    /* ALARM */
+    .alarm-cards{display:grid;gap:16px}
+    .alarm-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;transition:border-color .2s}
+    .alarm-card.armed{border-color:var(--accent3);box-shadow:0 0 20px rgba(247,201,72,.1)}
+    .alarm-info{flex:1}
+    .alarm-train{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:18px}
+    .alarm-class-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+    .alarm-time-chip{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px}
+    .alarm-time-chip .cls{font-size:9px;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace}
+    .alarm-time-chip .time{font-family:'Space Mono',monospace;font-size:14px;font-weight:700;color:var(--accent3)}
+    .alarm-toggle{width:56px;height:28px;background:var(--border);border-radius:14px;border:none;cursor:pointer;position:relative;transition:background .25s;flex-shrink:0}
+    .alarm-toggle::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform .25s}
+    .alarm-toggle.on{background:var(--accent3)}
+    .alarm-toggle.on::after{transform:translateX(28px)}
+
+    /* CLOCK */
+    .clock-widget{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center;margin-bottom:20px}
+    .clock-time{font-family:'Space Mono',monospace;font-size:42px;font-weight:700;color:var(--accent3);letter-spacing:4px;text-shadow:0 0 30px rgba(247,201,72,.3)}
+    .clock-date{font-size:12px;color:var(--muted);letter-spacing:2px;margin-top:6px;font-family:'Space Mono',monospace}
+    .tatkal-countdown{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    .countdown-item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px}
+    .countdown-label{font-size:9px;letter-spacing:2px;color:var(--muted);font-family:'Space Mono',monospace;margin-bottom:6px}
+    .countdown-value{font-family:'Space Mono',monospace;font-size:20px;font-weight:700;color:var(--accent)}
+    .countdown-value.soon{color:var(--danger);animation:blink .8s step-end infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* TOAST */
+    .toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:10px}
+    .toast{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:10px;padding:14px 18px;font-size:13px;color:var(--text);box-shadow:0 8px 30px rgba(0,0,0,.4);animation:slideIn .3s ease;max-width:300px}
+    .toast.error{border-left-color:var(--danger)}
+    .toast.warn{border-left-color:var(--accent3)}
+    @keyframes slideIn{from{transform:translateX(40px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+    /* OFFLINE */
+    .offline-banner{display:none;align-items:center;gap:10px;background:rgba(255,69,96,.12);border:1px solid rgba(255,69,96,.3);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--danger)}
+    .offline-banner.show{display:flex}
+
+    /* ADD SECTION */
+    .add-section{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+    .collapsible-trigger{cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:'Rajdhani',sans-serif;font-weight:600;font-size:14px;letter-spacing:1px;color:var(--text)}
+    .collapsible-body{display:none;margin-top:16px}
+    .collapsible-body.open{display:block;animation:fadeIn .2s ease}
+    .stored-label{display:inline-flex;align-items:center;gap:4px;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.25);border-radius:6px;padding:3px 10px;font-size:10px;letter-spacing:1px;color:var(--accent2);font-family:'Space Mono',monospace;margin-bottom:14px}
+
+    /* BOTTOM NAV */
+    .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);display:flex;z-index:100}
+    .bottom-nav button{flex:1;background:none;border:none;color:var(--muted);padding:12px 0 10px;cursor:pointer;font-size:20px;transition:color .2s;display:flex;flex-direction:column;align-items:center;gap:3px}
+    .bottom-nav button span{font-family:'Rajdhani',sans-serif;font-size:10px;letter-spacing:1px}
+    .bottom-nav button.active{color:var(--accent)}
+
+    /* ABOUT */
+    .about-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+    .about-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+    .about-card-icon{font-size:28px;margin-bottom:10px}
+    .about-card-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:15px;letter-spacing:1px;margin-bottom:6px}
+    .about-card-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+    @media(max-width:600px){
+      header{padding-top:48px}
+      .panel{padding:20px 16px}
+      .clock-time{font-size:32px}
+      nav{padding:16px 16px 0}
+      main{padding:0 16px 100px}
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticker-wrap">
+  <div class="ticker-label">🚂 LIVE</div>
+  <div class="ticker-content">
+    <span>12301 HOWRAH RAJDHANI · ON TIME</span>
+    <span>22691 RAJDHANI EXP · 15 MIN LATE</span>
+    <span>12002 BHOPAL SHATABDI · ON TIME</span>
+    <span>12951 MUMBAI RAJDHANI · ON TIME</span>
+    <span>12259 SEALDAH DURONTO · 8 MIN LATE</span>
+    <span>TATKAL: AC → 10:00 AM | SL → 11:00 AM (D-1 OF JOURNEY)</span>
+    <span>12431 TRIVANDRUM RAJDHANI · ON TIME</span>
+    <span>12627 KARNATAKA EXP · 22 MIN LATE</span>
+    <span>12301 HOWRAH RAJDHANI · ON TIME</span>
+    <span>22691 RAJDHANI EXP · 15 MIN LATE</span>
+    <span>12002 BHOPAL SHATABDI · ON TIME</span>
+    <span>12951 MUMBAI RAJDHANI · ON TIME</span>
+    <span>12259 SEALDAH DURONTO · 8 MIN LATE</span>
+    <span>TATKAL: AC → 10:00 AM | SL → 11:00 AM (D-1 OF JOURNEY)</span>
+    <span>12431 TRIVANDRUM RAJDHANI · ON TIME</span>
+    <span>12627 KARNATAKA EXP · 22 MIN LATE</span>
+  </div>
+</div>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🚆</div>
+    <div>
+      <div class="logo-text">Rail<span>Track</span></div>
+      <div class="logo-sub">INDIAN RAILWAYS PWA</div>
+    </div>
+  </div>
+  <div class="status-pill">
+    <div class="status-dot" id="netDot"></div>
+    <span id="netLabel">ONLINE</span>
+  </div>
+</header>
+
+<nav>
+  <button class="tab active" onclick="switchTab('pnr',this)">📋 PNR STATUS</button>
+  <button class="tab" onclick="switchTab('trains',this)">🚂 MY TRAINS</button>
+  <button class="tab" onclick="switchTab('alarm',this)">⏰ TATKAL ALARM</button>
+  <button class="tab" onclick="switchTab('about',this)">ℹ️ ABOUT</button>
+</nav>
+
+<main>
+
+  <!-- ══ PNR PANEL ══ -->
+  <div class="panel active" id="panel-pnr">
+    <div class="offline-banner" id="offlineBanner">📵 You are offline. Showing last cached PNR status.</div>
+
+    <div class="section-title">PNR STATUS</div>
+    <div class="section-sub">Live data via IRCTC RapidAPI · Results cached for offline access</div>
+
+    <div class="input-row">
+      <div class="input-group">
+        <label>PNR NUMBER (10 DIGITS)</label>
+        <input type="text" id="pnrInput" maxlength="10" placeholder="Enter your 10-digit PNR" inputmode="numeric" />
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+      <button class="btn btn-primary" onclick="fetchPNR()">🔍 CHECK STATUS</button>
+      <button class="btn btn-secondary" onclick="loadCachedPNR()">💾 LOAD CACHED</button>
+    </div>
+
+    <!-- API step animation -->
+    <div class="api-steps" id="apiSteps">
+      <div class="api-step" id="step1"><div class="step-dot"></div>Connecting to IRCTC RapidAPI server...</div>
+      <div class="api-step" id="step2"><div class="step-dot"></div>Authenticating API credentials...</div>
+      <div class="api-step" id="step3"><div class="step-dot"></div>Fetching PNR data from IRCTC database...</div>
+      <div class="api-step" id="step4"><div class="step-dot"></div>Parsing passenger reservation chart...</div>
+      <div class="api-step" id="step5"><div class="step-dot"></div>Loading berth & coach allocation...</div>
+    </div>
+    <div class="api-progress" id="apiProgress">
+      <div class="api-progress-bar" id="apiBar"></div>
+    </div>
+
+    <!-- Error box -->
+    <div class="error-box" id="errorBox">
+      <div class="error-title" id="errorTitle">⚠️ Error</div>
+      <div class="error-msg" id="errorMsg"></div>
+    </div>
+
+    <div class="pnr-result" id="pnrResult"></div>
+  </div>
+
+  <!-- ══ TRAINS PANEL ══ -->
+  <div class="panel" id="panel-trains">
+    <div class="section-title">MY TRAINS</div>
+    <div class="section-sub">Save up to 5 trains for quick access & alarm setting</div>
+
+    <div style="margin-bottom:16px;">
+      <label style="margin-bottom:8px;display:block;">⚡ QUICK ADD POPULAR TRAINS</label>
+      <div class="quick-trains" id="quickTrains"></div>
+    </div>
+
+    <div class="add-section">
+      <div class="collapsible-trigger" onclick="toggleAdd()">
+        <span>➕ ADD CUSTOM TRAIN</span><span id="addArrow">▼</span>
+      </div>
+      <div class="collapsible-body" id="addBody">
+        <div class="input-row">
+          <div class="input-group"><label>TRAIN NUMBER</label><input type="text" id="tNum" placeholder="e.g. 12301" maxlength="5"/></div>
+          <div class="input-group"><label>TRAIN NAME</label><input type="text" id="tName" placeholder="e.g. Howrah Rajdhani"/></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group"><label>FROM CODE</label><input type="text" id="tFrom" placeholder="HWH" maxlength="5"/></div>
+          <div class="input-group"><label>DEPARTURE</label><input type="time" id="tDep"/></div>
+          <div class="input-group"><label>TO CODE</label><input type="text" id="tTo" placeholder="NDLS" maxlength="5"/></div>
+          <div class="input-group"><label>ARRIVAL</label><input type="time" id="tArr"/></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>CLASS</label>
+            <select id="tClass">
+              <option value="1A">1A — First AC</option>
+              <option value="2A">2A — Second AC</option>
+              <option value="3A" selected>3A — Third AC</option>
+              <option value="SL">SL — Sleeper</option>
+              <option value="CC">CC — Chair Car</option>
+              <option value="GN">GN — General</option>
+            </select>
+          </div>
+          <div class="input-group"><label>DAYS OF RUN</label><input type="text" id="tDays" placeholder="Mon, Wed, Fri"/></div>
+        </div>
+        <button class="btn btn-success" onclick="addTrain()">SAVE TRAIN</button>
+      </div>
+    </div>
+    <div class="train-cards" id="trainCards"></div>
+  </div>
+
+  <!-- ══ ALARM PANEL ══ -->
+  <div class="panel" id="panel-alarm">
+    <div class="section-title">TATKAL ALARM</div>
+    <div class="section-sub">AC opens 10:00 AM · Sleeper opens 11:00 AM · Both on D-1 of journey</div>
+
+    <div class="clock-widget">
+      <div class="clock-time" id="clockTime">--:--:--</div>
+      <div class="clock-date" id="clockDate">---</div>
+      <div class="tatkal-countdown">
+        <div class="countdown-item">
+          <div class="countdown-label">AC TATKAL (10:00 AM)</div>
+          <div class="countdown-value" id="countdownAC">--:--:--</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-label">SL TATKAL (11:00 AM)</div>
+          <div class="countdown-value" id="countdownSL">--:--:--</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-section" style="margin-bottom:20px;">
+      <div class="collapsible-trigger" onclick="toggleAlarmAdd()">
+        <span>➕ SET NEW ALARM</span><span id="alarmAddArrow">▼</span>
+      </div>
+      <div class="collapsible-body" id="alarmAddBody">
+        <div class="input-row">
+          <div class="input-group"><label>SELECT TRAIN</label><select id="alarmTrainSel"><option value="">-- Select a saved train --</option></select></div>
+          <div class="input-group"><label>JOURNEY DATE</label><input type="date" id="alarmDate"/></div>
+        </div>
+        <div class="input-row">
+          <div class="input-group">
+            <label>CLASS TYPE</label>
+            <select id="alarmClass">
+              <option value="AC">AC Class (10:00 AM)</option>
+              <option value="SL">Sleeper Class (11:00 AM)</option>
+              <option value="BOTH">Both Classes</option>
+            </select>
+          </div>
+          <div class="input-group"><label>REMIND ME (MIN BEFORE)</label><input type="number" id="alarmAdv" value="15" min="1" max="60"/></div>
+        </div>
+        <button class="btn btn-primary" onclick="addAlarm()">⏰ SET ALARM</button>
+      </div>
+    </div>
+    <div class="alarm-cards" id="alarmCards"></div>
+  </div>
+
+  <!-- ══ ABOUT PANEL ══ -->
+  <div class="panel" id="panel-about">
+    <div class="section-title">ABOUT RAILTRACK</div>
+    <div class="section-sub">Indian Railways PWA — Live API + Offline Support</div>
+    <div class="about-grid">
+      <div class="about-card"><div class="about-card-icon">📋</div><div class="about-card-title">LIVE PNR STATUS</div><div class="about-card-desc">Real-time PNR data from IRCTC via RapidAPI. Falls back to cached data offline. Supports all quotas and classes.</div></div>
+      <div class="about-card"><div class="about-card-icon">🚂</div><div class="about-card-title">TRAIN TRACKER</div><div class="about-card-desc">Save up to 5 trains with station codes, timings, and class. Quick-add 10 popular trains in one tap.</div></div>
+      <div class="about-card"><div class="about-card-icon">⏰</div><div class="about-card-title">TATKAL ALARM</div><div class="about-card-desc">AC opens 10:00 AM, Sleeper 11:00 AM on D-1. Audio beep + push notification before the window opens.</div></div>
+      <div class="about-card"><div class="about-card-icon">📵</div><div class="about-card-title">OFFLINE FIRST</div><div class="about-card-desc">Service Worker caches app shell. Last PNR, trains, alarms persist in localStorage indefinitely.</div></div>
+      <div class="about-card"><div class="about-card-icon">🔔</div><div class="about-card-title">NOTIFICATIONS</div><div class="about-card-desc">Browser push notification + 4-tone audio alert fires before Tatkal window opens.</div></div>
+      <div class="about-card"><div class="about-card-icon">📱</div><div class="about-card-title">INSTALLABLE PWA</div><div class="about-card-desc">Install on Android, iOS, or desktop via browser. Full offline support via Service Worker manifest.</div></div>
+    </div>
+    <div style="margin-top:20px;">
+      <div class="about-card" style="border-left:3px solid var(--success);">
+        <div class="about-card-title" style="color:var(--success);">✅ Live API Connected</div>
+        <div class="about-card-desc" style="margin-top:8px;line-height:1.8;">
+          This app uses the <b>IRCTC Indian Railway API</b> on RapidAPI (<code style="color:var(--accent2);background:var(--card);padding:1px 6px;border-radius:4px">irctc1.p.rapidapi.com</code>).
+          PNR results are fetched live from IRCTC's database. If the API is unavailable or quota is exceeded, a graceful error message is shown and the last cached result is loaded automatically.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="bottom-nav">
+  <button class="active" id="bnPNR"    onclick="switchTab('pnr',null,0)">📋<span>PNR</span></button>
+  <button id="bnTrains" onclick="switchTab('trains',null,1)">🚂<span>TRAINS</span></button>
+  <button id="bnAlarm"  onclick="switchTab('alarm',null,2)">⏰<span>ALARM</span></button>
+  <button id="bnAbout"  onclick="switchTab('about',null,3)">ℹ️<span>ABOUT</span></button>
+</div>
+
+<div class="toast-container" id="toasts"></div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  CONFIG — RapidAPI credentials
+//  ⚠️  SECURITY NOTE: In production, route API calls through
+//      your own backend server to protect your API key.
+// ══════════════════════════════════════════════════════════════
+const RAPIDAPI_KEY  = 'f91ae99760mshf1331b213625a64p183611jsnd0e1667a6b4a';
+const RAPIDAPI_HOST = 'irctc1.p.rapidapi.com';
+const PNR_ENDPOINT  = 'https://irctc1.p.rapidapi.com/api/v3/getPNRStatus';
+
+// ══════════════════════════════════════════════════════════════
+//  Popular trains for quick-add
+// ══════════════════════════════════════════════════════════════
+const POPULAR_TRAINS = [
+  {num:'12301',name:'Howrah Rajdhani',   from:'HWH', dep:'19:55',to:'NDLS',arr:'09:55',cls:'3A',days:'Daily'},
+  {num:'12951',name:'Mumbai Rajdhani',   from:'MMCT',dep:'17:00',to:'NDLS',arr:'08:35',cls:'2A',days:'Daily'},
+  {num:'12002',name:'Bhopal Shatabdi',   from:'NDLS',dep:'06:00',to:'BPL', arr:'13:55',cls:'CC',days:'Daily exc Sun'},
+  {num:'12627',name:'Karnataka Express', from:'SBC', dep:'20:30',to:'NDLS',arr:'06:00',cls:'SL',days:'Daily'},
+  {num:'22691',name:'Rajdhani Express',  from:'SBC', dep:'20:00',to:'NDLS',arr:'06:40',cls:'1A',days:'Daily'},
+  {num:'12259',name:'Sealdah Duronto',   from:'SDAH',dep:'08:55',to:'NDLS',arr:'04:25',cls:'3A',days:'Mon,Thu,Sat'},
+  {num:'12431',name:'Trivandrum Rajdhani',from:'TVC',dep:'11:15',to:'NDLS',arr:'11:35',cls:'2A',days:'Daily'},
+  {num:'12909',name:'Garib Rath',        from:'BCT', dep:'21:35',to:'BDTS',arr:'09:20',cls:'3A',days:'Fri,Sun'},
+  {num:'12615',name:'Grand Trunk Exp',   from:'MAS', dep:'19:00',to:'NDLS',arr:'05:50',cls:'SL',days:'Daily'},
+  {num:'12286',name:'SC Duronto',        from:'SC',  dep:'17:05',to:'NDLS',arr:'11:45',cls:'3A',days:'Tue,Fri'},
+];
+
+// ══════════════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════════════
+let trains    = JSON.parse(localStorage.getItem('rt_trains')||'[]');
+let alarms    = JSON.parse(localStorage.getItem('rt_alarms')||'[]');
+let cachedPNR = JSON.parse(localStorage.getItem('rt_pnr')   ||'null');
+
+// ══════════════════════════════════════════════════════════════
+//  TAB SWITCHING
+// ══════════════════════════════════════════════════════════════
+const bnIds = ['bnPNR','bnTrains','bnAlarm','bnAbout'];
+function switchTab(name, el, idx) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  if(el) el.classList.add('active');
+  if(idx!==undefined) bnIds.forEach((id,i)=>document.getElementById(id).classList.toggle('active',i===idx));
+  if(name==='trains'){renderTrains();renderQuickTrains();}
+  if(name==='alarm'){renderAlarms();populateAlarmTrainSelect();}
+}
+
+// ══════════════════════════════════════════════════════════════
+//  NETWORK STATUS
+// ══════════════════════════════════════════════════════════════
+function updateNet() {
+  const online=navigator.onLine;
+  document.getElementById('netDot').className='status-dot'+(online?'':' offline');
+  document.getElementById('netLabel').textContent=online?'ONLINE':'OFFLINE';
+  document.getElementById('offlineBanner').classList.toggle('show',!online);
+}
+window.addEventListener('online',updateNet);
+window.addEventListener('offline',updateNet);
+updateNet();
+
+// ══════════════════════════════════════════════════════════════
+//  API STEP ANIMATION HELPER
+// ══════════════════════════════════════════════════════════════
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+async function runStepAnimation() {
+  const stepIds=['step1','step2','step3','step4','step5'];
+  const delays=[380,320,550,380,300];
+  const bar=document.getElementById('apiBar');
+  document.getElementById('apiSteps').classList.add('show');
+  document.getElementById('apiProgress').classList.add('show');
+  stepIds.forEach(s=>document.getElementById(s).className='api-step');
+  bar.style.width='0%';
+  for(let i=0;i<stepIds.length;i++){
+    document.getElementById(stepIds[i]).className='api-step active-step';
+    if(i>0)document.getElementById(stepIds[i-1]).className='api-step done';
+    bar.style.width=((i+1)/stepIds.length*88)+'%';
+    await sleep(delays[i]);
+  }
+  document.getElementById(stepIds[stepIds.length-1]).className='api-step done';
+  bar.style.width='100%';
+  await sleep(150);
+  document.getElementById('apiSteps').classList.remove('show');
+  document.getElementById('apiProgress').classList.remove('show');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  LIVE PNR FETCH — IRCTC RapidAPI
+// ══════════════════════════════════════════════════════════════
+async function fetchPNR() {
+  const pnr=document.getElementById('pnrInput').value.trim();
+  if(!/^\d{10}$/.test(pnr)){toast('Enter a valid 10-digit PNR number','error');return;}
+
+  // Offline → load cache
+  if(!navigator.onLine){toast('Offline — loading cached PNR','warn');loadCachedPNR();return;}
+
+  // Reset UI
+  document.getElementById('pnrResult').classList.remove('show');
+  document.getElementById('errorBox').classList.remove('show');
+
+  // Run step animation in parallel with API call
+  const animPromise = runStepAnimation();
+
+  let apiData = null;
+  let apiError = null;
+
+  try {
+    const response = await fetch(`${PNR_ENDPOINT}?pnrNumber=${pnr}`, {
+      method: 'GET',
+      headers: {
+        'x-rapidapi-key':  RAPIDAPI_KEY,
+        'x-rapidapi-host': RAPIDAPI_HOST
+      }
+    });
+
+    if(!response.ok) {
+      throw new Error(`HTTP ${response.status} — ${response.statusText}`);
+    }
+
+    const json = await response.json();
+
+    // IRCTC API returns { data: {...} } or error object
+    if(json.data) {
+      apiData = transformIRCTCResponse(json.data, pnr);
+    } else if(json.message) {
+      throw new Error(json.message);
+    } else {
+      throw new Error('Unexpected API response format');
+    }
+
+  } catch(err) {
+    apiError = err.message || 'Unknown error';
+  }
+
+  // Wait for animation to finish
+  await animPromise;
+
+  if(apiError) {
+    showError('API Error', apiError);
+    // Auto-load cache if available
+    if(cachedPNR) {
+      toast('API error — showing last cached result','warn');
+      renderPNR(cachedPNR, true);
+    }
+    return;
+  }
+
+  // Cache and render
+  const withTs = {...apiData, cachedAt:new Date().toISOString()};
+  localStorage.setItem('rt_pnr', JSON.stringify(withTs));
+  cachedPNR = apiData;
+  renderPNR(apiData, false);
+  toast('✅ Live PNR status fetched successfully');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  TRANSFORM IRCTC API RESPONSE → our internal format
+//  Handles the irctc1.p.rapidapi.com response shape
+// ══════════════════════════════════════════════════════════════
+function transformIRCTCResponse(data, pnr) {
+  // The IRCTC API response shape:
+  // data.PnrNumber, data.TrainNumber, data.TrainName,
+  // data.BoardingPoint, data.ReservationUpto,
+  // data.DateOfJourney, data.ClassCode,
+  // data.PassengerCount, data.PassengerStatus[]
+  // data.Quota, data.DepartureTime, data.ArrivalTime
+
+  const passengers = (data.PassengerStatus || []).map((p, i) => ({
+    no:      i + 1,
+    booking: p.BookingStatus    || p.bookingStatus    || '—',
+    current: p.CurrentStatus    || p.currentStatus    || '—',
+    coach:   p.Coach            || p.coach            || '—',
+    berth:   p.BerthNo          || p.berthNo          || '—',
+    type:    p.BerthType        || p.berthType        || '—',
+    gender:  p.PassengerGender  || p.gender           || '—',
+    age:     p.PassengerAge     || p.age              || '—',
+  }));
+
+  return {
+    pnr:         data.PnrNumber       || pnr,
+    trainNo:     data.TrainNumber     || '—',
+    trainName:   data.TrainName       || '—',
+    from: {
+      code: data.BoardingPoint        || data.From || '—',
+      name: data.BoardingPointName    || data.BoardingPoint || '—',
+    },
+    to: {
+      code: data.ReservationUpto      || data.To || '—',
+      name: data.ReservationUptoName  || data.ReservationUpto || '—',
+    },
+    doj:          data.DateOfJourney  || '—',
+    class:        data.ClassCode      || '—',
+    quota:        data.Quota          || 'GN',
+    departure:    data.DepartureTime  || '—',
+    arrival:      data.ArrivalTime    || '—',
+    duration:     data.Duration       || '—',
+    distance:     data.Distance       || '—',
+    fare:         data.Fare           || '—',
+    chartStatus:  data.ChartPrepared  || data.chartStatus || '—',
+    loco:         '—',
+    rake:         '—',
+    passengers,
+    isLive: true,
+  };
+}
+
+function showError(title, msg) {
+  document.getElementById('errorTitle').textContent = '⚠️ ' + title;
+  document.getElementById('errorMsg').innerHTML =
+    `${msg}<br><br>
+    <b>Common causes:</b><br>
+    • PNR number not found or expired<br>
+    • API monthly quota exhausted (free plan: 100 calls/month)<br>
+    • Network timeout — try again<br><br>
+    <span style="color:var(--accent2)">Tip: Upgrade your RapidAPI plan for more calls.</span>`;
+  document.getElementById('errorBox').classList.add('show');
+}
+
+function loadCachedPNR() {
+  if(!cachedPNR){toast('No cached PNR found','warn');return;}
+  renderPNR(cachedPNR, true);
+  toast('Showing cached PNR data');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  RENDER PNR RESULT
+// ══════════════════════════════════════════════════════════════
+function renderPNR(d, isCached) {
+  const allCNF = d.passengers.every(p=>p.current==='CNF'||p.current==='Confirmed');
+  const hasWL  = d.passengers.some(p=>p.current.toString().toUpperCase().includes('WL'));
+  const hasRAC = d.passengers.some(p=>p.current.toString().toUpperCase().includes('RAC'));
+  const badge  = allCNF
+    ? '<span class="status-badge status-cnf">✓ CONFIRMED</span>'
+    : hasWL
+    ? '<span class="status-badge status-wl">⚠ WAITLISTED</span>'
+    : '<span class="status-badge status-rac">◑ RAC</span>';
+
+  const paxRows = d.passengers.map(p=>{
+    const st = p.current.toString().toUpperCase();
+    const cls = st==='CNF'||st==='CONFIRMED'?'td-cnf':st.includes('WL')?'td-wl':'td-rac';
+    return `<tr>
+      <td>${p.no}</td>
+      <td>${p.gender||'—'} / ${p.age||'—'}</td>
+      <td>${p.booking}</td>
+      <td class="${cls}">${p.current}</td>
+      <td>${p.coach||'—'}</td>
+      <td>${p.berth||'—'} ${p.type&&p.type!=='—'?`<small style="color:var(--muted)">(${p.type})</small>`:''}</td>
+    </tr>`;
+  }).join('');
+
+  const sourceTag = d.isLive
+    ? `<div class="api-source-badge badge-live"><div class="badge-dot"></div>LIVE · IRCTC RAPIDAPI</div>`
+    : `<div class="api-source-badge badge-mock"><div class="badge-dot"></div>CACHED · ${new Date(d.cachedAt||Date.now()).toLocaleString('en-IN')}</div>`;
+
+  const el = document.getElementById('pnrResult');
+  el.innerHTML = `
+    ${isCached ? `<div class="stored-label">💾 CACHED · ${new Date(cachedPNR.cachedAt||Date.now()).toLocaleString('en-IN')}</div>` : sourceTag}
+    <div class="pnr-header">
+      <div>
+        <div class="pnr-train-name">${d.trainNo} · ${d.trainName}</div>
+        <div class="pnr-number">PNR: ${d.pnr} &nbsp;|&nbsp; ${d.doj} &nbsp;|&nbsp; Class: ${d.class} &nbsp;|&nbsp; Quota: ${d.quota||'GN'}</div>
+      </div>
+      ${badge}
+    </div>
+
+    <div class="pnr-route">
+      <div class="station-chip">
+        <div class="station-code">${d.from.code}</div>
+        <div class="station-name">${d.from.name}</div>
+        <div class="station-name" style="color:var(--accent2);margin-top:4px;font-weight:700;font-size:13px">${d.departure}</div>
+      </div>
+      <div style="flex:1;text-align:center;color:var(--muted)">
+        <div style="font-size:22px">→</div>
+        <div style="font-size:10px;font-family:'Space Mono',monospace;margin-top:4px">${d.distance&&d.distance!=='—'?d.distance:''}</div>
+        <div style="font-size:10px;font-family:'Space Mono',monospace;color:var(--accent3)">${d.duration&&d.duration!=='—'?d.duration:''}</div>
+      </div>
+      <div class="station-chip" style="text-align:right">
+        <div class="station-code">${d.to.code}</div>
+        <div class="station-name">${d.to.name}</div>
+        <div class="station-name" style="color:var(--accent2);margin-top:4px;font-weight:700;font-size:13px">${d.arrival}</div>
+      </div>
+    </div>
+
+    <div class="pnr-grid">
+      <div class="pnr-field"><div class="pnr-field-label">CLASS</div><div class="pnr-field-value">${d.class}</div></div>
+      <div class="pnr-field"><div class="pnr-field-label">QUOTA</div><div class="pnr-field-value">${d.quota||'GN'}</div></div>
+      <div class="pnr-field"><div class="pnr-field-label">CHART</div><div class="pnr-field-value" style="font-size:12px;line-height:1.4">${d.chartStatus}</div></div>
+      <div class="pnr-field"><div class="pnr-field-label">PASSENGERS</div><div class="pnr-field-value">${d.passengers.length}</div></div>
+      ${d.fare&&d.fare!=='—'?`<div class="pnr-field"><div class="pnr-field-label">FARE</div><div class="pnr-field-value" style="color:var(--accent3)">${d.fare}</div></div>`:''}
+      ${d.distance&&d.distance!=='—'?`<div class="pnr-field"><div class="pnr-field-label">DISTANCE</div><div class="pnr-field-value">${d.distance}</div></div>`:''}
+    </div>
+
+    <div class="section-title" style="font-size:14px;margin-bottom:10px">PASSENGER RESERVATION CHART</div>
+    <div style="overflow-x:auto">
+      <table class="passenger-table">
+        <thead><tr><th>#</th><th>GENDER / AGE</th><th>BOOKING STATUS</th><th>CURRENT STATUS</th><th>COACH</th><th>BERTH</th></tr></thead>
+        <tbody>${paxRows}</tbody>
+      </table>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:10px;justify-content:flex-end">
+      <button class="btn btn-ghost btn-sm" onclick="window.print()">📄 PRINT / PDF</button>
+    </div>
+  `;
+  el.classList.add('show');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  TRAINS
+// ══════════════════════════════════════════════════════════════
+function renderQuickTrains(){
+  const el=document.getElementById('quickTrains');
+  if(!el)return;
+  el.innerHTML=POPULAR_TRAINS.map(t=>`
+    <div class="quick-train-btn" onclick='quickAddTrain(${JSON.stringify(t)})'>
+      ${t.num} · ${t.name}
+    </div>`).join('');
+}
+
+function quickAddTrain(t){
+  if(trains.length>=5){toast('Max 5 trains. Remove one first.','warn');return;}
+  if(trains.find(x=>x.num===t.num)){toast(`${t.name} already saved`,'warn');return;}
+  trains.push({id:Date.now(),...t});
+  localStorage.setItem('rt_trains',JSON.stringify(trains));
+  renderTrains();
+  toast(`${t.name} added ✓`);
+}
+
+function toggleAdd(){
+  const b=document.getElementById('addBody');
+  const open=b.classList.toggle('open');
+  document.getElementById('addArrow').textContent=open?'▲':'▼';
+}
+
+function addTrain(){
+  if(trains.length>=5){toast('Max 5 trains allowed','warn');return;}
+  const num=document.getElementById('tNum').value.trim();
+  const name=document.getElementById('tName').value.trim();
+  const from=document.getElementById('tFrom').value.trim().toUpperCase();
+  const dep=document.getElementById('tDep').value;
+  const to=document.getElementById('tTo').value.trim().toUpperCase();
+  const arr=document.getElementById('tArr').value;
+  const cls=document.getElementById('tClass').value;
+  const days=document.getElementById('tDays').value.trim();
+  if(!num||!name||!from||!to){toast('Fill all required fields','error');return;}
+  if(trains.find(t=>t.num===num)){toast('Train already saved','warn');return;}
+  trains.push({id:Date.now(),num,name,from,dep,to,arr,cls,days});
+  localStorage.setItem('rt_trains',JSON.stringify(trains));
+  renderTrains();
+  toast(`${name} saved ✓`);
+  ['tNum','tName','tFrom','tDep','tTo','tArr','tDays'].forEach(id=>document.getElementById(id).value='');
+}
+
+function deleteTrain(id){
+  trains=trains.filter(t=>t.id!==id);
+  alarms=alarms.filter(a=>a.trainId!==id);
+  localStorage.setItem('rt_trains',JSON.stringify(trains));
+  localStorage.setItem('rt_alarms',JSON.stringify(alarms));
+  renderTrains();
+  toast('Train removed');
+}
+
+function renderTrains(){
+  const el=document.getElementById('trainCards');
+  if(!trains.length){
+    el.innerHTML=`<div class="empty-state"><div class="empty-icon">🚂</div><p>No trains saved yet.<br/>Use quick-add above or add a custom train.</p></div>`;
+    return;
+  }
+  el.innerHTML=trains.map(t=>`
+    <div class="train-card">
+      <div class="train-card-header">
+        <div>
+          <div class="train-number"># ${t.num}</div>
+          <div class="train-name-big">${t.name}</div>
+        </div>
+        <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:20px;color:var(--accent2)">${t.cls}</div>
+      </div>
+      <div class="train-route-row">
+        <span class="stn">${t.from}</span>
+        <span style="color:var(--muted);flex:1;text-align:center;letter-spacing:3px">- - -</span>
+        <span class="stn">${t.to}</span>
+      </div>
+      <div class="train-timings">
+        ${t.dep?`<div class="timing-tag">DEP <b>${t.dep}</b></div>`:''}
+        ${t.arr?`<div class="timing-tag">ARR <b>${t.arr}</b></div>`:''}
+        ${t.days?`<div class="timing-tag">RUNS <b>${t.days}</b></div>`:''}
+      </div>
+      <div class="train-card-actions">
+        <button class="btn btn-secondary btn-sm" onclick="setAlarmFor(${t.id})">⏰ SET ALARM</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteTrain(${t.id})">🗑 REMOVE</button>
+      </div>
+    </div>`).join('');
+}
+
+function setAlarmFor(id){
+  switchTab('alarm',null,2);
+  document.getElementById('bnAlarm').classList.add('active');
+  document.getElementById('bnTrains').classList.remove('active');
+  setTimeout(()=>{
+    populateAlarmTrainSelect();
+    document.getElementById('alarmTrainSel').value=id;
+    const b=document.getElementById('alarmAddBody');
+    if(!b.classList.contains('open'))toggleAlarmAdd();
+  },200);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  ALARMS
+// ══════════════════════════════════════════════════════════════
+function toggleAlarmAdd(){
+  const b=document.getElementById('alarmAddBody');
+  const open=b.classList.toggle('open');
+  document.getElementById('alarmAddArrow').textContent=open?'▲':'▼';
+}
+
+function populateAlarmTrainSelect(){
+  const sel=document.getElementById('alarmTrainSel');
+  sel.innerHTML='<option value="">-- Select a saved train --</option>'+
+    trains.map(t=>`<option value="${t.id}">${t.num} · ${t.name}</option>`).join('');
+}
+
+function addAlarm(){
+  const trainId=Number(document.getElementById('alarmTrainSel').value);
+  const date=document.getElementById('alarmDate').value;
+  const cls=document.getElementById('alarmClass').value;
+  const adv=Number(document.getElementById('alarmAdv').value)||15;
+  if(!trainId){toast('Select a train','error');return;}
+  if(!date){toast('Select journey date','error');return;}
+  const train=trains.find(t=>t.id===trainId);
+  if(!train){toast('Train not found','error');return;}
+  alarms.push({id:Date.now(),trainId,trainName:train.name,trainNum:train.num,date,cls,adv,active:true});
+  localStorage.setItem('rt_alarms',JSON.stringify(alarms));
+  renderAlarms();
+  scheduleNotifications();
+  toast(`Alarm set for ${train.name} ✓`);
+}
+
+function toggleAlarm(id){
+  const a=alarms.find(a=>a.id===id);
+  if(a)a.active=!a.active;
+  localStorage.setItem('rt_alarms',JSON.stringify(alarms));
+  renderAlarms();
+}
+
+function deleteAlarm(id){
+  alarms=alarms.filter(a=>a.id!==id);
+  localStorage.setItem('rt_alarms',JSON.stringify(alarms));
+  renderAlarms();
+  toast('Alarm removed');
+}
+
+function fmtRemind(hhmm,advMin,dateStr){
+  const [h,m]=hhmm.split(':').map(Number);
+  const d=new Date(dateStr+'T00:00:00');
+  d.setDate(d.getDate()-1);
+  d.setHours(h,m-advMin,0,0);
+  return d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+}
+
+function renderAlarms(){
+  const el=document.getElementById('alarmCards');
+  if(!alarms.length){
+    el.innerHTML=`<div class="empty-state"><div class="empty-icon">⏰</div><p>No alarms set.<br/>Save a train first, then set its Tatkal alarm.</p></div>`;
+    return;
+  }
+  el.innerHTML=alarms.map(a=>{
+    const remindAC=a.cls!=='SL'?fmtRemind('10:00',a.adv,a.date):'';
+    const remindSL=a.cls!=='AC'?fmtRemind('11:00',a.adv,a.date):'';
+    return `<div class="alarm-card ${a.active?'armed':''}">
+      <div class="alarm-info">
+        <div class="alarm-train">${a.trainNum} · ${a.trainName}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px;font-family:'Space Mono',monospace">
+          JOURNEY: ${a.date} &nbsp;|&nbsp; REMIND: ${a.adv} MIN BEFORE
+        </div>
+        <div class="alarm-class-row">
+          ${remindAC?`<div class="alarm-time-chip"><div class="cls">AC ALERT</div><div class="time">${remindAC}</div></div>`:''}
+          ${remindSL?`<div class="alarm-time-chip"><div class="cls">SL ALERT</div><div class="time">${remindSL}</div></div>`:''}
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end">
+        <button class="alarm-toggle ${a.active?'on':''}" onclick="toggleAlarm(${a.id})"></button>
+        <button class="btn btn-danger btn-sm" onclick="deleteAlarm(${a.id})">🗑</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  CLOCK & TATKAL COUNTDOWN
+// ══════════════════════════════════════════════════════════════
+function updateClock(){
+  const now=new Date();
+  document.getElementById('clockTime').textContent=now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  document.getElementById('clockDate').textContent=now.toLocaleDateString('en-IN',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  const countdown=(h,m)=>{
+    const t=new Date();t.setHours(h,m,0,0);
+    if(now>=t)t.setDate(t.getDate()+1);
+    const diff=t-now;
+    const hh=Math.floor(diff/3600000),mm=Math.floor((diff%3600000)/60000),ss=Math.floor((diff%60000)/1000);
+    return{str:`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}:${String(ss).padStart(2,'0')}`,diff};
+  };
+  const ac=countdown(10,0),sl=countdown(11,0);
+  const acEl=document.getElementById('countdownAC'),slEl=document.getElementById('countdownSL');
+  acEl.textContent=ac.str; slEl.textContent=sl.str;
+  acEl.className='countdown-value'+(ac.diff<600000?' soon':'');
+  slEl.className='countdown-value'+(sl.diff<600000?' soon':'');
+  checkAlarmTriggers(now);
+}
+setInterval(updateClock,1000);
+updateClock();
+
+const firedAlarms=new Set();
+function checkAlarmTriggers(now){
+  alarms.filter(a=>a.active).forEach(a=>{
+    ['AC','SL'].forEach(cls=>{
+      if(a.cls!==cls&&a.cls!=='BOTH')return;
+      const tatkalH=cls==='AC'?10:11;
+      const jDate=new Date(a.date+'T00:00:00');
+      jDate.setDate(jDate.getDate()-1);
+      jDate.setHours(tatkalH,-a.adv,0,0);
+      const key=`${a.id}-${cls}`;
+      const diff=jDate-now;
+      if(diff<=0&&diff>-60000&&!firedAlarms.has(key)){
+        firedAlarms.add(key);
+        triggerAlarm(a,cls);
+      }
+    });
+  });
+}
+
+function triggerAlarm(a,cls){
+  const t=cls==='AC'?'10:00 AM':'11:00 AM';
+  toast(`🔔 TATKAL ${cls} OPENS AT ${t}! Book ${a.trainNum} NOW!`,'warn');
+  if('Notification' in window&&Notification.permission==='granted'){
+    new Notification(`🚂 Tatkal ${cls} Opening!`,{body:`Book ${a.trainNum} · ${a.trainName}\nOpens at ${t}`});
+  }
+  try{
+    const ctx=new AudioContext();
+    [0,300,600,900].forEach(delay=>{
+      const osc=ctx.createOscillator(),gain=ctx.createGain();
+      osc.connect(gain);gain.connect(ctx.destination);
+      osc.frequency.value=delay===0||delay===600?880:660;
+      gain.gain.setValueAtTime(0.4,ctx.currentTime+delay/1000);
+      gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+delay/1000+0.35);
+      osc.start(ctx.currentTime+delay/1000);
+      osc.stop(ctx.currentTime+delay/1000+0.38);
+    });
+  }catch(e){}
+}
+
+// ══════════════════════════════════════════════════════════════
+//  NOTIFICATIONS
+// ══════════════════════════════════════════════════════════════
+async function scheduleNotifications(){
+  if(!('Notification' in window))return;
+  if(Notification.permission==='default'){
+    const p=await Notification.requestPermission();
+    if(p!=='granted')toast('Enable notifications for alarm reminders','warn');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+//  TOAST
+// ══════════════════════════════════════════════════════════════
+function toast(msg,type=''){
+  const el=document.createElement('div');
+  el.className=`toast ${type}`;el.textContent=msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(()=>el.remove(),4500);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  SERVICE WORKER
+// ══════════════════════════════════════════════════════════════
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+
+// ══════════════════════════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════════════════════════
+renderTrains();
+renderQuickTrains();
+renderAlarms();
+if(cachedPNR&&!navigator.onLine) renderPNR(cachedPNR,true);
+scheduleNotifications();
+</script>
+</body>
+</html>
