@@ -1,99 +1,80 @@
-# 🎓 Internship Assignments
+# QuotePaper
 
-Welcome to the technical assessment repository. This project contains a series of tasks and assignments designed to evaluate engineering logic, code quality, and attention to detail.
+A browser-based tool to turn text quotes into downloadable wallpapers. No build step, no dependencies to install — open `index.html` in any browser and it works.
 
------
+---
 
-## 🛠 Task List (Mini-Tasks)
+## What it does
 
-Each task is located in its respective branch. Use these to demonstrate specific technical skills.
+Type a quote and author, pick a background theme, layout, font, canvas size, and decoration style, then download a high-resolution PNG.
 
-| Task Description | Branch Name |
-| :--- | :--- |
-| **Title Case Utility:** Convert strings within an array of objects. | `task/title-case` |
-| **VS Code Extension:** Display file metadata (M/C time) in the status bar. | `task/vscode-metadata` |
-| **React Testing:** Implementation of unit tests for a UI component. | `task/react-unit-test` |
-| **Chrome Extension:** Network request monitor with accordion UI. | `task/network-monitor` |
+---
 
------
+## Features
 
-## 📂 Assignment List (Full Projects)
+- 8 background themes (dark and light)
+- 4 text layout positions
+- 3 font choices — Playfair Display, Cormorant Garamond, DM Mono
+- 4 export sizes — 16:9 desktop, 9:16 mobile/story, 1:1 square, 4:3
+- 4 decoration modes — line rule, large quote marks, decorative frame, minimal
+- 30 built-in quotes with a random button
+- High-res PNG download (scales from preview to full resolution)
+- Keyboard shortcut: `Ctrl/Cmd + D` to download
 
-Detailed documentation for each project can be found in the `docs/markdown` directory:
+---
 
-Since these are for an internship repository, I've categorized them based on the likely engineering challenge (UI, Logic, Full-stack, etc.) to make it easier for candidates to choose.
+## Getting started
 
------
+```bash
+git clone https://github.com/YOUR-USERNAME/assignment.git
+cd assignment
+git checkout task/quotepaper
+```
 
-## 📂 Assignment List
+Open `index.html` in a browser. No server or build step needed.
 
-### 🌐 Web & UI Challenges
+---
 
-* **[ImageSearch](./docs/markdown/ImageSearch.md)** – Build an AI-powered search interface with real-time result streaming.
-* **[ColorFinder](./docs/markdown/ColorFinder.md)** – Implementation of a tool to extract and identify color palettes from images or hex codes.
-* **[ColorNumber](./docs/markdown/ColorNumber.md)** – A utility to map specific numeric data to visual color scales or identifiers.
-* **[DynImagic](./docs/markdown/DynImagic.md)** – Create dynamic, responsive image layouts with on-the-fly manipulation.
-* **[IndiaMap](./docs/markdown/IndiaMap.md)** – Interactive SVG-based data visualization of Indian states and regions.
-* **[NumPad](./docs/markdown/NumPad.md)** – Development of a custom, accessible virtual numeric input for secure data entry.
-* **[QuotePaper](./docs/markdown/QuotePaper.md)** – A generator that transforms text quotes into aesthetically pleasing, downloadable wallpapers.
-* **[SocialPreview](./docs/markdown/SocialPreview.md)** – Build a tool to generate and preview OpenGraph/Social media meta-cards.
+## Project structure
 
-### ⚙️ Logic & Data Processing
+```
+quotepaper/
+├── index.html
+└── src/
+    ├── style.css
+    ├── quotes.js
+    └── app.js
+```
 
-* **[DanceCase](./docs/markdown/DanceCase.md)** – A string utility library for complex casing patterns (e.g., snake\_case to camelCase).
-* **[DateMatics](./docs/markdown/DateMatics.md)** – Complex date calculation engine for handling business days and timezones.
-* **[DateTimeCalculator](./docs/markdown/DateTimeCalculator.md)** – A focused utility for finding durations and differences between timestamps.
-* **[HinDictionary](./docs/markdown/HinDictionary.md)** – A localized Hindi-English dictionary with optimized search indexing.
-* **[Object\_Count](./docs/markdown/ObjectCount.md)** – Logic to parse and count nested objects or identified elements within a dataset.
-* **[SunsignMonth](./docs/markdown/SunsignMonth.md)** – Data mapping tool to correlate dates with astrological signs and monthly cycles.
-* **[URlShortner](./docs/markdown/URlShortner.md)** – Backend logic for creating, storing, and redirecting shortened URLs.
+`style.css` owns all visual logic including themes and layouts. `quotes.js` holds the quote dataset. `app.js` handles state and event binding — it only toggles CSS classes, it never touches colour or layout directly.
 
-### 📱 Full-Stack & Applications
+---
 
-* **[Bilingual PWA Dictionary](./docs/markdown/BilingualDictionary.md)** – An offline-first mobile web app for multi-language translations.
-* **[Build MCQ App](./docs/markdown/MCQApp.md)** – A complete quiz platform featuring timer logic and automated scoring.
-* **[FabricStore](./docs/markdown/FabricStore.md)** – A specialized e-commerce flow for managing fabric inventory and custom measurements.
-* **[PNR_PWA](./docs/markdown/PNR_PWA.md)** – A Progressive Web App to track and notify users of railway PNR status updates.
-* **[Sapariwar](./docs/markdown/Sapariwar.md)** – A community-focused platform for managing family directory data.
-* **[Societree](./docs/markdown/Societree.md)** – Visualization tool for mapping social networks and organizational hierarchies.
-* **[ToyShare](./docs/markdown/ToyShare.md)** – A peer-to-peer platform for listing and borrowing items within a community.
+## How the download works
 
-### 🛡️ Systems & Productivity
+`html2canvas` captures the `.wallpaper-canvas` element and multiplies it by a scale factor equal to `targetWidth / previewWidth`. A 16:9 preview at 640px wide is captured at 1920px — same proportions, full resolution.
 
-* **[BrandAddress](./docs/markdown/BrandAddress.md)** – Implementation of a formal brand identity and physical address verification system.
-* **[SafeDocs](./docs/markdown/SafeDocs.md)** – Privacy-centric document management with encryption or masking capabilities.
-* **[TeamMatrix](./docs/markdown/TeamMatrix.md)** – A dashboard for visualizing team skills, availability, and project allocation.
-* **[VoiceForm](./docs/markdown/VoiceForm.md)** – Use Web Speech API to fill out complex forms using only voice commands.
+---
 
------
+## Engineering notes
 
-## How to Submit
+The app uses a single `state` object with five keys. Every button click updates one key and calls `applyClasses()`, which rebuilds the element's class list. CSS does all the visual work. Adding a new background theme means one CSS class and one button in the HTML — nothing else changes.
 
-1. Checkout the branch: `task/<assignment-title>`
-2. Create your branch: `feature/<assignment-title>`
-3. Raise a PR back to the original `task/` branch.
+The quote dataset is local so the app runs fully offline and needs no API key.
 
------
+---
 
-## 🚀 Submission Workflow
+## Possible improvements
 
-Please follow this git flow strictly to ensure your code is reviewed:
+- Custom background image upload
+- Font size slider
+- JPEG export for smaller file sizes
+- LocalStorage to persist last-used settings
+- Quote search or category filter
 
-1. **Select your branch:** Checkout the branch corresponding to your task:
-    `git checkout task/<assignment-title>`
-2. **Create a feature branch:** `git checkout -b feature/<assignment-title>`
-3. **Commit & Push:** Ensure your commit messages are descriptive.
-4. **Raise a PR:** Submit your Pull Request against the original `task/<assignment-title>` branch.
+---
 
------
+## Submission
 
-## 📮 Support & Feedback
-
-If you encounter any bugs or have questions regarding the requirements:
-
-* **GitHub:** [Open an Issue](https://github.com/your-username/repo/issues)
-* **Email:** [recursivezero@outlook.com](mailto:recursivezero@outlook.com)
-
------
-
-&copy; 2025-26 Recursive Zero. All rights reserved.
+Branch: `feature/quotepaper`  
+PR target: `task/quotepaper` on the upstream repo
